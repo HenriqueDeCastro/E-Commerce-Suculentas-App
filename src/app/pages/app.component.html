@@ -1,0 +1,61 @@
+<div class="docs-app">
+  <mat-toolbar class="toolbar-line docs-navbar-header">
+    <mat-toolbar-row>
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <ng-container *ngIf="!sidenav.opened">
+          <mat-icon matTooltip="Menu">menu</mat-icon>
+        </ng-container>
+        <ng-container *ngIf="sidenav.opened">
+          <mat-icon class="icon-fechar">clear</mat-icon>
+        </ng-container>
+      </button>
+      <h1 class="titulo-app">Suculentas da rô</h1>
+      <span class="espaco-icones"></span>
+      <button mat-icon-button matTooltip="Carrinho">
+        <mat-icon>shopping_cart</mat-icon>
+      </button>
+      <button mat-icon-button matTooltip="Conta" (click)="IconePerfilNavegacao()">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="mat-drawer-container mat-sidenav-container docs-component-viewer-sidenav-container">
+    <mat-sidenav #sidenav [autoFocus]="false"  style="width: 200px;">
+      <mat-nav-list>
+        <ng-container *ngIf="!Logado()">
+          <a mat-list-item [routerLink]="'/empresa'" (click)="sidenav.toggle()">
+            <mat-icon class="icone-sidenav icon-chave">vpn_key</mat-icon> Admin
+          </a>
+          <mat-divider></mat-divider>
+        </ng-container>
+        <ng-container *ngIf="!Logado()">
+          <a mat-list-item [routerLink]="'/empresa/home'" (click)="sidenav.toggle()">
+            <mat-icon class="icone-sidenav icon-empresa">store_mall_directory</mat-icon> Empresa
+          </a>
+        <mat-divider></mat-divider>
+        </ng-container>
+        <a mat-list-item [routerLink]="'/produtos'" (click)="sidenav.toggle()">
+          <mat-icon class="icone-sidenav icon-produtos">local_florist</mat-icon> Produtos </a>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content class="mat-drawer-content mat-sidenav-content">
+      <div class="fundo-sidenav altura-pagina">
+        <div class="container altura-sidenav">
+          <br>
+          <br>
+          <router-outlet></router-outlet>
+          <br>
+        </div>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  <!-- <a mat-list-item [routerLink]="'/accounts'"> Accounts </a>
+  <a mat-list-item [routerLink]="'/create-account'"> Create Account </a>
+  <a mat-list-item [routerLink]="'/contacts'"> Contacts </a>
+  <a mat-list-item [routerLink]="'/create-contact'"> Create Contact </a>
+  <a mat-list-item [routerLink]="'/activities'"> Activities </a>
+  <a mat-list-item [routerLink]="'/create-activity'"> Create Activity </a>
+  <a mat-list-item (click)="sidenav.toggle()" href="" mat-list-item>Close</a> -->
+
+</div>

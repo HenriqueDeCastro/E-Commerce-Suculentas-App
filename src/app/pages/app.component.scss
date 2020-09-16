@@ -1,0 +1,57 @@
+.espaco-icones {
+  flex: 1 1 auto;
+}
+
+.mat-toolbar {
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: white;
+}
+
+.altura-pagina {
+  z-index: 1;
+  display: block;
+  max-height: 100vh !important;
+}
+
+.altura-sidenav {
+  height: 100vh;
+}
+
+.fundo-sidenav {
+  background-color: var(--cinza-fundo);
+}
+
+.icone-sidenav {
+  margin-right: 20px;
+}
+
+.toolbar-line {
+  border-bottom:solid 2px var(--cinza-linha-toolbar);
+}
+
+.docs-navbar-header[_ngcontent-iie-c50] {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 8px 16px;
+}
+
+.docs-app {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 1px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+@media (max-width: 600px)
+{
+  .titulo-app {
+
+  }
+}

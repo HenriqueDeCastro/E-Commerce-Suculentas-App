@@ -1,0 +1,36 @@
+<h1 class="titulo">Bem vindo(a), {{User.fullName}}!</h1>
+<h2 class="titulo">O que deseja fazer hoje?</h2>
+<br>
+<br>
+<mat-list>
+  <div mat-subheader>Catálogo</div>
+  <mat-list-item  class="lista cursor" (click)="router.navigate(['empresa/categoria'])">
+    <mat-icon mat-list-icon>menu_book</mat-icon>
+    <div mat-line>Categorias</div>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-list-item class="lista cursor" (click)="router.navigate(['empresa/produto'])">
+    <mat-icon mat-list-icon>local_offer</mat-icon>
+    <div mat-line>Produtos</div>
+  </mat-list-item>
+  <!-- <div mat-subheader>Vendas</div>
+  <mat-list-item>
+    <mat-icon mat-list-icon>credit_card</mat-icon>
+    <div mat-line>Aguardando Pagamento</div>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-list-item>
+    <mat-icon mat-list-icon>store</mat-icon>
+    <div mat-line>Aguardando Envio</div>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-list-item>
+    <mat-icon mat-list-icon>local_shipping</mat-icon>
+    <div mat-line>Enviados</div>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-list-item>
+    <mat-icon mat-list-icon>check</mat-icon>
+    <div mat-line>Finalizados</div>
+  </mat-list-item> -->
+</mat-list>

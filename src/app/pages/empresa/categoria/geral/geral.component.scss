@@ -1,0 +1,16 @@
+.icone {
+  float: right;
+}
+
+.true {
+  color: var(--verde);
+}
+
+.false {
+  color: var(--vermelho);
+}
+
+.mat-card {
+  border: 1px solid var(--cinza-linha-toolbar);
+  border-radius: 20px;
+}

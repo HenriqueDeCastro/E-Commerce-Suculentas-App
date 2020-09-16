@@ -1,0 +1,40 @@
+<h1 class="titulo-lista">Olá, {{User.fullName}}!</h1>
+<br>
+<mat-list>
+  <div mat-subheader>Dados Pessoais</div>
+  <mat-list-item>
+    <mat-icon mat-list-icon>person</mat-icon>
+    <div mat-line>Editar Informações</div>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-list-item>
+    <mat-icon mat-list-icon>home</mat-icon>
+    <div mat-line>Gerenciar Endereços </div>
+  </mat-list-item>
+  <div mat-subheader>Compras</div>
+  <mat-list-item>
+    <mat-icon mat-list-icon>credit_card</mat-icon>
+    <div mat-line>Aguardando Pagamento</div>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-list-item>
+    <mat-icon mat-list-icon>store</mat-icon>
+    <div mat-line>Aguardando Envio</div>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-list-item>
+    <mat-icon mat-list-icon>local_shipping</mat-icon>
+    <div mat-line>Enviados</div>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-list-item>
+    <mat-icon mat-list-icon>check</mat-icon>
+    <div mat-line>Finalizados</div>
+  </mat-list-item>
+</mat-list>
+<br>
+<br>
+<br>
+<div class="form-group col-md-12 centralizar">
+  <button mat-flat-button class="btn-responsive" color="warn" (click)="Logout()">Sair</button>
+</div>
