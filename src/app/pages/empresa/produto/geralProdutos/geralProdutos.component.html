@@ -1,12 +1,21 @@
-<app-voltar></app-voltar>
-<br>
-<br>
-<br>
-<div class="container-titulo">
-  <h1 class="h1-btn titulo-lista">Produtos</h1>
-  <div class="btn-titulo">
-    <button mat-icon-button matTooltip="Adicionar" (click)="router.navigate(['/empresa/produto/adicionar'])">
-      <mat-icon color=primary>add</mat-icon>
-    </button>
+<ng-container *ngIf="!Categorias">
+  <app-spinner></app-spinner>
+</ng-container>
+<ng-container *ngIf="Categorias">
+  <app-voltar></app-voltar>
+  <br>
+  <br>
+  <br>
+  <div class="container-titulo">
+    <h1 class="h1-btn titulo-lista">Produtos</h1>
+    <div class="btn-titulo">
+      <button mat-icon-button matTooltip="Filtrar" (click)="router.navigate(['/empresa/produto/adicionar'])">
+        <mat-icon class="material-icons-outlined" color=primary>filter_alt</mat-icon>
+      </button>
+      <button mat-icon-button matTooltip="Adicionar" (click)="router.navigate(['/empresa/produto/adicionar'])">
+        <mat-icon class="material-icons-outlined" color=primary>add</mat-icon>
+      </button>
+    </div>
   </div>
-</div>
+</ng-container>
+

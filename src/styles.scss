@@ -18,7 +18,6 @@
   --roxo: #9d4edd;
   --rosa: #ffcbf2;
   --marrom: #cb997e;
-  --preto: #86bbd8;
 }
 
 html, body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif !important;}
@@ -72,6 +71,10 @@ button:focus { outline: none; }
 
 .container-titulo {
   position: relative;
+}
+
+.icon-filtro {
+  color: var(--laranja);
 }
 
 .h1-btn {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CategoriaService } from 'src/app/core/services/Categoria/Categoria.service';
+import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
 import { ICategoria } from 'src/app/shared/models/ICategoria';
 
 @Component({
@@ -15,7 +16,8 @@ export class GeralComponent implements OnInit {
   public CategoriasInativas: ICategoria[] = [];
 
   constructor(public router: Router,
-              private categoriaService: CategoriaService) { }
+              private categoriaService: CategoriaService,
+              private snackbar: SnackbarComponent) { }
 
   ngOnInit(): void {
     this.ReceberCategorias();
@@ -25,6 +27,10 @@ export class GeralComponent implements OnInit {
     this.categoriaService.GetAllSemProduto().subscribe((categorias: ICategoria[]) => {
       this.Categorias = categorias;
       this.SepararCategorias(this.Categorias);
+    },
+    erro => {
+      console.log(erro);
+      this.snackbar.OpenSnackBarError('Erro no servidor, tente novamente mais tarde !!!');
     });
   }
 

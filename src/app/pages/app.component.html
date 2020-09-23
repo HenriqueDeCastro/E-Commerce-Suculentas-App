@@ -9,13 +9,13 @@
           <mat-icon class="icon-fechar">clear</mat-icon>
         </ng-container>
       </button>
-      <h1 class="titulo-app">Suculentas da rô</h1>
+      <h1 class="titulo">Suculentas da rô</h1>
       <span class="espaco-icones"></span>
       <button mat-icon-button matTooltip="Carrinho">
-        <mat-icon>shopping_cart</mat-icon>
+        <mat-icon class="material-icons-outlined">shopping_cart</mat-icon>
       </button>
       <button mat-icon-button matTooltip="Conta" (click)="IconePerfilNavegacao()">
-        <mat-icon>account_circle</mat-icon>
+        <mat-icon class="material-icons-outlined">account_circle</mat-icon>
       </button>
     </mat-toolbar-row>
   </mat-toolbar>
@@ -23,20 +23,30 @@
   <mat-sidenav-container class="mat-drawer-container mat-sidenav-container docs-component-viewer-sidenav-container">
     <mat-sidenav #sidenav [autoFocus]="false"  style="width: 200px;">
       <mat-nav-list>
+        <a mat-list-item [routerLink]="'/produtos'" (click)="sidenav.toggle()">
+          <mat-icon class="material-icons-outlined icone-sidenav">local_florist</mat-icon> Produtos
+        </a>
+        <a mat-list-item [routerLink]="'/produtos'" (click)="sidenav.toggle()">
+          <mat-icon class="material-icons-outlined icone-sidenav">local_florist</mat-icon> Encomendas
+        </a>
         <ng-container *ngIf="!Logado()">
           <a mat-list-item [routerLink]="'/empresa'" (click)="sidenav.toggle()">
-            <mat-icon class="icone-sidenav icon-chave">vpn_key</mat-icon> Admin
+            <mat-icon class="material-icons-outlined icone-sidenav">vpn_key</mat-icon> Admin
           </a>
-          <mat-divider></mat-divider>
         </ng-container>
         <ng-container *ngIf="!Logado()">
           <a mat-list-item [routerLink]="'/empresa/home'" (click)="sidenav.toggle()">
-            <mat-icon class="icone-sidenav icon-empresa">store_mall_directory</mat-icon> Empresa
+            <mat-icon class="material-icons-outlined icone-sidenav">store_mall_directory</mat-icon> Empresa
           </a>
-        <mat-divider></mat-divider>
         </ng-container>
-        <a mat-list-item [routerLink]="'/produtos'" (click)="sidenav.toggle()">
-          <mat-icon class="icone-sidenav icon-produtos">local_florist</mat-icon> Produtos </a>
+        <ng-container *ngIf="!Logado()">
+          <a mat-list-item [routerLink]="'/empresa/home'" (click)="sidenav.toggle()">
+            <mat-icon class="material-icons-outlined icone-sidenav">chat</mat-icon> Chat
+          </a>
+        </ng-container>
+        <a mat-list-item [routerLink]="'/sobre'" (click)="sidenav.toggle()">
+          <mat-icon class="material-icons-outlined icone-sidenav">info</mat-icon> Sobre
+        </a>
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content class="mat-drawer-content mat-sidenav-content">

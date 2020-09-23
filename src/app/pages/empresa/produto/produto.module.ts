@@ -8,6 +8,8 @@ import { ProdutoRoutingModule } from './produto-routing.module';
 import { ProdutoComponent } from './produto.component';
 import { GeralProdutosComponent } from './geralProdutos/geralProdutos.component';
 import { AdicionarProdutoComponent } from './adicionarProduto/adicionarProduto.component';
+import { FileInputModule } from 'src/app/shared/components/file input/file-input.module';
+import { MaskModule } from 'src/app/shared/components/mask/mask.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { AdicionarProdutoComponent } from './adicionarProduto/adicionarProduto.c
     CommonModule,
     ComponentModule,
     MaterialModule,
-    ProdutoRoutingModule
+    FileInputModule,
+    ProdutoRoutingModule,
+    MaskModule
   ]
 })
 export class ProdutoModule {}

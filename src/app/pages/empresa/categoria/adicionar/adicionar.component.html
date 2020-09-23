@@ -6,7 +6,7 @@
 <h1 class="titulo">Criar Categoria</h1>
 <br>
 <br>
-<form [formGroup]="CategoriaForm" (ngSubmit)="Registrar()">
+<form [formGroup]="CategoriaForm" (ngSubmit)="Registrar()" autocomplete="off">
   <mat-form-field appearance="fill" class="w-100">
     <mat-label>Nome</mat-label>
     <input matInput formControlName="nome">

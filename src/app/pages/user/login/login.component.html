@@ -4,7 +4,7 @@
   <mat-form-field appearance="fill" class="w-100">
     <mat-label> E-mail </mat-label>
     <input matInput formControlName="email">
-    <mat-icon matSuffix >mail_outline</mat-icon>
+    <mat-icon class="material-icons-outlined" matSuffix >mail_outline</mat-icon>
     <mat-error *ngIf="LoginForm.get('email').hasError('email')" class="invalid-feedback">Insira apenas e-mails validos</mat-error>
     <mat-error *ngIf="LoginForm.get('email').hasError('required')" class="invalid-feedback">E-mail é obrigatório</mat-error>
   </mat-form-field>
@@ -13,7 +13,7 @@
   <mat-form-field appearance="fill" class="w-100">
     <mat-label> Senha </mat-label>
     <input type="password" matInput formControlName="password">
-    <mat-icon matSuffix>https</mat-icon>
+    <mat-icon class="material-icons-outlined" matSuffix>https</mat-icon>
     <mat-error *ngIf="LoginForm.get('password').hasError('minlength')" class="invalid-feedback">Senha deve ter no minimo 8 caracteres</mat-error>
     <mat-error *ngIf="LoginForm.get('password').hasError('required')" class="invalid-feedback">Senha é obrigatória</mat-error>
   </mat-form-field>
