@@ -77,6 +77,10 @@ button:focus { outline: none; }
   color: var(--laranja);
 }
 
+.quebra-linha-texto {
+  white-space: pre-wrap;
+}
+
 .h1-btn {
   position: absolute;
   left: 0;
@@ -92,6 +96,18 @@ button:focus { outline: none; }
   text-align: right;
   max-width: 50%;
   overflow: hidden
+}
+
+mat-card {
+  margin-top: 10%;
+  border-radius: 20px !important;
+}
+
+@media (max-width: 770px)
+{
+  .col-md-3 {
+    width: 50% !important;
+  }
 }
 
 @media (max-width: 600px)

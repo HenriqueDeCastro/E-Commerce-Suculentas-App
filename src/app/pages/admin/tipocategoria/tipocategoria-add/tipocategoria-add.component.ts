@@ -1,64 +1,47 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CategoriaService } from 'src/app/core/services/Categoria/Categoria.service';
 import { TipoCategoriaService } from 'src/app/core/services/TipoCategoria/TipoCategoria.service';
 import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
 import { ITipoCategoria } from 'src/app/shared/models/ITipoCategoria';
-import { ICategoria } from '../../../../shared/models/ICategoria';
 
 @Component({
-  selector: 'app-adicionar',
-  templateUrl: './adicionar.component.html',
-  styleUrls: ['./adicionar.component.scss']
+  selector: 'app-tipocategoria-add',
+  templateUrl: './tipocategoria-add.component.html',
+  styleUrls: ['./tipocategoria-add.component.scss']
 })
-export class AdicionarComponent implements OnInit {
+export class TipocategoriaAddComponent implements OnInit {
 
-  public CategoriaForm: FormGroup;
+  public TipoCategoriaForm: FormGroup;
   public RealizandoCadastro = false;
-  private Categoria: ICategoria;
-  public TiposCategorias: ITipoCategoria[];
-  public selected: number;
+  private TipoCategoria: ITipoCategoria;
 
   constructor(private fb: FormBuilder,
               public router: Router,
-              private categoriaService: CategoriaService,
               private tipoCategoriaService: TipoCategoriaService,
               private snackbar: SnackbarComponent) { }
 
   ngOnInit(): void {
     this.Validation();
-    this.ReceberTipoCategorias();
   }
 
   Validation(): void {
-    this.CategoriaForm = this.fb.group({
+    this.TipoCategoriaForm = this.fb.group({
       nome: ['', [Validators.required]],
-      descricao: ['', [Validators.required]],
-      tipocategoria: [null, [Validators.required]]
-    });
-  }
-
-  ReceberTipoCategorias(): void {
-    this.tipoCategoriaService.GetAllSemCategoria().subscribe((tipoCategorias: ITipoCategoria[]) => {
-      this.TiposCategorias = tipoCategorias;
     });
   }
 
   Registrar(): void {
-    if (this.CategoriaForm.valid) {
+    if (this.TipoCategoriaForm.valid) {
       this.RealizandoCadastro = true;
-      this.Categoria = {
-        nome: this.CategoriaForm.value.nome,
-        descricao: this.CategoriaForm.value.descricao,
-        ativo: true,
-        tipoCategoriaId: this.selected
+      this.TipoCategoria = {
+        nome: this.TipoCategoriaForm.value.nome
       };
-      this.categoriaService.Post(this.Categoria).subscribe(
+      this.tipoCategoriaService.Post(this.TipoCategoria).subscribe(
         () => {
           this.RealizandoCadastro = false;
           this.snackbar.OpenSnackBarSuccess('Cadastrado realizado com sucesso');
-          this.router.navigate(['empresa/categoria']);
+          this.router.navigate(['admin/tipocategoria']);
         },
         error => {
           this.RealizandoCadastro = false;

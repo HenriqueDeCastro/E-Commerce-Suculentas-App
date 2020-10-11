@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ICategoria } from 'src/app/shared/models/ICategoria';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { ICategoria } from 'src/app/shared/models/ICategoria';
 export class CategoriaService {
 
 
-  private UrlBase = 'http://localhost:5000/categoria';
+  private UrlBase = `${environment.UrlApi}/categoria`;
 
   constructor(private http: HttpClient) { }
 

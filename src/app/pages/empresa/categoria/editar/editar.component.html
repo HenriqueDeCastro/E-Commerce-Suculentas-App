@@ -1,7 +1,7 @@
-<ng-container *ngIf="!Categoria">
+<ng-container *ngIf="!Categoria && !TiposCategorias">
   <app-spinner></app-spinner>
 </ng-container>
-<ng-container *ngIf="Categoria">
+<ng-container *ngIf="Categoria && TiposCategorias">
   <app-voltar></app-voltar>
   <br>
   <br>
@@ -30,6 +30,16 @@
       <mat-select [(value)]="selected">
         <mat-option value="true">Sim</mat-option>
         <mat-option value="false">Não</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br>
+    <br>
+    <mat-form-field appearance="fill" class="w-100">
+      <mat-label>Tipo da categoria</mat-label>
+      <mat-select [(value)]="selectedTipo">
+        <mat-option *ngFor="let tipocategoria of TiposCategorias" [value]="tipocategoria.id">
+          {{tipocategoria.nome}}
+        </mat-option>
       </mat-select>
     </mat-form-field>
     <br>

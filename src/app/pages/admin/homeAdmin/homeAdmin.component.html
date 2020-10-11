@@ -4,15 +4,21 @@
 <br>
 <mat-list>
   <div mat-subheader>Catálogo</div>
+  <mat-list-item class="lista cursor" (click)="router.navigate(['admin/tipocategoria'])">
+    <mat-icon class="material-icons-outlined" mat-list-icon>menu_book</mat-icon>
+    <div mat-line>Tipo de Categorias</div>
+  </mat-list-item>
+  <div mat-subheader>Acessos</div>
   <mat-list-item  class="lista cursor" (click)="router.navigate(['empresa/categoria'])">
-    <mat-icon class="material-icons-outlined" mat-list-icon>import_contacts</mat-icon>
-    <div mat-line>Categorias</div>
+    <mat-icon class="material-icons-outlined" mat-list-icon>rule</mat-icon>
+    <div mat-line>Gerenciar Rules</div>
   </mat-list-item>
   <mat-divider></mat-divider>
-  <mat-list-item class="lista cursor" (click)="router.navigate(['empresa/produto'])">
-    <mat-icon class="material-icons-outlined" mat-list-icon>local_offer</mat-icon>
-    <div mat-line>Produtos</div>
+  <mat-list-item  class="lista cursor" (click)="router.navigate(['empresa/categoria'])">
+    <mat-icon class="material-icons-outlined" mat-list-icon>local_police</mat-icon>
+    <div mat-line>Promover</div>
   </mat-list-item>
+
   <!-- <div mat-subheader>Vendas</div>
   <mat-list-item>
     <mat-icon mat-list-icon>credit_card</mat-icon>

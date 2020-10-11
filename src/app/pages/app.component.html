@@ -27,10 +27,10 @@
           <mat-icon class="material-icons-outlined icone-sidenav">local_florist</mat-icon> Produtos
         </a>
         <a mat-list-item [routerLink]="'/produtos'" (click)="sidenav.toggle()">
-          <mat-icon class="material-icons-outlined icone-sidenav">local_florist</mat-icon> Encomendas
+          <mat-icon class="material-icons-outlined icone-sidenav">timer</mat-icon> Encomendas
         </a>
         <ng-container *ngIf="!Logado()">
-          <a mat-list-item [routerLink]="'/empresa'" (click)="sidenav.toggle()">
+          <a mat-list-item [routerLink]="'/admin'" (click)="sidenav.toggle()">
             <mat-icon class="material-icons-outlined icone-sidenav">vpn_key</mat-icon> Admin
           </a>
         </ng-container>
@@ -39,11 +39,9 @@
             <mat-icon class="material-icons-outlined icone-sidenav">store_mall_directory</mat-icon> Empresa
           </a>
         </ng-container>
-        <ng-container *ngIf="!Logado()">
-          <a mat-list-item [routerLink]="'/empresa/home'" (click)="sidenav.toggle()">
-            <mat-icon class="material-icons-outlined icone-sidenav">chat</mat-icon> Chat
-          </a>
-        </ng-container>
+        <a mat-list-item [routerLink]="'/empresa/home'" (click)="sidenav.toggle()">
+          <mat-icon class="material-icons-outlined icone-sidenav">chat</mat-icon> Chat
+        </a>
         <a mat-list-item [routerLink]="'/sobre'" (click)="sidenav.toggle()">
           <mat-icon class="material-icons-outlined icone-sidenav">info</mat-icon> Sobre
         </a>

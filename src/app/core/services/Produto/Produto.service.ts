@@ -2,13 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IProduto } from 'src/app/shared/models/IProduto';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProdutoService {
 
-  private UrlBase = 'http://localhost:5000/produto';
+  private UrlBase = `${environment.UrlApi}/produto`;
 
   constructor(private http: HttpClient) { }
 

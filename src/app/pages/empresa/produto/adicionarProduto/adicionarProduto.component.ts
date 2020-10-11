@@ -43,6 +43,7 @@ export class AdicionarProdutoComponent implements OnInit {
       estoque: ['', [Validators.required]]
     });
   }
+
   ReceberCategorias(): void {
     this.categoriaService.GetAllSemProduto().subscribe((categorias: ICategoria[]) => {
       this.Categorias = categorias;

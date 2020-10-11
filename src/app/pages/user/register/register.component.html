@@ -48,7 +48,7 @@
       <mat-form-field appearance="fill" class="w-100">
         <mat-label> Celular + DDD </mat-label>
         <input matInput formControlName="phoneNumber" mask="(00)00000-0000">
-        <mat-icon class="material-icons-outlined" matSuffix>phone</mat-icon>
+        <mat-icon class="material-icons-outlined" matSuffix>stay_current_portrait</mat-icon>
         <mat-error *ngIf="ContatosForm.get('phoneNumber').hasError('required')" class="invalid-feedback">Número é obrigatório</mat-error>
         <mat-error *ngIf="ContatosForm.get('phoneNumber').hasError('minlength')" class="invalid-feedback">Número deve ter 11 numeros</mat-error>
         <mat-error *ngIf="ContatosForm.get('phoneNumber').hasError('maxlength')" class="invalid-feedback">Número deve ter 11 numeros</mat-error>
@@ -58,7 +58,7 @@
       <mat-form-field appearance="fill" class="w-100">
         <mat-label> E-mail </mat-label>
         <input matInput formControlName="email">
-        <mat-icon class="material-icons-outlined" matSuffix>mail_outline</mat-icon>
+        <mat-icon class="material-icons-outlined" matSuffix>alternate_email</mat-icon>
         <mat-error *ngIf="ContatosForm.get('email').hasError('email')" class="invalid-feedback">Insira apenas e-mails validos</mat-error>
         <mat-error *ngIf="ContatosForm.get('email').hasError('required')" class="invalid-feedback">E-mail é obrigatório</mat-error>
       </mat-form-field>

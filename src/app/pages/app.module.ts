@@ -13,6 +13,7 @@ import { EmpresaModule } from './empresa/empresa.module';
 import { UserModule } from './user/user.module';
 import { ProdutosModule } from './produtos/produtos.module';
 import { SobreModule } from './sobre/sobre.module';
+import { AdminModule } from './admin/admin.module';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from '../core/guards/auth.interceptor';
@@ -38,7 +39,8 @@ import { CommonModule } from '@angular/common';
     EmpresaModule,
     UserModule,
     ProdutosModule,
-    SobreModule
+    SobreModule,
+    AdminModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

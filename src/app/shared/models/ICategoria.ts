@@ -6,5 +6,6 @@ export interface ICategoria {
   nome: string;
   descricao: string;
   ativo: boolean;
+  tipoCategoriaId: number;
   produtos?: IProduto[];
 }
