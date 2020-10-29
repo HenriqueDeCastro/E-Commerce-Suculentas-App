@@ -1,0 +1,30 @@
+<mat-nav-list>
+  <mat-list-item (click)="FecharBottoom($event, '/produto')">
+    <mat-icon class="material-icons-outlined" mat-list-icon>local_offer</mat-icon>
+    <div mat-line>Produtos</div>
+  </mat-list-item>
+  <mat-list-item (click)="FecharBottoom($event, '/produto')">
+    <mat-icon class="material-icons-outlined" mat-list-icon>timer</mat-icon>
+    <div mat-line>Encomendas</div>
+  </mat-list-item>
+  <ng-container *ngIf="!Logado()">
+    <mat-list-item (click)="FecharBottoom($event, '/empresa/home')">
+      <mat-icon class="material-icons-outlined" mat-list-icon>store_mall_directory</mat-icon>
+      <div mat-line>Empresa</div>
+    </mat-list-item>
+  </ng-container>
+  <ng-container *ngIf="!Logado()">
+    <mat-list-item (click)="FecharBottoom($event, '/admin')">
+      <mat-icon class="material-icons-outlined" mat-list-icon>vpn_key</mat-icon>
+      <div mat-line>Admin</div>
+    </mat-list-item>
+  </ng-container>
+  <mat-list-item (click)="FecharBottoom($event, '/produto')">
+    <mat-icon class="material-icons-outlined" mat-list-icon>chat</mat-icon>
+    <div mat-line>Chat</div>
+  </mat-list-item>
+  <mat-list-item (click)="FecharBottoom($event, '/sobre')">
+    <mat-icon class="material-icons-outlined" mat-list-icon>info</mat-icon>
+    <div mat-line>Sobre</div>
+  </mat-list-item>
+</mat-nav-list>

@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { MaterialModule } from 'src/app/shared/components/material/material.module';
 
 import { ProdutosComponent } from './produtos.component';
 
@@ -6,6 +7,8 @@ import { ProdutosComponent } from './produtos.component';
   declarations: [
     ProdutosComponent
   ],
-  imports: []
+  imports: [
+    MaterialModule
+  ]
 })
 export class ProdutosModule {}

@@ -1,15 +1,7 @@
 <div class="docs-app">
   <mat-toolbar class="toolbar-line docs-navbar-header">
     <mat-toolbar-row>
-      <button mat-icon-button (click)="sidenav.toggle()">
-        <ng-container *ngIf="!sidenav.opened">
-          <mat-icon matTooltip="Menu">menu</mat-icon>
-        </ng-container>
-        <ng-container *ngIf="sidenav.opened">
-          <mat-icon class="icon-fechar">clear</mat-icon>
-        </ng-container>
-      </button>
-      <h1 class="titulo">Suculentas da rô</h1>
+      <h1 class="titulo-site">Suculentas da rô</h1>
       <span class="espaco-icones"></span>
       <button mat-icon-button matTooltip="Carrinho">
         <mat-icon class="material-icons-outlined">shopping_cart</mat-icon>
@@ -17,14 +9,25 @@
       <button mat-icon-button matTooltip="Conta" (click)="IconePerfilNavegacao()">
         <mat-icon class="material-icons-outlined">account_circle</mat-icon>
       </button>
+      <button mat-icon-button matTooltip="Filtrar" (click)="openBottomSheet()" class="menu-mobile">
+        <mat-icon class="material-icons-outlined">menu</mat-icon>
+      </button>
+      <button mat-icon-button (click)="sidenav.toggle()" class="menu-pc">
+        <ng-container *ngIf="!sidenav.opened">
+          <mat-icon matTooltip="Menu">menu</mat-icon>
+        </ng-container>
+        <ng-container *ngIf="sidenav.opened">
+          <mat-icon class="icon-fechar">clear</mat-icon>
+        </ng-container>
+      </button>
     </mat-toolbar-row>
   </mat-toolbar>
 
   <mat-sidenav-container class="mat-drawer-container mat-sidenav-container docs-component-viewer-sidenav-container">
-    <mat-sidenav #sidenav [autoFocus]="false"  style="width: 200px;">
+    <mat-sidenav #sidenav [autoFocus]="false"  style="width: 200px;" position="end" mode="side">
       <mat-nav-list>
         <a mat-list-item [routerLink]="'/produtos'" (click)="sidenav.toggle()">
-          <mat-icon class="material-icons-outlined icone-sidenav">local_florist</mat-icon> Produtos
+          <mat-icon class="material-icons-outlined icone-sidenav">local_offer</mat-icon> Produtos
         </a>
         <a mat-list-item [routerLink]="'/produtos'" (click)="sidenav.toggle()">
           <mat-icon class="material-icons-outlined icone-sidenav">timer</mat-icon> Encomendas

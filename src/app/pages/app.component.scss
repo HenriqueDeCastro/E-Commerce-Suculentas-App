@@ -24,10 +24,6 @@
   background-color: var(--cinza-fundo);
 }
 
-.icone-sidenav {
-  margin-right: 20px;
-}
-
 .toolbar-line {
   border-bottom:solid 2px var(--cinza-linha-toolbar);
 }
@@ -49,9 +45,17 @@
   right: 0;
 }
 
+.menu-mobile {
+  display: none;
+}
+
 @media (max-width: 600px)
 {
-  .titulo-app {
+  .menu-pc {
+    display: none;
+  }
 
+  .menu-mobile {
+    display: block;
   }
 }

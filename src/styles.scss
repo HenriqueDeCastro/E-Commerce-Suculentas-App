@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Lobster:300,400,500&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Pacifico:300,400,500&display=swap');
 @import '~@angular/material/theming';
 
 @include mat-core();
@@ -31,6 +31,13 @@ button:focus { outline: none; }
 .titulo-lista {
   font-family:Verdana, Geneva, Tahoma, sans-serif !important;
   margin-left: 1% !important;
+}
+
+.titulo-site {
+  font-family: Pacifico !important;
+  font-size: 30px;
+  color: var(--verde);
+  text-align: center;
 }
 
 .cursor {
@@ -75,6 +82,10 @@ button:focus { outline: none; }
 
 .icon-filtro {
   color: var(--laranja);
+}
+
+.icone-sidenav {
+  margin-right: 20px;
 }
 
 .quebra-linha-texto {

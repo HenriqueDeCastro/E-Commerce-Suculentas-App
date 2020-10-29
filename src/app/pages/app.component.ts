@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../core/services/Auth/Auth.service';
 import { Router } from '@angular/router';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { RotasSiteComponent } from 'src/app/shared/components/Rotas-Site/Rotas-Site.component';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +12,8 @@ import { Router } from '@angular/router';
 export class AppComponent implements OnInit{
 
   constructor(private authService: AuthService,
-              private route: Router) { }
+              private route: Router,
+              private bottomSheet: MatBottomSheet) { }
 
   ngOnInit(): void {
   }
@@ -25,5 +28,9 @@ export class AppComponent implements OnInit{
     } else {
       this.route.navigate(['/user/login']);
     }
+  }
+
+  openBottomSheet(): void {
+    this.bottomSheet.open(RotasSiteComponent);
   }
 }
