@@ -9,7 +9,7 @@ export const environment = {
   // UrlApi: 'http://localhost:5000',
 
   // HOMOLOGAÇÂO
-   UrlApi: 'http://192.168.0.27:5200'
+  UrlApi: 'https://www.xn--suculentasdar-1lb.com.br'
 };
 
 /*
