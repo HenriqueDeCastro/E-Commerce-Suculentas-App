@@ -13,7 +13,8 @@ export class AppComponent implements OnInit{
 
   constructor(private authService: AuthService,
               private route: Router,
-              private bottomSheet: MatBottomSheet) { }
+              private bottomSheet: MatBottomSheet,
+              public router: Router) { }
 
   ngOnInit(): void {
   }
