@@ -1,19 +1,13 @@
 <mat-nav-list>
   <mat-list-item (click)="FecharBottoom($event, '/produto')">
-    <mat-icon class="material-icons-outlined" mat-list-icon>local_offer</mat-icon>
+    <mat-icon class="material-icons-outlined icone-produto" mat-list-icon>local_offer</mat-icon>
     <div mat-line class="negrito">Produtos</div>
-    <div mat-line class="negrito-leve">Produtos a pronta entrega</div>
-  </mat-list-item>
-  <mat-divider></mat-divider>
-  <mat-list-item (click)="FecharBottoom($event, '/produto')">
-    <mat-icon class="material-icons-outlined" mat-list-icon>timer</mat-icon>
-    <div mat-line class="negrito">Encomendas</div>
-    <div mat-line class="negrito-leve">Produtos feitos por encomenda</div>
+    <div mat-line class="negrito-leve">Produtos feitos com carinho para você</div>
   </mat-list-item>
   <mat-divider></mat-divider>
   <ng-container *ngIf="!Logado()">
     <mat-list-item (click)="FecharBottoom($event, '/empresa/home')">
-      <mat-icon class="material-icons-outlined" mat-list-icon>store_mall_directory</mat-icon>
+      <mat-icon class="material-icons-outlined icone-empresa" mat-list-icon>store_mall_directory</mat-icon>
       <div mat-line class="negrito">Empresa</div>
       <div mat-line class="negrito-leve">Gerenciar informações do site</div>
     </mat-list-item>
@@ -21,22 +15,22 @@
   </ng-container>
   <ng-container *ngIf="!Logado()">
     <mat-list-item (click)="FecharBottoom($event, '/admin')">
-      <mat-icon class="material-icons-outlined" mat-list-icon>vpn_key</mat-icon>
+      <mat-icon class="material-icons-outlined icone-admin" mat-list-icon>vpn_key</mat-icon>
       <div mat-line class="negrito">Admin</div>
       <div mat-line class="negrito-leve">Gerenciar informações sensiveis</div>
     </mat-list-item>
   <mat-divider></mat-divider>
   </ng-container>
-  <a href="https://api.whatsapp.com/send/?phone=WhatsAppNumber5511964593680&text=Hello+World&app_absent=1">
+  <a href="https://api.whatsapp.com/send/?phone=WhatsAppNumber5511974513646&text=&app_absent=1">
     <mat-list-item>
-      <mat-icon class="material-icons-outlined" mat-list-icon>chat</mat-icon>
+      <mat-icon class="material-icons-outlined icone-chat" mat-list-icon>chat</mat-icon>
       <div mat-line class="negrito">Chat</div>
       <div mat-line class="negrito-leve">Conversar conosco por Whatsapp</div>
     </mat-list-item>
   </a>
   <mat-divider></mat-divider>
   <mat-list-item (click)="FecharBottoom($event, '/sobre')">
-    <mat-icon class="material-icons-outlined" mat-list-icon>info</mat-icon>
+    <mat-icon class="material-icons-outlined icone-sobre" mat-list-icon>info</mat-icon>
     <div mat-line class="negrito">Sobre</div>
     <div mat-line class="negrito-leve">Vem descobrir quem somos</div>
   </mat-list-item>

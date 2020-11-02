@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/Auth/Auth.service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-Rotas-Site',
@@ -14,8 +15,7 @@ export class RotasSiteComponent implements OnInit {
               private authService: AuthService,
               public router: Router) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   Logado(): boolean {
     return this.authService.LoggedIn();
