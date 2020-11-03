@@ -1,0 +1,46 @@
+<ng-container *ngIf="!Categorias">
+  <app-spinner></app-spinner>
+</ng-container>
+<ng-container *ngIf="Categorias">
+  <div class="container-titulo">
+    <h1 class="h1-btn titulo-lista">Produtos</h1>
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <ng-container *ngFor="let categoria of Categorias">
+    <div class="container-divider">
+      <div class="line"><mat-divider></mat-divider></div>
+      <div class="text mat-typography">{{categoria.nome}}</div>
+      <div class="line"><mat-divider></mat-divider></div>
+    </div>
+    <br>
+    <ng-container *ngIf="categoria.produtos.length == 0">
+      <h3 class="titulo centralizar">Não foram cadastrados produtos para {{categoria.nome}}</h3>
+    </ng-container>
+    <ng-container *ngIf="categoria.produtos.length > 0">
+      <div class="row">
+        <ng-container *ngFor="let produto of categoria.produtos">
+          <div class="col-md-3">
+            <mat-card class="mat-elevation-z2">
+              <img mat-card-image src="{{link}}/resources/{{produto.imagem}}" alt="{{produto.nome}}">
+                <mat-card-header>
+                  <mat-card-title>{{produto.nome}}</mat-card-title>
+                  <mat-card-subtitle>Estoque: {{produto.estoque}}</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </ng-container>
+      </div>
+      <br>
+      <br>
+      <div class="centralizar">
+        <button mat-button class="btn-responsive light-button"  color="accent" (click)="Navegar(categoria.nome, categoria.id)">Ver Mais</button>
+      </div>
+      <br>
+    </ng-container>
+  </ng-container>
+</ng-container>
