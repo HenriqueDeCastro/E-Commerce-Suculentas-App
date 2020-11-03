@@ -17,7 +17,7 @@
     </div>
     <br>
     <ng-container *ngIf="categoria.produtos.length == 0">
-      <h3 class="titulo centralizar">Não foram cadastrados produtos para {{categoria.nome}}</h3>
+      <h3 class="titulo centralizar">Aguarde por novidades!!!</h3>
     </ng-container>
     <ng-container *ngIf="categoria.produtos.length > 0">
       <div class="row">
@@ -27,7 +27,7 @@
               <img mat-card-image src="{{link}}/resources/{{produto.imagem}}" alt="{{produto.nome}}">
                 <mat-card-header>
                   <mat-card-title>{{produto.nome}}</mat-card-title>
-                  <mat-card-subtitle>Estoque: {{produto.estoque}}</mat-card-subtitle>
+                  <mat-card-subtitle>{{produto.preco | currency:'BRL'}}</mat-card-subtitle>
                 </mat-card-header>
                 <mat-card-content>
               </mat-card-content>
