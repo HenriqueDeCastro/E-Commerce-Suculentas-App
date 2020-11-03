@@ -5,11 +5,15 @@
 export const environment = {
   production: false,
 
-  // LOCAL
+  // LOCAL VSCODE
   // UrlApi: 'http://localhost:5000',
 
+  // LOCAL VS STUDIO
+  UrlApi: 'https://localhost:44350',
+
+
   // HOMOLOGAÇÂO
-  UrlApi: 'https://www.xn--suculentasdar-1lb.com.br'
+  // UrlApi: 'https://www.xn--suculentasdar-1lb.com.br'
 };
 
 /*

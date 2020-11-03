@@ -22,6 +22,10 @@ export class CategoriaService {
     return this.http.get<ICategoria[]>(`${this.UrlBase}/getSemProduto`);
   }
 
+  GetAllPagInicial(): Observable<ICategoria[]> {
+    return this.http.get<ICategoria[]>(`${this.UrlBase}/getPagInicial`);
+  }
+
   GetById(categoriaId: number): Observable<ICategoria> {
     return this.http.get<ICategoria>(`${this.UrlBase}/${categoriaId}`);
   }

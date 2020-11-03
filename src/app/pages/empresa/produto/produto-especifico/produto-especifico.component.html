@@ -1,0 +1,37 @@
+<ng-container *ngIf="!Categoria">
+  <app-spinner></app-spinner>
+</ng-container>
+<ng-container *ngIf="Categoria">
+  <app-voltar></app-voltar>
+  <br>
+  <br>
+  <br>
+  <div class="container-titulo">
+    <h1 class="h1-btn titulo-lista">{{Categoria.nome}}</h1>
+    <div class="btn-titulo">
+      <mat-icon class="material-icons-outlined cursor" matTooltip="Filtrar" color=primary (click)="openBottomSheet()">filter_alt</mat-icon>
+    </div>
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <div class="row">
+  <ng-container *ngFor="let produto of Categoria.produtos">
+      <div class="col-md-3">
+        <mat-card class="mat-elevation-z2">
+          <img mat-card-image src="{{link}}/resources/{{produto.imagem}}" alt="{{produto.nome}}">
+            <mat-card-header>
+              <mat-card-title>{{produto.nome}}</mat-card-title>
+              <mat-card-subtitle>Estoque: {{produto.estoque}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <div class="form-group col-md-12 centralizar">
+                <button mat-button class="w-100" color="accent">Editar</button>
+              </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </ng-container>
+  </div>
+</ng-container>

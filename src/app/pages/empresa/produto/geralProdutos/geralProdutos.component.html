@@ -9,9 +9,7 @@
   <div class="container-titulo">
     <h1 class="h1-btn titulo-lista">Produtos</h1>
     <div class="btn-titulo">
-      <button mat-icon-button matTooltip="Adicionar" (click)="router.navigate(['/empresa/produto/adicionar'])">
-        <mat-icon class="material-icons-outlined" color=primary>add</mat-icon>
-      </button>
+      <mat-icon class="material-icons-outlined cursor" color=primary  matTooltip="Adicionar" (click)="router.navigate(['/empresa/produto/adicionar'])">add</mat-icon>
     </div>
   </div>
   <br>
@@ -39,9 +37,6 @@
                   <mat-card-subtitle>Estoque: {{produto.estoque}}</mat-card-subtitle>
                 </mat-card-header>
                 <mat-card-content>
-                  <div class="form-group col-md-12 centralizar">
-                    <button mat-button class="w-100" color="accent">Editar</button>
-                  </div>
               </mat-card-content>
             </mat-card>
           </div>
@@ -50,8 +45,9 @@
       <br>
       <br>
       <div class="centralizar">
-        <button mat-stroked-button class="btn-responsive light-button"  color="accent">Ver Mais</button>
+        <button mat-button class="btn-responsive light-button"  color="accent" (click)="Navegar(categoria.nome, categoria.id)">Ver Mais</button>
       </div>
+      <br>
     </ng-container>
   </ng-container>
 </ng-container>
@@ -60,22 +56,3 @@
         <mat-icon class="material-icons-outlined" color=accent>filter_alt</mat-icon>
       </button> -->
 
-<!-- <div class="row">
-  <ng-container *ngFor="let produto of categoria.produtos">
-    <div class="col-md-3">
-      <mat-card class="">
-        <img mat-card-image src="{{link}}/resources/{{produto.imagem}}" alt="{{produto.nome}}">
-          <mat-card-header>
-            <mat-card-title>{{produto.nome}}</mat-card-title>
-            <mat-card-subtitle class="quebra-linha-texto">{{produto.descricao}}</mat-card-subtitle>
-            <mat-card-subtitle class="negrito" color=primary>{{produto.preco | currency}}</mat-card-subtitle>
-          </mat-card-header>
-        <mat-card-content>
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-button class="w-100" color=primary>Carrinho</button>
-        </mat-card-actions>
-      </mat-card>
-    </div>
-  </ng-container>
-</div> -->

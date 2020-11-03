@@ -5,6 +5,7 @@ import { AuthGuard } from '../../../core/guards/auth.guard';
 import { ProdutoComponent } from './produto.component';
 import { GeralProdutosComponent } from './geralProdutos/geralProdutos.component';
 import { AdicionarProdutoComponent } from './adicionarProduto/adicionarProduto.component';
+import { ProdutoEspecificoComponent } from './produto-especifico/produto-especifico.component';
 
 const routes: Routes = [
   { path: '', component: ProdutoComponent,
@@ -12,6 +13,7 @@ const routes: Routes = [
     [
       { path: 'geral', component: GeralProdutosComponent, canActivate: [AuthGuard] },
       { path: 'adicionar', component: AdicionarProdutoComponent, canActivate: [AuthGuard] },
+      { path: ':categoriaId/:categoriaName', component: ProdutoEspecificoComponent, canActivate: [AuthGuard] },
       { path: '', redirectTo: 'geral', pathMatch: 'full' },
       { path: '**', redirectTo: 'geral', pathMatch: 'full' }
     ],
