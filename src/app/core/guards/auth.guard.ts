@@ -13,7 +13,14 @@ export class AuthGuard implements CanActivate {
     if (localStorage.getItem('token') != null) {
       return true;
     } else {
-      this.router.navigate(['/user/login']);
+      this.router.navigate(
+        ['/user/login'],
+        {
+          queryParams: {
+            fromUrl: state.url
+          }
+        }
+      );
       return false;
     }
   }

@@ -40,7 +40,7 @@ export class EsqueciSenhaComponent implements OnInit {
       this.authService.EsqueciSenha(this.EsqueciObjeto).subscribe(
         () => {
           this.EnviandoRequisicao = false;
-          this.snackbar.OpenSnackBarSuccess('Verifique sua caixa de e-mail')
+          this.snackbar.OpenSnackBarSuccess('Verifique sua caixa de e-mail');
           this.router.navigate(['/user/login']);
         },
         error => {

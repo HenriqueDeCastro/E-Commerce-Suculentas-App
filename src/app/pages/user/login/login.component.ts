@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/Auth/Auth.service';
 import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
 
@@ -13,14 +13,21 @@ export class LoginComponent implements OnInit {
 
   public LoginForm: FormGroup;
   public RealizandoLogin = false;
+  private FromUrl: string;
 
   constructor(private fb: FormBuilder,
               public router: Router,
               private authService: AuthService,
-              private snackbar: SnackbarComponent) { }
+              private snackbar: SnackbarComponent,
+              private activetedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.ReceberValorRota();
     this.Validation();
+  }
+
+  ReceberValorRota(): void {
+    this.activetedRoute.queryParams.subscribe(params => this.FromUrl = params.fromUrl);
   }
 
   Validation(): void {
@@ -36,7 +43,11 @@ export class LoginComponent implements OnInit {
       this.authService.Login(this.LoginForm.value).subscribe(
         () => {
           this.RealizandoLogin = false;
-          this.router.navigate(['/produtos']);
+          if (this.FromUrl) {
+            this.router.navigateByUrl(this.FromUrl);
+          } else {
+            this.router.navigate(['/produtos']);
+          }
         },
         error => {
           this.RealizandoLogin = false;
