@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../core/services/Auth/Auth.service';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { RotasSiteComponent } from 'src/app/shared/components/Rotas-Site/Rotas-Site.component';
 import { environment } from '../../environments/environment';
@@ -17,7 +17,14 @@ export class AppComponent implements OnInit{
               private bottomSheet: MatBottomSheet,
               public router: Router) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.router.events.subscribe((evt) => {
+      if (!(evt instanceof NavigationEnd)) {
+          return;
+      }
+      this.resetScrollPosition();
+    });
+  }
 
   Logado(): boolean {
     return this.authService.LoggedIn();
@@ -28,6 +35,15 @@ export class AppComponent implements OnInit{
       this.route.navigate(['/user/perfil']);
     } else {
       this.route.navigate(['/user/login']);
+    }
+  }
+
+  resetScrollPosition(): void {
+    if (typeof document === 'object' && document) {
+      const sidenavContent = document.querySelector('.mat-drawer-content');
+      if (sidenavContent) {
+        sidenavContent.scrollTop = 0;
+      }
     }
   }
 

@@ -1,0 +1,29 @@
+<app-voltar></app-voltar>
+<br>
+<br>
+<br>
+<h1 class="titulo" color="primary">Esqueceu a senha?</h1>
+<br>
+<br>
+<h2 class="titulo" color="primary">Informe o e-mail da sua conta:</h2>
+<br>
+<br>
+<form [formGroup]="EsqueciForm" (ngSubmit)="EsqueciSenha()" autocomplete="off">
+  <mat-form-field appearance="fill" class="w-100">
+    <mat-label> E-mail </mat-label>
+    <input matInput formControlName="email">
+    <mat-icon class="material-icons-outlined" matSuffix >mail_outline</mat-icon>
+    <mat-error *ngIf="EsqueciForm.get('email').hasError('email')" class="invalid-feedback">Insira apenas e-mails validos</mat-error>
+    <mat-error *ngIf="EsqueciForm.get('email').hasError('required')" class="invalid-feedback">E-mail é obrigatório</mat-error>
+  </mat-form-field>
+  <br>
+  <ng-container *ngIf="EnviandoRequisicao">
+    <br>
+    <app-progressbar></app-progressbar>
+  </ng-container>
+  <br>
+  <div class="form-group col-md-12 centralizar">
+    <button mat-flat-button class="btn-responsive" color="primary" [disabled]=EnviandoRequisicao>Enviar</button>
+  </div>
+</form>
+

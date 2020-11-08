@@ -49,6 +49,10 @@
   display: none;
 }
 
+::ng-deep .mat-card-header-text {
+  margin: 0px !important;
+}
+
 @media (max-width: 600px)
 {
   .menu-pc {

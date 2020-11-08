@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from '../core/guards/auth.guard';
 
-import { ProdutosComponent } from './produtos/produtos.component';
-
 const routes: Routes = [
   { path: 'user', loadChildren: './user/user.module#UserModule' },
   { path: 'produtos', loadChildren: './produtos/produtos.module#ProdutosModule' },

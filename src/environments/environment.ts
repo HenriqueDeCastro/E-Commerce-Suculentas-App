@@ -9,11 +9,11 @@ export const environment = {
   // UrlApi: 'http://localhost:5000',
 
   // LOCAL VS STUDIO
-  UrlApi: 'https://localhost:44350',
+  // UrlApi: 'https://localhost:44350',
 
 
   // HOMOLOGAÇÂO
-  // UrlApi: 'https://www.xn--suculentasdar-1lb.com.br'
+  UrlApi: 'https://www.xn--suculentasdar-1lb.com.br'
 };
 
 /*

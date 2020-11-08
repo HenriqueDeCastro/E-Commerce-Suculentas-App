@@ -7,9 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SobreComponent implements OnInit {
 
+  teste: boolean;
+
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit(): void {}
 
 }

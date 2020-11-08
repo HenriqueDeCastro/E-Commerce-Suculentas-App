@@ -1,0 +1,35 @@
+<h1 class="titulo" color="primary">Redefinir senha</h1>
+<br>
+<br>
+<h2 class="titulo" color="primary">Informe e confirme sua nova senha:</h2>
+<br>
+<br>
+<form [formGroup]="SenhaForm" (ngSubmit)="ResetSenha()" autocomplete="off">
+  <div formGroupName="passwords">
+    <mat-form-field appearance="fill" class="w-100">
+      <mat-label> Senha </mat-label>
+      <input type="password" matInput formControlName="password">
+      <mat-icon class="material-icons-outlined" matSuffix>lock_open</mat-icon>
+      <mat-error *ngIf="SenhaForm.get('passwords.password').hasError('required')" class="invalid-feedback">Senha é obrigatória</mat-error>
+      <mat-error *ngIf="SenhaForm.get('passwords.password').hasError('minlength')" class="invalid-feedback">Senha deve conter no minimo 8 caracterer</mat-error>
+    </mat-form-field>
+    <br>
+    <br>
+    <mat-form-field appearance="fill" class="w-100">
+      <mat-label> Confirmar senha </mat-label>
+      <input type="password" matInput formControlName="confirmedPassword">
+      <mat-icon class="material-icons-outlined" matSuffix>https</mat-icon>
+      <mat-error *ngIf="SenhaForm.get('passwords.confirmedPassword').hasError('required')" class="invalid-feedback">Confirmar senha é obrigatório</mat-error>
+      <mat-error *ngIf="SenhaForm.get('passwords.confirmedPassword').hasError('minlength')" class="invalid-feedback">Senha deve conter no minimo 8 caracterer</mat-error>
+      <mat-error *ngIf="SenhaForm.get('passwords.confirmedPassword').hasError('mismatch')" class="invalid-feedback"> Senhas não conferem </mat-error>
+    </mat-form-field>
+  </div>
+  <br>
+  <ng-container *ngIf="Registrando">
+    <app-progressbar></app-progressbar>
+  </ng-container>
+  <br>
+  <div class="form-group col-md-12 centralizar">
+    <button mat-flat-button class="btn-responsive" color="primary" [disabled]="Registrando">Redefinir</button>
+  </div>
+</form>

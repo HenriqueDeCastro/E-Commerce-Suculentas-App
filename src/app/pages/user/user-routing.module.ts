@@ -5,6 +5,8 @@ import { AuthGuard } from '../../core/guards/auth.guard';
 import { UserComponent } from './user.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { EsqueciSenhaComponent } from './esqueciSenha/esqueciSenha.component';
+import { ResetSenhaComponent } from './resetSenha/resetSenha.component';
 import { PerfilComponent } from './perfil/perfil.component';
 
 const routes: Routes = [
@@ -13,6 +15,8 @@ const routes: Routes = [
     [
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
+      { path: 'esquecisenha', component: EsqueciSenhaComponent },
+      { path: 'reset/:email/:token', component: ResetSenhaComponent },
       { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard]  },
       { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: '**', redirectTo: 'login', pathMatch: 'full' }

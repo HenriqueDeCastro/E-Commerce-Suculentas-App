@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { UserComponent } from './user.component';
 import { LoginComponent } from './login/login.component';
@@ -11,16 +11,21 @@ import { MaterialModule } from 'src/app/shared/components/material/material.modu
 import { UserRoutingModule } from './user-routing.module';
 import { CommonModule } from '@angular/common';
 import { ComponentModule } from 'src/app/shared/components/component.module';
+import { EsqueciSenhaComponent } from './esqueciSenha/esqueciSenha.component';
+import { ResetSenhaComponent } from './resetSenha/resetSenha.component';
 
 @NgModule({
   declarations: [
     UserComponent,
     LoginComponent,
     RegisterComponent,
-    PerfilComponent
+    PerfilComponent,
+    EsqueciSenhaComponent,
+    ResetSenhaComponent
   ],
   imports: [
     MaterialModule,
+    FormsModule,
     ReactiveFormsModule,
     UserRoutingModule,
     CommonModule,

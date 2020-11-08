@@ -29,6 +29,14 @@ export class AuthService {
     );
   }
 
+  EsqueciSenha(model: any) {
+    return this.http.post(`${this.UrlBase}/esqueciSenha`, model);
+  }
+
+  ResetSenha(model: any) {
+    return this.http.post(`${this.UrlBase}/resetarSenha`, model);
+  }
+
   Register(model: any) {
     return this.http.post(`${this.UrlBase}/register`, model).pipe(
       map((response: any) => {

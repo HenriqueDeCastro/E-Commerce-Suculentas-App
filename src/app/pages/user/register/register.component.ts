@@ -75,7 +75,7 @@ export class RegisterComponent implements OnInit {
         error => {
           this.Registrando = false;
           const erro = error.error;
-          console.log(error)
+          console.log(error);
           switch (erro) {
             case 'DuplicateUserName':
               this.snackbar.OpenSnackBarError('E-mail informado já possui cadastro !!!');

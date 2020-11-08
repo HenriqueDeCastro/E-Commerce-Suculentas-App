@@ -18,6 +18,7 @@
     <mat-error *ngIf="LoginForm.get('password').hasError('required')" class="invalid-feedback">Senha é obrigatória</mat-error>
   </mat-form-field>
   <br>
+  <h4 (click)="router.navigate(['user/esquecisenha'])" class="w-40 btn-esquecisenha cursor negrito">Esqueceu a senha?</h4>
   <br>
   <div class="form-row">
     <div class="form-group col-md-12 centralizar">

@@ -19,10 +19,12 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from '../core/guards/auth.interceptor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { CarrinhoComponent } from './carrinho/carrinho.component';
 
 @NgModule({
-  declarations: [
-    AppComponent
+  declarations: [	
+    AppComponent,
+      CarrinhoComponent
    ],
   imports: [
     BrowserModule,
