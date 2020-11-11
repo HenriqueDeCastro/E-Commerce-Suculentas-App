@@ -48,7 +48,7 @@
       <mat-form-field appearance="fill" class="w-100">
         <mat-label> Celular + DDD </mat-label>
         <input matInput formControlName="phoneNumber" mask="(00)00000-0000">
-        <mat-icon class="material-icons-outlined" matSuffix>stay_current_portrait</mat-icon>
+        <mat-icon class="material-icons-outlined" matSuffix>phone_iphone</mat-icon>
         <mat-error *ngIf="ContatosForm.get('phoneNumber').hasError('required')" class="invalid-feedback">Número é obrigatório</mat-error>
         <mat-error *ngIf="ContatosForm.get('phoneNumber').hasError('minlength')" class="invalid-feedback">Número deve ter 11 numeros</mat-error>
         <mat-error *ngIf="ContatosForm.get('phoneNumber').hasError('maxlength')" class="invalid-feedback">Número deve ter 11 numeros</mat-error>
@@ -74,13 +74,17 @@
     <ng-template matStepLabel>Senhas</ng-template>
     <br>
     <form [formGroup]="SenhaForm" (ngSubmit)="Registrar()" autocomplete="off">
+      <div class="alert alert-warning" role="alert">
+        Senha deve conter no mínimo 8 caracteres
+      </div>
+      <br>
       <div formGroupName="passwords">
         <mat-form-field appearance="fill" class="w-100">
           <mat-label> Senha </mat-label>
           <input type="password" matInput formControlName="password">
           <mat-icon class="material-icons-outlined" matSuffix>lock_open</mat-icon>
           <mat-error *ngIf="SenhaForm.get('passwords.password').hasError('required')" class="invalid-feedback">Senha é obrigatória</mat-error>
-          <mat-error *ngIf="SenhaForm.get('passwords.password').hasError('minlength')" class="invalid-feedback">Senha deve conter no minimo 8 caracterer</mat-error>
+          <mat-error *ngIf="SenhaForm.get('passwords.password').hasError('minlength')" class="invalid-feedback">Senha deve conter no minimo 8 caracteres</mat-error>
         </mat-form-field>
         <br>
         <br>
@@ -89,7 +93,7 @@
           <input type="password" matInput formControlName="confirmedPassword">
           <mat-icon class="material-icons-outlined" matSuffix>https</mat-icon>
           <mat-error *ngIf="SenhaForm.get('passwords.confirmedPassword').hasError('required')" class="invalid-feedback">Confirmar senha é obrigatório</mat-error>
-          <mat-error *ngIf="SenhaForm.get('passwords.confirmedPassword').hasError('minlength')" class="invalid-feedback">Senha deve conter no minimo 8 caracterer</mat-error>
+          <mat-error *ngIf="SenhaForm.get('passwords.confirmedPassword').hasError('minlength')" class="invalid-feedback">Senha deve conter no minimo 8 caracteres</mat-error>
           <mat-error *ngIf="SenhaForm.get('passwords.confirmedPassword').hasError('mismatch')" class="invalid-feedback"> Senhas não conferem </mat-error>
         </mat-form-field>
       </div>

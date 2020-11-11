@@ -51,8 +51,17 @@ export class LoginComponent implements OnInit {
         },
         error => {
           this.RealizandoLogin = false;
+          const erro = error.error;
           console.log(error);
-          this.snackbar.OpenSnackBarError('Erro no login');
+
+          switch (erro.title) {
+            case 'Unauthorized':
+              this.snackbar.OpenSnackBarError('E-mail ou senha incorretos');
+              break;
+            default:
+              this.snackbar.OpenSnackBarError('Erro no servidor, tente novamente mais tarde !!!');
+              break;
+          }
       });
     }else {
       this.snackbar.OpenSnackBarError('Preencha todos os campos!');

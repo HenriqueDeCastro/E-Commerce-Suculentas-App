@@ -24,6 +24,7 @@
     "@auth0/angular-jwt": "^5.0.1",
     "angular-jwt": "^0.1.11",
     "bootstrap": "^4.5.2",
+    "compass-mixins": "^0.12.10",
     "ngx-mask": "^10.0.1",
     "ngx-material-file-input": "^2.1.1",
     "rxjs": "~6.5.5",

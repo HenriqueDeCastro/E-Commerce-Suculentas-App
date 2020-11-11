@@ -5,7 +5,7 @@ import { VoltarComponent } from './voltar/voltar.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { FiltroProdutosComponent } from './filtro-produtos/filtro-produtos.component';
 import { RotasSiteComponent } from './Rotas-Site/Rotas-Site.component';
-import { AppRoutingModule } from 'src/app/pages/app-routing.module';
+import { FooterComponent } from './footer/footer.component';
 import { CommonModule } from '@angular/common';
 
 @NgModule({
@@ -14,14 +14,16 @@ import { CommonModule } from '@angular/common';
     VoltarComponent,
     SpinnerComponent,
     FiltroProdutosComponent,
-    RotasSiteComponent
+    RotasSiteComponent,
+    FooterComponent
   ],
   exports: [
     ProgressbarComponent,
     VoltarComponent,
     SpinnerComponent,
     FiltroProdutosComponent,
-    RotasSiteComponent
+    RotasSiteComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,

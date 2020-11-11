@@ -1,0 +1,84 @@
+@import '~compass-mixins/lib/compass/css3';
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+@import url('https://fonts.googleapis.com/css?family=Norican:300,400,500&display=swap');
+
+/* Colors */
+$whats: #6dcd9a;
+$face: #3D5B94;
+$insta: #c1558b;
+$social-size: 1.3em;
+$social-width: 25%;
+
+* {
+  margin: 0;
+  padding: 0;
+  @include box-sizing(border-box);
+}
+
+footer {
+  width: 100%;
+  margin: 0 0;
+  height: 70px;
+  background-color: var(--cinza-linha-toolbar);
+  .copyright {
+    width: 50%;
+    float: left;
+    @media (max-width: 600px) {
+      width: 100%;
+      text-align: center;
+    }
+    a {
+      padding-left: 10%;
+      color: black;
+      font-size: 0.8em;
+      vertical-align: auto;
+      line-height: 70px;
+      //text-transform: capitalize;
+      letter-spacing: 1px;
+      text-align: center;
+      @media (max-width: 600px) {
+        padding: 0;
+      }
+    }
+  }
+  .social {
+      width: 50%;
+      float: right;
+    @media (max-width: 600px) {
+      width: 100%;
+    }
+     a {
+      float: left;
+      line-height: 70px;
+      text-decoration: none;
+      color: white;
+      text-align: center;
+      //font-weight: bold;
+      font-weight: 400;
+      @include transition(all, 0.3s);
+       &:hover {
+         background-color: black;
+         @include transition(all, .5s);
+       }
+    }
+  }
+}
+
+.face {
+  background-color: $face;
+  font-size: $social-size;
+  width: $social-width;
+}
+
+.insta {
+  background-color: $insta;
+  font-size: $social-size;
+  width: $social-width;
+  font-family: Norican !important;
+}
+
+.support {
+  background-color: $whats;
+  font-size: 1em;
+  width: 50%;
+}
