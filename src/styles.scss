@@ -24,6 +24,10 @@ html, body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif !impor
 
 button:focus { outline: none; }
 
+.altura-sidenav {
+  height: 100vh;
+}
+
 .titulo {
   font-family:Verdana, Geneva, Tahoma, sans-serif !important;
 }
