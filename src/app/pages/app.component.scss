@@ -10,6 +10,10 @@
   background-color: white;
 }
 
+.altura-sidenav {
+  min-height: calc(100vh - 60px);
+}
+
 .fundo-sidenav {
   background-color: var(--cinza-fundo);
 }
