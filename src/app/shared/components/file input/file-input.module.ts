@@ -1,5 +1,4 @@
-import {NgModule} from '@angular/core';
-import {A11yModule} from '@angular/cdk/a11y';
+import { NgModule } from '@angular/core';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 
 @NgModule({

@@ -8,6 +8,7 @@ import { ProdutosRoutingModule } from './produtos-routing.module';
 import { ProdutosEspecificoComponent } from './produtos-especifico/produtos-especifico.component';
 import { ProdutosHomeComponent } from './produtosHome/produtosHome.component';
 import { FormsModule } from '@angular/forms';
+import { PaginationModule } from '../../shared/components/pagination/pagination.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
     CommonModule,
     ComponentModule,
-    ProdutosRoutingModule
+    ProdutosRoutingModule,
+    PaginationModule
   ]
 })
 export class ProdutosModule {}

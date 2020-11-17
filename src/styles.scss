@@ -123,6 +123,23 @@ mat-card {
   border-radius: 20px !important;
 }
 
+.mat-card :hover {
+  cursor: pointer;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+}
+
+ul {
+  padding-inline-start: 0px !important;
+}
+
+.ngx-pagination .current {
+  background: var(--verde) !important;
+}
+
 @media (max-width: 770px)
 {
   .col-md-3 {
