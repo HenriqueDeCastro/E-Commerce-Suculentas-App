@@ -1,1 +1,37 @@
-.recuo { text-indent:2em }
+img    {
+  border-radius: 50%;
+  height: 100%;
+  width: 100%;
+}
+
+.titulo-sobre {
+  margin-left: 4%;
+}
+
+@media (max-width: 767px)
+{
+  .texto-sobre {
+    text-align: center;
+  }
+
+  .titulo-sobre {
+    margin-left: 0px;
+    text-align: center;
+  }
+
+  .img-centralizar {
+    display: flex;
+    justify-content: center;
+  }
+
+  .col-img {
+    width: 100% !important;
+  }
+
+  img    {
+    border-radius: 50%;
+    height: 50%;
+    width: 50%;
+    margin-bottom: 2rem;
+  }
+}

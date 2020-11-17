@@ -17,7 +17,7 @@
   <br>
   <br>
   <div class="row">
-  <ng-container *ngFor="let produto of Categoria.produtos">
+  <ng-container *ngFor="let produto of Categoria.produtos  | paginate: { itemsPerPage: 8, currentPage: pages }">
       <div class="col-md-3">
         <mat-card class="mat-elevation-z2">
           <img mat-card-image src="{{link}}/resources/{{produto.imagem}}" alt="{{produto.nome}}">
@@ -34,4 +34,18 @@
       </div>
     </ng-container>
   </div>
+  <br>
+  <br>
+  <br>
+  <div class="d-flex justify-content-center">
+    <pagination-controls
+      (pageChange)="onChangePage($event)"
+      maxSize="9"
+      autoHide="true"
+      responsive="true"
+      previousLabel="Anterior"
+      nextLabel="Próximo"></pagination-controls>
+  </div>
+  <br>
+  <br>
 </ng-container>

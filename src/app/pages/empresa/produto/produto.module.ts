@@ -11,6 +11,7 @@ import { ProdutoEspecificoComponent } from './produto-especifico/produto-especif
 import { AdicionarProdutoComponent } from './adicionarProduto/adicionarProduto.component';
 import { FileInputModule } from 'src/app/shared/components/file input/file-input.module';
 import { MaskModule } from 'src/app/shared/components/mask/mask.module';
+import { PaginationModule } from 'src/app/shared/components/pagination/pagination.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { MaskModule } from 'src/app/shared/components/mask/mask.module';
     MaterialModule,
     FileInputModule,
     ProdutoRoutingModule,
-    MaskModule
+    MaskModule,
+    PaginationModule
   ]
 })
 export class ProdutoModule {}
