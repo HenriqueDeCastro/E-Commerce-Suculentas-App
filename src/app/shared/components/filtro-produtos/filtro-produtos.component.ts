@@ -10,7 +10,7 @@ export class FiltroProdutosComponent implements OnInit {
 
   constructor(private bottomSheetRef: MatBottomSheetRef<FiltroProdutosComponent>) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
 }

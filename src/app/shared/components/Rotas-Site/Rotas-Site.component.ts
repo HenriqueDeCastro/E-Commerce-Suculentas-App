@@ -11,11 +11,15 @@ import { environment } from '../../../../environments/environment';
 })
 export class RotasSiteComponent implements OnInit {
 
+  urlWhatsapp: string;
+
   constructor(private bottomSheetRef: MatBottomSheetRef<RotasSiteComponent>,
               private authService: AuthService,
               public router: Router) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.urlWhatsapp = environment.UrlWhats;
+  }
 
   Logado(): boolean {
     return this.authService.LoggedIn();

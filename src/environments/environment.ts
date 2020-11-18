@@ -1,7 +1,3 @@
-// This file can be replaced during build by using the `fileReplacements` array.
-// `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
-// The list of file replacements can be found in `angular.json`.
-
 export const environment = {
   production: false,
 
@@ -11,16 +7,16 @@ export const environment = {
   // LOCAL VS STUDIO
   // UrlApi: 'https://localhost:44350',
 
-
   // HOMOLOGAÇÂO
-  UrlApi: 'https://www.xn--suculentasdar-1lb.com.br'
+  UrlApi: 'https://www.xn--suculentasdar-1lb.com.br',
+
+  // WHATSAPP
+  UrlWhats: 'https://api.whatsapp.com/send/?phone=WhatsAppNumber5511974513646&text=&app_absent=1',
+
+  // FACEBOOK
+  UrlFace: 'https://www.facebook.com/groups/2486651298029953',
+
+  // INSTAGRAM
+  UrlInsta: 'https://www.instagram.com/suculentas_da_ro/'
 };
 
-/*
- * For easier debugging in development mode, you can import the following file
- * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
- *
- * This import should be commented out in production mode because it will have a negative impact
- * on performance if an error is thrown.
- */
-// import 'zone.js/dist/zone-error';  // Included with Angular CLI.
