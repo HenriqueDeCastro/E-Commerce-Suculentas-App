@@ -47,7 +47,21 @@ export class ProdutosEspecificoComponent implements OnInit {
   }
 
   openBottomSheet(): void {
-    this.bottomSheet.open(FiltroProdutosComponent);
+    const bottomSheetRef = this.bottomSheet.open(FiltroProdutosComponent);
+    bottomSheetRef.afterDismissed().subscribe((dataFromChild) => {
+      if (dataFromChild === 'Alfabetica') {
+        this.Categoria.produtos.sort((a, b) => a.nome > b.nome ? 1 : -1);
+        this.pages = 1;
+      }
+      if (dataFromChild === 'Preço maior para menor') {
+        this.Categoria.produtos.sort((a, b) => a.preco < b.preco ? 1 : -1);
+        this.pages = 1;
+      }
+      if (dataFromChild === 'Preço menor para maior') {
+        this.Categoria.produtos.sort((a, b) => a.preco > b.preco ? 1 : -1);
+        this.pages = 1;
+      }
+    });
   }
 
   onChangePage(evento: any): void {

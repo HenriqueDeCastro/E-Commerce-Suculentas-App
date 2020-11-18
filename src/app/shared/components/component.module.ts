@@ -4,6 +4,7 @@ import { ProgressbarComponent } from './progressbar/progressbar.component';
 import { VoltarComponent } from './voltar/voltar.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { FiltroProdutosComponent } from './filtro-produtos/filtro-produtos.component';
+import { FiltroProdutosEmpresaComponent } from './filtro-produtos-empresa/filtro-produtos-empresa.component';
 import { RotasSiteComponent } from './Rotas-Site/Rotas-Site.component';
 import { FooterComponent } from './footer/footer.component';
 import { CommonModule } from '@angular/common';
@@ -14,6 +15,7 @@ import { CommonModule } from '@angular/common';
     VoltarComponent,
     SpinnerComponent,
     FiltroProdutosComponent,
+    FiltroProdutosEmpresaComponent,
     RotasSiteComponent,
     FooterComponent
   ],
@@ -22,6 +24,7 @@ import { CommonModule } from '@angular/common';
     VoltarComponent,
     SpinnerComponent,
     FiltroProdutosComponent,
+    FiltroProdutosEmpresaComponent,
     RotasSiteComponent,
     FooterComponent
   ],

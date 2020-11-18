@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { ActivatedRoute } from '@angular/router';
 import { CategoriaService } from 'src/app/core/services/Categoria/Categoria.service';
-import { FiltroProdutosComponent } from 'src/app/shared/components/filtro-produtos/filtro-produtos.component';
+import { FiltroProdutosEmpresaComponent } from 'src/app/shared/components/filtro-produtos-empresa/filtro-produtos-empresa.component';
 import { ResetScrollComponent } from 'src/app/shared/components/reset-scroll/reset-scroll.component';
 import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
 import { ICategoria } from 'src/app/shared/models/ICategoria';
@@ -47,11 +47,41 @@ export class ProdutoEspecificoComponent implements OnInit {
   }
 
   openBottomSheet(): void {
-    this.bottomSheet.open(FiltroProdutosComponent);
+    const bottomSheetRef = this.bottomSheet.open(FiltroProdutosEmpresaComponent);
+    bottomSheetRef.afterDismissed().subscribe((dataFromChild) => {
+      if (dataFromChild === 'Alfabetica') {
+        this.Categoria.produtos.sort((a, b) => a.nome > b.nome ? 1 : -1);
+        this.pages = 1;
+      }
+      if (dataFromChild === 'Preço maior para menor') {
+        this.Categoria.produtos.sort((a, b) => a.preco < b.preco ? 1 : -1);
+        this.pages = 1;
+      }
+      if (dataFromChild === 'Preço menor para maior') {
+        this.Categoria.produtos.sort((a, b) => a.preco > b.preco ? 1 : -1);
+        this.pages = 1;
+      }
+      if (dataFromChild === 'Estoque') {
+        this.Categoria.produtos.sort((a, b) => a.estoque > b.estoque ? 1 : -1);
+        this.pages = 1;
+      }
+    });
   }
 
   onChangePage(evento: any): void {
     this.pages = evento;
     this.resetScroll.PositionZero();
+  }
+
+  ColorEstoque(estoque: number): string {
+    if (estoque === 0) {
+      return 'zerado';
+    }
+    if (estoque > 0 && estoque < 4) {
+      return 'pouco';
+    }
+    if (estoque >= 4) {
+      return 'otimo';
+    }
   }
 }

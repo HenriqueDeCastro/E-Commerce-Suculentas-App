@@ -6,7 +6,7 @@ import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.c
 import { ICategoria } from 'src/app/shared/models/ICategoria';
 import { IProduto } from 'src/app/shared/models/IProduto';
 import { ProdutoService } from '../../../../core/services/Produto/Produto.service';
-import { RenomearService } from '../../../../core/services/Renomear/Renomear.service';
+import { RenomearArquivoComponent } from '../../../../shared/components/renomear-arquivo/renomear-arquivo.component';
 
 @Component({
   selector: 'app-adicionarProduto',
@@ -25,7 +25,7 @@ export class AdicionarProdutoComponent implements OnInit {
               public router: Router,
               private produtoService: ProdutoService,
               private categoriaService: CategoriaService,
-              private renomear: RenomearService,
+              private renomear: RenomearArquivoComponent,
               private snackbar: SnackbarComponent) { }
 
   ngOnInit(): void {

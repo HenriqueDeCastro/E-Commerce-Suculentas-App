@@ -13,4 +13,9 @@ export class FiltroProdutosComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  FecharBottoom(event: MouseEvent, value: string): void{
+    this.bottomSheetRef.dismiss(value);
+    event.preventDefault();
+  }
+
 }

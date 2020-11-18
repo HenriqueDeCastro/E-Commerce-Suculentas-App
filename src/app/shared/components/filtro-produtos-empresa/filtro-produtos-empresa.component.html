@@ -16,5 +16,10 @@
       <div mat-line class="negrito-leve">Ordem alfabética</div>
       <div mat-line class="negrito">Da letra A a Z</div>
     </mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item (click)="FecharBottoom($event, 'Estoque')" class="estoque">
+      <mat-icon class="material-icons-outlined" mat-list-icon>warning</mat-icon>
+      <div mat-line class="negrito-leve">Estoque</div>
+      <div mat-line class="negrito">Do zerado para a maior quantidade</div>
+    </mat-list-item>
 </mat-nav-list>
-
