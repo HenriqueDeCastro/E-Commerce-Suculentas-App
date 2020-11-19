@@ -39,21 +39,7 @@
   right: 0;
 }
 
-.menu-mobile {
-  display: none;
-}
-
 ::ng-deep .mat-card-header-text {
   margin: 0px !important;
 }
 
-@media (max-width: 770px)
-{
-  .menu-pc {
-    display: none;
-  }
-
-  .menu-mobile {
-    display: block;
-  }
-}

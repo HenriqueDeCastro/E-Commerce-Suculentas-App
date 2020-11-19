@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { CategoriaService } from 'src/app/core/services/Categoria/Categoria.service';
 import { FiltroProdutosEmpresaComponent } from 'src/app/shared/components/filtro-produtos-empresa/filtro-produtos-empresa.component';
@@ -7,6 +8,7 @@ import { ResetScrollComponent } from 'src/app/shared/components/reset-scroll/res
 import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
 import { ICategoria } from 'src/app/shared/models/ICategoria';
 import { environment } from 'src/environments/environment';
+import { DialogFiltroProdutosEmpresaComponent } from '../../../../shared/components/dialog-filtro-produtos-empresa/dialog-filtro-produtos-empresa.component'
 
 @Component({
   selector: 'app-produto-especifico',
@@ -24,7 +26,8 @@ export class ProdutoEspecificoComponent implements OnInit {
               private categoriaService: CategoriaService,
               private bottomSheet: MatBottomSheet,
               private snackbar: SnackbarComponent,
-              private resetScroll: ResetScrollComponent) { }
+              private resetScroll: ResetScrollComponent,
+              public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.link = environment.UrlApi;
@@ -62,6 +65,30 @@ export class ProdutoEspecificoComponent implements OnInit {
         this.pages = 1;
       }
       if (dataFromChild === 'Estoque') {
+        this.Categoria.produtos.sort((a, b) => a.estoque > b.estoque ? 1 : -1);
+        this.pages = 1;
+      }
+    });
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DialogFiltroProdutosEmpresaComponent, {
+      autoFocus: false,
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'Alfabetica') {
+        this.Categoria.produtos.sort((a, b) => a.nome > b.nome ? 1 : -1);
+        this.pages = 1;
+      }
+      if (result === 'Preço maior para menor') {
+        this.Categoria.produtos.sort((a, b) => a.preco < b.preco ? 1 : -1);
+        this.pages = 1;
+      }
+      if (result === 'Preço menor para maior') {
+        this.Categoria.produtos.sort((a, b) => a.preco > b.preco ? 1 : -1);
+        this.pages = 1;
+      }
+      if (result === 'Estoque') {
         this.Categoria.produtos.sort((a, b) => a.estoque > b.estoque ? 1 : -1);
         this.pages = 1;
       }

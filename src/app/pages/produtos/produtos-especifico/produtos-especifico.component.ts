@@ -7,6 +7,8 @@ import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.c
 import { ICategoria } from 'src/app/shared/models/ICategoria';
 import { ResetScrollComponent } from '../../../shared/components/reset-scroll/reset-scroll.component';
 import { environment } from 'src/environments/environment';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogFiltroProdutosComponent } from '../../../shared/components/dialog-filtro-produtos/dialog-filtro-produtos.component';
 
 @Component({
   selector: 'app-produtos-especifico',
@@ -24,7 +26,8 @@ export class ProdutosEspecificoComponent implements OnInit {
               private categoriaService: CategoriaService,
               private bottomSheet: MatBottomSheet,
               private snackbar: SnackbarComponent,
-              private resetScroll: ResetScrollComponent) { }
+              private resetScroll: ResetScrollComponent,
+              public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.link = environment.UrlApi;
@@ -64,9 +67,28 @@ export class ProdutosEspecificoComponent implements OnInit {
     });
   }
 
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DialogFiltroProdutosComponent, {
+      autoFocus: false,
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'Alfabetica') {
+        this.Categoria.produtos.sort((a, b) => a.nome > b.nome ? 1 : -1);
+        this.pages = 1;
+      }
+      if (result === 'Preço maior para menor') {
+        this.Categoria.produtos.sort((a, b) => a.preco < b.preco ? 1 : -1);
+        this.pages = 1;
+      }
+      if (result === 'Preço menor para maior') {
+        this.Categoria.produtos.sort((a, b) => a.preco > b.preco ? 1 : -1);
+        this.pages = 1;
+      }
+    });
+  }
+
   onChangePage(evento: any): void {
     this.pages = evento;
     this.resetScroll.PositionZero();
   }
-
 }

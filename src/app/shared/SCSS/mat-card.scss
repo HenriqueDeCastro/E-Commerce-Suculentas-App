@@ -1,0 +1,19 @@
+mat-card {
+  margin-top: 10%;
+  border-radius: 20px !important;
+}
+
+.mat-card :hover {
+  cursor: pointer;
+}
+
+.margin-card {
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 770px)
+{
+  .col-md-3 {
+    width: 50% !important;
+  }
+}
