@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { ActivatedRoute } from '@angular/router';
 import { CategoriaService } from 'src/app/core/services/Categoria/Categoria.service';
@@ -9,6 +9,7 @@ import { ResetScrollComponent } from '../../../shared/components/reset-scroll/re
 import { environment } from 'src/environments/environment';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogFiltroProdutosComponent } from '../../../shared/components/dialog-filtro-produtos/dialog-filtro-produtos.component';
+import { MatInput } from '@angular/material/input';
 
 @Component({
   selector: 'app-produtos-especifico',
@@ -19,8 +20,10 @@ export class ProdutosEspecificoComponent implements OnInit {
 
   private CategoriaId: number;
   public Categoria: ICategoria;
-  link: string;
+  public link: string;
   public pages = 1;
+  public open = false;
+  public filter = '';
 
   constructor(private activetedRoute: ActivatedRoute,
               private categoriaService: CategoriaService,
@@ -47,6 +50,10 @@ export class ProdutosEspecificoComponent implements OnInit {
       console.log(erro);
       this.snackbar.OpenSnackBarError('Erro no servidor, tente novamente mais tarde !!!');
     });
+  }
+
+  openAccordion(): void {
+    this.open = !this.open;
   }
 
   openBottomSheet(): void {

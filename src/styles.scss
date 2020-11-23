@@ -2,9 +2,16 @@
 @import '~@angular/material/theming';
 @include mat-core();
 
+@font-face {
+  font-family: "Bakerie";
+  src: local("Bakerie"), url(./assets/fonts/bakerie/BakerieRoughWide-Medium.otf) format("truetype");
+}
+
+
 @import '~./app/shared/SCSS/botoes';
 @import '~./app/shared/SCSS/custom-theme';
 @import '~./app/shared/SCSS/icons';
+@import '~./app/shared/SCSS/mat-accordion';
 @import '~./app/shared/SCSS/mat-card';
 @import '~./app/shared/SCSS/pagination';
 @import '~./app/shared/SCSS/snackbar';

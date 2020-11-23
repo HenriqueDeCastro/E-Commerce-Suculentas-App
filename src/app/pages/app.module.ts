@@ -22,7 +22,7 @@ import { CommonModule } from '@angular/common';
 import { CarrinhoComponent } from './carrinho/carrinho.component';
 
 @NgModule({
-  declarations: [	
+  declarations: [
     AppComponent,
       CarrinhoComponent
    ],

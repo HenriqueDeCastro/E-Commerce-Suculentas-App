@@ -8,14 +8,17 @@
 }
 
 .titulo-site {
-  font-family: Pacifico !important;
-  font-size: 30px;
+  font-family: Bakerie !important;
+  font-size: 25px !important;
   color: var(--verde);
-  text-align: center;
+  margin: 0;
+  position: absolute;
+  top: 25%;
 }
 
 .container-titulo {
   position: relative;
+  width: 100%;
 }
 
 .h1-btn {

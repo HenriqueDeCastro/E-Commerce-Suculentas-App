@@ -1,0 +1,4 @@
+<mat-form-field appearance="fill" class="w-100">
+  <mat-label> Informe o nome do produto</mat-label>
+  <input type="search" (keyup)="debounce.next($event.target.value)" [value]="value" autofocus matInput>
+</mat-form-field>

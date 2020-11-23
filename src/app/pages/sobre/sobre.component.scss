@@ -8,10 +8,25 @@ img    {
   margin-left: 4%;
 }
 
+.texto-sobre {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+}
+
 @media (max-width: 767px)
 {
   .texto-sobre {
     text-align: center;
+    margin: 0;
+    position: relative;
+    top: 0%;
+    left: 0%;
+    transform: translate(0%, 0%);
+    width: 100%;
   }
 
   .titulo-sobre {

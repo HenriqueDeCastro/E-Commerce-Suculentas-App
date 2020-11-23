@@ -7,18 +7,27 @@
   <br>
   <br>
   <div class="container-titulo">
-    <h1 class="h1-btn titulo-lista">{{Categoria.nome}}</h1>
+    <h1 class="h1-btn titulo">{{Categoria.nome}}</h1>
     <div class="btn-titulo">
+      <mat-icon class="material-icons cursor btn-search " matTooltip="Pesquisar" color=primary (click)="openAccordion()">search</mat-icon>
       <mat-icon class="material-icons cursor btn-mobile" matTooltip="Ordenar" color=primary (click)="openBottomSheet()">swap_vert</mat-icon>
-      <mat-icon class="material-icons cursor btn-pc" matTooltip="Ordenar" color=primary (click)="openDialog()">swap_vert</mat-icon>
+      <mat-icon class="material-icons cursor btn-pc btn-orderby" matTooltip="Ordenar" color=primary (click)="openDialog()">swap_vert</mat-icon>
     </div>
   </div>
   <br>
   <br>
   <br>
+  <div>
+    <mat-accordion>
+      <mat-expansion-panel [expanded]="open == true" class="mat-elevation-z0" hideToggle>
+        <br>
+        <app-pesquisa (OnTyping)="filter = $event" (page)="pages = $event" [value]="filter"></app-pesquisa>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
   <br>
   <div class="row">
-  <ng-container *ngFor="let produto of Categoria.produtos | paginate: { itemsPerPage: 8, currentPage: pages }">
+    <ng-container *ngFor="let produto of Categoria.produtos  | filterByName: filter | paginate: { itemsPerPage: 8, currentPage: pages }">
       <div class="col-md-3">
         <mat-card class="mat-elevation-z2">
           <img mat-card-image src="{{link}}/resources/{{produto.imagem}}" alt="{{produto.nome}}">
