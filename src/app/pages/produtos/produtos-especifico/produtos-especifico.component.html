@@ -21,44 +21,51 @@
     <mat-accordion>
       <mat-expansion-panel [expanded]="open == true" class="mat-elevation-z0" hideToggle>
         <br>
-        <app-pesquisa (OnTyping)="filter = $event" (page)="pages = $event" [value]="filter"></app-pesquisa>
+        <app-pesquisa (OnTyping)="receberFiltro($event)" (page)="pages = $event" [value]="filter"></app-pesquisa>
       </mat-expansion-panel>
     </mat-accordion>
   </div>
   <br>
-  <div class="row">
-    <ng-container *ngFor="let produto of Categoria.produtos  | filterByName: filter | paginate: { itemsPerPage: 8, currentPage: pages }">
-      <div class="col-md-3">
-        <mat-card class="mat-elevation-z2">
-          <img mat-card-image src="{{link}}/resources/{{produto.imagem}}" alt="{{produto.nome}}">
-            <mat-card-header>
-              <mat-card-title class="quebra-linha-texto">{{produto.nome}}</mat-card-title>
-              <mat-card-subtitle>{{produto.preco | currency:'BRL'}}</mat-card-subtitle>
-            </mat-card-header>
-            <mat-card-content>
-              <div class="form-group col-md-12 centralizar">
-                <button mat-icon-button matTooltip="Adicionar no carrinho" color="accent">
-                  <mat-icon class="material-icons-outlined">add_shopping_cart</mat-icon>
-                </button>
-              </div>
-          </mat-card-content>
-        </mat-card>
-      </div>
-    </ng-container>
-  </div>
-  <br>
-  <br>
-  <br>
-  <div class="d-flex justify-content-center">
-    <pagination-controls
-      (pageChange)="onChangePage($event)"
-      maxSize="9"
-      autoHide="true"
-      responsive="true"
-      previousLabel="Anterior"
-      nextLabel="Próximo"></pagination-controls>
-  </div>
-  <br>
-  <br>
+  <ng-container *ngIf="Produtos.length > 0">
+    <div class="row">
+      <ng-container *ngFor="let produto of Produtos | paginate: { itemsPerPage: 8, currentPage: pages }">
+        <div class="col-md-3">
+          <mat-card class="mat-elevation-z1">
+            <img mat-card-image src="{{link}}/resources/{{produto.imagem}}" alt="{{produto.nome}}">
+              <mat-card-header>
+                <mat-card-title class="quebra-linha-texto">{{produto.nome}}</mat-card-title>
+                <mat-card-subtitle>{{produto.preco | currency:'BRL'}}</mat-card-subtitle>
+              </mat-card-header>
+              <mat-card-content>
+                <div class="form-group col-md-12 centralizar">
+                  <button mat-icon-button matTooltip="Adicionar no carrinho" color="accent">
+                    <mat-icon class="material-icons-outlined">add_shopping_cart</mat-icon>
+                  </button>
+                </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </ng-container>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="d-flex justify-content-center">
+      <pagination-controls
+        (pageChange)="onChangePage($event)"
+        maxSize="9"
+        autoHide="true"
+        responsive="true"
+        previousLabel="Anterior"
+        nextLabel="Próximo"></pagination-controls>
+    </div>
+    <br>
+    <br>
+  </ng-container>
+  <ng-container *ngIf="Produtos.length == 0">
+    <br>
+    <br>
+    <h3 class="titulo centralizar" style="color: var(--vermelho);"> Não encontramos nenhum(a) {{this.Categoria.nome}} que tenha em seu nome "{{filter}}".</h3>
+  </ng-container>
 </ng-container>
 

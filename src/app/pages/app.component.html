@@ -1,13 +1,15 @@
 <div class="docs-app">
   <mat-toolbar class="toolbar-line docs-navbar-header">
     <mat-toolbar-row>
-      <h1 class="titulo-site cursor" (click)="router.navigate(['/produtos'])">Suculentas da Rô</h1>
+      <div style="margin-right: 1rem;">
+        <img src="../../assets//images//Logo.png" alt="logo Suculentas da Ro" class="img-logo" (click)="router.navigate(['/produtos'])">
+      </div>
+      <div>
+        <h1 class="titulo-site cursor" (click)="router.navigate(['/produtos'])">Suculentas da Rô</h1>
+      </div>
       <span class="espaco-icones"></span>
       <button mat-icon-button matTooltip="Carrinho">
         <mat-icon class="material-icons-outlined">shopping_cart</mat-icon>
-      </button>
-      <button mat-icon-button matTooltip="Conta" (click)="IconePerfilNavegacao()">
-        <mat-icon class="material-icons-outlined">account_circle</mat-icon>
       </button>
       <button mat-icon-button matTooltip="Filtrar" (click)="openBottomSheet()" class="btn-mobile">
         <mat-icon class="material-icons-outlined">menu</mat-icon>
@@ -48,13 +50,13 @@
           </mat-list-item>
         <mat-divider></mat-divider>
         </ng-container>
-        <a href="https://api.whatsapp.com/send/?phone=WhatsAppNumber5511974513646&text=&app_absent=1">
-          <mat-list-item>
-            <mat-icon class="material-icons-outlined icone-chat" mat-list-icon>chat</mat-icon>
-            <div mat-line class="negrito">Chat</div>
-            <div mat-line class="negrito-leve">Converse conosco por Whatsapp</div>
-          </mat-list-item>
-        </a>
+        <mat-list-item (click)="sidenav.toggle(); PerfilNavegacao()">
+          <mat-icon class="material-icons-outlined icone-chat" mat-list-icon>account_circle</mat-icon>
+          <div *ngIf="Logado()" mat-line class="negrito">Login</div>
+          <div *ngIf="Logado()" mat-line class="negrito-leve">Entre no site ou faça seu cadastro</div>
+          <div *ngIf="!Logado()" mat-line class="negrito">Perfil</div>
+          <div *ngIf="!Logado()" mat-line class="negrito-leve">Confira suas compras e dados pessoais</div>
+        </mat-list-item>
         <mat-divider></mat-divider>
         <mat-list-item [routerLink]="'/sobre'" (click)="sidenav.toggle()">
           <mat-icon class="material-icons-outlined icone-sobre" mat-list-icon>info</mat-icon>
@@ -87,3 +89,8 @@
   <a mat-list-item [routerLink]="'/activities'"> Activities </a>
   <a mat-list-item [routerLink]="'/create-activity'"> Create Activity </a>
   <a mat-list-item (click)="sidenav.toggle()" href="" mat-list-item>Close</a> -->
+
+
+       <!-- <button mat-icon-button matTooltip="Conta" (click)="IconePerfilNavegacao()">
+        <mat-icon class="material-icons-outlined">account_circle</mat-icon>
+      </button> -->

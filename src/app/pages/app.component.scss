@@ -2,6 +2,18 @@
   flex: 1 1 auto;
 }
 
+.espaco-img {
+  margin-right: 0.8rem;
+}
+
+.img-logo {
+  height: 22px;
+  width: 22px;
+  position: absolute;
+  transform: translate(-50%, -60%);
+  margin-right: 1rem;
+}
+
 .mat-toolbar {
   position: sticky;
   position: -webkit-sticky;
@@ -43,3 +55,10 @@
   margin: 0px !important;
 }
 
+
+@media (max-width: 600px)
+{
+  .img-logo {
+    transform: translate(-50%, -55%);
+  }
+}

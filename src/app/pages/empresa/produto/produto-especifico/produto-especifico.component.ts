@@ -3,10 +3,12 @@ import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { CategoriaService } from 'src/app/core/services/Categoria/Categoria.service';
+import { FiltroNomeComponent } from 'src/app/shared/components/filtro-nome/filtro-nome.component';
 import { FiltroProdutosEmpresaComponent } from 'src/app/shared/components/filtro-produtos-empresa/filtro-produtos-empresa.component';
 import { ResetScrollComponent } from 'src/app/shared/components/reset-scroll/reset-scroll.component';
 import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
 import { ICategoria } from 'src/app/shared/models/ICategoria';
+import { IProduto } from 'src/app/shared/models/IProduto';
 import { environment } from 'src/environments/environment';
 import { DialogFiltroProdutosEmpresaComponent } from '../../../../shared/components/dialog-filtro-produtos-empresa/dialog-filtro-produtos-empresa.component'
 
@@ -17,17 +19,21 @@ import { DialogFiltroProdutosEmpresaComponent } from '../../../../shared/compone
 })
 export class ProdutoEspecificoComponent implements OnInit {
 
-  private CategoriaId: number;
+  public CategoriaId: number;
   public Categoria: ICategoria;
-  link: string;
+  public link: string;
   public pages = 1;
+  public open = false;
+  public filter = '';
+  public Produtos: IProduto[];
 
   constructor(private activetedRoute: ActivatedRoute,
               private categoriaService: CategoriaService,
               private bottomSheet: MatBottomSheet,
               private snackbar: SnackbarComponent,
               private resetScroll: ResetScrollComponent,
-              public dialog: MatDialog) { }
+              public dialog: MatDialog,
+              private filtroNome: FiltroNomeComponent) { }
 
   ngOnInit(): void {
     this.link = environment.UrlApi;
@@ -42,6 +48,7 @@ export class ProdutoEspecificoComponent implements OnInit {
   ReceberCategoria(): void {
     this.categoriaService.GetById(this.CategoriaId).subscribe((categoria: ICategoria) => {
       this.Categoria = categoria;
+      this.Produtos = this.Categoria.produtos;
     },
     erro => {
       console.log(erro);
@@ -49,25 +56,14 @@ export class ProdutoEspecificoComponent implements OnInit {
     });
   }
 
+  openAccordion(): void {
+    this.open = !this.open;
+  }
+
   openBottomSheet(): void {
     const bottomSheetRef = this.bottomSheet.open(FiltroProdutosEmpresaComponent);
-    bottomSheetRef.afterDismissed().subscribe((dataFromChild) => {
-      if (dataFromChild === 'Alfabetica') {
-        this.Categoria.produtos.sort((a, b) => a.nome > b.nome ? 1 : -1);
-        this.pages = 1;
-      }
-      if (dataFromChild === 'Preço maior para menor') {
-        this.Categoria.produtos.sort((a, b) => a.preco < b.preco ? 1 : -1);
-        this.pages = 1;
-      }
-      if (dataFromChild === 'Preço menor para maior') {
-        this.Categoria.produtos.sort((a, b) => a.preco > b.preco ? 1 : -1);
-        this.pages = 1;
-      }
-      if (dataFromChild === 'Estoque') {
-        this.Categoria.produtos.sort((a, b) => a.estoque > b.estoque ? 1 : -1);
-        this.pages = 1;
-      }
+    bottomSheetRef.afterDismissed().subscribe((result) => {
+      this.resultOrderBy(result);
     });
   }
 
@@ -76,23 +72,40 @@ export class ProdutoEspecificoComponent implements OnInit {
       autoFocus: false,
     });
     dialogRef.afterClosed().subscribe(result => {
-      if (result === 'Alfabetica') {
-        this.Categoria.produtos.sort((a, b) => a.nome > b.nome ? 1 : -1);
-        this.pages = 1;
-      }
-      if (result === 'Preço maior para menor') {
-        this.Categoria.produtos.sort((a, b) => a.preco < b.preco ? 1 : -1);
-        this.pages = 1;
-      }
-      if (result === 'Preço menor para maior') {
-        this.Categoria.produtos.sort((a, b) => a.preco > b.preco ? 1 : -1);
-        this.pages = 1;
-      }
-      if (result === 'Estoque') {
-        this.Categoria.produtos.sort((a, b) => a.estoque > b.estoque ? 1 : -1);
-        this.pages = 1;
-      }
+      this.resultOrderBy(result);
     });
+  }
+
+  receberFiltro(valor: string): void {
+    this.filter = valor;
+    if (this.filter === '') {
+      this.Produtos = this.Categoria.produtos;
+    } else {
+      this.Produtos = this.filtroNome.transform(this.Categoria.produtos, this.filter);
+    }
+  }
+
+  resultOrderBy(result: string): void {
+    if (result === 'Alfabetica') {
+      this.Categoria.produtos.sort((a, b) => a.nome > b.nome ? 1 : -1);
+      this.Produtos = this.filtroNome.transform(this.Categoria.produtos, this.filter);
+      this.pages = 1;
+    }
+    if (result === 'Preço maior para menor') {
+      this.Categoria.produtos.sort((a, b) => a.preco < b.preco ? 1 : -1);
+      this.Produtos = this.filtroNome.transform(this.Categoria.produtos, this.filter);
+      this.pages = 1;
+    }
+    if (result === 'Preço menor para maior') {
+      this.Categoria.produtos.sort((a, b) => a.preco > b.preco ? 1 : -1);
+      this.Produtos = this.filtroNome.transform(this.Categoria.produtos, this.filter);
+      this.pages = 1;
+    }
+    if (result === 'Estoque') {
+      this.Categoria.produtos.sort((a, b) => a.estoque > b.estoque ? 1 : -1);
+      this.Produtos = this.filtroNome.transform(this.Categoria.produtos, this.filter);
+      this.pages = 1;
+    }
   }
 
   onChangePage(evento: any): void {

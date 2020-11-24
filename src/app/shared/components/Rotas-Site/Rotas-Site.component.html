@@ -21,13 +21,13 @@
     </mat-list-item>
   <mat-divider></mat-divider>
   </ng-container>
-  <a href="{{urlWhatsapp}}">
-    <mat-list-item>
-      <mat-icon class="material-icons-outlined icone-chat" mat-list-icon>chat</mat-icon>
-      <div mat-line class="negrito">Chat</div>
-      <div mat-line class="negrito-leve">Converse conosco por Whatsapp</div>
-    </mat-list-item>
-  </a>
+  <mat-list-item (click)="PerfilNavegacao($event)">
+    <mat-icon class="material-icons-outlined icone-chat" mat-list-icon>account_circle</mat-icon>
+    <div *ngIf="Logado()" mat-line class="negrito">Login</div>
+    <div *ngIf="Logado()" mat-line class="negrito-leve">Entre no site ou faça seu cadastro</div>
+    <div *ngIf="!Logado()" mat-line class="negrito">Perfil</div>
+    <div *ngIf="!Logado()" mat-line class="negrito-leve">Confira suas compras e dados pessoais</div>
+  </mat-list-item>
   <mat-divider></mat-divider>
   <mat-list-item (click)="FecharBottoom($event, '/sobre')">
     <mat-icon class="material-icons-outlined icone-sobre" mat-list-icon>info</mat-icon>
@@ -35,3 +35,8 @@
     <div mat-line class="negrito-leve">Vem descobrir quem somos</div>
   </mat-list-item>
 </mat-nav-list>
+
+
+      <!-- <button mat-icon-button matTooltip="Conta" (click)="IconePerfilNavegacao()">
+        <mat-icon class="material-icons-outlined">account_circle</mat-icon>
+      </button> -->

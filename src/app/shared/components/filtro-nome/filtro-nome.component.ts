@@ -1,11 +1,13 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { Component, Injectable } from '@angular/core';
+import { IProduto } from '../../models/IProduto';
 
-import { IProduto } from '../models/IProduto';
-
-@Pipe({ name: 'filterByName'})
-export class FilterByName implements PipeTransform {
+@Injectable({
+  providedIn: 'root'
+})
+export class FiltroNomeComponent {
 
   transform(produtos: IProduto[], descriptionQuery: string): IProduto[] {
+
     descriptionQuery = descriptionQuery
       .trim()
       .toLowerCase();
@@ -17,4 +19,5 @@ export class FilterByName implements PipeTransform {
       return produtos;
     }
   }
+
 }

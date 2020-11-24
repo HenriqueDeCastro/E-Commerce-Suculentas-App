@@ -32,7 +32,7 @@ export class AppComponent implements OnInit{
     return this.authService.LoggedIn();
   }
 
-  IconePerfilNavegacao(): void {
+  PerfilNavegacao(): void {
     if (!this.Logado()){
       this.route.navigate(['/user/perfil']);
     } else {

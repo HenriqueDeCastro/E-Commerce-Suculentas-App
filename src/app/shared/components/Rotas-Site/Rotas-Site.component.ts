@@ -25,6 +25,16 @@ export class RotasSiteComponent implements OnInit {
     return this.authService.LoggedIn();
   }
 
+  PerfilNavegacao(event: MouseEvent): void {
+    this.bottomSheetRef.dismiss();
+    event.preventDefault();
+    if (!this.Logado()){
+      this.router.navigate(['/user/perfil']);
+    } else {
+      this.router.navigate(['/user/login']);
+    }
+  }
+
   FecharBottoom(event: MouseEvent, link: string): void {
     this.bottomSheetRef.dismiss();
     event.preventDefault();
