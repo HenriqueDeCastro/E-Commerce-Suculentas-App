@@ -23,13 +23,19 @@
       <div class="row">
         <ng-container *ngFor="let produto of categoria.produtos">
           <div class="col-md-3">
-            <mat-card class="mat-elevation-z2">
-              <img mat-card-image src="{{link}}/resources/{{produto.imagem}}" alt="{{produto.nome}}">
-                <mat-card-header>
+            <mat-card class="mat-elevation-z1">
+              <img mat-card-image src="{{link}}/resources/{{produto.imagem}}" alt="{{produto.nome}}" (click)="NavegarProduto(categoria.nome, produto.id, produto.nome)">
+                <mat-card-header (click)="NavegarProduto(categoria.nome, produto.id, produto.nome)">
                   <mat-card-title>{{produto.nome}}</mat-card-title>
                   <mat-card-subtitle>{{produto.preco | currency:'BRL'}}</mat-card-subtitle>
                 </mat-card-header>
                 <mat-card-content>
+                  <div class="centralizar">
+                    <button mat-button color="accent" class="w-100">
+                      <mat-icon class="material-icons-outlined">add_shopping_cart</mat-icon>
+                      Carrinho
+                    </button>
+                  </div>
               </mat-card-content>
             </mat-card>
           </div>
@@ -38,7 +44,7 @@
       <br>
       <br>
       <div class="centralizar">
-        <button mat-button class="btn-responsive light-button" color="accent" (click)="Navegar(categoria.nome, categoria.id)">Ver Mais</button>
+        <button mat-button class="btn-responsive light-button" color="accent" (click)="NavegarCategoria(categoria.nome, categoria.id)">Ver Mais</button>
       </div>
       <br>
     </ng-container>

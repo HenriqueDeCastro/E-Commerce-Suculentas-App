@@ -34,7 +34,11 @@ export class ProdutosHomeComponent implements OnInit {
     });
   }
 
-  Navegar(categoriaNome, categoriaId): void {
+  NavegarCategoria(categoriaNome, categoriaId): void {
     this.router.navigate(['/produtos/' + categoriaId + '/' + categoriaNome]);
+  }
+
+  NavegarProduto(categoriaNome, produtoId, produtoNome): void {
+    this.router.navigate(['/produtos/' + categoriaNome + '/' + produtoId + '/' + produtoNome]);
   }
 }

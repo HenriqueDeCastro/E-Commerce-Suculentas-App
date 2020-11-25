@@ -9,12 +9,14 @@ import { ProdutosEspecificoComponent } from './produtos-especifico/produtos-espe
 import { ProdutosHomeComponent } from './produtosHome/produtosHome.component';
 import { FormsModule } from '@angular/forms';
 import { PaginationModule } from '../../shared/components/pagination/pagination.module';
+import { ProdutoUnitarioComponent } from './produto-unitario/produto-unitario.component';
 
 @NgModule({
   declarations: [
     ProdutosComponent,
     ProdutosEspecificoComponent,
-    ProdutosHomeComponent
+    ProdutosHomeComponent,
+    ProdutoUnitarioComponent
   ],
   imports: [
     MaterialModule,

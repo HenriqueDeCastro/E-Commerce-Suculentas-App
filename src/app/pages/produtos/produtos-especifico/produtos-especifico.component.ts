@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CategoriaService } from 'src/app/core/services/Categoria/Categoria.service';
 import { FiltroProdutosComponent } from 'src/app/shared/components/filtro-produtos/filtro-produtos.component';
 import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
@@ -33,6 +33,7 @@ export class ProdutosEspecificoComponent implements OnInit {
               private snackbar: SnackbarComponent,
               private resetScroll: ResetScrollComponent,
               public dialog: MatDialog,
+              public router: Router,
               private filtroNome: FiltroNomeComponent) { }
 
   ngOnInit(): void {
@@ -106,5 +107,10 @@ export class ProdutosEspecificoComponent implements OnInit {
   onChangePage(evento: any): void {
     this.pages = evento;
     this.resetScroll.PositionZero();
+  }
+
+
+  Navegar(produtoId, produtoNome): void {
+    this.router.navigate(['/produtos/' + this.Categoria.nome + '/' + produtoId + '/' + produtoNome]);
   }
 }

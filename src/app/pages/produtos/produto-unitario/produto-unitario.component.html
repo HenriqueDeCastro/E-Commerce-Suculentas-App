@@ -1,0 +1,56 @@
+<ng-container *ngIf="!Produto">
+  <app-spinner></app-spinner>
+</ng-container>
+<ng-container *ngIf="Produto">
+  <app-voltar></app-voltar>
+  <br>
+  <br>
+  <br>
+  <br>
+  <div class="mobile">
+    <h1 class="titulo centralizar">{{Produto.nome}}</h1>
+    <br>
+  </div>
+  <div class="row">
+    <div class="col-sm-5">
+      <div class="col-img">
+        <img src="{{link}}/resources/{{Produto.imagem}}" alt="{{Produto.nome}}" class="img">
+      </div>
+    </div>
+    <div class="col-sm-7">
+      <h1 class="titulo centralizar pc">{{Produto.nome}}</h1>
+      <br>
+      <mat-list>
+        <div mat-subheader>Descrição</div>
+        <mat-list-item class="tamanho-matlineitem">
+          <div mat-line class="quebralinha-matline">{{Produto.descricao}}</div>
+        </mat-list-item>
+        <br>
+        <mat-divider></mat-divider>
+        <div mat-subheader>Valor</div>
+        <mat-list-item class="dinheiro">
+          <mat-icon class="material-icons-outlined" mat-list-icon>payments</mat-icon>
+          <div mat-line class="negrito">{{Produto.preco | currency:'BRL'}}</div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <div mat-subheader>Estoque</div>
+        <mat-list-item>
+          <mat-icon class="material-icons-outlined" mat-list-icon>filter_{{Produto.estoque}}</mat-icon>
+          <div mat-line class="negrito">Disponivel</div>
+        </mat-list-item>
+      </mat-list>
+      <br>
+      <br>
+      <div class="centralizar">
+        <button mat-button color="accent" class="w-100 pc">
+          <mat-icon class="material-icons-outlined">add_shopping_cart</mat-icon>
+          Carrinho
+        </button>
+        <button mat-flat-button color="accent" class="w-100 mobile">
+          <mat-icon class="material-icons-outlined">add_shopping_cart</mat-icon>
+          Carrinho
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-container>
