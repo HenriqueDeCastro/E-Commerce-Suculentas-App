@@ -16,50 +16,71 @@
       <div class="col-img">
         <img src="{{link}}/resources/{{Produto.imagem}}" alt="{{Produto.nome}}" class="img">
       </div>
+      <br>
+      <div class="alert alert-warning" role="alert">
+        As imagens são reais do nosso viveiro, mas cada muda é unica, tentamos sempre enviar a mais idêntica que tivermos a foto,
+        A coloração e o tamanho da muda pode variar de acordo com cada exemplar. Tentamos ser o mais fiel possível a foto disposta no nosso site,
+        porém é natural haver certa variabilidade morfológica
+      </div>
     </div>
     <div class="col-sm-7">
       <h1 class="titulo centralizar pc">{{Produto.nome}}</h1>
       <br>
       <mat-list>
-        <div mat-subheader>Descrição</div>
+        <div class="container-divider">
+          <!-- <div class="line"><mat-divider></mat-divider></div> -->
+          <div mat-subheader class="text mat-typography">Descrição</div>
+          <div class="line"><mat-divider></mat-divider></div>
+        </div>
         <mat-list-item class="tamanho-matlineitem">
           <div mat-line class="quebralinha-matline">{{Produto.descricao}}</div>
         </mat-list-item>
         <br>
-        <mat-divider></mat-divider>
-        <div mat-subheader>Valor</div>
+        <div class="container-divider">
+          <div class="line"><mat-divider></mat-divider></div>
+          <div mat-subheader class="text mat-typography">Valor</div>
+          <div class="line"><mat-divider></mat-divider></div>
+        </div>
         <mat-list-item class="dinheiro">
           <mat-icon class="material-icons-outlined" mat-list-icon>payments</mat-icon>
-          <div mat-line class="negrito">{{Produto.preco | currency:'BRL'}}</div>
+          <div mat-line class="negrito dinheiro">{{Produto.preco | currency:'BRL'}}</div>
         </mat-list-item>
-        <mat-divider></mat-divider>
-        <div mat-subheader>Estoque</div>
+        <div class="container-divider">
+          <div class="line"><mat-divider></mat-divider></div>
+          <div mat-subheader class="text mat-typography">Quantidade</div>
+          <div class="line"><mat-divider></mat-divider></div>
+        </div>
         <mat-list-item>
-          <mat-icon class="material-icons-outlined" mat-list-icon>filter_{{Produto.estoque}}</mat-icon>
-          <div mat-line class="negrito">Disponivel</div>
+          <div mat-line class="negrito">Temos {{Produto.estoque}} {{Produto.nome}} em estoque</div>
         </mat-list-item>
       </mat-list>
-      <br>
+      <div class="container-divider">
+        <div class="line"><mat-divider></mat-divider></div>
+        <div mat-subheader class="text mat-typography">Quantas deseja levar?</div>
+        <div class="line"><mat-divider></mat-divider></div>
+      </div>
       <div class="centralizar">
-        <button mat-icon-button aria-label="Example icon button with a vertical three dot icon">
-          <mat-icon>more_vert</mat-icon>
+        <button mat-icon-button color color="warn" class="btn-menos mat-elevation-z0" [disabled]="quantidade <= 1" (click)="quantidade = quantidade - 1">
+          <mat-icon>remove_circle_outline</mat-icon>
         </button>
-        <button mat-icon-button color="primary" aria-label="Example icon button with a home icon">
-          <mat-icon>home</mat-icon>
+        <button mat-icon-button class="btn-quantidade mat-elevation-z0">{{quantidade}}</button>
+        <button mat-icon-button color="primary" class="btn-mais mat-elevation-z0" (click)="quantidade = quantidade + 1" [disabled]="quantidade >= Produto.estoque">
+          <mat-icon>add_circle_outline</mat-icon>
         </button>
-        <button mat-icon-button color="primary" aria-label="Example icon button with a home icon">
-          <mat-icon>home</mat-icon>
-        </button>
-        <br>
-        <br>
-        <button mat-button color="accent" class="w-100 pc">
-          <mat-icon class="material-icons-outlined">add_shopping_cart</mat-icon>
-          Carrinho
-        </button>
-        <button mat-flat-button color="primary" class="w-100 mobile">
-          <mat-icon class="material-icons-outlined">add_shopping_cart</mat-icon>
-          Carrinho
-        </button>
+        <div class="pc">
+          <br>
+          <br>
+          <button mat-flat-button color="primary" class="w-100">
+            <mat-icon class="material-icons-outlined btn-responsive">add_shopping_cart</mat-icon>
+            Carrinho
+          </button>
+        </div>
+        <div class="mobile">
+          <br>
+          <br>
+          <br>
+          <app-botao-carrinho [TipoBotao]="'solido'"></app-botao-carrinho>
+        </div>
       </div>
     </div>
   </div>

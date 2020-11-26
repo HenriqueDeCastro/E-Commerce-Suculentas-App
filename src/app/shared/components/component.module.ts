@@ -10,6 +10,8 @@ import { DialogFiltroProdutosEmpresaComponent } from './dialog-filtro-produtos-e
 import { RotasSiteComponent } from './Rotas-Site/Rotas-Site.component';
 import { FooterComponent } from './footer/footer.component';
 import { PesquisaComponent } from './pesquisa/pesquisa.component';
+import { CardProdutoComponent } from './card-produto/card-produto.component';
+import { BotaoCarrinhoComponent } from './botao-carrinho/botao-carrinho.component';
 import { CommonModule } from '@angular/common';
 
 @NgModule({
@@ -23,7 +25,9 @@ import { CommonModule } from '@angular/common';
     FooterComponent,
     DialogFiltroProdutosComponent,
     DialogFiltroProdutosEmpresaComponent,
-    PesquisaComponent
+    PesquisaComponent,
+    CardProdutoComponent,
+    BotaoCarrinhoComponent
   ],
   exports: [
     ProgressbarComponent,
@@ -34,7 +38,9 @@ import { CommonModule } from '@angular/common';
     RotasSiteComponent,
     FooterComponent,
     DialogFiltroProdutosComponent,
-    PesquisaComponent
+    PesquisaComponent,
+    CardProdutoComponent,
+    BotaoCarrinhoComponent
   ],
   imports: [
     CommonModule,

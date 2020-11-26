@@ -13,8 +13,10 @@ import { environment } from 'src/environments/environment';
 export class ProdutoUnitarioComponent implements OnInit {
 
   public produtoId: number;
+  public categoriaNome: string;
   public Produto: IProduto;
   public link: string;
+  public quantidade: number;
 
   constructor(private activetedRoute: ActivatedRoute,
               private snackbar: SnackbarComponent,
@@ -22,12 +24,14 @@ export class ProdutoUnitarioComponent implements OnInit {
 
   ngOnInit(): void {
     this.link = environment.UrlApi;
+    this.quantidade = 1;
     this.ReceberValorRota();
     this.ReceberProduto();
   }
 
   ReceberValorRota(): void {
     this.produtoId = this.activetedRoute.snapshot.params.produtoId;
+    this.categoriaNome = this.activetedRoute.snapshot.params.categoriaName;
   }
 
   ReceberProduto(): void {

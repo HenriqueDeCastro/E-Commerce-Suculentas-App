@@ -1,12 +1,11 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { CategoriaService } from 'src/app/core/services/Categoria/Categoria.service';
 import { FiltroProdutosComponent } from 'src/app/shared/components/filtro-produtos/filtro-produtos.component';
 import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
 import { ICategoria } from 'src/app/shared/models/ICategoria';
 import { ResetScrollComponent } from '../../../shared/components/reset-scroll/reset-scroll.component';
-import { environment } from 'src/environments/environment';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogFiltroProdutosComponent } from '../../../shared/components/dialog-filtro-produtos/dialog-filtro-produtos.component';
 import { FiltroNomeComponent } from '../../../shared/components/filtro-nome/filtro-nome.component';
@@ -33,11 +32,9 @@ export class ProdutosEspecificoComponent implements OnInit {
               private snackbar: SnackbarComponent,
               private resetScroll: ResetScrollComponent,
               public dialog: MatDialog,
-              public router: Router,
               private filtroNome: FiltroNomeComponent) { }
 
   ngOnInit(): void {
-    this.link = environment.UrlApi;
     this.ReceberValorRota();
     this.ReceberCategoria();
   }
@@ -107,10 +104,5 @@ export class ProdutosEspecificoComponent implements OnInit {
   onChangePage(evento: any): void {
     this.pages = evento;
     this.resetScroll.PositionZero();
-  }
-
-
-  Navegar(produtoId, produtoNome): void {
-    this.router.navigate(['/produtos/' + this.Categoria.nome + '/' + produtoId + '/' + produtoNome]);
   }
 }
