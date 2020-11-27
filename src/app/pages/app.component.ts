@@ -43,4 +43,8 @@ export class AppComponent implements OnInit{
   openBottomSheet(): void {
     this.bottomSheet.open(RotasSiteComponent);
   }
+
+  QuantidadeCarrinho(): any {
+    return JSON.parse(localStorage.getItem('quantidade'));
+  }
 }

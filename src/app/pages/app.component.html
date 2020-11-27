@@ -9,7 +9,7 @@
       </div>
       <span class="espaco-icones"></span>
       <button mat-icon-button matTooltip="Carrinho">
-        <mat-icon class="material-icons-outlined">shopping_cart</mat-icon>
+        <mat-icon matBadge="{{QuantidadeCarrinho()}}"  class="material-icons-outlined">shopping_cart</mat-icon>
       </button>
       <button mat-icon-button matTooltip="Filtrar" (click)="openBottomSheet()" class="btn-mobile">
         <mat-icon class="material-icons-outlined">menu</mat-icon>
