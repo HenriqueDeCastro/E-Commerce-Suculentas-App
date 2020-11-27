@@ -8,10 +8,14 @@ import { Component, Input, OnInit } from '@angular/core';
 export class BotaoCarrinhoComponent implements OnInit {
 
   @Input() TipoBotao: string;
+  @Input() Quantidade: number;
+  @Input() Desabilitar: boolean;
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
+  ColocarCarrinho(): void {
+  }
 }
