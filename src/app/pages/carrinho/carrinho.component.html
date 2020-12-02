@@ -1,3 +1,23 @@
-<p>
-  carrinho works!
-</p>
+<app-voltar></app-voltar>
+<br>
+<br>
+<br>
+<h1 class="titulo-lista responsive">Carrinho</h1>
+<br>
+<ng-container *ngIf="Produtos">
+  <div class="row">
+    <ng-container *ngFor="let produto of Produtos">
+      <div class="col-sm-6">
+        <app-produto-carrrinho [produto]=produto (atualizacao)="ReceberAtt($event)"></app-produto-carrrinho>
+      </div>
+    </ng-container>
+  </div>
+  <br>
+  <br>
+  <app-botoes-carrinho></app-botoes-carrinho>
+</ng-container>
+<ng-container *ngIf="!Produtos">
+  <br>
+  <br>
+  <h2 class="titulo centralizar-vertical centralizar"> Não há produtos no carrinho ainda 😞 !</h2>
+</ng-container>

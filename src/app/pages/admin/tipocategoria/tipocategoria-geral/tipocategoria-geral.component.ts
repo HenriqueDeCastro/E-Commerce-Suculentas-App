@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ITipoCategoria } from '../../../../shared/models/ITipoCategoria';
 import { TipoCategoriaService } from '../../../../core/services/TipoCategoria/TipoCategoria.service';
 import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
+import { MensagemSnackbarComponent } from 'src/app/shared/components/mensagem-snackbar/mensagem-snackbar.component';
 
 @Component({
   selector: 'app-tipocategoria-geral',
@@ -13,9 +14,9 @@ export class TipocategoriaGeralComponent implements OnInit {
 
   public TipoCategorias: ITipoCategoria[];
 
-  constructor(public router: Router,
-              private tipoCategoriaService: TipoCategoriaService,
-              private snackbar: SnackbarComponent) { }
+  constructor(private tipoCategoriaService: TipoCategoriaService,
+              private snackbar: SnackbarComponent,
+              private mensagemSnackbar: MensagemSnackbarComponent) { }
 
   ngOnInit(): void {
     this.ReceberCategorias();
@@ -27,11 +28,7 @@ export class TipocategoriaGeralComponent implements OnInit {
     },
     erro => {
       console.log(erro);
-      this.snackbar.OpenSnackBarError('Erro no servidor, tente novamente mais tarde !!!');
+      this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
     });
-  }
-
-  Navegar(tipoCategoriaNome, tipoCategoriaId): void {
-    this.router.navigate(['/admin/tipocategoria/editar/' + tipoCategoriaId + '/' + tipoCategoriaNome]);
   }
 }

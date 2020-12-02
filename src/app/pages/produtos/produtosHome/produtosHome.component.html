@@ -29,9 +29,7 @@
       </div>
       <br>
       <br>
-      <div class="centralizar">
-        <button mat-button class="btn-responsive light-button" color="accent" (click)="NavegarCategoria(categoria.nome, categoria.id)">Ver Mais</button>
-      </div>
+      <app-botao-vermais [Categoria]=categoria [Rota]="'/produtos/'"></app-botao-vermais>
       <br>
     </ng-container>
   </ng-container>

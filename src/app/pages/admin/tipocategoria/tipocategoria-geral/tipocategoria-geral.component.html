@@ -6,30 +6,13 @@
   <br>
   <br>
   <br>
-  <div class="container-titulo">
-    <h1 class="h1-btn titulo-lista">Tipo Categorias</h1>
-    <div class="btn-titulo">
-      <button mat-icon-button matTooltip="Adicionar" (click)="router.navigate(['/admin/tipocategoria/adicionar'])">
-        <mat-icon color=primary>add</mat-icon>
-      </button>
-    </div>
-  </div>
+  <app-titulo-mais-add [Titulo]="'Tipo Categorias'" [Rotas]="'/admin/tipocategoria/adicionar'"></app-titulo-mais-add>
   <br>
   <br>
   <br>
   <br>
   <ng-container *ngIf="TipoCategorias.length > 0">
-    <mat-list>
-      <div mat-subheader color=primary>Todas</div>
-      <ng-container *ngFor="let tipocategoria of TipoCategorias; let i = index">
-        <mat-list-item class="lista cursor" (click)="Navegar(tipocategoria.nome, tipocategoria.id)">
-          <div mat-line>{{tipocategoria.nome}}</div>
-        </mat-list-item>
-        <ng-container *ngIf="TipoCategorias.length > (i + 1)">
-          <mat-divider></mat-divider>
-        </ng-container>
-      </ng-container>
-    </mat-list>
+    <app-lista-tipocategoria [TipoCategorias]=TipoCategorias></app-lista-tipocategoria>
   </ng-container>
   <ng-container *ngIf="TipoCategorias.length == 0">
     <mat-list-item>

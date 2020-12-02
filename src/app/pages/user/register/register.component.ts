@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/Auth/Auth.service';
+import { MensagemSnackbarComponent } from 'src/app/shared/components/mensagem-snackbar/mensagem-snackbar.component';
 import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
 import { IUser } from '../../../shared/models/IUser';
 
@@ -22,7 +23,8 @@ export class RegisterComponent implements OnInit {
   constructor(private fb: FormBuilder,
               public router: Router,
               private authService: AuthService,
-              private snackbar: SnackbarComponent) { }
+              private snackbar: SnackbarComponent,
+              private mensagemSnackbar: MensagemSnackbarComponent) { }
 
   ngOnInit(): void {
     this.ValidationDados();
@@ -69,7 +71,7 @@ export class RegisterComponent implements OnInit {
       this.authService.Register(this.User).subscribe(
         () => {
           this.Registrando = false;
-          this.snackbar.OpenSnackBarSuccess('Cadastrado realizado com sucesso');
+          this.snackbar.OpenSnackBarSuccess(this.mensagemSnackbar.CadastroConcluido);
           this.router.navigate(['/produtos']);
         },
         error => {
@@ -78,15 +80,15 @@ export class RegisterComponent implements OnInit {
           console.log(error);
           switch (erro) {
             case 'DuplicateUserName':
-              this.snackbar.OpenSnackBarError('E-mail informado já possui cadastro !!!');
+              this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroCadastroDuplicado);
               break;
             default:
-              this.snackbar.OpenSnackBarError('Erro no servidor, tente novamente mais tarde !!!');
+              this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
               break;
           }
         });
     } else {
-      this.snackbar.OpenSnackBarError('Nem todos os campos foram preenchidos');
+      this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroCamposPreenchidos);
     }
   }
 

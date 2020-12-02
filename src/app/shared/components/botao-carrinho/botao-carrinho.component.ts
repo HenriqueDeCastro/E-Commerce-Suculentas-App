@@ -3,6 +3,8 @@ import { IProdutoCarrinho } from '../../models/IProdutoCarrinho';
 import { IProduto } from '../../models/IProduto';
 import { Location } from '@angular/common';
 import { SnackbarComponent } from '../snackbar/snackbar.component';
+import { environment } from 'src/environments/environment';
+import { MensagemSnackbarComponent } from '../mensagem-snackbar/mensagem-snackbar.component';
 
 @Component({
   selector: 'app-botao-carrinho',
@@ -14,40 +16,97 @@ export class BotaoCarrinhoComponent implements OnInit {
   @Input() TipoBotao: string;
   @Input() Quantidade: number;
   @Input() Desabilitar: boolean;
-  @Input() Voltar: boolean = false;
+  @Input() Voltar = false;
   @Input() Produto: IProduto;
   private Produtos: IProdutoCarrinho[];
   private QuantidadeCarrinho: number;
 
   constructor(private snackbar: SnackbarComponent,
-              private location: Location) { }
+              private location: Location,
+              private mensagemSnackbar: MensagemSnackbarComponent) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   ColocarCarrinho(): void {
+    this.Produtos = JSON.parse(localStorage.getItem(environment.VariavelProduto));
+    this.QuantidadeCarrinho = JSON.parse(localStorage.getItem(environment.VariavelQuantidade));
+
+    if (this.Produtos == null)
+    {
+      localStorage.setItem(environment.VariavelProduto, JSON.stringify([this.ConvertProdutoinCarrinho(this.Produto)]));
+      localStorage.setItem(environment.VariavelQuantidade, String(this.Quantidade));
+      this.snackbar.OpenSnackBarSuccess(this.mensagemSnackbar.ProdutoAdicionadoCarrinho);
+    }
+    else
+    {
+      if (this.InserirCarrinho())
+      {
+        this.snackbar.OpenSnackBarSuccess(this.mensagemSnackbar.ProdutoAdicionadoCarrinho);
+        if (this.Voltar)
+        {
+          this.VoltarPagina();
+        }
+      }
+      else
+      {
+        this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroEstoqueMaximo);
+      }
+    }
+  }
+
+  InserirCarrinho(): boolean {
     const produtosCarrinho = [];
-    this.Produtos = JSON.parse(localStorage.getItem('produtos'));
-    this.QuantidadeCarrinho = JSON.parse(localStorage.getItem('quantidade'));
+    let produtoExistente = false;
+    let EstoqueSuficienteQuantidade = true;
 
-    if (this.Produtos == null) {
-      localStorage.setItem('produtos', JSON.stringify([this.ConvertProdutoinCarrinho(this.Produto)]));
-      localStorage.setItem('quantidade', String(this.Quantidade));
-    }
-    else {
-      this.Produtos.forEach(produto => {
+    this.Produtos.forEach(produto => {
+      if (produto.id === this.Produto.id)
+      {
+        if (this.ValidaEstoqueProduto(produto))
+        {
+          produto.quantidadePedido = produto.quantidadePedido + this.Quantidade;
+          produtoExistente = true;
+          produtosCarrinho.push(produto);
+        }
+        else
+        {
+          EstoqueSuficienteQuantidade = false;
+        }
+      }
+      else
+      {
         produtosCarrinho.push(produto);
-      });
-      produtosCarrinho.push(this.ConvertProdutoinCarrinho(this.Produto));
-      localStorage.setItem('produtos', JSON.stringify(produtosCarrinho));
+      }
+    });
 
+    if (EstoqueSuficienteQuantidade) {
+
+      if (!produtoExistente)
+      {
+        produtosCarrinho.push(this.ConvertProdutoinCarrinho(this.Produto));
+      }
+
+      localStorage.setItem(environment.VariavelProduto, JSON.stringify(produtosCarrinho));
       this.QuantidadeCarrinho = this.QuantidadeCarrinho + this.Quantidade;
-      localStorage.setItem('quantidade', String(this.QuantidadeCarrinho));
+      localStorage.setItem(environment.VariavelQuantidade, String(this.QuantidadeCarrinho));
+
+      return  true;
+    }
+    else
+    {
+      return false;
     }
 
-    this.snackbar.OpenSnackBarSuccess('Produto adicionado ao carrinho');
-    if (this.Voltar) {
-      this.VoltarPagina();
+  }
+
+  ValidaEstoqueProduto(produto: IProdutoCarrinho): boolean {
+    if (this.Produto.estoque >= (produto.quantidadePedido + this.Quantidade))
+    {
+      return true;
+    }
+    else
+    {
+      return false;
     }
   }
 

@@ -6,65 +6,24 @@
   <br>
   <br>
   <br>
-  <div class="container-titulo">
-    <h1 class="h1-btn titulo-lista">Categorias</h1>
-    <div class="btn-titulo">
-      <button mat-icon-button matTooltip="Adicionar" (click)="router.navigate(['/empresa/categoria/adicionar'])">
-        <mat-icon color=primary>add</mat-icon>
-      </button>
-    </div>
-  </div>
+    <app-titulo-mais-add [Titulo]="'Categorias'" [Rotas]="'/empresa/categoria/adicionar'"></app-titulo-mais-add>
   <br>
   <br>
   <br>
   <br>
   <ng-container *ngIf="CategoriasAtivas.length > 0">
-    <mat-list>
-      <div mat-subheader color=primary>Ativas</div>
-      <ng-container *ngFor="let categoria of CategoriasAtivas; let i = index">
-        <mat-list-item class="lista cursor" (click)="Navegar(categoria.nome, categoria.id)">
-          <div mat-line class="negrito">{{categoria.nome}}</div>
-          <div mat-line class="negrito-leve">{{categoria.descricao}}</div>
-        </mat-list-item>
-        <ng-container *ngIf="CategoriasAtivas.length > (i + 1)">
-          <mat-divider></mat-divider>
-        </ng-container>
-      </ng-container>
-    </mat-list>
+    <app-lista-categoria [Categorias]=CategoriasAtivas [Titulo]="'Ativas'"></app-lista-categoria>
   </ng-container>
   <ng-container *ngIf="CategoriasAtivas.length == 0">
-    <mat-list-item>
-    <mat-list>
-      <div mat-subheader>Ativas</div>
-      <mat-list-item>
-        <div mat-line class="negrito">Não há categorias ativas</div>
-      </mat-list-item>
-    </mat-list>
-    </mat-list-item>
+    <app-lista-categoria-vazia [Titulo]="'Ativas'" [Mensagem]="'Não há categorias ativas'"></app-lista-categoria-vazia>
   </ng-container>
   <br>
   <br>
   <ng-container *ngIf="CategoriasInativas.length > 0">
-    <mat-list>
-      <div mat-subheader>Inativas</div>
-      <ng-container *ngFor="let categoria of CategoriasInativas; let i = index">
-        <mat-list-item class="lista cursor" (click)="Navegar(categoria.nome, categoria.id)">
-          <div mat-line class="negrito cursor">{{categoria.nome}}</div>
-          <div mat-line class="negrito-leve cursor">{{categoria.descricao}}</div>
-        </mat-list-item>
-        <ng-container *ngIf="CategoriasInativas.length > (i + 1)">
-          <mat-divider></mat-divider>
-        </ng-container>
-      </ng-container>
-    </mat-list>
+    <app-lista-categoria [Categorias]=CategoriasInativas [Titulo]="'Inativas'"></app-lista-categoria>
   </ng-container>
   <ng-container *ngIf="CategoriasInativas.length == 0">
-    <mat-list>
-      <div mat-subheader>Inativas</div>
-      <mat-list-item>
-        <div mat-line class="negrito">Não há categorias inativas</div>
-      </mat-list-item>
-    </mat-list>
+    <app-lista-categoria-vazia [Titulo]="'Inativas'" [Mensagem]="'Não há categorias inativas'"></app-lista-categoria-vazia>
   </ng-container>
 </ng-container>
 <br>

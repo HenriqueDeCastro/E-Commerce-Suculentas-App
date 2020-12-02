@@ -1,0 +1,12 @@
+<mat-list>
+  <div mat-subheader color=primary>{{Titulo}}</div>
+  <ng-container *ngFor="let categoria of Categorias; let i = index">
+    <mat-list-item class="lista cursor" (click)="Navegar(categoria.nome, categoria.id)">
+      <div mat-line class="negrito">{{categoria.nome}}</div>
+      <div mat-line class="negrito-leve">{{categoria.descricao}}</div>
+    </mat-list-item>
+    <ng-container *ngIf="Categorias.length > (i + 1)">
+      <mat-divider></mat-divider>
+    </ng-container>
+  </ng-container>
+</mat-list>

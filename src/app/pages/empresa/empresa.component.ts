@@ -9,7 +9,6 @@ export class EmpresaComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit(): void {}
 
 }

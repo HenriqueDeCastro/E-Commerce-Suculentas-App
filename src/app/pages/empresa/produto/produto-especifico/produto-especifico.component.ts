@@ -4,13 +4,14 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { CategoriaService } from 'src/app/core/services/Categoria/Categoria.service';
 import { FiltroNomeComponent } from 'src/app/shared/components/filtro-nome/filtro-nome.component';
-import { FiltroProdutosEmpresaComponent } from 'src/app/shared/components/filtro-produtos-empresa/filtro-produtos-empresa.component';
+import { MensagemSnackbarComponent } from 'src/app/shared/components/mensagem-snackbar/mensagem-snackbar.component';
 import { ResetScrollComponent } from 'src/app/shared/components/reset-scroll/reset-scroll.component';
 import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
 import { ICategoria } from 'src/app/shared/models/ICategoria';
 import { IProduto } from 'src/app/shared/models/IProduto';
 import { environment } from 'src/environments/environment';
-import { DialogFiltroProdutosEmpresaComponent } from '../../../../shared/components/dialog-filtro-produtos-empresa/dialog-filtro-produtos-empresa.component'
+import { BottomOrderbyEmpresaComponent } from './components/bottom-orderby-empresa/bottom-orderby-empresa.component';
+import { DialogOrderbyEmpresaComponent } from './components/dialog-orderby-empresa/dialog-orderby-empresa.component';
 
 @Component({
   selector: 'app-produto-especifico',
@@ -33,7 +34,8 @@ export class ProdutoEspecificoComponent implements OnInit {
               private snackbar: SnackbarComponent,
               private resetScroll: ResetScrollComponent,
               public dialog: MatDialog,
-              private filtroNome: FiltroNomeComponent) { }
+              private filtroNome: FiltroNomeComponent,
+              private mensagemSnackbar: MensagemSnackbarComponent) { }
 
   ngOnInit(): void {
     this.link = environment.UrlApi;
@@ -52,7 +54,7 @@ export class ProdutoEspecificoComponent implements OnInit {
     },
     erro => {
       console.log(erro);
-      this.snackbar.OpenSnackBarError('Erro no servidor, tente novamente mais tarde !!!');
+      this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
     });
   }
 
@@ -61,14 +63,14 @@ export class ProdutoEspecificoComponent implements OnInit {
   }
 
   openBottomSheet(): void {
-    const bottomSheetRef = this.bottomSheet.open(FiltroProdutosEmpresaComponent);
+    const bottomSheetRef = this.bottomSheet.open(BottomOrderbyEmpresaComponent);
     bottomSheetRef.afterDismissed().subscribe((result) => {
       this.resultOrderBy(result);
     });
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(DialogFiltroProdutosEmpresaComponent, {
+    const dialogRef = this.dialog.open(DialogOrderbyEmpresaComponent, {
       autoFocus: false,
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -111,17 +113,5 @@ export class ProdutoEspecificoComponent implements OnInit {
   onChangePage(evento: any): void {
     this.pages = evento;
     this.resetScroll.PositionZero();
-  }
-
-  ColorEstoque(estoque: number): string {
-    if (estoque === 0) {
-      return 'zerado';
-    }
-    if (estoque > 0 && estoque < 4) {
-      return 'pouco';
-    }
-    if (estoque >= 4) {
-      return 'otimo';
-    }
   }
 }

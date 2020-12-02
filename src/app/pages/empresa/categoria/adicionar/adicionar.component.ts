@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CategoriaService } from 'src/app/core/services/Categoria/Categoria.service';
 import { TipoCategoriaService } from 'src/app/core/services/TipoCategoria/TipoCategoria.service';
+import { MensagemSnackbarComponent } from 'src/app/shared/components/mensagem-snackbar/mensagem-snackbar.component';
 import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
 import { ITipoCategoria } from 'src/app/shared/models/ITipoCategoria';
 import { ICategoria } from '../../../../shared/models/ICategoria';
@@ -24,7 +25,8 @@ export class AdicionarComponent implements OnInit {
               public router: Router,
               private categoriaService: CategoriaService,
               private tipoCategoriaService: TipoCategoriaService,
-              private snackbar: SnackbarComponent) { }
+              private snackbar: SnackbarComponent,
+              private mensagemSnackbar: MensagemSnackbarComponent) { }
 
   ngOnInit(): void {
     this.Validation();
@@ -57,16 +59,16 @@ export class AdicionarComponent implements OnInit {
       this.categoriaService.Post(this.Categoria).subscribe(
         () => {
           this.RealizandoCadastro = false;
-          this.snackbar.OpenSnackBarSuccess('Cadastrado realizado com sucesso');
+          this.snackbar.OpenSnackBarSuccess(this.mensagemSnackbar.CadastroConcluido);
           this.router.navigate(['empresa/categoria']);
         },
         error => {
           this.RealizandoCadastro = false;
           console.log(error);
-          this.snackbar.OpenSnackBarError('Erro no servidor, tente novamente mais tarde !!!');
+          this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
         });
     } else {
-      this.snackbar.OpenSnackBarError('Nem todos os campos foram preenchidos');
+      this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroCamposPreenchidos);
     }
   }
 }

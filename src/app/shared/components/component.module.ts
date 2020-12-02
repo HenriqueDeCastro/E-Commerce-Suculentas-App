@@ -1,46 +1,56 @@
+// MODULES
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MaterialModule } from './material/material.module';
-import { ProgressbarComponent } from './progressbar/progressbar.component';
-import { VoltarComponent } from './voltar/voltar.component';
-import { SpinnerComponent } from './spinner/spinner.component';
-import { FiltroProdutosComponent } from './filtro-produtos/filtro-produtos.component';
-import { FiltroProdutosEmpresaComponent } from './filtro-produtos-empresa/filtro-produtos-empresa.component';
-import { DialogFiltroProdutosComponent } from './dialog-filtro-produtos/dialog-filtro-produtos.component';
-import { DialogFiltroProdutosEmpresaComponent } from './dialog-filtro-produtos-empresa/dialog-filtro-produtos-empresa.component';
-import { RotasSiteComponent } from './Rotas-Site/Rotas-Site.component';
-import { FooterComponent } from './footer/footer.component';
-import { PesquisaComponent } from './pesquisa/pesquisa.component';
-import { CardProdutoComponent } from './card-produto/card-produto.component';
+
+// COMPONENTS
 import { BotaoCarrinhoComponent } from './botao-carrinho/botao-carrinho.component';
-import { CommonModule } from '@angular/common';
+import { BotaoQuantidadeComponent } from './botao-quantidade/botao-quantidade.component';
+import { BotaoVermaisComponent } from './botao-vermais/botao-vermais.component';
+import { CardProdutoComponent } from './card-produto/card-produto.component';
+import { CardProdutoEmpresaComponent } from './card-produto-empresa/card-produto-empresa.component';
+import { FooterComponent } from './footer/footer.component';
+import { ListaOrderbyProdutoComponent } from './lista-orderby-produto/lista-orderby-produto.component';
+import { PesquisaComponent } from './pesquisa/pesquisa.component';
+import { ProgressbarComponent } from './progressbar/progressbar.component';
+import { RotasSiteComponent } from './Rotas-Site/Rotas-Site.component';
+import { SpinnerComponent } from './spinner/spinner.component';
+import { TituloMaisAddComponent } from './titulo-mais-add/titulo-mais-add.component';
+import { VoltarComponent } from './voltar/voltar.component';
+import { EditCarrinhoComponent } from './edit-carrinho/edit-carrinho.component';
 
 @NgModule({
   declarations: [
     ProgressbarComponent,
     VoltarComponent,
     SpinnerComponent,
-    FiltroProdutosComponent,
-    FiltroProdutosEmpresaComponent,
     RotasSiteComponent,
     FooterComponent,
-    DialogFiltroProdutosComponent,
-    DialogFiltroProdutosEmpresaComponent,
     PesquisaComponent,
     CardProdutoComponent,
-    BotaoCarrinhoComponent
+    BotaoCarrinhoComponent,
+    TituloMaisAddComponent,
+    CardProdutoEmpresaComponent,
+    BotaoVermaisComponent,
+    ListaOrderbyProdutoComponent,
+    EditCarrinhoComponent,
+    BotaoQuantidadeComponent
   ],
   exports: [
     ProgressbarComponent,
     VoltarComponent,
     SpinnerComponent,
-    FiltroProdutosComponent,
-    FiltroProdutosEmpresaComponent,
     RotasSiteComponent,
     FooterComponent,
-    DialogFiltroProdutosComponent,
     PesquisaComponent,
     CardProdutoComponent,
-    BotaoCarrinhoComponent
+    BotaoCarrinhoComponent,
+    TituloMaisAddComponent,
+    CardProdutoEmpresaComponent,
+    BotaoVermaisComponent,
+    ListaOrderbyProdutoComponent,
+    EditCarrinhoComponent,
+    BotaoQuantidadeComponent
   ],
   imports: [
     CommonModule,

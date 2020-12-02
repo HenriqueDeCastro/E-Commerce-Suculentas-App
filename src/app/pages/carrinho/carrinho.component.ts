@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { IProdutoCarrinho } from 'src/app/shared/models/IProdutoCarrinho';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-carrinho',
@@ -7,9 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CarrinhoComponent implements OnInit {
 
+  public Produtos: IProdutoCarrinho[];
+  public link: string;
+
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.link = environment.UrlApi;
+    this.ReceberProdutoCarrinho();
   }
 
+  ReceberProdutoCarrinho(): void {
+    this.Produtos = JSON.parse(localStorage.getItem(environment.VariavelProduto));
+  }
+
+  ReceberAtt(event: boolean): void {
+    if (event) {
+      this.Produtos = JSON.parse(localStorage.getItem(environment.VariavelProduto));
+    }
+  }
 }

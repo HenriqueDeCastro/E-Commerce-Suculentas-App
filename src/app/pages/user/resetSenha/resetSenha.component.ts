@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/Auth/Auth.service';
+import { MensagemSnackbarComponent } from 'src/app/shared/components/mensagem-snackbar/mensagem-snackbar.component';
 import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
 import { IResetSenha } from '../../../shared/models/IResetSenha';
 
@@ -22,7 +23,8 @@ export class ResetSenhaComponent implements OnInit {
               private fb: FormBuilder,
               public router: Router,
               private authService: AuthService,
-              private snackbar: SnackbarComponent) { }
+              private snackbar: SnackbarComponent,
+              private mensagemSnackbar: MensagemSnackbarComponent) { }
 
   ngOnInit(): void {
     this.ReceberValorRota();
@@ -52,9 +54,9 @@ export class ResetSenhaComponent implements OnInit {
         password: this.SenhaForm.get('passwords.password').value,
         confirmedPassword: this.SenhaForm.get('passwords.confirmedPassword').value
       };
-      this.authService.ResetSenha(this.Reset). subscribe((model: any) => {
+      this.authService.ResetSenha(this.Reset).subscribe((model: any) => {
         this.Registrando = false;
-        this.snackbar.OpenSnackBarSuccess('Senha redefinida com sucesso');
+        this.snackbar.OpenSnackBarSuccess(this.mensagemSnackbar.SenhaRedefinida);
         this.router.navigate(['/user/login']);
       },
       (error) => {
@@ -63,15 +65,15 @@ export class ResetSenhaComponent implements OnInit {
         console.log(error);
         switch (erro) {
           case 'Usuario não encontrado!':
-            this.snackbar.OpenSnackBarError('Não foi encontrado o e-mail informado !!!');
+            this.snackbar.OpenSnackBarError(this.mensagemSnackbar.EmailNaoEncontrado);
             break;
           default:
-            this.snackbar.OpenSnackBarError('Erro no servidor, tente novamente mais tarde !!!');
+            this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
             break;
         }
       });
     } else {
-      this.snackbar.OpenSnackBarError('Nem todos os campos foram preenchidos');
+      this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroCamposPreenchidos);
 
     }
   }

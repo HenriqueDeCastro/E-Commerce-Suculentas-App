@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/Auth/Auth.service';
+import { MensagemSnackbarComponent } from 'src/app/shared/components/mensagem-snackbar/mensagem-snackbar.component';
 import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
 import { IEsqueciSenha } from 'src/app/shared/models/IEsqueciSenha';
 
@@ -19,7 +20,8 @@ export class EsqueciSenhaComponent implements OnInit {
   constructor(private fb: FormBuilder,
               public router: Router,
               private authService: AuthService,
-              private snackbar: SnackbarComponent) { }
+              private snackbar: SnackbarComponent,
+              private mensagemSnackbar: MensagemSnackbarComponent) { }
 
   ngOnInit(): void {
     this.Validation();
@@ -40,7 +42,7 @@ export class EsqueciSenhaComponent implements OnInit {
       this.authService.EsqueciSenha(this.EsqueciObjeto).subscribe(
         () => {
           this.EnviandoRequisicao = false;
-          this.snackbar.OpenSnackBarSuccess('Verifique sua caixa de e-mail');
+          this.snackbar.OpenSnackBarSuccess(this.mensagemSnackbar.VerificarCaixaEmail);
           this.router.navigate(['/user/login']);
         },
         error => {
@@ -49,15 +51,15 @@ export class EsqueciSenhaComponent implements OnInit {
           console.log(error);
           switch (erro) {
             case 'Usuario não encontrado!':
-              this.snackbar.OpenSnackBarError('Não foi encontrado o e-mail informado !!!');
+              this.snackbar.OpenSnackBarError(this.mensagemSnackbar.EmailNaoEncontrado);
               break;
             default:
-              this.snackbar.OpenSnackBarError('Erro no servidor, tente novamente mais tarde !!!');
+              this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
               break;
           }
       });
     }else {
-      this.snackbar.OpenSnackBarError('Preencha todos os campos!');
+      this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroCamposPreenchidos);
     }
   }
 }

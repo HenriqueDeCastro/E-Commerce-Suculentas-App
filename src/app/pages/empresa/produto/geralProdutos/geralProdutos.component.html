@@ -6,12 +6,7 @@
   <br>
   <br>
   <br>
-  <div class="container-titulo">
-    <h1 class="h1-btn titulo">Produtos</h1>
-    <div class="btn-titulo">
-      <mat-icon class="material-icons-outlined cursor" color=primary  matTooltip="Adicionar" (click)="router.navigate(['/empresa/produto/adicionar'])">add</mat-icon>
-    </div>
-  </div>
+  <app-titulo-mais-add [Titulo]="'Produtos'" [Rotas]="'/empresa/produto/adicionar'"></app-titulo-mais-add>
   <br>
   <br>
   <br>
@@ -30,29 +25,16 @@
       <div class="row">
         <ng-container *ngFor="let produto of categoria.produtos">
           <div class="col-md-3">
-            <mat-card class="mat-elevation-z2">
-              <img mat-card-image src="{{link}}/resources/{{produto.imagem}}" alt="{{produto.nome}}">
-                <mat-card-header>
-                  <mat-card-title>{{produto.nome}}</mat-card-title>
-                  <mat-card-subtitle>Estoque: {{produto.estoque}}</mat-card-subtitle>
-                </mat-card-header>
-                <mat-card-content>
-              </mat-card-content>
-            </mat-card>
+            <app-card-produto-empresa [produto]=produto [categoriaNome]="categoria.nome"></app-card-produto-empresa>
           </div>
         </ng-container>
       </div>
       <br>
       <br>
-      <div class="centralizar">
-        <button mat-button class="btn-responsive light-button"  color="accent" (click)="Navegar(categoria.nome, categoria.id)">Ver Mais</button>
-      </div>
+        <app-botao-vermais [Categoria]=categoria [Rota]="'/empresa/produto/'"></app-botao-vermais>
       <br>
     </ng-container>
   </ng-container>
 </ng-container>
 
-      <!-- <button mat-icon-button matTooltip="Filtrar" (click)="openBottomSheet()">
-        <mat-icon class="material-icons-outlined" color=accent>filter_alt</mat-icon>
-      </button> -->
 

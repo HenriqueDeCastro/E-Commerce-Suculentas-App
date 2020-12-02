@@ -2,14 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { ActivatedRoute } from '@angular/router';
 import { CategoriaService } from 'src/app/core/services/Categoria/Categoria.service';
-import { FiltroProdutosComponent } from 'src/app/shared/components/filtro-produtos/filtro-produtos.component';
+import { BottomOrderbyComponent} from './components/bottom-orderby/bottom-orderby.component';
 import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
 import { ICategoria } from 'src/app/shared/models/ICategoria';
 import { ResetScrollComponent } from '../../../shared/components/reset-scroll/reset-scroll.component';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogFiltroProdutosComponent } from '../../../shared/components/dialog-filtro-produtos/dialog-filtro-produtos.component';
+import { DialogOrderbyComponent } from './components/dialog-orderby/dialog-orderby.component';
 import { FiltroNomeComponent } from '../../../shared/components/filtro-nome/filtro-nome.component';
 import { IProduto } from 'src/app/shared/models/IProduto';
+import { MensagemSnackbarComponent } from 'src/app/shared/components/mensagem-snackbar/mensagem-snackbar.component';
 
 @Component({
   selector: 'app-produtos-especifico',
@@ -32,7 +33,8 @@ export class ProdutosEspecificoComponent implements OnInit {
               private snackbar: SnackbarComponent,
               private resetScroll: ResetScrollComponent,
               public dialog: MatDialog,
-              private filtroNome: FiltroNomeComponent) { }
+              private filtroNome: FiltroNomeComponent,
+              private mensagemSnackbar: MensagemSnackbarComponent) { }
 
   ngOnInit(): void {
     this.ReceberValorRota();
@@ -50,7 +52,7 @@ export class ProdutosEspecificoComponent implements OnInit {
     },
     erro => {
       console.log(erro);
-      this.snackbar.OpenSnackBarError('Erro no servidor, tente novamente mais tarde !!!');
+      this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
     });
   }
 
@@ -59,14 +61,14 @@ export class ProdutosEspecificoComponent implements OnInit {
   }
 
   openBottomSheet(): void {
-    const bottomSheetRef = this.bottomSheet.open(FiltroProdutosComponent);
+    const bottomSheetRef = this.bottomSheet.open(BottomOrderbyComponent);
     bottomSheetRef.afterDismissed().subscribe((result) => {
       this.resultOrderBy(result);
     });
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(DialogFiltroProdutosComponent, {
+    const dialogRef = this.dialog.open(DialogOrderbyComponent, {
       autoFocus: false,
     });
     dialogRef.afterClosed().subscribe(result => {

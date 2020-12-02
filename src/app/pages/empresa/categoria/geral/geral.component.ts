@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CategoriaService } from 'src/app/core/services/Categoria/Categoria.service';
+import { MensagemSnackbarComponent } from 'src/app/shared/components/mensagem-snackbar/mensagem-snackbar.component';
 import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
 import { ICategoria } from 'src/app/shared/models/ICategoria';
 
@@ -15,9 +16,9 @@ export class GeralComponent implements OnInit {
   public CategoriasAtivas: ICategoria[] = [];
   public CategoriasInativas: ICategoria[] = [];
 
-  constructor(public router: Router,
-              private categoriaService: CategoriaService,
-              private snackbar: SnackbarComponent) { }
+  constructor(private categoriaService: CategoriaService,
+              private snackbar: SnackbarComponent,
+              private mensagemSnackbar: MensagemSnackbarComponent) { }
 
   ngOnInit(): void {
     this.ReceberCategorias();
@@ -30,7 +31,7 @@ export class GeralComponent implements OnInit {
     },
     erro => {
       console.log(erro);
-      this.snackbar.OpenSnackBarError('Erro no servidor, tente novamente mais tarde !!!');
+      this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
     });
   }
 
@@ -42,9 +43,5 @@ export class GeralComponent implements OnInit {
         this.CategoriasInativas.push(categoria);
       }
     });
-  }
-
-  Navegar(categoriaNome, categoriaId): void {
-    this.router.navigate(['/empresa/categoria/editar/' + categoriaId + '/' + categoriaNome]);
   }
 }

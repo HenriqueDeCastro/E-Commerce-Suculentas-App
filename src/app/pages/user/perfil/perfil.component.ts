@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IUser } from 'src/app/shared/models/IUser';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-perfil',
@@ -11,18 +12,18 @@ export class PerfilComponent implements OnInit {
 
   public User: IUser;
 
-  constructor(private route: Router) { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     this.RecebeserLogado();
   }
 
   Logout(): void {
-    localStorage.removeItem('token');
-    this.route.navigate(['/user/login']);
+    localStorage.removeItem(environment.VariavelToken);
+    this.router.navigate(['/user/login']);
   }
 
   RecebeserLogado(): void{
-    this.User = JSON.parse(localStorage.getItem('user'));
+    this.User = JSON.parse(localStorage.getItem(environment.VariavelUsuario));
   }
 }

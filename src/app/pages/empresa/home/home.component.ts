@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IUser } from 'src/app/shared/models/IUser';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -14,11 +15,11 @@ export class HomeComponent implements OnInit {
   constructor(public router: Router) { }
 
   ngOnInit(): void {
-    this.RecebeserLogado();
+    this.ReceberLogado();
   }
 
-  RecebeserLogado(): void{
-    this.User = JSON.parse(localStorage.getItem('user'));
+  ReceberLogado(): void{
+    this.User = JSON.parse(localStorage.getItem(environment.VariavelUsuario));
   }
 
 }

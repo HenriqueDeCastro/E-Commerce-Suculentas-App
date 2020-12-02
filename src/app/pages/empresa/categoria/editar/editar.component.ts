@@ -6,6 +6,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
 import { TipoCategoriaService } from 'src/app/core/services/TipoCategoria/TipoCategoria.service';
 import { ITipoCategoria } from 'src/app/shared/models/ITipoCategoria';
+import { MensagemSnackbarComponent } from 'src/app/shared/components/mensagem-snackbar/mensagem-snackbar.component';
 
 @Component({
   selector: 'app-editar',
@@ -27,7 +28,8 @@ export class EditarComponent implements OnInit {
               private activetedRoute: ActivatedRoute,
               private categoriaService: CategoriaService,
               private tipoCategoriaService: TipoCategoriaService,
-              private snackbar: SnackbarComponent) { }
+              private snackbar: SnackbarComponent,
+              private mensagemSnackbar: MensagemSnackbarComponent) { }
 
   ngOnInit(): void {
     this.ReceberValorRota();
@@ -71,16 +73,16 @@ export class EditarComponent implements OnInit {
       this.categoriaService.Put(this.Categoria).subscribe(
         () => {
           this.EditandoCategoria = false;
-          this.snackbar.OpenSnackBarSuccess('Categoria atualizada com sucesso');
+          this.snackbar.OpenSnackBarSuccess(this.mensagemSnackbar.AtualizacaoConcluida);
           this.router.navigate(['empresa/categoria']);
         },
         error => {
           this.EditandoCategoria = false;
           console.log(error);
-          this.snackbar.OpenSnackBarError('Erro no servidor, tente novamente mais tarde !!!');
+          this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
         });
     } else {
-      this.snackbar.OpenSnackBarError('Nem todos os campos foram preenchidos');
+      this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroCamposPreenchidos);
     }
   }
 }

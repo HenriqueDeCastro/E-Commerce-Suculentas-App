@@ -6,6 +6,15 @@
   text-align: center;
 }
 
+.centralizar-vertical {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+}
+
 .invalid-feedback {
   font-size: 12px;
 }

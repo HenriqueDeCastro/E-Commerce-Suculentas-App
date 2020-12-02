@@ -17,6 +17,18 @@ export const environment = {
   UrlFace: 'https://www.facebook.com/groups/2486651298029953',
 
   // INSTAGRAM
-  UrlInsta: 'https://www.instagram.com/suculentas_da_ro/'
+  UrlInsta: 'https://www.instagram.com/suculentas_da_ro/',
+
+  // VARIAVEL DE TOKEN DO LOCALSTORAGE
+  VariavelToken: 'token',
+
+  // VARIAVEL DE USUARIO DO LOCALSTORAGE
+  VariavelUsuario: 'user',
+
+  // VARIAVEL DE QUANTIDADE DO LOCALSTORAGE
+  VariavelQuantidade: 'quantidade',
+
+  // VARIAVEL DE PRODUTO DO LOCALSTORAGE
+  VariavelProduto: 'produtos'
 };
 

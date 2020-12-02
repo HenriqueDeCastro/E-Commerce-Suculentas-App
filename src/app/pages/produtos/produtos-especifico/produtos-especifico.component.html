@@ -9,9 +9,12 @@
   <div class="container-titulo">
     <h1 class="h1-btn titulo">{{Categoria.nome}}</h1>
     <div class="btn-titulo">
-      <mat-icon class="material-icons cursor btn-search " matTooltip="Pesquisar" color=primary (click)="openAccordion()">search</mat-icon>
-      <mat-icon class="material-icons cursor btn-mobile" matTooltip="Ordenar" color=primary (click)="openBottomSheet()">swap_vert</mat-icon>
-      <mat-icon class="material-icons cursor btn-pc btn-orderby" matTooltip="Ordenar" color=primary (click)="openDialog()">swap_vert</mat-icon>
+      <mat-icon *ngIf="!open" class="material-icons cursor btn-search " matTooltip="Pesquisar" color=primary (click)="openAccordion()">search</mat-icon>
+      <mat-icon *ngIf="open" class="material-icons cursor btn-search " matTooltip="Fechar pesquisa" color=warn (click)="openAccordion()">clear</mat-icon>
+
+      <!-- botoes filtro -->
+      <mat-icon class="material-icons cursor btn-mobile" matTooltip="Ordenar" color=accent (click)="openBottomSheet()">swap_vert</mat-icon>
+      <mat-icon class="material-icons cursor btn-pc btn-orderby" matTooltip="Ordenar" color=accent (click)="openDialog()">swap_vert</mat-icon>
     </div>
   </div>
   <br>
@@ -52,7 +55,7 @@
   <ng-container *ngIf="Produtos.length == 0">
     <br>
     <br>
-    <h3 class="titulo centralizar mensagem-vazio"> Não encontramos nenhum(a) {{this.Categoria.nome}} que tenha em seu nome "{{filter}}".</h3>
+    <h3 class="titulo centralizar centralizar-vertical">🤔 Não encontramos nenhum(a) {{this.Categoria.nome}} que tenha em seu nome "{{filter}}".</h3>
   </ng-container>
 </ng-container>
 

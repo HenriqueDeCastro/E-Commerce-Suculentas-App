@@ -7,26 +7,10 @@
   color: var(--verde);
 }
 
-.quebralinha-matline {
-  word-wrap: break-word !important;
-  white-space: pre-wrap !important;
-}
-
-.tamanho-matlineitem{
-  height:initial!important;
-}
-
 .mobile {
   display: none;
 }
 
-.btn-menos {
-  margin-right: 18%;
-}
-
-.btn-mais {
-  margin-left: 18%;
-}
 
 .btn-quantidade {
   background-color: transparent !important;
@@ -34,11 +18,7 @@
 }
 
 .estoque {
-  color: var(--azul-escuro);
-}
-
-.cabecalho-lista {
-  color: var(--preto);
+  color: var(--azul);
 }
 
 @media (max-width: 600px)

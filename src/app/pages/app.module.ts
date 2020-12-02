@@ -14,17 +14,16 @@ import { UserModule } from './user/user.module';
 import { ProdutosModule } from './produtos/produtos.module';
 import { SobreModule } from './sobre/sobre.module';
 import { AdminModule } from './admin/admin.module';
+import { CarrinhoModule } from './carrinho/carrinho.module';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from '../core/guards/auth.interceptor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { CarrinhoComponent } from './carrinho/carrinho.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-      CarrinhoComponent
+    AppComponent
    ],
   imports: [
     BrowserModule,
@@ -42,7 +41,8 @@ import { CarrinhoComponent } from './carrinho/carrinho.component';
     UserModule,
     ProdutosModule,
     SobreModule,
-    AdminModule
+    AdminModule,
+    CarrinhoModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

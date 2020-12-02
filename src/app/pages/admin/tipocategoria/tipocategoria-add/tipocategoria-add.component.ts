@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { TipoCategoriaService } from 'src/app/core/services/TipoCategoria/TipoCategoria.service';
 import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
 import { ITipoCategoria } from 'src/app/shared/models/ITipoCategoria';
+import { MensagemSnackbarComponent } from '../../../../shared/components/mensagem-snackbar/mensagem-snackbar.component';
 
 @Component({
   selector: 'app-tipocategoria-add',
@@ -17,9 +18,10 @@ export class TipocategoriaAddComponent implements OnInit {
   private TipoCategoria: ITipoCategoria;
 
   constructor(private fb: FormBuilder,
-              public router: Router,
+              private router: Router,
               private tipoCategoriaService: TipoCategoriaService,
-              private snackbar: SnackbarComponent) { }
+              private snackbar: SnackbarComponent,
+              private mensagemSnackbar: MensagemSnackbarComponent) { }
 
   ngOnInit(): void {
     this.Validation();
@@ -40,16 +42,16 @@ export class TipocategoriaAddComponent implements OnInit {
       this.tipoCategoriaService.Post(this.TipoCategoria).subscribe(
         () => {
           this.RealizandoCadastro = false;
-          this.snackbar.OpenSnackBarSuccess('Cadastrado realizado com sucesso');
+          this.snackbar.OpenSnackBarSuccess(this.mensagemSnackbar.CadastroConcluido);
           this.router.navigate(['admin/tipocategoria']);
         },
         error => {
           this.RealizandoCadastro = false;
           console.log(error);
-          this.snackbar.OpenSnackBarError('Erro no servidor, tente novamente mais tarde !!!');
+          this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
         });
     } else {
-      this.snackbar.OpenSnackBarError('Nem todos os campos foram preenchidos');
+      this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroCamposPreenchidos);
     }
   }
 }

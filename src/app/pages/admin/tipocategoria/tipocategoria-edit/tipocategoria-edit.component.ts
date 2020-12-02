@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TipoCategoriaService } from 'src/app/core/services/TipoCategoria/TipoCategoria.service';
+import { MensagemSnackbarComponent } from 'src/app/shared/components/mensagem-snackbar/mensagem-snackbar.component';
 import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
 import { ITipoCategoria } from 'src/app/shared/models/ITipoCategoria';
 
@@ -21,7 +22,8 @@ export class TipocategoriaEditComponent implements OnInit {
               public router: Router,
               private activetedRoute: ActivatedRoute,
               private tipoCategoriaService: TipoCategoriaService,
-              private snackbar: SnackbarComponent) { }
+              private snackbar: SnackbarComponent,
+              private mensagemSnackbar: MensagemSnackbarComponent) { }
 
   ngOnInit(): void {
     this.ReceberValorRota();
@@ -52,16 +54,16 @@ export class TipocategoriaEditComponent implements OnInit {
       this.tipoCategoriaService.Put(this.TipoCategoria).subscribe(
         () => {
           this.EditandoCategoria = false;
-          this.snackbar.OpenSnackBarSuccess('Tipo Categoria atualizada com sucesso');
+          this.snackbar.OpenSnackBarSuccess(this.mensagemSnackbar.AtualizacaoConcluida);
           this.router.navigate(['admin/tipocategoria']);
         },
         error => {
           this.EditandoCategoria = false;
           console.log(error);
-          this.snackbar.OpenSnackBarError('Erro no servidor, tente novamente mais tarde !!!');
+          this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
         });
     } else {
-      this.snackbar.OpenSnackBarError('Nem todos os campos foram preenchidos');
+      this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroCamposPreenchidos);
     }
   }
 }

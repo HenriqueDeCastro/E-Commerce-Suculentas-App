@@ -48,17 +48,11 @@
       <br>
       <br>
       <div class="centralizar">
-        <button mat-icon-button color color="warn" class="btn-menos mat-elevation-z0" [disabled]="quantidade <= 1" (click)="quantidade = quantidade - 1">
-          <mat-icon>remove_circle_outline</mat-icon>
-        </button>
-        <button mat-icon-button class="btn-quantidade mat-elevation-z0" style="font-size: 17px;">{{quantidade}}</button>
-        <button mat-icon-button color="primary" class="btn-mais mat-elevation-z0" (click)="quantidade = quantidade + 1" [disabled]="quantidade >= Produto.estoque">
-          <mat-icon>add_circle_outline</mat-icon>
-        </button>
+        <app-botao-quantidade [Quantidade]=Quantidade [ProdutoEstoque]=Produto.estoque (QuantidadeEscolhida)="ReceberQuantidade($event)"></app-botao-quantidade>
         <br>
         <br>
         <br>
-        <app-botao-carrinho [TipoBotao]="'solido'" [Quantidade]="quantidade" [Desabilitar]="Produto.estoque <= 0" [Produto]="Produto" [Voltar]=true></app-botao-carrinho>
+        <app-botao-carrinho [TipoBotao]="'solido'" [Quantidade]="Quantidade" [Desabilitar]="Produto.estoque <= 0" [Produto]="Produto" [Voltar]=true></app-botao-carrinho>
       </div>
     </div>
   </div>

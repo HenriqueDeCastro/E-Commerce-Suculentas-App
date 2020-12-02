@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/Auth/Auth.service';
+import { MensagemSnackbarComponent } from 'src/app/shared/components/mensagem-snackbar/mensagem-snackbar.component';
 import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
 
 @Component({
@@ -19,7 +20,8 @@ export class LoginComponent implements OnInit {
               public router: Router,
               private authService: AuthService,
               private snackbar: SnackbarComponent,
-              private activetedRoute: ActivatedRoute) { }
+              private activetedRoute: ActivatedRoute,
+              private mensagemSnackbar: MensagemSnackbarComponent) { }
 
   ngOnInit(): void {
     this.ReceberValorRota();
@@ -56,15 +58,15 @@ export class LoginComponent implements OnInit {
 
           switch (erro.title) {
             case 'Unauthorized':
-              this.snackbar.OpenSnackBarError('E-mail ou senha incorretos');
+              this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroLoginNaoAutorizado);
               break;
             default:
-              this.snackbar.OpenSnackBarError('Erro no servidor, tente novamente mais tarde !!!');
+              this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
               break;
           }
       });
     }else {
-      this.snackbar.OpenSnackBarError('Preencha todos os campos!');
+      this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroCamposPreenchidos);
     }
   }
 }

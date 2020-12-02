@@ -24,6 +24,10 @@ button:focus {
   margin-right: 1.5rem;
 }
 
+.btn-stroked {
+  border: 2px solid var(--vermelho) !important;
+}
+
 @media (max-width: 955px)
 {
   .btn-pc {

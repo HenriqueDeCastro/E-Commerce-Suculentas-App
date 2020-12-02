@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: 'empresa', loadChildren: './empresa/empresa.module#EmpresaModule', canActivate: [AuthGuard] },
   { path: 'admin', loadChildren: './admin/admin.module#AdminModule', canActivate: [AuthGuard] },
   { path: 'sobre', loadChildren: './sobre/sobre.module#SobreModule' },
+  { path: 'carrinho', loadChildren: './carrinho/carrinho.module#CarrinhoModule' },
   { path: '', redirectTo: 'produtos/home', pathMatch: 'full' },
   { path: '**', redirectTo: 'produtos/home', pathMatch: 'full' }
 ];
