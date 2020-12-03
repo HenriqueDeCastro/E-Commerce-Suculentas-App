@@ -31,11 +31,11 @@ export class CategoriaService {
   }
 
   Post(categoria: ICategoria): Observable<ICategoria>   {
-    return this.http.post<ICategoria>(`${this.UrlBase}`, categoria);
+    return this.http.post<ICategoria>(`${this.UrlBase}`, categoria) ;
   }
 
   Put(categoria: ICategoria): Observable<ICategoria>   {
-    return this.http.put<ICategoria>(`${this.UrlBase}/${categoria.id}`, categoria);
+    return this.http.put<ICategoria>(`${this.UrlBase}/${categoria.id}`, categoria, { headers: { 'Content-Type': 'application/json'}});
   }
 
   Delete(categoriaId: number): Observable<ICategoria>  {
