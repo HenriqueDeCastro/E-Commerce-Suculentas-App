@@ -22,12 +22,24 @@ export class CategoriaService {
     return this.http.get<ICategoria[]>(`${this.UrlBase}/getSemProduto`);
   }
 
+  GetAllPagInicialEmpresa(): Observable<ICategoria[]> {
+    return this.http.get<ICategoria[]>(`${this.UrlBase}/getPagInicialEmpresa`);
+  }
+
   GetAllPagInicial(): Observable<ICategoria[]> {
     return this.http.get<ICategoria[]>(`${this.UrlBase}/getPagInicial`);
   }
 
   GetById(categoriaId: number): Observable<ICategoria> {
     return this.http.get<ICategoria>(`${this.UrlBase}/${categoriaId}`);
+  }
+
+  GetByIdCliente(categoriaId: number): Observable<ICategoria> {
+    return this.http.get<ICategoria>(`${this.UrlBase}/getCliente/${categoriaId}`);
+  }
+
+  GetByIdEmpresa(categoriaId: number): Observable<ICategoria> {
+    return this.http.get<ICategoria>(`${this.UrlBase}/getEmpresa/${categoriaId}`);
   }
 
   Post(categoria: ICategoria): Observable<ICategoria>   {

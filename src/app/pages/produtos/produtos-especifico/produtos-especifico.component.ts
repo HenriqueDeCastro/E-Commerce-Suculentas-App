@@ -46,7 +46,7 @@ export class ProdutosEspecificoComponent implements OnInit {
   }
 
   ReceberCategoria(): void {
-    this.categoriaService.GetById(this.CategoriaId).subscribe((categoria: ICategoria) => {
+    this.categoriaService.GetByIdCliente(this.CategoriaId).subscribe((categoria: ICategoria) => {
       this.Categoria = categoria;
       this.Produtos = this.Categoria.produtos;
     },

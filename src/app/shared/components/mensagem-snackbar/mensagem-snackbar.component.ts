@@ -12,7 +12,7 @@ export class MensagemSnackbarComponent {
 
   // SUCESSO
   public CadastroConcluido = 'Cadastrado realizado com sucesso';
-  public AtualizacaoConcluida: 'Atualização realizada com sucesso';
+  public AtualizacaoConcluida = 'Atualização realizada com sucesso';
 
   // CARRINHO
   public ProdutoRemovidoCarrinho = 'Produto removido do carrinho!';
