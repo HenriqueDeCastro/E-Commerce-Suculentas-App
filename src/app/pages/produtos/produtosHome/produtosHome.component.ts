@@ -22,7 +22,7 @@ export class ProdutosHomeComponent implements OnInit {
   }
 
   ReceberCategorias(): void {
-    this.categoriaService.GetAllPagInicialEmpresa().subscribe((categorias: ICategoria[]) => {
+    this.categoriaService.GetAllPagInicial().subscribe((categorias: ICategoria[]) => {
       this.Categorias = categorias;
     },
     erro => {
