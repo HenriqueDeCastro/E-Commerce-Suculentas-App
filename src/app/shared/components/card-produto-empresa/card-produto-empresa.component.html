@@ -1,4 +1,4 @@
-<mat-card class="mat-elevation-z1">
+<mat-card class="mat-elevation-z1" (click)="Navegar(produto.id, produto.nome)">
   <img mat-card-image src="{{link}}/resources/{{produto.imagem}}" alt="{{produto.nome}}">
     <mat-card-header>
       <mat-card-title class="quebra-linha-texto">{{produto.nome}}</mat-card-title>

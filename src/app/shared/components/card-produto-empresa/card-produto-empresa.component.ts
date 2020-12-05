@@ -31,4 +31,8 @@ export class CardProdutoEmpresaComponent implements OnInit {
       return 'otimo';
     }
   }
+
+  Navegar(produtoId, produtoNome): void {
+    this.router.navigate(['/empresa/produto/editar/' + produtoId + '/' + produtoNome]);
+  }
 }

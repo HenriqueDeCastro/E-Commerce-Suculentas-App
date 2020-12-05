@@ -14,6 +14,7 @@ import { ProdutoComponent } from './produto.component';
 import { GeralProdutosComponent } from './geralProdutos/geralProdutos.component';
 import { ProdutoEspecificoComponent } from './produto-especifico/produto-especifico.component';
 import { AdicionarProdutoComponent } from './adicionarProduto/adicionarProduto.component';
+import { EditarProdutoComponent } from './editarProduto/editarProduto.component';
 
 // COMPONENTS
 import { BottomOrderbyEmpresaComponent } from './produto-especifico/components/bottom-orderby-empresa/bottom-orderby-empresa.component';
@@ -26,7 +27,8 @@ import { DialogOrderbyEmpresaComponent } from './produto-especifico/components/d
     AdicionarProdutoComponent,
     ProdutoEspecificoComponent,
     DialogOrderbyEmpresaComponent,
-    BottomOrderbyEmpresaComponent
+    BottomOrderbyEmpresaComponent,
+    EditarProdutoComponent
   ],
   imports: [
     ReactiveFormsModule,
