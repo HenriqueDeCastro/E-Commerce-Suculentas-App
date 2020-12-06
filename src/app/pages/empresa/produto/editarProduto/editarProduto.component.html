@@ -9,7 +9,7 @@
   <h1 class="titulo">Editar {{Produto.nome}}</h1>
   <br>
   <form [formGroup]="ProdutoForm" (ngSubmit)="Atualizar()" autocomplete="off">
-    <mat-vertical-stepper [linear]="true" #stepper>
+    <mat-vertical-stepper #stepper>
         <mat-step>
           <ng-template matStepLabel>Identificação</ng-template>
           <br>
