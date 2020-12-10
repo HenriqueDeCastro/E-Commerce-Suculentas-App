@@ -3,14 +3,14 @@
 <br>
 <br>
 <br>
-<h1 class="titulo">Criar Tipo de Categoria</h1>
+<h1 class="titulo">Criar Tipo de Produto</h1>
 <br>
 <br>
-<form [formGroup]="TipoCategoriaForm" (ngSubmit)="Registrar()" autocomplete="off">
+<form [formGroup]="TipoProdutoForm" (ngSubmit)="Registrar()" autocomplete="off">
   <mat-form-field appearance="fill" class="w-100">
     <mat-label>Nome</mat-label>
     <input matInput formControlName="nome">
-    <mat-error *ngIf="TipoCategoriaForm.get('nome').hasError('required')" class="invalid-feedback">Nome é obrigatório</mat-error>
+    <mat-error *ngIf="TipoProdutoForm.get('nome').hasError('required')" class="invalid-feedback">Nome é obrigatório</mat-error>
   </mat-form-field>
   <br>
   <br>

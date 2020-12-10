@@ -7,8 +7,10 @@ export interface IProduto {
   descricao: string;
   preco: number;
   imagem: string;
-  estoque: number;
+  estoque?: number;
+  quantidadeMaxima?: number;
   ativo: boolean;
+  tipoProdutoId?: number;
   categoriaId: number;
   pedidos?: IPedido[];
 }

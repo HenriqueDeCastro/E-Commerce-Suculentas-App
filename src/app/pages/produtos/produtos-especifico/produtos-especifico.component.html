@@ -33,7 +33,7 @@
     <div class="row">
       <ng-container *ngFor="let produto of Produtos | paginate: { itemsPerPage: 8, currentPage: pages }">
         <div class="col-md-3">
-          <app-card-produto [produto]="produto" [categoriaNome]="Categoria.nome"></app-card-produto>
+          <app-card-produto [produto]="produto" [Categoria]="Categoria"></app-card-produto>
         </div>
       </ng-container>
     </div>

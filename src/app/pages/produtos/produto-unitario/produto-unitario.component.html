@@ -21,6 +21,9 @@
         Os produtos do site são reais e tentamos sempre enviar o mais idêntico possível da foto disposta,
         mas cada ítem é único, sendo assim natural a variabilidade de tamanho ou coloração.
       </div>
+      <div *ngIf="Produto.tipoProdutoId === IdEncomenda" class="alert alert-danger" role="alert">
+        Só entregamos esse produto para a região do Grande ABC paulista !
+      </div>
     </div>
     <div class="col-sm-7">
       <h1 class="titulo centralizar pc">{{Produto.nome}}</h1>
@@ -38,21 +41,33 @@
           <div mat-line class="quebralinha-matline">Aceitamos cartões e boleto como formas de pagamento.</div>
         </mat-list-item>
         <br>
-        <div mat-subheader class="cabecalho-lista negrito">Estoque</div>
-        <mat-list-item class="tamanho-matlineitem">
-          <mat-icon class="material-icons-outlined estoque" mat-list-icon>local_mall</mat-icon>
-          <div mat-line class="quebralinha-matline negrito  estoque">Temos {{Produto.estoque}} {{Produto.nome}} em estoque</div>
-          <div mat-line class="quebralinha-matline">Selecione abaixo a quantidade que deseja levar</div>
-        </mat-list-item>
+        <ng-container *ngIf="Produto.tipoProdutoId === IdEncomenda">
+          <div mat-subheader class="cabecalho-lista negrito">Encomedar</div>
+          <mat-list-item class="tamanho-matlineitem">
+            <mat-icon class="material-icons-outlined estoque" mat-list-icon>timer</mat-icon>
+            <div mat-line class="quebralinha-matline negrito  estoque">Vendemos {{Produto.nome}} apenas por encomandas</div>
+            <div mat-line class="quebralinha-matline">Selecione abaixo a quantidade que deseja reservar</div>
+          </mat-list-item>
+        </ng-container>
+        <ng-container *ngIf="Produto.tipoProdutoId === IdEstoque">
+          <div mat-subheader class="cabecalho-lista negrito">Estoque</div>
+          <mat-list-item class="tamanho-matlineitem">
+            <mat-icon class="material-icons-outlined estoque" mat-list-icon>local_mall</mat-icon>
+            <div mat-line class="quebralinha-matline negrito  estoque">Temos {{Produto.estoque}} {{Produto.nome}} em estoque</div>
+            <div mat-line class="quebralinha-matline">Selecione abaixo a quantidade que deseja levar</div>
+          </mat-list-item>
+        </ng-container>
       </mat-list>
       <br>
       <br>
       <div class="centralizar">
-        <app-botao-quantidade [Quantidade]=Quantidade [ProdutoEstoque]=Produto.estoque (QuantidadeEscolhida)="ReceberQuantidade($event)"></app-botao-quantidade>
+        <app-botao-quantidade *ngIf="Produto.tipoProdutoId === IdEstoque" [Quantidade]=Quantidade [QuantidadeMaxima]=Produto.estoque (QuantidadeEscolhida)="ReceberQuantidade($event)"></app-botao-quantidade>
+        <app-botao-quantidade *ngIf="Produto.tipoProdutoId === IdEncomenda" [Quantidade]=Quantidade [QuantidadeMaxima]=Produto.quantidadeMaxima (QuantidadeEscolhida)="ReceberQuantidade($event)"></app-botao-quantidade>
         <br>
         <br>
         <br>
-        <app-botao-carrinho [TipoBotao]="'solido'" [Quantidade]="Quantidade" [Desabilitar]="Produto.estoque <= 0" [Produto]="Produto" [Voltar]=true></app-botao-carrinho>
+        <app-botao-carrinho *ngIf="Produto.tipoProdutoId === IdEstoque" [TipoBotao]="'solido'" [Quantidade]="Quantidade" [Desabilitar]="Produto.estoque <= 0 || !Produto.ativo" [Produto]="Produto" [Voltar]=true></app-botao-carrinho>
+        <app-botao-carrinho *ngIf="Produto.tipoProdutoId === IdEncomenda" [TipoBotao]="'solido'" [Quantidade]="Quantidade" [Desabilitar]="Produto.estoque <= 0 || !Produto.ativo" [Produto]="Produto" [Voltar]=true></app-botao-carrinho>
       </div>
     </div>
   </div>

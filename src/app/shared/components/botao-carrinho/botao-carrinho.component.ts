@@ -28,19 +28,14 @@ export class BotaoCarrinhoComponent implements OnInit {
   ngOnInit(): void {}
 
   ColocarCarrinho(): void {
-    this.Produtos = JSON.parse(localStorage.getItem(environment.VariavelProduto));
-    this.QuantidadeCarrinho = JSON.parse(localStorage.getItem(environment.VariavelQuantidade));
+    if (this.Produto.estoque > 0) {
+      this.Produtos = JSON.parse(localStorage.getItem(environment.VariavelProduto));
+      this.QuantidadeCarrinho = JSON.parse(localStorage.getItem(environment.VariavelQuantidade));
 
-    if (this.Produtos == null)
-    {
-      localStorage.setItem(environment.VariavelProduto, JSON.stringify([this.ConvertProdutoinCarrinho(this.Produto)]));
-      localStorage.setItem(environment.VariavelQuantidade, String(this.Quantidade));
-      this.snackbar.OpenSnackBarSuccess(this.mensagemSnackbar.ProdutoAdicionadoCarrinho);
-    }
-    else
-    {
-      if (this.InserirCarrinho())
+      if (this.Produtos == null)
       {
+        localStorage.setItem(environment.VariavelProduto, JSON.stringify([this.ConvertProdutoinCarrinho(this.Produto)]));
+        localStorage.setItem(environment.VariavelQuantidade, String(this.Quantidade));
         this.snackbar.OpenSnackBarSuccess(this.mensagemSnackbar.ProdutoAdicionadoCarrinho);
         if (this.Voltar)
         {
@@ -49,7 +44,18 @@ export class BotaoCarrinhoComponent implements OnInit {
       }
       else
       {
-        this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroEstoqueMaximo);
+        if (this.InserirCarrinho())
+        {
+          this.snackbar.OpenSnackBarSuccess(this.mensagemSnackbar.ProdutoAdicionadoCarrinho);
+          if (this.Voltar)
+          {
+            this.VoltarPagina();
+          }
+        }
+        else
+        {
+          this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroEstoqueMaximo);
+        }
       }
     }
   }
@@ -62,7 +68,7 @@ export class BotaoCarrinhoComponent implements OnInit {
     this.Produtos.forEach(produto => {
       if (produto.id === this.Produto.id)
       {
-        if (this.ValidaEstoqueProduto(produto))
+        if (this.ValidaProdutoDisponivel(produto))
         {
           produto.quantidadePedido = produto.quantidadePedido + this.Quantidade;
           produtoExistente = true;
@@ -99,8 +105,9 @@ export class BotaoCarrinhoComponent implements OnInit {
 
   }
 
-  ValidaEstoqueProduto(produto: IProdutoCarrinho): boolean {
-    if (this.Produto.estoque >= (produto.quantidadePedido + this.Quantidade))
+  ValidaProdutoDisponivel(produto: IProdutoCarrinho): boolean {
+    const ValorMaximo = this.Produto.tipoProdutoId == environment.TipoProdutoEncomenda? this.Produto.quantidadeMaxima : this.Produto.estoque;
+    if (ValorMaximo >= (produto.quantidadePedido + this.Quantidade))
     {
       return true;
     }

@@ -1,86 +1,112 @@
-<ng-container *ngIf="!Produto && !Categorias">
+<ng-container *ngIf="!Produto || !Categorias || !TiposProdutos">
   <app-spinner></app-spinner>
 </ng-container>
-<ng-container *ngIf="Produto && Categorias">
+<ng-container *ngIf="Produto && Categorias && TiposProdutos">
   <app-voltar></app-voltar>
   <br>
   <br>
   <br>
-  <h1 class="titulo">Editar {{Produto.nome}}</h1>
+  <h1 class="titulo">Criar Produto</h1>
   <br>
-  <form [formGroup]="ProdutoForm" (ngSubmit)="Atualizar()" autocomplete="off">
-    <mat-vertical-stepper #stepper>
-        <mat-step>
-          <ng-template matStepLabel>Identificação</ng-template>
-          <br>
+  <br>
+  <mat-vertical-stepper [linear]="" #stepper>
+    <!-- Identificação -->
+    <mat-step [stepControl]="IdentificacaoForm">
+      <ng-template matStepLabel>Identificação</ng-template>
+      <br>
+        <form [formGroup]="IdentificacaoForm" autocomplete="off">
           <mat-form-field  appearance="fill" class="w-100">
             <mat-label>Imagem</mat-label>
             <ngx-mat-file-input (change)="OnFileChange($event)" accept="image/*" formControlName="imagem"></ngx-mat-file-input>
-            <mat-error *ngIf="ProdutoForm.get('imagem').hasError('required')" class="invalid-feedback">Imagem é obrigatória</mat-error>
+            <mat-error *ngIf="IdentificacaoForm.get('imagem').hasError('required')" class="invalid-feedback">Imagem é obrigatória</mat-error>
             <mat-icon class="material-icons-outlined" matSuffix>add_photo_alternate</mat-icon>
           </mat-form-field>
           <br>
           <br>
           <mat-form-field appearance="fill" class="w-100">
             <mat-label>Categoria</mat-label>
-            <mat-select [(value)]="selected" formControlName="categorias">
+            <mat-select [(value)]="selectedCategoria" formControlName="categorias">
               <mat-option *ngFor="let categoria of Categorias" [value]="categoria.id">
                 {{categoria.nome}}
               </mat-option>
             </mat-select>
-            <mat-error *ngIf="ProdutoForm.get('categorias').hasError('required')" class="invalid-feedback">Categoria é obrigatória</mat-error>
+            <mat-error *ngIf="IdentificacaoForm.get('categorias').hasError('required')" class="invalid-feedback">Categoria é obrigatória</mat-error>
           </mat-form-field>
           <br>
           <br>
           <mat-form-field appearance="fill" class="w-100">
-            <mat-label>Ativo</mat-label>
-            <mat-select [(value)]="selectedAtivo" formControlName="ativo">
-              <mat-option [value]=true>Sim</mat-option>
-              <mat-option [value]=false>Não</mat-option>
+            <mat-label>Tipo do Produto</mat-label>
+            <mat-select formControlName="tiposprodutos">
+              <mat-option *ngFor="let tipoproduto of TiposProdutos" (click)="SelecaoTipo(tipoproduto.id)" [value]="tipoproduto.id">
+                {{tipoproduto.nome}}
+              </mat-option>
             </mat-select>
+            <mat-error *ngIf="IdentificacaoForm.get('tiposprodutos').hasError('required')" class="invalid-feedback">Tipo de Produto é obrigatório</mat-error>
           </mat-form-field>
           <br>
           <br>
           <div class="form-group col-md-12 centralizar">
-            <button mat-button type="button" matStepperNext class="btn-responsive" color="primary">Próximo</button>
+            <button mat-button type="button" matStepperNext class="btn-responsive" color="primary" [disabled]=!IdentificacaoForm.valid>Próximo</button>
           </div>
-        </mat-step>
-        <mat-step>
-          <ng-template matStepLabel>Informações</ng-template>
-          <br>
+        </form>
+      </mat-step>
+      <!-- Informações -->
+      <mat-step [stepControl]="InformacoesForm">
+        <ng-template matStepLabel>Informações</ng-template>
+        <br>
+        <form [formGroup]="InformacoesForm" (ngSubmit)="ValidationValores()" autocomplete="off">
           <mat-form-field  appearance="fill" class="w-100">
             <mat-label>Nome</mat-label>
             <input matInput formControlName="nome">
-            <mat-error *ngIf="ProdutoForm.get('nome').hasError('required')" class="invalid-feedback">Nome é obrigatório</mat-error>
+            <mat-error *ngIf="InformacoesForm.get('nome').hasError('required')" class="invalid-feedback">Nome é obrigatório</mat-error>
           </mat-form-field>
           <br>
           <br>
           <mat-form-field  appearance="fill" class="w-100">
             <mat-label>Descrição</mat-label>
             <textarea matInput formControlName="descricao"></textarea>
-            <mat-error *ngIf="ProdutoForm.get('descricao').hasError('required')" class="invalid-feedback">Descrição é obrigatória</mat-error>
+            <mat-error *ngIf="InformacoesForm.get('descricao').hasError('required')" class="invalid-feedback">Descrição é obrigatória</mat-error>
+          </mat-form-field>
+          <br>
+          <br>
+          <mat-form-field appearance="fill" class="w-100">
+            <mat-label>Ativo</mat-label>
+            <mat-select [(value)]="selectedAtivo">
+              <mat-option value=true>Sim</mat-option>
+              <mat-option value=false>Não</mat-option>
+            </mat-select>
           </mat-form-field>
           <br>
           <br>
           <div class="form-group col-md-12 centralizar">
             <button mat-button matStepperPrevious class="w-50" color="warn">Anterior</button>
-            <button mat-button type="button" matStepperNext class="w-50" color="primary">Próximo</button>
+            <button mat-button type="button" matStepperNext class="w-50" color="primary" [disabled]=!InformacoesForm.valid>Próximo</button>
           </div>
+        </form>
         </mat-step>
-        <mat-step>
-          <ng-template matStepLabel>Valores</ng-template>
-          <br>
+      <!-- Valores -->
+      <mat-step [stepControl]="ValoresForm" (click)='ValidationValores()'>
+        <ng-template matStepLabel>Valores</ng-template>
+        <br>
+        <form [formGroup]="ValoresForm" (ngSubmit)="Atualizar()" autocomplete="off">
           <mat-form-field  appearance="fill" class="w-100">
             <mat-label>Preço</mat-label>
-            <input matInput formControlName="preco" separatorLimit="1000" thousandSeparator=".">
-            <mat-error *ngIf="ProdutoForm.get('descricao').hasError('required')" class="invalid-feedback">Preço é obrigatório</mat-error>
+            <input matInput formControlName="preco"  mask="separator.2" separatorLimit="1000" thousandSeparator=".">
+            <mat-error *ngIf="ValoresForm.get('preco').hasError('required')" class="invalid-feedback">Preço é obrigatório</mat-error>
           </mat-form-field>
           <br>
           <br>
           <mat-form-field  appearance="fill" class="w-100">
             <mat-label>Estoque</mat-label>
             <input type="number" matInput formControlName="estoque">
-            <mat-error *ngIf="ProdutoForm.get('estoque').hasError('required')" class="invalid-feedback">Estoque é obrigatório</mat-error>
+            <mat-error *ngIf="ValoresForm.get('estoque').hasError('required')" class="invalid-feedback">Estoque é obrigatório</mat-error>
+          </mat-form-field>
+          <br>
+          <br>
+          <mat-form-field  appearance="fill" class="w-100">
+            <mat-label>Quantidade Maxima de Encomenda</mat-label>
+            <input type="number" matInput formControlName="quantidadeMaxima">
+            <mat-error *ngIf="ValoresForm.get('quantidadeMaxima').hasError('required')" class="invalid-feedback">Quantidade Maxima é obrigatório</mat-error>
           </mat-form-field>
           <br>
           <br>
@@ -90,9 +116,9 @@
           <br>
           <div class="form-group col-md-12 centralizar">
             <button mat-button matStepperPrevious class="w-50" color="warn">Anterior</button>
-            <button mat-button matStepperNext class="w-50" color="primary" [disabled]="RealizandoCadastro">Atualizar</button>
+            <button mat-button matStepperNext class="w-50" color="primary" [disabled]="RealizandoCadastro">Finalizar</button>
           </div>
-        </mat-step>
-      </mat-vertical-stepper>
-    </form>
+        </form>
+      </mat-step>
+    </mat-vertical-stepper>
 </ng-container>

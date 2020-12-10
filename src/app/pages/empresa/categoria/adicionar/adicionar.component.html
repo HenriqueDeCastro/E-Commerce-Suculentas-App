@@ -1,48 +1,32 @@
-<ng-container *ngIf="!TiposCategorias">
-  <app-spinner></app-spinner>
-</ng-container>
-<ng-container *ngIf="TiposCategorias">
-  <app-voltar></app-voltar>
+<app-voltar></app-voltar>
+<br>
+<br>
+<br>
+<br>
+<h1 class="titulo">Criar Categoria</h1>
+<br>
+<br>
+<form [formGroup]="CategoriaForm" (ngSubmit)="Registrar()" autocomplete="off">
+  <mat-form-field appearance="fill" class="w-100">
+    <mat-label>Nome</mat-label>
+    <input matInput formControlName="nome">
+    <mat-error *ngIf="CategoriaForm.get('nome').hasError('required')" class="invalid-feedback">Nome é obrigatório</mat-error>
+  </mat-form-field>
   <br>
   <br>
+  <mat-form-field appearance="fill" class="w-100">
+    <mat-label>Descrição</mat-label>
+    <textarea matInput formControlName="descricao"></textarea>
+    <mat-error *ngIf="CategoriaForm.get('descricao').hasError('required')" class="invalid-feedback">Descrição é obrigatória</mat-error>
+  </mat-form-field>
   <br>
   <br>
-  <h1 class="titulo">Criar Categoria</h1>
+  <ng-container *ngIf="RealizandoCadastro">
+    <app-progressbar></app-progressbar>
+  </ng-container>
   <br>
-  <br>
-  <form [formGroup]="CategoriaForm" (ngSubmit)="Registrar()" autocomplete="off">
-    <mat-form-field appearance="fill" class="w-100">
-      <mat-label>Nome</mat-label>
-      <input matInput formControlName="nome">
-      <mat-error *ngIf="CategoriaForm.get('nome').hasError('required')" class="invalid-feedback">Nome é obrigatório</mat-error>
-    </mat-form-field>
-    <br>
-    <br>
-    <mat-form-field appearance="fill" class="w-100">
-      <mat-label>Descrição</mat-label>
-      <textarea matInput formControlName="descricao"></textarea>
-      <mat-error *ngIf="CategoriaForm.get('descricao').hasError('required')" class="invalid-feedback">Descrição é obrigatória</mat-error>
-    </mat-form-field>
-    <br>
-    <br>
-    <mat-form-field appearance="fill" class="w-100">
-      <mat-label>Tipo da categoria</mat-label>
-      <mat-select [(value)]="selected" formControlName="tipocategoria">
-        <mat-option *ngFor="let tipocategoria of TiposCategorias" [value]="tipocategoria.id">
-          {{tipocategoria.nome}}
-        </mat-option>
-      </mat-select>
-      <mat-error *ngIf="CategoriaForm.get('tipocategoria').hasError('required')" class="invalid-feedback">Tipo da Categoria é obrigatório</mat-error>
-    </mat-form-field>
-    <br>
-    <br>
-    <ng-container *ngIf="RealizandoCadastro">
-      <app-progressbar></app-progressbar>
-    </ng-container>
-    <br>
-    <div class="form-group col-md-12 centralizar">
-      <button mat-flat-button class="btn-responsive" color="primary" [disabled]=RealizandoCadastro>Cadastrar</button>
-    </div>
-  </form>
+  <div class="form-group col-md-12 centralizar">
+    <button mat-flat-button class="btn-responsive" color="primary" [disabled]=RealizandoCadastro>Cadastrar</button>
+  </div>
+</form>
 
-</ng-container>

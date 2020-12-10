@@ -4,8 +4,6 @@ import { CategoriaService } from 'src/app/core/services/Categoria/Categoria.serv
 import { ICategoria } from 'src/app/shared/models/ICategoria';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
-import { TipoCategoriaService } from 'src/app/core/services/TipoCategoria/TipoCategoria.service';
-import { ITipoCategoria } from 'src/app/shared/models/ITipoCategoria';
 import { MensagemSnackbarComponent } from 'src/app/shared/components/mensagem-snackbar/mensagem-snackbar.component';
 
 @Component({
@@ -18,7 +16,6 @@ export class EditarComponent implements OnInit {
   private CategoriaId: number;
   public Categoria: ICategoria;
   public CategoriaForm: FormGroup;
-  public TiposCategorias: ITipoCategoria[];
   public EditandoCategoria = false;
   public selected: any;
   public selectedTipo: number;
@@ -27,14 +24,12 @@ export class EditarComponent implements OnInit {
               public router: Router,
               private activetedRoute: ActivatedRoute,
               private categoriaService: CategoriaService,
-              private tipoCategoriaService: TipoCategoriaService,
               private snackbar: SnackbarComponent,
               private mensagemSnackbar: MensagemSnackbarComponent) { }
 
   ngOnInit(): void {
     this.ReceberValorRota();
     this.ReceberCategoria();
-    this.ReceberTipoCategorias();
   }
 
   ReceberValorRota(): void {
@@ -45,14 +40,7 @@ export class EditarComponent implements OnInit {
     this.categoriaService.GetById(this.CategoriaId).subscribe((categoria: ICategoria) => {
       this.Categoria = categoria;
       this.selected = String(this.Categoria.ativo);
-      this.selectedTipo = this.Categoria.tipoCategoriaId;
       this.Validation(this.Categoria);
-    });
-  }
-
-  ReceberTipoCategorias(): void {
-    this.tipoCategoriaService.GetAllSemCategoria().subscribe((tipoCategorias: ITipoCategoria[]) => {
-      this.TiposCategorias = tipoCategorias;
     });
   }
 
@@ -69,7 +57,6 @@ export class EditarComponent implements OnInit {
       this.Categoria.nome = this.CategoriaForm.value.nome;
       this.Categoria.descricao = this.CategoriaForm.value.descricao;
       this.Categoria.ativo = this.selected;
-      this.Categoria.tipoCategoriaId = this.selectedTipo;
       this.categoriaService.Put(this.Categoria).subscribe(
         () => {
           this.EditandoCategoria = false;

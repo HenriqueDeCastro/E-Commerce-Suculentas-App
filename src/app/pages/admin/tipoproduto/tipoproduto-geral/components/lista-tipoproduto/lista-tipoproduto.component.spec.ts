@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { TipocategoriaEditComponent } from './tipocategoria-edit.component';
+import { ListaTipoprodutoComponent } from './lista-tipoproduto.component';
 
-describe('TipocategoriaEditComponent', () => {
-  let component: TipocategoriaEditComponent;
-  let fixture: ComponentFixture<TipocategoriaEditComponent>;
+describe('ListaTipoprodutoComponent', () => {
+  let component: ListaTipoprodutoComponent;
+  let fixture: ComponentFixture<ListaTipoprodutoComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TipocategoriaEditComponent ]
+      declarations: [ ListaTipoprodutoComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TipocategoriaEditComponent);
+    fixture = TestBed.createComponent(ListaTipoprodutoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

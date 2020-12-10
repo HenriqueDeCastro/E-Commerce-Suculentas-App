@@ -1,0 +1,11 @@
+<mat-list>
+  <div mat-subheader color=primary>Todas</div>
+  <ng-container *ngFor="let tipoproduto of TipoProdutos; let i = index">
+    <mat-list-item class="lista cursor" (click)="Navegar(tipoproduto.nome, tipoproduto.id)">
+      <div mat-line>{{tipoproduto.nome}}</div>
+    </mat-list-item>
+    <ng-container *ngIf="TipoProdutos.length > (i + 1)">
+      <mat-divider></mat-divider>
+    </ng-container>
+  </ng-container>
+</mat-list>

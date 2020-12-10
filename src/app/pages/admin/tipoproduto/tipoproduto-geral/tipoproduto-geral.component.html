@@ -1,20 +1,20 @@
-<ng-container *ngIf="!TipoCategorias">
+<ng-container *ngIf="!TipoProdutos">
   <app-spinner></app-spinner>
 </ng-container>
-<ng-container *ngIf="TipoCategorias">
+<ng-container *ngIf="TipoProdutos">
   <app-voltar></app-voltar>
   <br>
   <br>
   <br>
-  <app-titulo-mais-add [Titulo]="'Tipo Categorias'" [Rotas]="'/admin/tipocategoria/adicionar'"></app-titulo-mais-add>
+  <app-titulo-mais-add [Titulo]="'Tipo Produtos'" [Rotas]="'/admin/tipoproduto/adicionar'"></app-titulo-mais-add>
   <br>
   <br>
   <br>
   <br>
-  <ng-container *ngIf="TipoCategorias.length > 0">
-    <app-lista-tipocategoria [TipoCategorias]=TipoCategorias></app-lista-tipocategoria>
+  <ng-container *ngIf="TipoProdutos.length > 0">
+    <app-lista-tipoproduto [TipoProdutos]=TipoProdutos></app-lista-tipoproduto>
   </ng-container>
-  <ng-container *ngIf="TipoCategorias.length == 0">
+  <ng-container *ngIf="TipoProdutos.length == 0">
     <mat-list-item>
     <mat-list>
       <div mat-subheader>Vazio</div>

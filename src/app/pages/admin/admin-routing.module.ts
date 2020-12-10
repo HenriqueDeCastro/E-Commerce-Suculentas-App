@@ -10,7 +10,7 @@ const routes: Routes = [
     children:
     [
       { path: 'home', component: HomeAdminComponent, canActivate: [AuthGuard] },
-      { path: 'tipocategoria', loadChildren: './tipocategoria/tipocategoria.module#TipoCategoriaModule', canActivate: [AuthGuard] },
+      { path: 'tipoproduto', loadChildren: './tipoproduto/tipoproduto.module#TipoProdutoModule', canActivate: [AuthGuard] },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: '**', redirectTo: 'home', pathMatch: 'full' }
     ],

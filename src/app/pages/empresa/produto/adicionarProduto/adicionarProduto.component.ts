@@ -2,10 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CategoriaService } from 'src/app/core/services/Categoria/Categoria.service';
+import { TipoProdutoService } from 'src/app/core/services/TipoProduto/TipoProduto.service';
 import { MensagemSnackbarComponent } from 'src/app/shared/components/mensagem-snackbar/mensagem-snackbar.component';
 import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
 import { ICategoria } from 'src/app/shared/models/ICategoria';
 import { IProduto } from 'src/app/shared/models/IProduto';
+import { ITipoProduto } from 'src/app/shared/models/ITipoProduto';
+import { environment } from 'src/environments/environment';
 import { ProdutoService } from '../../../../core/services/Produto/Produto.service';
 import { RenomearArquivoComponent } from '../../../../shared/components/renomear-arquivo/renomear-arquivo.component';
 
@@ -17,39 +20,82 @@ import { RenomearArquivoComponent } from '../../../../shared/components/renomear
 export class AdicionarProdutoComponent implements OnInit {
 
   public file: File;
-  public ProdutoForm: FormGroup;
+  public IdentificacaoForm: FormGroup;
+  public InformacoesForm: FormGroup;
+  public ValoresForm: FormGroup;
   public RealizandoCadastro = false;
-  public selected: number;
+  public selectedCategoria: number;
+  public selectedTipo: number;
+  public TiposProdutos: ITipoProduto[];
   public Categorias: ICategoria[];
+  public IdEstoque: number;
+  public IdEncomenda: number;
 
   constructor(private fb: FormBuilder,
               public router: Router,
               private produtoService: ProdutoService,
               private categoriaService: CategoriaService,
+              private tipoProdutoService: TipoProdutoService,
               private renomear: RenomearArquivoComponent,
               private snackbar: SnackbarComponent,
               private mensagemSnackbar: MensagemSnackbarComponent) { }
 
   ngOnInit(): void {
     this.ReceberCategorias();
-    this.Validation();
+    this.ReceberTiposCategorias();
+    this.ValidationIndetificacao();
+    this.ValidationInformacoes();
+    this.ValidationValores();
+    this.IdEncomenda = environment.TipoProdutoEncomenda;
+    this.IdEstoque = environment.TipoProdutoEstoque;
   }
 
-  Validation(): void {
-    this.ProdutoForm = this.fb.group({
-      nome: ['', [Validators.required]],
-      descricao: ['', [Validators.required]],
-      preco: ['', [Validators.required]],
+  ValidationIndetificacao(): void {
+    this.IdentificacaoForm = this.fb.group({
       imagem: ['', [Validators.required]],
       categorias: [null, [Validators.required]],
-      estoque: ['', [Validators.required]]
+      tiposprodutos: [null, [Validators.required]]
+    });
+  }
+
+  ValidationInformacoes(): void {
+    this.InformacoesForm = this.fb.group({
+      nome: ['', [Validators.required]],
+      descricao: ['', [Validators.required]],
+    });
+  }
+
+  ValidationValores(): void {
+    this.ValoresForm = this.fb.group({
+      preco: ['', [Validators.required]],
+      estoque: [{value:'', disabled: this.selectedTipo == this.IdEncomenda}, [Validators.required]],
+      quantidadeMaxima: [{value:'', disabled: this.selectedTipo == this.IdEstoque}, [Validators.required]]
     });
   }
 
   ReceberCategorias(): void {
     this.categoriaService.GetAllSemProduto().subscribe((categorias: ICategoria[]) => {
       this.Categorias = categorias;
+    },
+    erro => {
+      console.log(erro);
+      this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroUploadImagem);
     });
+  }
+
+  ReceberTiposCategorias() {
+    this.tipoProdutoService.GetAllSemProduto().subscribe((tipoProdutos: ITipoProduto[]) => {
+      this.TiposProdutos = tipoProdutos
+    },
+    erro => {
+      console.log(erro);
+      this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroUploadImagem);
+    })
+  }
+
+  SelecaoTipo(valor: number) {
+    this.selectedTipo = valor;
+    this.ValidationValores();
   }
 
   OnFileChange(event): void {
@@ -59,20 +105,22 @@ export class AdicionarProdutoComponent implements OnInit {
   }
 
   Registrar(): void {
-    if (this.ProdutoForm.valid) {
+      if (this.IdentificacaoForm.valid && this.InformacoesForm.valid && this.ValoresForm.valid) {
       this.RealizandoCadastro = true;
-      this.file = this.renomear.RenomearArquivo(this.file, this.ProdutoForm.value.nome);
+      this.file = this.renomear.RenomearArquivo(this.file, this.InformacoesForm.value.nome);
       this.produtoService.postUpload(this.file).subscribe(
         () => {
           let produto: IProduto;
           produto = {
-            nome: this.ProdutoForm.value.nome,
-            descricao: this.ProdutoForm.value.descricao,
-            preco: Number(this.ProdutoForm.value.preco),
+            nome: this.InformacoesForm.value.nome,
+            descricao: this.InformacoesForm.value.descricao,
+            preco: Number(this.ValoresForm.value.preco),
             imagem: this.file[0].name,
-            estoque: this.ProdutoForm.value.estoque,
+            tipoProdutoId: this.selectedTipo,
+            estoque: this.selectedTipo == this.IdEstoque? this.ValoresForm.value.estoque : null,
+            quantidadeMaxima: this.selectedTipo == this.IdEncomenda? this.ValoresForm.value.quantidadeMaxima : null,
             ativo: true,
-            categoriaId: this.selected
+            categoriaId: this.selectedCategoria
           };
           this.produtoService.Post(produto).subscribe(
             () => {

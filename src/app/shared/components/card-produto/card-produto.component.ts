@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IProduto } from '../../models/IProduto';
 import { environment } from 'src/environments/environment';
+import { ICategoria } from '../../models/ICategoria';
 
 @Component({
   selector: 'app-card-produto',
@@ -11,16 +12,34 @@ import { environment } from 'src/environments/environment';
 export class CardProdutoComponent implements OnInit {
 
   @Input() produto: IProduto;
-  @Input() categoriaNome: string;
+  @Input() Categoria: ICategoria;
   public link: string;
+  public tipos: Array<any>;
+  public IdEstoque: number;
+  public IdEncomenda: number;
+  public Disabled: boolean
 
   constructor(public router: Router) { }
 
   ngOnInit(): void {
     this.link = environment.UrlApi;
+    this.IdEncomenda = environment.TipoProdutoEncomenda;
+    this.IdEstoque = environment.TipoProdutoEstoque;
+    this.Verificar();
   }
 
   Navegar(produtoId, produtoNome): void {
-    this.router.navigate(['/produtos/' + this.categoriaNome + '/' + produtoId + '/' + produtoNome]);
+    this.router.navigate(['/produtos/' + this.Categoria.nome + '/' + produtoId + '/' + produtoNome]);
+  }
+
+  Verificar() {
+    if (this.produto.tipoProdutoId === environment.TipoProdutoEncomenda)
+    {
+      this.Disabled = false;
+    }
+    if (this.produto.tipoProdutoId === environment.TipoProdutoEstoque)
+    {
+      this.Disabled = this.produto.estoque <= 0;
+    }
   }
 }

@@ -1,25 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { TipoCategoriaService } from 'src/app/core/services/TipoCategoria/TipoCategoria.service';
+import { TipoProdutoService } from 'src/app/core/services/TipoProduto/TipoProduto.service';
+import { MensagemSnackbarComponent } from 'src/app/shared/components/mensagem-snackbar/mensagem-snackbar.component';
 import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
-import { ITipoCategoria } from 'src/app/shared/models/ITipoCategoria';
-import { MensagemSnackbarComponent } from '../../../../shared/components/mensagem-snackbar/mensagem-snackbar.component';
+import { ITipoProduto } from 'src/app/shared/models/ITipoProduto';
 
 @Component({
-  selector: 'app-tipocategoria-add',
-  templateUrl: './tipocategoria-add.component.html',
-  styleUrls: ['./tipocategoria-add.component.scss']
+  selector: 'app-tipoproduto-add',
+  templateUrl: './tipoproduto-add.component.html',
+  styleUrls: ['./tipoproduto-add.component.scss']
 })
-export class TipocategoriaAddComponent implements OnInit {
+export class TipoprodutoAddComponent implements OnInit {
 
-  public TipoCategoriaForm: FormGroup;
+  public TipoProdutoForm: FormGroup;
   public RealizandoCadastro = false;
-  private TipoCategoria: ITipoCategoria;
+  private TipoProduto: ITipoProduto;
 
   constructor(private fb: FormBuilder,
               private router: Router,
-              private tipoCategoriaService: TipoCategoriaService,
+              private tipoProdutoService: TipoProdutoService,
               private snackbar: SnackbarComponent,
               private mensagemSnackbar: MensagemSnackbarComponent) { }
 
@@ -28,22 +28,22 @@ export class TipocategoriaAddComponent implements OnInit {
   }
 
   Validation(): void {
-    this.TipoCategoriaForm = this.fb.group({
+    this.TipoProdutoForm = this.fb.group({
       nome: ['', [Validators.required]],
     });
   }
 
   Registrar(): void {
-    if (this.TipoCategoriaForm.valid) {
+    if (this.TipoProdutoForm.valid) {
       this.RealizandoCadastro = true;
-      this.TipoCategoria = {
-        nome: this.TipoCategoriaForm.value.nome
+      this.TipoProduto = {
+        nome: this.TipoProdutoForm.value.nome
       };
-      this.tipoCategoriaService.Post(this.TipoCategoria).subscribe(
+      this.tipoProdutoService.Post(this.TipoProduto).subscribe(
         () => {
           this.RealizandoCadastro = false;
           this.snackbar.OpenSnackBarSuccess(this.mensagemSnackbar.CadastroConcluido);
-          this.router.navigate(['admin/tipocategoria']);
+          this.router.navigate(['admin/tipoproduto']);
         },
         error => {
           this.RealizandoCadastro = false;
@@ -54,4 +54,5 @@ export class TipocategoriaAddComponent implements OnInit {
       this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroCamposPreenchidos);
     }
   }
+
 }

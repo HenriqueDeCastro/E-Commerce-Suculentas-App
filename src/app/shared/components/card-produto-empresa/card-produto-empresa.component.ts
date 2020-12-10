@@ -13,11 +13,15 @@ export class CardProdutoEmpresaComponent implements OnInit {
   @Input() produto: IProduto;
   @Input() categoriaNome: string;
   public link: string;
+  public IdEstoque: number;
+  public IdEncomenda: number;
 
   constructor(public router: Router) { }
 
   ngOnInit(): void {
     this.link = environment.UrlApi;
+    this.IdEncomenda = environment.TipoProdutoEncomenda;
+    this.IdEstoque = environment.TipoProdutoEstoque;
   }
 
   ColorEstoque(estoque: number): string {

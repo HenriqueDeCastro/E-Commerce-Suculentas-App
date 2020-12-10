@@ -1,7 +1,7 @@
-<ng-container *ngIf="!TipoCategoria">
+<ng-container *ngIf="!TipoProduto">
   <app-spinner></app-spinner>
 </ng-container>
-<ng-container *ngIf="TipoCategoria">
+<ng-container *ngIf="TipoProduto">
   <app-voltar></app-voltar>
   <br>
   <br>
@@ -10,20 +10,20 @@
   <h1 class="titulo">Editar Tipo de Categoria</h1>
   <br>
   <br>
-  <form [formGroup]="TipoCategoriaForm" (ngSubmit)="Editar()">
+  <form [formGroup]="TipoProdutoForm" (ngSubmit)="Editar()">
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>Nome</mat-label>
       <input matInput formControlName="nome">
-      <mat-error *ngIf="TipoCategoriaForm.get('nome').hasError('required')" class="invalid-feedback">Nome é obrigatório</mat-error>
+      <mat-error *ngIf="TipoProdutoForm.get('nome').hasError('required')" class="invalid-feedback">Nome é obrigatório</mat-error>
     </mat-form-field>
     <br>
     <br>
-    <ng-container *ngIf="EditandoCategoria">
+    <ng-container *ngIf="EditandoTipoProduto">
       <app-progressbar></app-progressbar>
     </ng-container>
     <br>
     <div class="form-group col-md-12 centralizar">
-      <button mat-flat-button class="btn-responsive" color="primary" [disabled]=EditandoCategoria>Editar</button>
+      <button mat-flat-button class="btn-responsive" color="primary" [disabled]=EditandoTipoProduto>Editar</button>
     </div>
   </form>
 </ng-container>

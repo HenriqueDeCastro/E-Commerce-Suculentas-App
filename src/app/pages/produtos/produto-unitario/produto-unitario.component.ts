@@ -18,6 +18,8 @@ export class ProdutoUnitarioComponent implements OnInit {
   public Produto: IProduto;
   public link: string;
   public Quantidade: number;
+  public IdEstoque: number;
+  public IdEncomenda: number;
 
   constructor(private activetedRoute: ActivatedRoute,
               private snackbar: SnackbarComponent,
@@ -26,6 +28,8 @@ export class ProdutoUnitarioComponent implements OnInit {
 
   ngOnInit(): void {
     this.link = environment.UrlApi;
+    this.IdEncomenda = environment.TipoProdutoEncomenda;
+    this.IdEstoque = environment.TipoProdutoEstoque;
     this.Quantidade = 1;
     this.ReceberValorRota();
     this.ReceberProduto();

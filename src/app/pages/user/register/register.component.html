@@ -2,6 +2,7 @@
 <br>
 <br>
 <mat-vertical-stepper [linear]="true" #stepper>
+  <!-- Dados -->
   <mat-step [stepControl]="DadosForm">
     <ng-template matStepLabel>Dados</ng-template>
     <br>
@@ -41,6 +42,7 @@
       </div>
     </form>
   </mat-step>
+  <!-- Contatos -->
   <mat-step [stepControl]="ContatosForm">
     <ng-template matStepLabel>Contatos</ng-template>
     <br>
@@ -70,6 +72,7 @@
       </div>
     </form>
   </mat-step>
+  <!-- Contatos -->
   <mat-step>
     <ng-template matStepLabel>Senhas</ng-template>
     <br>

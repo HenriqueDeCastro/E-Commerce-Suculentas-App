@@ -7,5 +7,7 @@ export const environment = {
   VariavelToken: 'token',
   VariavelUsuario: 'user',
   VariavelQuantidade: 'quantidade',
-  VariavelProduto: 'produtos'
+  VariavelProduto: 'produtos',
+  TipoProdutoEncomenda:  1,
+  TipoProdutoEstoque:  2
 };

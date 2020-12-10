@@ -8,7 +8,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class BotaoQuantidadeComponent implements OnInit {
 
   @Input() Quantidade: number;
-  @Input() ProdutoEstoque: number;
+  @Input() QuantidadeMaxima: number;
   @Output() QuantidadeEscolhida = new EventEmitter<number>();
 
   constructor() { }

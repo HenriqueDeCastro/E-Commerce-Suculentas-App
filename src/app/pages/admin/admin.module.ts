@@ -6,7 +6,7 @@ import { ComponentModule } from '../../shared/components/component.module';
 
 import { AdminComponent } from './admin.component';
 import { HomeAdminComponent } from './homeAdmin/homeAdmin.component';
-import { TipoCategoriaModule } from './tipocategoria/tipocategoria.module';
+import { TipoProdutoModule } from './tipoproduto/tipoproduto.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +17,7 @@ import { TipoCategoriaModule } from './tipocategoria/tipocategoria.module';
     ComponentModule,
     MaterialModule,
     AdminRoutingModule,
-    TipoCategoriaModule
+    TipoProdutoModule
   ]
 })
 export class AdminModule {}

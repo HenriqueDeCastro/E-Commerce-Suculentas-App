@@ -23,7 +23,7 @@
       <div class="row">
         <ng-container *ngFor="let produto of categoria.produtos">
           <div class="col-md-3">
-            <app-card-produto [produto]="produto" [categoriaNome]="categoria.nome"></app-card-produto>
+            <app-card-produto [Carrrinho]=false [produto]="produto" [Categoria]="categoria"></app-card-produto>
           </div>
         </ng-container>
       </div>

@@ -3,7 +3,7 @@
     <mat-icon>remove_circle_outline</mat-icon>
   </button>
   <button mat-icon-button class="btn-quantidade mat-elevation-z0" style="font-size: 17px;">{{Quantidade}}</button>
-  <button mat-icon-button color="primary" class="btn-mais mat-elevation-z0" (click)="AumentarQuantidade()" [disabled]="Quantidade >= ProdutoEstoque">
+  <button mat-icon-button color="primary" class="btn-mais mat-elevation-z0" (click)="AumentarQuantidade()" [disabled]="Quantidade >= QuantidadeMaxima">
     <mat-icon>add_circle_outline</mat-icon>
   </button>
 </div>

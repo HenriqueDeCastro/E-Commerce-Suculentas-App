@@ -1,10 +1,8 @@
 import { IProduto } from './IProduto';
 
-export interface ICategoria {
+export interface ITipoProduto {
 
   id?: number;
   nome: string;
-  descricao: string;
-  ativo: boolean;
   produtos?: IProduto[];
 }
