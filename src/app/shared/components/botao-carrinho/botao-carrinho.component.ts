@@ -15,9 +15,11 @@ export class BotaoCarrinhoComponent implements OnInit {
 
   @Input() TipoBotao: string;
   @Input() Quantidade: number;
-  @Input() Desabilitar: boolean;
   @Input() Voltar = false;
   @Input() Produto: IProduto;
+  public Desabilitar: boolean;
+  private TipoEncomenda: number;
+  private TipoEstoque: number;
   private Produtos: IProdutoCarrinho[];
   private QuantidadeCarrinho: number;
 
@@ -25,95 +27,107 @@ export class BotaoCarrinhoComponent implements OnInit {
               private location: Location,
               private mensagemSnackbar: MensagemSnackbarComponent) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.TipoEncomenda = environment.TipoProdutoEncomenda;
+    this.TipoEstoque = environment.TipoProdutoEstoque;
+    this.VerificaTotalProduto();
+  }
+
+  VerificaTotalProduto() {
+    this.RecuperarProdutosStorage();
+
+    if (this.Produtos) {
+      let Pr: IProdutoCarrinho[] = this.FiltraProduto();
+      const produto = Pr[0];
+
+      if(produto)
+        this.Desabilitar = this.ValidaQuantidadeDisponivel(produto);
+    }
+  }
+
+  RecuperarProdutosStorage() {
+    this.Produtos = JSON.parse(localStorage.getItem(environment.VariavelProduto));
+  }
+
+  FiltraProduto(): IProdutoCarrinho[] {
+    return this.Produtos.filter(p => p.id == this.Produto.id);
+  }
+
+  ValidaQuantidadeDisponivel(produto: IProdutoCarrinho): boolean {
+    const ValorMaximo = this.Produto.tipoProdutoId == environment.TipoProdutoEncomenda? this.Produto.quantidadeMaxima : this.Produto.estoque;
+    return ValorMaximo < (produto.quantidadePedido + this.Quantidade)? true : false
+  }
+
+  ValidaProdutoDisponivel(produto: IProduto): boolean {
+    const ValorMaximo = this.Produto.tipoProdutoId == environment.TipoProdutoEncomenda? this.Produto.quantidadeMaxima : this.Produto.estoque;
+    return ValorMaximo > 0? true : false
+  }
 
   ColocarCarrinho(): void {
-    if (this.Produto.estoque > 0) {
-      this.Produtos = JSON.parse(localStorage.getItem(environment.VariavelProduto));
+    if (this.ValidaProdutoDisponivel(this.Produto))
+    {
+      this.RecuperarProdutosStorage();
       this.QuantidadeCarrinho = JSON.parse(localStorage.getItem(environment.VariavelQuantidade));
 
       if (this.Produtos == null)
       {
-        localStorage.setItem(environment.VariavelProduto, JSON.stringify([this.ConvertProdutoinCarrinho(this.Produto)]));
-        localStorage.setItem(environment.VariavelQuantidade, String(this.Quantidade));
-        this.snackbar.OpenSnackBarSuccess(this.mensagemSnackbar.ProdutoAdicionadoCarrinho);
-        if (this.Voltar)
-        {
-          this.VoltarPagina();
-        }
+        this.InserirStoragePrimeiraVez();
       }
       else
       {
-        if (this.InserirCarrinho())
-        {
-          this.snackbar.OpenSnackBarSuccess(this.mensagemSnackbar.ProdutoAdicionadoCarrinho);
-          if (this.Voltar)
-          {
-            this.VoltarPagina();
-          }
-        }
-        else
-        {
-          this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroEstoqueMaximo);
-        }
+        this.InserirStorage();
       }
     }
   }
 
-  InserirCarrinho(): boolean {
-    const produtosCarrinho = [];
-    let produtoExistente = false;
-    let EstoqueSuficienteQuantidade = true;
+  InserirStoragePrimeiraVez() {
+    localStorage.setItem(environment.VariavelProduto, JSON.stringify([this.ConvertProdutoinCarrinho(this.Produto)]));
+    localStorage.setItem(environment.VariavelQuantidade, String(this.Quantidade));
+    this.snackbar.OpenSnackBarSuccess(this.mensagemSnackbar.ProdutoAdicionadoCarrinho);
+    this.VerificaTotalProduto();
+    this.VoltarPagina();
+  }
 
-    this.Produtos.forEach(produto => {
-      if (produto.id === this.Produto.id)
+  InserirStorage() {
+    let Pr: IProdutoCarrinho[] = this.FiltraProduto();
+    const produto = Pr[0];
+
+    if (produto) {
+      if (!this.ValidaQuantidadeDisponivel(produto))
       {
-        if (this.ValidaProdutoDisponivel(produto))
-        {
-          produto.quantidadePedido = produto.quantidadePedido + this.Quantidade;
-          produtoExistente = true;
-          produtosCarrinho.push(produto);
-        }
-        else
-        {
-          EstoqueSuficienteQuantidade = false;
-        }
+        this.Produtos.forEach((produto, index) => {
+          if (produto.id === this.Produto.id) {
+            this.Produtos.splice(index, 1);
+          }
+        });
+
+        this.QuantidadeCarrinho = this.QuantidadeCarrinho + this.Quantidade;
+        localStorage.setItem(environment.VariavelQuantidade, String(this.QuantidadeCarrinho));
+
+        produto.quantidadePedido = produto.quantidadePedido + this.Quantidade;
+        this.Produtos.push(produto);
+        localStorage.setItem(environment.VariavelProduto, JSON.stringify(this.Produtos));
+
+        this.snackbar.OpenSnackBarSuccess(this.mensagemSnackbar.ProdutoAdicionadoCarrinho);
+
+        this.VerificaTotalProduto();
+        this.VoltarPagina();
       }
       else
       {
-        produtosCarrinho.push(produto);
+        this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroEstoqueMaximo);
       }
-    });
-
-    if (EstoqueSuficienteQuantidade) {
-
-      if (!produtoExistente)
-      {
-        produtosCarrinho.push(this.ConvertProdutoinCarrinho(this.Produto));
-      }
-
-      localStorage.setItem(environment.VariavelProduto, JSON.stringify(produtosCarrinho));
+    }
+    else {
+      this.Produtos.push(this.ConvertProdutoinCarrinho(this.Produto));
+      localStorage.setItem(environment.VariavelProduto, JSON.stringify(this.Produtos));
       this.QuantidadeCarrinho = this.QuantidadeCarrinho + this.Quantidade;
       localStorage.setItem(environment.VariavelQuantidade, String(this.QuantidadeCarrinho));
 
-      return  true;
-    }
-    else
-    {
-      return false;
-    }
+      this.snackbar.OpenSnackBarSuccess(this.mensagemSnackbar.ProdutoAdicionadoCarrinho);
 
-  }
-
-  ValidaProdutoDisponivel(produto: IProdutoCarrinho): boolean {
-    const ValorMaximo = this.Produto.tipoProdutoId == environment.TipoProdutoEncomenda? this.Produto.quantidadeMaxima : this.Produto.estoque;
-    if (ValorMaximo >= (produto.quantidadePedido + this.Quantidade))
-    {
-      return true;
-    }
-    else
-    {
-      return false;
+      this.VerificaTotalProduto();
+      this.VoltarPagina();
     }
   }
 
@@ -128,12 +142,15 @@ export class BotaoCarrinhoComponent implements OnInit {
       imagem: produto.imagem,
       estoque: produto.estoque,
       ativo: produto.ativo,
+      tipoProdutoId: produto.tipoProdutoId,
       categoriaId: produto.categoriaId,
+      quantidadeMaxima: produto.quantidadeMaxima,
       quantidadePedido: this.Quantidade
     };
   }
 
   VoltarPagina(): void {
-    this.location.back();
+    if (this.Voltar)
+      this.location.back();
   }
 }

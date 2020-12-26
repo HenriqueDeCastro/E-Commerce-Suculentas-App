@@ -45,6 +45,14 @@ export class AppComponent implements OnInit{
   }
 
   QuantidadeCarrinho(): any {
-    return JSON.parse(localStorage.getItem(environment.VariavelQuantidade));
+    const quantidade = JSON.parse(localStorage.getItem(environment.VariavelQuantidade));
+
+    if(quantidade > 0)
+    {
+      return quantidade
+    }
+    else {
+      return null
+    }
   }
 }

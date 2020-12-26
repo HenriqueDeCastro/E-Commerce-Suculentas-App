@@ -10,7 +10,7 @@ export interface IProduto {
   estoque?: number;
   quantidadeMaxima?: number;
   ativo: boolean;
-  tipoProdutoId?: number;
+  tipoProdutoId: number;
   categoriaId: number;
   pedidos?: IPedido[];
 }

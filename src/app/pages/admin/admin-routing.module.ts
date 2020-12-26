@@ -11,6 +11,8 @@ const routes: Routes = [
     [
       { path: 'home', component: HomeAdminComponent, canActivate: [AuthGuard] },
       { path: 'tipoproduto', loadChildren: './tipoproduto/tipoproduto.module#TipoProdutoModule', canActivate: [AuthGuard] },
+      { path: 'promover', loadChildren: './promover/promover.module#PromoverModule', canActivate: [AuthGuard] },
+      { path: 'gerenciarrules', loadChildren: './gerenciar-rules/gerenciar-rules.module#GerenciarRulesModule', canActivate: [AuthGuard] },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: '**', redirectTo: 'home', pathMatch: 'full' }
     ],

@@ -1,0 +1,13 @@
+@media (max-width: 340px)
+{
+  .mat-icon {
+    display: none;
+  }
+}
+
+@media (max-width: 300px)
+{
+  .mat-button {
+    font-size: 12px !important;
+  }
+}

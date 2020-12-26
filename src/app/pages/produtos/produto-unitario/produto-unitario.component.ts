@@ -4,6 +4,7 @@ import { ProdutoService } from 'src/app/core/services/Produto/Produto.service';
 import { MensagemSnackbarComponent } from 'src/app/shared/components/mensagem-snackbar/mensagem-snackbar.component';
 import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
 import { IProduto } from 'src/app/shared/models/IProduto';
+import { IProdutoCarrinho } from 'src/app/shared/models/IProdutoCarrinho';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -15,9 +16,11 @@ export class ProdutoUnitarioComponent implements OnInit {
 
   public produtoId: number;
   public categoriaNome: string;
+  public ProdutoCarrinho: IProdutoCarrinho;
   public Produto: IProduto;
   public link: string;
   public Quantidade: number;
+  public QuantidadeMaxima: number;
   public IdEstoque: number;
   public IdEncomenda: number;
 
@@ -42,6 +45,7 @@ export class ProdutoUnitarioComponent implements OnInit {
 
   ReceberProduto(): void {
     this.produtoService.GetById(this.produtoId).subscribe((produto: IProduto) => {
+      this.VerificarProdutoCarrinho(produto);
       this.Produto = produto;
     },
     (erro) => {
@@ -53,4 +57,50 @@ export class ProdutoUnitarioComponent implements OnInit {
   ReceberQuantidade(value: number): void {
     this.Quantidade = value;
   }
+
+  VerificarProdutoCarrinho(produto: IProduto) {
+    const ProdutosCarrinho = JSON.parse(localStorage.getItem(environment.VariavelProduto));
+
+    if (ProdutosCarrinho)
+    {
+      const produtoFiltrado: IProdutoCarrinho[] = ProdutosCarrinho.filter(p => p.id == produto.id);
+      this.ProdutoCarrinho = produtoFiltrado[0];
+
+      if(this.ProdutoCarrinho)
+      {
+        this.QuantidadeMaximaMenosQuantidadeCarrinho(produto, this.ProdutoCarrinho);
+      }
+      else
+      {
+        this.QuantidadeMaximaProdutoDisponivel(produto);
+      }
+    }
+    else
+    {
+      this.QuantidadeMaximaProdutoDisponivel(produto);
+    }
+  }
+
+  QuantidadeMaximaMenosQuantidadeCarrinho(produto: IProduto, produtoCarrinho: IProdutoCarrinho) {
+    if (produto.tipoProdutoId == environment.TipoProdutoEncomenda)
+    {
+      this.QuantidadeMaxima = produto.quantidadeMaxima - produtoCarrinho.quantidadePedido;
+    }
+    else
+    {
+      this.QuantidadeMaxima = produto.estoque - produtoCarrinho.quantidadePedido;
+    }
+  }
+
+  QuantidadeMaximaProdutoDisponivel(produto: IProduto) {
+    if (produto.tipoProdutoId == environment.TipoProdutoEncomenda)
+    {
+      this.QuantidadeMaxima = produto.quantidadeMaxima;
+    }
+    else
+    {
+      this.QuantidadeMaxima = produto.estoque;
+    }
+  }
+
 }

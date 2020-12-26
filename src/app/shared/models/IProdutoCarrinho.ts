@@ -5,8 +5,10 @@ export interface IProdutoCarrinho {
   descricao: string;
   preco: number;
   imagem: string;
-  estoque: number;
+  estoque?: number;
+  quantidadeMaxima?: number;
   ativo: boolean;
+  tipoProdutoId: number;
   categoriaId: number;
   quantidadePedido: number;
 }

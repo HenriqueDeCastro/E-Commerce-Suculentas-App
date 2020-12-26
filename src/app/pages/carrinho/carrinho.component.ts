@@ -9,23 +9,35 @@ import { environment } from 'src/environments/environment';
 })
 export class CarrinhoComponent implements OnInit {
 
-  public Produtos: IProdutoCarrinho[];
+  public ProdutosEncomenda: IProdutoCarrinho[];
+  public ProdutosEstoque: IProdutoCarrinho[];
+  public TipoEncomenda: number;
+  public TipoEstoque: number;
   public link: string;
 
   constructor() { }
 
   ngOnInit(): void {
     this.link = environment.UrlApi;
+    this.TipoEncomenda = environment.TipoProdutoEncomenda;
+    this.TipoEstoque = environment.TipoProdutoEstoque;
     this.ReceberProdutoCarrinho();
   }
 
   ReceberProdutoCarrinho(): void {
-    this.Produtos = JSON.parse(localStorage.getItem(environment.VariavelProduto));
+    let Produtos: IProdutoCarrinho[] = JSON.parse(localStorage.getItem(environment.VariavelProduto));
+    this.SepararTiposProdutos(Produtos);
   }
 
   ReceberAtt(event: boolean): void {
     if (event) {
-      this.Produtos = JSON.parse(localStorage.getItem(environment.VariavelProduto));
+      let Produtos: IProdutoCarrinho[] = JSON.parse(localStorage.getItem(environment.VariavelProduto));
+      this.SepararTiposProdutos(Produtos);
     }
+  }
+
+  SepararTiposProdutos(Produtos: IProdutoCarrinho[]) {
+    this.ProdutosEncomenda = Produtos.filter(p => p.tipoProdutoId == this.TipoEncomenda);
+    this.ProdutosEstoque = Produtos.filter(p => p.tipoProdutoId == this.TipoEstoque);
   }
 }

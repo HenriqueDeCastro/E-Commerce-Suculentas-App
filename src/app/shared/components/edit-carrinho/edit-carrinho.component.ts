@@ -12,11 +12,13 @@ export class EditCarrinhoComponent implements OnInit {
   @Input() Produto: IProdutoCarrinho;
   @Output() Acao = new EventEmitter<string>();
   public Quantidade: number;
+  public QuantidadeMaxima: number;
 
   constructor() { }
 
   ngOnInit(): void {
     this.Quantidade = this.Produto.quantidadePedido;
+    this.QuantidadeMaximaProdutoDisponivel(this.Produto);
   }
 
   ReceberQuantidade(value: number): void {
@@ -56,4 +58,16 @@ export class EditCarrinhoComponent implements OnInit {
 
     this.Acao.emit('Editado');
   }
+
+  QuantidadeMaximaProdutoDisponivel(produto: IProdutoCarrinho) {
+    if (produto.tipoProdutoId == environment.TipoProdutoEncomenda)
+    {
+      this.QuantidadeMaxima = produto.quantidadeMaxima;
+    }
+    else
+    {
+      this.QuantidadeMaxima = produto.estoque;
+    }
+  }
+
 }

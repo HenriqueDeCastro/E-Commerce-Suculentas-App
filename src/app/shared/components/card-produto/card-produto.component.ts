@@ -25,21 +25,9 @@ export class CardProdutoComponent implements OnInit {
     this.link = environment.UrlApi;
     this.IdEncomenda = environment.TipoProdutoEncomenda;
     this.IdEstoque = environment.TipoProdutoEstoque;
-    this.Verificar();
   }
 
   Navegar(produtoId, produtoNome): void {
     this.router.navigate(['/produtos/' + this.Categoria.nome + '/' + produtoId + '/' + produtoNome]);
-  }
-
-  Verificar() {
-    if (this.produto.tipoProdutoId === environment.TipoProdutoEncomenda)
-    {
-      this.Disabled = false;
-    }
-    if (this.produto.tipoProdutoId === environment.TipoProdutoEstoque)
-    {
-      this.Disabled = this.produto.estoque <= 0;
-    }
   }
 }
