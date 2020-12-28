@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserComponent } from './user.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { PerfilComponent } from './perfil/perfil.component';
 import { MaskModule } from '../../shared/components/mask/mask.module';
 
 import { MaterialModule } from 'src/app/shared/components/material/material.module';
@@ -13,13 +12,13 @@ import { CommonModule } from '@angular/common';
 import { ComponentModule } from 'src/app/shared/components/component.module';
 import { EsqueciSenhaComponent } from './esqueciSenha/esqueciSenha.component';
 import { ResetSenhaComponent } from './resetSenha/resetSenha.component';
+import { PerfilModule } from './perfil/perfil.module';
 
 @NgModule({
   declarations: [
     UserComponent,
     LoginComponent,
     RegisterComponent,
-    PerfilComponent,
     EsqueciSenhaComponent,
     ResetSenhaComponent
   ],
@@ -30,7 +29,8 @@ import { ResetSenhaComponent } from './resetSenha/resetSenha.component';
     UserRoutingModule,
     CommonModule,
     ComponentModule,
-    MaskModule
+    MaskModule,
+    PerfilModule
   ]
 })
 export class UserModule {}

@@ -10,20 +10,7 @@ import { environment } from 'src/environments/environment';
 })
 export class PerfilComponent implements OnInit {
 
-  public User: IUser;
+  constructor() { }
 
-  constructor(private router: Router) { }
-
-  ngOnInit(): void {
-    this.RecebeserLogado();
-  }
-
-  Logout(): void {
-    localStorage.removeItem(environment.VariavelToken);
-    this.router.navigate(['/user/login']);
-  }
-
-  RecebeserLogado(): void{
-    this.User = JSON.parse(localStorage.getItem(environment.VariavelUsuario));
-  }
+  ngOnInit(): void {}
 }

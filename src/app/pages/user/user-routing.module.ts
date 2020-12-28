@@ -16,8 +16,8 @@ const routes: Routes = [
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
       { path: 'esquecisenha', component: EsqueciSenhaComponent },
+      { path: 'perfil', loadChildren: './perfil/perfil.module#PerfilModule', canActivate: [AuthGuard] },
       { path: 'reset/:email/:token', component: ResetSenhaComponent },
-      { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard]  },
       { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: '**', redirectTo: 'login', pathMatch: 'full' }
     ],

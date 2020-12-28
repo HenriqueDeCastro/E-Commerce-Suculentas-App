@@ -21,9 +21,9 @@ export class AuthService {
       map((response: IUserLogin) => {
         const user = response;
         if (user) {
-          localStorage.setItem('token', user.token);
+          localStorage.setItem(environment.VariavelToken, user.token);
           this.decodedToken = this.jwtHelpers.decodeToken(user.token);
-          localStorage.setItem('user', JSON.stringify(user.user));
+          localStorage.setItem(environment.VariavelUsuario, JSON.stringify(user.user));
         }
       })
     );
@@ -42,16 +42,16 @@ export class AuthService {
       map((response: any) => {
         const user = response;
         if (user) {
-          localStorage.setItem('token', user.token);
+          localStorage.setItem(environment.VariavelToken, user.token);
           this.decodedToken = this.jwtHelpers.decodeToken(user.token);
-          localStorage.setItem('user', JSON.stringify(user.user));
+          localStorage.setItem(environment.VariavelUsuario, JSON.stringify(user.user));
         }
       })
     );
   }
 
   LoggedIn() {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem(environment.VariavelToken);
     return this.jwtHelpers.isTokenExpired(token);
   }
 }
