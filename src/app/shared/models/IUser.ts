@@ -5,12 +5,12 @@ import { IUserRole } from './IUserRole';
 export interface IUser {
 
   fullName: string;
-  password: string;
+  password?: string;
   cpf: string;
   dataNascimento: string;
   phoneNumber: string;
   email: string;
-  confirmedPassword: string;
+  confirmedPassword?: string;
   vendas?: IVenda[];
   enderecos?: IEndereco[];
   userRoles?: IUserRole[];

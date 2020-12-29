@@ -18,7 +18,7 @@ export class RegisterComponent implements OnInit {
   public SenhaForm: FormGroup;
   public Registrando = false;
   private User: IUser;
-  step = 0;
+  public step = 0;
 
   constructor(private fb: FormBuilder,
               public router: Router,

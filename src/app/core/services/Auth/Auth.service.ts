@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { IUserLogin } from '../../../shared/models/IUserLogin';
 import { environment } from '../../../../environments/environment';
+import { IUser } from 'src/app/shared/models/IUser';
 
 @Injectable({
   providedIn: 'root'
@@ -40,6 +41,19 @@ export class AuthService {
   Register(model: any) {
     return this.http.post(`${this.UrlBase}/register`, model).pipe(
       map((response: any) => {
+        const user = response;
+        if (user) {
+          localStorage.setItem(environment.VariavelToken, user.token);
+          this.decodedToken = this.jwtHelpers.decodeToken(user.token);
+          localStorage.setItem(environment.VariavelUsuario, JSON.stringify(user.user));
+        }
+      })
+    );
+  }
+
+  Put(model: IUser) {
+    return this.http.put(`${this.UrlBase}/atualizarUsuario`, model).pipe(
+      map((response: IUserLogin) => {
         const user = response;
         if (user) {
           localStorage.setItem(environment.VariavelToken, user.token);
