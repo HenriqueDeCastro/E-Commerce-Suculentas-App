@@ -1,0 +1,29 @@
+<ng-container *ngIf="!Endereco">
+  <app-spinner></app-spinner>
+</ng-container>
+<ng-container *ngIf="Endereco">
+  <app-voltar></app-voltar>
+  <br>
+  <br>
+  <br>
+  <h1 class="titulo responsive">Seus Endereços</h1>
+  <br>
+  <ng-container *ngIf="Endereco.length == 0">
+    <br>
+    <br>
+    <div class="centralizar-vertical">
+      <h2 class="titulo centralizar">Você ainda não tem nenhum endereço cadastrado!</h2>
+      <br>
+      <br>
+      <br>
+      <div class="form-group col-md-12 centralizar">
+        <button mat-flat-button class="btn-responsive" color="primary" (click)="router.navigate(['user/perfil/endereco/add'])">Adicionar</button>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="Endereco.length > 0">
+    <div class="row">
+
+    </div>
+  </ng-container>
+</ng-container>

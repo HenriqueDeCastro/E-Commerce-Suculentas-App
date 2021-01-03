@@ -4,6 +4,7 @@ import { IUserRole } from './IUserRole';
 
 export interface IUser {
 
+  id?: number
   fullName: string;
   password?: string;
   cpf: string;

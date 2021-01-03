@@ -18,10 +18,10 @@ export class DadosPessoaisComponent implements OnInit {
               public router: Router) { }
 
   ngOnInit(): void {
-    this.RecebeserLogado();
+    this.ReceberUserLogado();
   }
 
-  RecebeserLogado(): void{
+  ReceberUserLogado(): void{
     this.Form(JSON.parse(localStorage.getItem(environment.VariavelUsuario)));
   }
 

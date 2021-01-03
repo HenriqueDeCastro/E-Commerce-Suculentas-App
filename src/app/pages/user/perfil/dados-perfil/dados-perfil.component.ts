@@ -15,7 +15,7 @@ export class DadosPerfilComponent implements OnInit {
   constructor(public router: Router) { }
 
   ngOnInit(): void {
-    this.RecebeserLogado();
+    this.ReceberUserLogado();
   }
 
   Logout(): void {
@@ -23,7 +23,7 @@ export class DadosPerfilComponent implements OnInit {
     this.router.navigate(['/user/login']);
   }
 
-  RecebeserLogado(): void{
+  ReceberUserLogado(): void{
     this.User = JSON.parse(localStorage.getItem(environment.VariavelUsuario));
   }
 }

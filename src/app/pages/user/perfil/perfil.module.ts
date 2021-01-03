@@ -11,13 +11,17 @@ import { PerfilComponent } from '../perfil/perfil.component';
 import { DadosPerfilComponent } from '../perfil/dados-perfil/dados-perfil.component';
 import { DadosPessoaisComponent } from '../perfil/dados-pessoais/dados-pessoais.component';
 import { DadosPessoaisEditComponent } from '../perfil/dados-pessoais-edit/dados-pessoais-edit.component';
+import { EnderecoComponent } from './endereco/endereco.component';
+import { EnderecoAddComponent } from './endereco-add/endereco-add.component';
 
 @NgModule({
   declarations: [
     PerfilComponent,
     DadosPerfilComponent,
     DadosPessoaisComponent,
-    DadosPessoaisEditComponent
+    DadosPessoaisEditComponent,
+    EnderecoComponent,
+    EnderecoAddComponent
   ],
   imports: [
     MaterialModule,

@@ -12,7 +12,7 @@
     <div mat-line>Dados Pessoais</div>
   </mat-list-item>
   <mat-divider></mat-divider>
-  <mat-list-item class="lista cursor">
+  <mat-list-item class="lista cursor" (click)="router.navigate(['user/perfil/endereco'])">
     <mat-icon class="material-icons-outlined" mat-list-icon>sensor_door</mat-icon>
     <div mat-line>Endereços</div>
   </mat-list-item>

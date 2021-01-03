@@ -64,9 +64,12 @@ export class DadosPessoaisEditComponent implements OnInit {
   }
 
   Atualizar() {
+    const user = JSON.parse(localStorage.getItem(environment.VariavelUsuario))
+
     if (this.DadosForm.valid && this.ContatosForm.valid) {
       this.Atualizando = true;
       this.User = {
+        id: user.id,
         fullName: this.DadosForm.value.fullname,
         cpf: this.DadosForm.value.cpf,
         dataNascimento: `${this.DadosForm.value.dataNascimento}`,
@@ -77,7 +80,7 @@ export class DadosPessoaisEditComponent implements OnInit {
       this.authService.Put(this.User).subscribe(
         () => {
           this.Atualizando = false;
-          this.snackbar.OpenSnackBarSuccess(this.mensagemSnackbar.CadastroConcluido);
+          this.snackbar.OpenSnackBarSuccess(this.mensagemSnackbar.AtualizacaoConcluida);
           this.router.navigate(['/user/perfil/dados']);
         },
         error => {

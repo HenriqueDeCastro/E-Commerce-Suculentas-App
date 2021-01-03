@@ -9,7 +9,6 @@ import { environment } from '../../../../environments/environment';
 })
 export class CategoriaService {
 
-
   private UrlBase = `${environment.UrlApi}/categoria`;
 
   constructor(private http: HttpClient) { }
@@ -47,11 +46,10 @@ export class CategoriaService {
   }
 
   Put(categoria: ICategoria): Observable<ICategoria>   {
-    return this.http.put<ICategoria>(`${this.UrlBase}/${categoria.id}`, categoria, { headers: { 'Content-Type': 'application/json'}});
+    return this.http.put<ICategoria>(`${this.UrlBase}/${categoria.id}`, categoria);
   }
 
   Delete(categoriaId: number): Observable<ICategoria>  {
     return this.http.delete<ICategoria>(`${this.UrlBase}/${categoriaId}`);
   }
-
 }

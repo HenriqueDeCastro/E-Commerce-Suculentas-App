@@ -31,6 +31,10 @@ export class MensagemSnackbarComponent {
   // REGISTER
   public ErroCadastroDuplicado = 'E-mail informado já possui cadastro !!!';
 
+  // ENDEREÇO
+  public EnderecoCadastro = 'Endereço cadastrado com sucesso';
+
+
   constructor() { }
 
 }
