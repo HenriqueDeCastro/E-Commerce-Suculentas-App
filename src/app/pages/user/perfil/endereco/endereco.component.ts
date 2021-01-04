@@ -15,7 +15,7 @@ import { environment } from 'src/environments/environment';
 export class EnderecoComponent implements OnInit {
 
   public User: IUser;
-  public Endereco: IEndereco[];
+  public Enderecos: IEndereco[];
 
   constructor(public router: Router,
               private enderecoService: EnderecoService,
@@ -33,12 +33,23 @@ export class EnderecoComponent implements OnInit {
 
   ReceberEnderecoUser() {
     this.enderecoService.GetByUserId(this.User.id).subscribe((enderecos: IEndereco[]) => {
-      this.Endereco = enderecos;
-      console.log(this.Endereco)
+      this.Enderecos = enderecos;
     },
     erro => {
       console.log(erro);
       this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
     });
+  }
+
+  TituloCard(endereco: IEndereco): string {
+    if (endereco.descricao) {
+      return endereco.descricao;
+    } else {
+      return `${endereco.rua}, ${endereco.numero}`;
+    }
+  }
+
+  Navegar(): void {
+    this.router.navigate(['/produtos/']);
   }
 }
