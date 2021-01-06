@@ -10,7 +10,7 @@
     <h1 class="h1-btn titulo">{{Categoria.nome}}</h1>
     <div class="btn-titulo">
       <mat-icon *ngIf="!open" class="material-icons cursor btn-search " matTooltip="Pesquisar" color=primary (click)="openAccordion()">search</mat-icon>
-      <mat-icon *ngIf="open" class="material-icons cursor btn-search " matTooltip="Fechar pesquisa" color=warn (click)="openAccordion()">clear</mat-icon>
+      <mat-icon *ngIf="open" class="material-icons cursor btn-search " matTooltip="Fechar pesquisa" (click)="openAccordion()">clear</mat-icon>
 
       <!-- botoes filtro -->
       <mat-icon class="material-icons cursor btn-mobile" matTooltip="Ordenar" color=accent (click)="openBottomSheet()">swap_vert</mat-icon>
@@ -24,7 +24,9 @@
     <mat-accordion>
       <mat-expansion-panel [expanded]="open == true" class="mat-elevation-z0" hideToggle>
         <br>
-        <app-pesquisa (OnTyping)="receberFiltro($event)" (page)="pages = $event" [value]="filter"></app-pesquisa>
+        <ng-container *ngIf="open">
+          <app-pesquisa (OnTyping)="receberFiltro($event)" (page)="pages = $event" [value]="filter"></app-pesquisa>
+        </ng-container>
       </mat-expansion-panel>
     </mat-accordion>
   </div>

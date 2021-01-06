@@ -13,6 +13,7 @@ export class MensagemSnackbarComponent {
   // SUCESSO
   public CadastroConcluido = 'Cadastrado realizado com sucesso';
   public AtualizacaoConcluida = 'Atualização realizada com sucesso';
+  public DeletarConcluido = 'Deletado com sucesso';
 
   // CARRINHO
   public ProdutoRemovidoCarrinho = 'Produto removido do carrinho!';
@@ -30,10 +31,6 @@ export class MensagemSnackbarComponent {
 
   // REGISTER
   public ErroCadastroDuplicado = 'E-mail informado já possui cadastro !!!';
-
-  // ENDEREÇO
-  public EnderecoCadastro = 'Endereço cadastrado com sucesso';
-
 
   constructor() { }
 

@@ -4,11 +4,11 @@ import { IUser } from 'src/app/shared/models/IUser';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-dados-perfil',
-  templateUrl: './dados-perfil.component.html',
-  styleUrls: ['./dados-perfil.component.scss']
+  selector: 'app-perfil-geral',
+  templateUrl: './perfil-geral.component.html',
+  styleUrls: ['./perfil-geral.component.scss']
 })
-export class DadosPerfilComponent implements OnInit {
+export class PerfilGeralComponent implements OnInit {
 
   public User: IUser;
 
@@ -26,4 +26,5 @@ export class DadosPerfilComponent implements OnInit {
   ReceberUserLogado(): void{
     this.User = JSON.parse(localStorage.getItem(environment.VariavelUsuario));
   }
+
 }

@@ -1,0 +1,42 @@
+.btn-edit {
+  width: 48%;
+  margin-right: 0.1rem;
+}
+
+.btn-delete {
+  width: 48%;
+}
+
+.titulo {
+  color: white;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+.icone {
+  float: right;
+  font-size: 30px;
+}
+
+.linha {
+  position: relative;
+  margin-bottom: 25px;
+}
+
+.nome {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+
+.botao {
+  position: absolute;
+  right: 0;
+  top: 0;
+  text-align: right
+}
+

@@ -1,5 +1,6 @@
 <mat-form-field appearance="fill" class="w-100">
   <mat-label> Nome do produto</mat-label>
-  <input type="search" (keyup)="debounce.next($event.target.value)" [value]="value" autofocus matInput autocomplete="off">
+  <input type="search" matInput (keyup)="debounce.next($event.target.value)"
+          [value]="value" autofocus  autocomplete="off">
   <mat-icon matSuffix color=primary>search</mat-icon>
 </mat-form-field>

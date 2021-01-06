@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { DadosPerfilComponent } from './dados-perfil.component';
+import { BottomEnderecoDeleteComponent } from './bottom-endereco-delete.component';
 
-describe('DadosPerfilComponent', () => {
-  let component: DadosPerfilComponent;
-  let fixture: ComponentFixture<DadosPerfilComponent>;
+describe('BottomEnderecoDeleteComponent', () => {
+  let component: BottomEnderecoDeleteComponent;
+  let fixture: ComponentFixture<BottomEnderecoDeleteComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DadosPerfilComponent ]
+      declarations: [ BottomEnderecoDeleteComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DadosPerfilComponent);
+    fixture = TestBed.createComponent(BottomEnderecoDeleteComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

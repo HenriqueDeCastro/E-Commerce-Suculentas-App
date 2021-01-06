@@ -94,13 +94,13 @@
         </mat-form-field>
         <br>
         <br>
-        <ng-container *ngIf="Atualizando">
+        <ng-container *ngIf="Registrando">
           <app-progressbar></app-progressbar>
         </ng-container>
         <br>
         <div class="form-group col-md-12 centralizar">
           <button mat-button matStepperPrevious class="w-50" color="warn">Anterior</button>
-          <button mat-button matStepperNext class="w-50" color="primary" [disabled]="Atualizando">Finalizar</button>
+          <button mat-button matStepperNext class="w-50" color="primary" [disabled]="Registrando">Finalizar</button>
         </div>
       </form>
     </mat-step>

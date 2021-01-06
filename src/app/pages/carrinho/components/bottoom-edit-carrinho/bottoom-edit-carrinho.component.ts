@@ -1,6 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
-import { BottomOrderbyComponent } from 'src/app/pages/produtos/produtos-especifico/components/bottom-orderby/bottom-orderby.component';
 import { IProdutoCarrinho } from 'src/app/shared/models/IProdutoCarrinho';
 
 @Component({
@@ -24,6 +23,7 @@ export class BottoomEditCarrinhoComponent implements OnInit {
       this.Produto = this.data.produto;
     }
   }
+
   FecharBottoom(value: string): void{
     this.bottomSheetRef.dismiss(value);
   }

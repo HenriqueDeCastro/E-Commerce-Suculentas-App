@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { throwToolbarMixedModesError } from '@angular/material/toolbar';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 

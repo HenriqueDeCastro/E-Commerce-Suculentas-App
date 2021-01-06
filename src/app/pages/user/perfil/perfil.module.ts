@@ -6,22 +6,17 @@ import { MaskModule } from '../../../shared/components/mask/mask.module';
 import { MaterialModule } from '../../../shared/components/material/material.module';
 import { ComponentModule } from '../../../shared/components/component.module';
 import { PerfilRoutingModule } from './perfil-routing.module';
+import { EnderecoModule } from './endereco/endereco.module';
+import { DadosPessoaisModule } from './dados-pessoais/dados-pessoais.module';
 
 import { PerfilComponent } from '../perfil/perfil.component';
-import { DadosPerfilComponent } from '../perfil/dados-perfil/dados-perfil.component';
-import { DadosPessoaisComponent } from '../perfil/dados-pessoais/dados-pessoais.component';
-import { DadosPessoaisEditComponent } from '../perfil/dados-pessoais-edit/dados-pessoais-edit.component';
-import { EnderecoComponent } from './endereco/endereco.component';
-import { EnderecoAddComponent } from './endereco-add/endereco-add.component';
+import { PerfilGeralComponent } from '../perfil/perfil-geral/perfil-geral.component';
+
 
 @NgModule({
   declarations: [
     PerfilComponent,
-    DadosPerfilComponent,
-    DadosPessoaisComponent,
-    DadosPessoaisEditComponent,
-    EnderecoComponent,
-    EnderecoAddComponent
+    PerfilGeralComponent
   ],
   imports: [
     MaterialModule,
@@ -30,7 +25,9 @@ import { EnderecoAddComponent } from './endereco-add/endereco-add.component';
     PerfilRoutingModule,
     CommonModule,
     ComponentModule,
-    MaskModule
+    MaskModule,
+    EnderecoModule,
+    DadosPessoaisModule
   ]
 })
 export class PerfilModule {}

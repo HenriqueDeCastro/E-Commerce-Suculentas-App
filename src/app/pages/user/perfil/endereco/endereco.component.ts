@@ -1,11 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { EnderecoService } from 'src/app/core/services/Endereco/Endereco.service';
-import { MensagemSnackbarComponent } from 'src/app/shared/components/mensagem-snackbar/mensagem-snackbar.component';
-import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
-import { IEndereco } from 'src/app/shared/models/IEndereco';
-import { IUser } from 'src/app/shared/models/IUser';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-endereco',
@@ -14,42 +7,8 @@ import { environment } from 'src/environments/environment';
 })
 export class EnderecoComponent implements OnInit {
 
-  public User: IUser;
-  public Enderecos: IEndereco[];
-
-  constructor(public router: Router,
-              private enderecoService: EnderecoService,
-              private snackbar: SnackbarComponent,
-              private mensagemSnackbar: MensagemSnackbarComponent) { }
+  constructor() { }
 
   ngOnInit() {
-    this.ReceberUserLogado();
-    this.ReceberEnderecoUser();
-  }
-
-  ReceberUserLogado(): void{
-    this.User = JSON.parse(localStorage.getItem(environment.VariavelUsuario));
-  }
-
-  ReceberEnderecoUser() {
-    this.enderecoService.GetByUserId(this.User.id).subscribe((enderecos: IEndereco[]) => {
-      this.Enderecos = enderecos;
-    },
-    erro => {
-      console.log(erro);
-      this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
-    });
-  }
-
-  TituloCard(endereco: IEndereco): string {
-    if (endereco.descricao) {
-      return endereco.descricao;
-    } else {
-      return `${endereco.rua}, ${endereco.numero}`;
-    }
-  }
-
-  Navegar(): void {
-    this.router.navigate(['/produtos/']);
   }
 }
