@@ -11,6 +11,7 @@ export const environment = {
   VariavelUsuario: 'user',
   VariavelQuantidade: 'quantidade',
   VariavelProduto: 'produtos',
+  VariavelCEP: 'cep',
   TipoProdutoEncomenda:  1,
   TipoProdutoEstoque:  2
 };
