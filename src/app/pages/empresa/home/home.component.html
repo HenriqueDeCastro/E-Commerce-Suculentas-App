@@ -3,6 +3,7 @@
 <br>
 <br>
 <mat-list>
+  <!-- CATALOGO -->
   <div mat-subheader>Catálogo</div>
   <mat-list-item  class="lista cursor" (click)="router.navigate(['empresa/categoria'])">
     <mat-icon class="material-icons-outlined" mat-list-icon>import_contacts</mat-icon>
@@ -13,6 +14,7 @@
     <mat-icon class="material-icons-outlined" mat-list-icon>local_offer</mat-icon>
     <div mat-line>Produtos</div>
   </mat-list-item>
+  <!-- VENDAS -->
     <div mat-subheader>Vendas</div>
     <mat-list-item>
       <mat-icon class="material-icons-outlined" mat-list-icon>credit_card</mat-icon>
@@ -33,4 +35,15 @@
       <mat-icon class="material-icons-outlined" mat-list-icon>check</mat-icon>
       <div mat-line>Finalizados</div>
     </mat-list-item>
+  <!-- OPERAÇÔES -->
+  <div mat-subheader>Operações</div>
+  <mat-list-item (click)="router.navigate(['empresa/fretemanual'])">
+    <mat-icon class="material-icons-outlined" mat-list-icon>travel_explore</mat-icon>
+    <div mat-line>Frete Manual</div>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-list-item>
+    <mat-icon class="material-icons-outlined" mat-list-icon>savings</mat-icon>
+    <div mat-line>Finanças</div>
+  </mat-list-item>
 </mat-list>

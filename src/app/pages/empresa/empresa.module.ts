@@ -6,6 +6,7 @@ import { EmpresaRoutingModule } from './empresa-routing.module';
 import { HomeComponent } from './home/home.component';
 import { ComponentModule } from 'src/app/shared/components/component.module';
 import { CategoriaModule } from './categoria/categoria.module';
+import { FreteManualModule } from './frete-manual/frete-manual.module';
 import { ProdutoModule } from './produto/produto.module';
 
 @NgModule({
@@ -18,7 +19,8 @@ import { ProdutoModule } from './produto/produto.module';
     MaterialModule,
     EmpresaRoutingModule,
     CategoriaModule,
-    ProdutoModule
+    ProdutoModule,
+    FreteManualModule
   ]
 })
 export class EmpresaModule {}

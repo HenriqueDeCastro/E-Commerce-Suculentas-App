@@ -3,6 +3,7 @@ import { HttpInterceptor, HttpEvent, HttpRequest, HttpHandler } from '@angular/c
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/internal/operators/tap';
+import { environment } from 'src/environments/environment';
 
 @Injectable({providedIn: 'root'})
 export class AuthInterceptor implements HttpInterceptor {
@@ -10,7 +11,7 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(private router: Router) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (localStorage.getItem('token') !== null) {
+    if (localStorage.getItem('token') !== null && req.url.includes(environment.UrlApi)) {
       const cloneReq = req.clone({
         headers: req.headers.set('Authorization', `Bearer ${localStorage.getItem('token')}`)
       });

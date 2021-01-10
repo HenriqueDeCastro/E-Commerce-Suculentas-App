@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ComponentModule } from 'src/app/shared/components/component.module';
 import { MaterialModule } from 'src/app/shared/components/material/material.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaginationModule } from '../../shared/components/pagination/pagination.module';
 
 // PAGES
@@ -16,6 +16,7 @@ import { ProdutoUnitarioComponent } from './produto-unitario/produto-unitario.co
 // COMPONENTS
 import { DialogOrderbyComponent } from './produtos-especifico/components/dialog-orderby/dialog-orderby.component';
 import { BottomOrderbyComponent } from './produtos-especifico/components/bottom-orderby/bottom-orderby.component';
+import { MaskModule } from 'src/app/shared/components/mask/mask.module';
 
 @NgModule({
   declarations: [
@@ -27,10 +28,13 @@ import { BottomOrderbyComponent } from './produtos-especifico/components/bottom-
     BottomOrderbyComponent
   ],
   imports: [
+    FormsModule,
+    ReactiveFormsModule,
     MaterialModule,
     FormsModule,
     CommonModule,
     ComponentModule,
+    MaskModule,
     ProdutosRoutingModule,
     PaginationModule
   ]

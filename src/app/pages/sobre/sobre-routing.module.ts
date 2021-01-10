@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { SobreComponent } from './sobre.component';
 
 const routes: Routes = [
-  { path: '', component: SobreComponent},
+  { path: '', component: SobreComponent}
 ];
 
 @NgModule({

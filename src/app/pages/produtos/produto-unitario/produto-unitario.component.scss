@@ -21,9 +21,23 @@
   color: var(--azul);
 }
 
+.frete {
+  color: var(--azul-escuro);
+}
+
+.frete-calculado {
+  color: var(--vermelho);
+}
+
 .estoque-quantidade {
   color: var(--azul-escuro)
 }
+
+.mat-flat-button {
+  background-color: var(--azul-escuro) !important;
+  color: white !important;
+}
+
 
 @media (max-width: 600px)
 {

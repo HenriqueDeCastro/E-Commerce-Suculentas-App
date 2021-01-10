@@ -32,6 +32,11 @@ export class MensagemSnackbarComponent {
   // REGISTER
   public ErroCadastroDuplicado = 'E-mail informado já possui cadastro !!!';
 
+  // MELHOR ENVIO
+  public ErroServidorMelhorEnvio = 'Erro inesperado no servidor do "Melhor Envio", tente novamente!!!';
+  public ErroCampoCEPPreenchido = 'CEP é obrigatório para calcular o frete';
+
+
   constructor() { }
 
 }

@@ -32,20 +32,59 @@
       <h1 class="titulo centralizar pc">{{Produto.nome}}</h1>
       <br>
       <mat-list>
+        <!-- DESCRIÇÂO -->
         <div mat-subheader class="cabecalho-lista negrito">Descrição</div>
         <mat-list-item class="tamanho-matlineitem">
           <div mat-line class="quebralinha-matline">{{Produto.descricao}}</div>
         </mat-list-item>
         <br>
+        <!-- FRETE -->
+        <div mat-subheader class="cabecalho-lista negrito">Frete</div>
+        <ng-container *ngIf="!ValorFrete">
+          <mat-list-item class="tamanho-matlineitem">
+            <mat-icon class="material-icons-outlined frete" mat-list-icon>local_shipping</mat-icon>
+            <div mat-line class="quebralinha-matline negrito frete">Informe o seu CEP:</div>
+            <div mat-line class="quebralinha-matline">
+              <br>
+              <form [formGroup]="FreteForm" (ngSubmit)="CalcularFrete()" autocomplete="off">
+                <mat-form-field  appearance="fill" class="w-100">
+                  <mat-label>CEP</mat-label>
+                  <input matInput formControlName="cep" mask="00000-000">
+                  <mat-error *ngIf="FreteForm.get('cep').hasError('required')" class="invalid-feedback">CEP é obrigatório</mat-error>
+                  <mat-error *ngIf="FreteForm.get('cep').hasError('minlength')" class="invalid-feedback">Insira um CEP valido</mat-error>
+                </mat-form-field>
+              </form>
+              <br>
+            </div>
+            <div mat-line class="quebralinha-matline">
+              <button mat-flat-button class="btn-Calcular-Frete" class="w-100" (click)="CalcularFrete()">
+                Calcular
+              </button>
+            </div>
+          </mat-list-item>
+        </ng-container>
+        <ng-container *ngIf="ValorFrete">
+          <mat-list-item class="tamanho-matlineitem">
+            <mat-icon class="material-icons-outlined frete" mat-list-icon>local_shipping</mat-icon>
+            <div mat-line class="quebralinha-matline negrito frete">O frete é de {{ValorFrete.price | currency:'BRL'}} para {{CEPStorage | mask:'00000-000'}}</div>
+            <div mat-line class="quebralinha-matline">Entregue por {{ValorFrete.company.name}}©</div>
+            <div mat-line class="quebralinha-matline negrito frete cursor"><br>
+              <span (click)="LimparFrete()">Calcular outro endereço ?</span>
+            </div>
+          </mat-list-item>
+        </ng-container>
+        <br>
+        <!-- VALOR -->
         <div mat-subheader class="cabecalho-lista negrito">Valor</div>
         <mat-list-item class="tamanho-matlineitem">
           <mat-icon class="material-icons-outlined dinheiro" mat-list-icon>payments</mat-icon>
           <div mat-line class="quebralinha-matline negrito dinheiro">{{Produto.preco | currency:'BRL'}}</div>
-          <div mat-line class="quebralinha-matline">Aceitamos cartões e boleto como formas de pagamento.</div>
+          <div mat-line class="quebralinha-matline">Pagamentos são feitos pela ferramenta do PagSeguro©</div>
         </mat-list-item>
         <br>
+        <!-- ENCOMENDAR -->
         <ng-container *ngIf="Produto.tipoProdutoId === IdEncomenda">
-          <div mat-subheader class="cabecalho-lista negrito">Encomedar</div>
+          <div mat-subheader class="cabecalho-lista negrito">Encomendar</div>
           <mat-list-item class="tamanho-matlineitem">
             <mat-icon class="material-icons-outlined estoque" mat-list-icon>timer</mat-icon>
             <div mat-line class="quebralinha-matline negrito estoque">Vendemos {{Produto.nome}} apenas por encomendas</div>
@@ -54,6 +93,7 @@
             <div mat-line class="quebralinha-matline">Selecione abaixo a quantidade que deseja reservar</div>
           </mat-list-item>
         </ng-container>
+        <!-- ESTOQUE -->
         <ng-container *ngIf="Produto.tipoProdutoId === IdEstoque">
           <div mat-subheader class="cabecalho-lista negrito">Estoque</div>
           <mat-list-item class="tamanho-matlineitem">
