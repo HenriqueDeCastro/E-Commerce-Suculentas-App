@@ -38,6 +38,14 @@
           <div mat-line class="quebralinha-matline">{{Produto.descricao}}</div>
         </mat-list-item>
         <br>
+        <!-- VALOR -->
+        <div mat-subheader class="cabecalho-lista negrito">Valor</div>
+        <mat-list-item class="tamanho-matlineitem">
+          <mat-icon class="material-icons-outlined dinheiro" mat-list-icon>payments</mat-icon>
+          <div mat-line class="quebralinha-matline negrito dinheiro">{{Produto.preco | currency:'BRL'}}</div>
+          <div mat-line class="quebralinha-matline">Pagamentos são feitos pela ferramenta do PagSeguro©</div>
+        </mat-list-item>
+        <br>
         <!-- FRETE -->
         <div mat-subheader class="cabecalho-lista negrito">Frete</div>
         <ng-container *ngIf="!ValorFrete">
@@ -69,18 +77,10 @@
             <div mat-line class="quebralinha-matline negrito frete">O frete é de {{ValorFrete.price | currency:'BRL'}} para {{CEPStorage | mask:'00000-000'}}</div>
             <div mat-line class="quebralinha-matline">Entregue por {{ValorFrete.company.name}}©</div>
             <div mat-line class="quebralinha-matline negrito frete cursor"><br>
-              <span (click)="LimparFrete()">Calcular outro endereço ?</span>
+              <span (click)="LimparFrete()">Calcular para outro endereço ?</span>
             </div>
           </mat-list-item>
         </ng-container>
-        <br>
-        <!-- VALOR -->
-        <div mat-subheader class="cabecalho-lista negrito">Valor</div>
-        <mat-list-item class="tamanho-matlineitem">
-          <mat-icon class="material-icons-outlined dinheiro" mat-list-icon>payments</mat-icon>
-          <div mat-line class="quebralinha-matline negrito dinheiro">{{Produto.preco | currency:'BRL'}}</div>
-          <div mat-line class="quebralinha-matline">Pagamentos são feitos pela ferramenta do PagSeguro©</div>
-        </mat-list-item>
         <br>
         <!-- ENCOMENDAR -->
         <ng-container *ngIf="Produto.tipoProdutoId === IdEncomenda">
