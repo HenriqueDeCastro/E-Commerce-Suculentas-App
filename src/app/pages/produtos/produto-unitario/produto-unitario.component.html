@@ -65,9 +65,7 @@
               <br>
             </div>
             <div mat-line class="quebralinha-matline">
-              <button mat-flat-button class="btn-Calcular-Frete" class="w-100" (click)="CalcularFrete()">
-                Calcular
-              </button>
+              <button mat-flat-button class="btn-Calcular-Frete" class="w-100" (click)="CalcularFrete()" [disabled]=Calculando>{{TextoBotaoCalculo}}</button>
             </div>
           </mat-list-item>
         </ng-container>
@@ -76,7 +74,7 @@
             <mat-icon class="material-icons-outlined frete" mat-list-icon>local_shipping</mat-icon>
             <div mat-line class="quebralinha-matline negrito frete">O frete é de {{ValorFrete.price | currency:'BRL'}} para {{CEPStorage | mask:'00000-000'}}</div>
             <div mat-line class="quebralinha-matline">Entregue por {{ValorFrete.company.name}}©</div>
-            <div mat-line class="quebralinha-matline negrito frete cursor"><br>
+            <div mat-line class="quebralinha-matline negrito frete-calculado cursor"><br>
               <span (click)="LimparFrete()">Calcular para outro endereço ?</span>
             </div>
           </mat-list-item>

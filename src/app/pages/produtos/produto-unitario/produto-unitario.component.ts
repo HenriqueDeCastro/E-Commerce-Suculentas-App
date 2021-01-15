@@ -29,6 +29,8 @@ export class ProdutoUnitarioComponent implements OnInit {
   public FreteForm: FormGroup;
   public ValorFrete: ICalculoFrete;
   public CEPStorage: string;
+  public Calculando: boolean = false;
+  public TextoBotaoCalculo: string = 'Calcular';
 
   constructor(private activetedRoute: ActivatedRoute,
               private snackbar: SnackbarComponent,
@@ -89,13 +91,20 @@ export class ProdutoUnitarioComponent implements OnInit {
 
   CalcularFrete() {
     if (this.FreteForm.valid) {
+      this.Calculando = true;
+      this.TextoBotaoCalculo = 'Calculando...';
       this.melhorEnvioService.CalcularFretePacote(this.FreteForm.value.cep).subscribe((result: ICalculoFrete) => {
+        this.CEPStorage = this.FreteForm.value.cep;
         localStorage.setItem(environment.VariavelCEP, this.FreteForm.value.cep);
         this.ValorFrete = result;
+        this.TextoBotaoCalculo = 'Calcular';
+        this.Calculando = false;
       },
       (erro) => {
         console.log(erro);
         this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidorMelhorEnvio);
+        this.TextoBotaoCalculo = 'Calcular';
+        this.Calculando = false;
       });
     } else {
       this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroCampoCEPPreenchido);

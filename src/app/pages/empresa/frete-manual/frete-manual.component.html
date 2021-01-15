@@ -15,7 +15,7 @@
     </mat-form-field>
   </form>
   <br>
-  <button mat-flat-button color=primary class="w-100" (click)="CalcularFrete()">Calcular</button>
+  <button mat-flat-button color=primary class="w-100" (click)="CalcularFrete()" [disabled]=Calculando>{{TextoBotao}}</button>
 </ng-container>
 <ng-container *ngIf="ValoresFretes">
   <mat-list>

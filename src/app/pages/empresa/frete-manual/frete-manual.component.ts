@@ -15,7 +15,8 @@ export class FreteManualComponent implements OnInit {
 
   public FreteForm: FormGroup;
   public ValoresFretes: ICalculoFrete[];
-
+  public Calculando: boolean = false;
+  public TextoBotao: string = 'Calcular';
 
   constructor(private snackbar: SnackbarComponent,
               private fb: FormBuilder,
@@ -38,12 +39,18 @@ export class FreteManualComponent implements OnInit {
 
   CalcularFrete(): void {
     if (this.FreteForm.valid) {
+      this.Calculando = true;
+      this.TextoBotao = 'Calculando...';
       this.melhorEnvioService.CalcularFretePacoteTodosServicos(this.FreteForm.value.cep).subscribe((result: ICalculoFrete[]) => {
         localStorage.setItem(environment.VariavelCEP, this.FreteForm.value.cep);
+        this.Calculando = false;
+        this.TextoBotao = 'Calcular';
         this.ValoresFretes = result;
       },
       (erro) => {
         console.log(erro);
+        this.Calculando = false;
+        this.TextoBotao = 'Calcular';
         this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidorMelhorEnvio);
       });
     } else {

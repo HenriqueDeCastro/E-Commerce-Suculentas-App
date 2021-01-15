@@ -11,7 +11,6 @@
   display: none;
 }
 
-
 .btn-quantidade {
   background-color: transparent !important;
   color: black;
@@ -26,7 +25,8 @@
 }
 
 .frete-calculado {
-  color: var(--vermelho);
+  color: var(--azul-escuro);
+  text-decoration: underline;
 }
 
 .estoque-quantidade {
@@ -34,8 +34,8 @@
 }
 
 .mat-flat-button {
-  background-color: var(--azul-escuro) !important;
-  color: white !important;
+  background-color: var(--azul-escuro);
+  color: white ;
 }
 
 
