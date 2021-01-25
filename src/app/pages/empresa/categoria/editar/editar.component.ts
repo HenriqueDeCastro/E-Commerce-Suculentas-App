@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CategoriaService } from 'src/app/core/services/Categoria/Categoria.service';
+import { CategoriaService } from 'src/app/core/services/server/Categoria/Categoria.service';
 import { ICategoria } from 'src/app/shared/models/ICategoria';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
-import { MensagemSnackbarComponent } from 'src/app/shared/components/mensagem-snackbar/mensagem-snackbar.component';
+import { SnackbarService } from '../../../../core/services/shared/Snackbar/Snackbar.service';
+import { MensagensService } from '../../../../core/services/shared/Mensagens/Mensagens.service';
 
 @Component({
   selector: 'app-editar',
@@ -24,8 +24,8 @@ export class EditarComponent implements OnInit {
               public router: Router,
               private activetedRoute: ActivatedRoute,
               private categoriaService: CategoriaService,
-              private snackbar: SnackbarComponent,
-              private mensagemSnackbar: MensagemSnackbarComponent) { }
+              private snackbar: SnackbarService,
+              private mensagemSnackbar: MensagensService) { }
 
   ngOnInit(): void {
     this.ReceberValorRota();

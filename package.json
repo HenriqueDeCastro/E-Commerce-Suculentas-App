@@ -25,6 +25,7 @@
     "angular-jwt": "^0.1.11",
     "bootstrap": "^4.5.3",
     "compass-mixins": "^0.12.10",
+    "ngx-image-compress": "^11.0.3",
     "ngx-mask": "^10.0.4",
     "ngx-material-file-input": "^2.1.1",
     "ngx-pagination": "^5.0.0",

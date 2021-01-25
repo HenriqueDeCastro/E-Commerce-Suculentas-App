@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CategoriaService } from 'src/app/core/services/Categoria/Categoria.service';
-import { MensagemSnackbarComponent } from 'src/app/shared/components/mensagem-snackbar/mensagem-snackbar.component';
-import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
+import { CategoriaService } from 'src/app/core/services/server/Categoria/Categoria.service';
+import { SnackbarService } from '../../../../core/services/shared/Snackbar/Snackbar.service';
+import { MensagensService } from '../../../../core/services/shared/Mensagens/Mensagens.service';
 import { ICategoria } from '../../../../shared/models/ICategoria';
 
 @Component({
@@ -21,8 +21,8 @@ export class AdicionarComponent implements OnInit {
   constructor(private fb: FormBuilder,
               public router: Router,
               private categoriaService: CategoriaService,
-              private snackbar: SnackbarComponent,
-              private mensagemSnackbar: MensagemSnackbarComponent) { }
+              private snackbar: SnackbarService,
+              private mensagemSnackbar: MensagensService) { }
 
   ngOnInit(): void {
     this.Validation();

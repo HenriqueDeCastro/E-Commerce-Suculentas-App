@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { CategoriaService } from 'src/app/core/services/Categoria/Categoria.service';
-import { FiltroNomeComponent } from 'src/app/shared/components/filtro-nome/filtro-nome.component';
-import { MensagemSnackbarComponent } from 'src/app/shared/components/mensagem-snackbar/mensagem-snackbar.component';
-import { ResetScrollComponent } from 'src/app/shared/components/reset-scroll/reset-scroll.component';
-import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
+import { CategoriaService } from 'src/app/core/services/server/Categoria/Categoria.service';
+import { FiltroNomeService } from 'src/app/core/services/shared/FiltroNome/FiltroNome.service';
+import { SnackbarService } from 'src/app/core/services/shared/Snackbar/Snackbar.service';
+import { MensagensService } from 'src/app/core/services/shared/Mensagens/Mensagens.service';
+import { ResetScrollService } from 'src/app/core/services/shared/ResetScroll/ResetScroll.service';
 import { ICategoria } from 'src/app/shared/models/ICategoria';
 import { IProduto } from 'src/app/shared/models/IProduto';
 import { environment } from 'src/environments/environment';
@@ -31,11 +31,11 @@ export class ProdutoEspecificoComponent implements OnInit {
   constructor(private activetedRoute: ActivatedRoute,
               private categoriaService: CategoriaService,
               private bottomSheet: MatBottomSheet,
-              private snackbar: SnackbarComponent,
-              private resetScroll: ResetScrollComponent,
+              private snackbar: SnackbarService,
+              private resetScroll: ResetScrollService,
               public dialog: MatDialog,
-              private filtroNome: FiltroNomeComponent,
-              private mensagemSnackbar: MensagemSnackbarComponent) { }
+              private filtroNome: FiltroNomeService,
+              private mensagemSnackbar: MensagensService) { }
 
   ngOnInit(): void {
     this.link = environment.UrlApi;

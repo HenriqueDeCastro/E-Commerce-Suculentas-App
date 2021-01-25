@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { EnderecoService } from 'src/app/core/services/Endereco/Endereco.service';
-import { MensagemSnackbarComponent } from 'src/app/shared/components/mensagem-snackbar/mensagem-snackbar.component';
-import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
+import { EnderecoService } from 'src/app/core/services/server/Endereco/Endereco.service';
+import { SnackbarService } from 'src/app/core/services/shared/Snackbar/Snackbar.service';
+import { MensagensService } from 'src/app/core/services/shared/Mensagens/Mensagens.service';
 import { IEndereco } from 'src/app/shared/models/IEndereco';
 
 @Component({
@@ -16,8 +16,8 @@ export class ListEnderecoDeleteComponent implements OnInit {
   public Apagando: boolean = false;
 
   constructor(private enderecoService: EnderecoService,
-              private snackbar: SnackbarComponent,
-              private mensagemSnackbar: MensagemSnackbarComponent) { }
+              private snackbar: SnackbarService,
+              private mensagemSnackbar: MensagensService) { }
 
   ngOnInit() {
   }

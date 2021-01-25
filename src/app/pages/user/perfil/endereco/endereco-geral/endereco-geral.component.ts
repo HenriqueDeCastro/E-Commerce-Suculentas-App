@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { EnderecoService } from 'src/app/core/services/Endereco/Endereco.service';
-import { MensagemSnackbarComponent } from 'src/app/shared/components/mensagem-snackbar/mensagem-snackbar.component';
-import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
+import { EnderecoService } from 'src/app/core/services/server/Endereco/Endereco.service';
+import { SnackbarService } from 'src/app/core/services/shared/Snackbar/Snackbar.service';
+import { MensagensService } from 'src/app/core/services/shared/Mensagens/Mensagens.service';
 import { IEndereco } from 'src/app/shared/models/IEndereco';
 import { IUser } from 'src/app/shared/models/IUser';
 import { environment } from 'src/environments/environment';
@@ -24,9 +24,9 @@ export class EnderecoGeralComponent implements OnInit {
   constructor(public router: Router,
               public dialog: MatDialog,
               private enderecoService: EnderecoService,
-              private snackbar: SnackbarComponent,
+              private snackbar: SnackbarService,
               private bottomSheet: MatBottomSheet,
-              private mensagemSnackbar: MensagemSnackbarComponent) { }
+              private mensagemSnackbar: MensagensService) { }
 
   ngOnInit() {
     this.ReceberUserLogado();

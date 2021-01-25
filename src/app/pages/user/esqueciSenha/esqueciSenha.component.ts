@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/core/services/Auth/Auth.service';
-import { MensagemSnackbarComponent } from 'src/app/shared/components/mensagem-snackbar/mensagem-snackbar.component';
-import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
+import { AuthService } from 'src/app/core/services/server/Auth/Auth.service';
+import { SnackbarService } from 'src/app/core/services/shared/Snackbar/Snackbar.service';
+import { MensagensService } from 'src/app/core/services/shared/Mensagens/Mensagens.service';
 import { IEsqueciSenha } from 'src/app/shared/models/IEsqueciSenha';
 
 @Component({
@@ -20,8 +20,8 @@ export class EsqueciSenhaComponent implements OnInit {
   constructor(private fb: FormBuilder,
               public router: Router,
               private authService: AuthService,
-              private snackbar: SnackbarComponent,
-              private mensagemSnackbar: MensagemSnackbarComponent) { }
+              private snackbar: SnackbarService,
+              private mensagemSnackbar: MensagensService) { }
 
   ngOnInit(): void {
     this.Validation();

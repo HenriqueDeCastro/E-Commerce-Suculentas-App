@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CidadesService } from 'src/app/core/services/Cidades/Cidades.service';
-import { EnderecoService } from 'src/app/core/services/Endereco/Endereco.service';
-import { EstadosService } from 'src/app/core/services/Estados/Estados.service';
-import { MensagemSnackbarComponent } from 'src/app/shared/components/mensagem-snackbar/mensagem-snackbar.component';
-import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
+import { CidadesService } from 'src/app/core/services/server/Cidades/Cidades.service';
+import { EnderecoService } from 'src/app/core/services/server/Endereco/Endereco.service';
+import { EstadosService } from 'src/app/core/services/server/Estados/Estados.service';
+import { SnackbarService } from 'src/app/core/services/shared/Snackbar/Snackbar.service';
+import { MensagensService } from 'src/app/core/services/shared/Mensagens/Mensagens.service';
 import { ICidade } from 'src/app/shared/models/ICidade';
 import { IEndereco } from 'src/app/shared/models/IEndereco';
 import { IEstado } from 'src/app/shared/models/IEstado';
@@ -32,8 +32,8 @@ export class EnderecoEditComponent implements OnInit {
               public router: Router,
               private activetedRoute: ActivatedRoute,
               private enderecoService: EnderecoService,
-              private snackbar: SnackbarComponent,
-              private mensagemSnackbar: MensagemSnackbarComponent,
+              private snackbar: SnackbarService,
+              private mensagemSnackbar: MensagensService,
               private estadosService: EstadosService,
               private cidadeService: CidadesService) { }
 

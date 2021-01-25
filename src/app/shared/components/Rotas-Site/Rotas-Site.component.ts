@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/core/services/Auth/Auth.service';
+import { AuthService } from 'src/app/core/services/server/Auth/Auth.service';
 import { environment } from '../../../../environments/environment';
 
 @Component({

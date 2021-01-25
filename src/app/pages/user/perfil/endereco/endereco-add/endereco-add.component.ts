@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MensagemSnackbarComponent } from 'src/app/shared/components/mensagem-snackbar/mensagem-snackbar.component';
-import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
+import { SnackbarService } from 'src/app/core/services/shared/Snackbar/Snackbar.service';
+import { MensagensService } from 'src/app/core/services/shared/Mensagens/Mensagens.service';
 import { IEstado } from 'src/app/shared/models/IEstado';
 import { ICidade } from 'src/app/shared/models/ICidade';
-import { EstadosService } from '../../../../../core/services/Estados/Estados.service';
-import { CidadesService } from '../../../../../core/services/Cidades/Cidades.service';
-import { EnderecoService } from '../../../../../core/services/Endereco/Endereco.service';
+import { EstadosService } from '../../../../../core/services/server/Estados/Estados.service';
+import { CidadesService } from '../../../../../core/services/server/Cidades/Cidades.service';
+import { EnderecoService } from '../../../../../core/services/server/Endereco/Endereco.service';
 import { IEndereco } from 'src/app/shared/models/IEndereco';
 import { environment } from 'src/environments/environment';
 import { IUser } from 'src/app/shared/models/IUser';
@@ -31,10 +31,10 @@ export class EnderecoAddComponent implements OnInit {
   constructor(private estadosService: EstadosService,
               private cidadeService: CidadesService,
               private enderecoService: EnderecoService,
-              private snackbar: SnackbarComponent,
+              private snackbar: SnackbarService,
               private fb: FormBuilder,
               public router: Router,
-              private mensagemSnackbar: MensagemSnackbarComponent) { }
+              private mensagemSnackbar: MensagensService) { }
 
   ngOnInit() {
     this.ReceberEstados();

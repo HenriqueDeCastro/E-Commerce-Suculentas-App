@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MelhorEnvioService } from 'src/app/core/services/MelhorEnvio/MelhorEnvio.service';
-import { MensagemSnackbarComponent } from 'src/app/shared/components/mensagem-snackbar/mensagem-snackbar.component';
-import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
+import { MelhorEnvioService } from 'src/app/core/services/server/MelhorEnvio/MelhorEnvio.service';
 import { ICalculoFrete } from 'src/app/shared/models/ICalculoFrete';
 import { environment } from 'src/environments/environment';
+import { SnackbarService } from 'src/app/core/services/shared/Snackbar/Snackbar.service';
+import { MensagensService } from 'src/app/core/services/shared/Mensagens/Mensagens.service';
 
 @Component({
   selector: 'app-frete-manual',
@@ -18,10 +18,10 @@ export class FreteManualComponent implements OnInit {
   public Calculando: boolean = false;
   public TextoBotao: string = 'Calcular';
 
-  constructor(private snackbar: SnackbarComponent,
+  constructor(private snackbar: SnackbarService,
               private fb: FormBuilder,
               private melhorEnvioService: MelhorEnvioService,
-              private mensagemSnackbar: MensagemSnackbarComponent) { }
+              private mensagemSnackbar: MensagensService) { }
 
   ngOnInit() {
     this.Validation();

@@ -2,8 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { MensagemSnackbarComponent } from 'src/app/shared/components/mensagem-snackbar/mensagem-snackbar.component';
-import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
+import { SnackbarService } from '../../../../core/services/shared/Snackbar/Snackbar.service';
+import { MensagensService } from '../../../../core/services/shared/Mensagens/Mensagens.service';
 import { IProdutoCarrinho } from 'src/app/shared/models/IProdutoCarrinho';
 import { environment } from 'src/environments/environment';
 import { DialogEditCarrinhoComponent } from '../dialog-edit-carrinho/dialog-edit-carrinho.component';
@@ -22,9 +22,9 @@ export class ProdutoCarrrinhoComponent implements OnInit {
 
   constructor(private router: Router,
               public dialog: MatDialog,
-              private snackbar: SnackbarComponent,
+              private snackbar: SnackbarService,
               private bottomSheet: MatBottomSheet,
-              private mensagemSnackbar: MensagemSnackbarComponent) { }
+              private mensagemSnackbar: MensagensService) { }
 
   ngOnInit(): void {
     this.link = environment.UrlApi;

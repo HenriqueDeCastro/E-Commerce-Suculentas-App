@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { MensagemSnackbarComponent } from 'src/app/shared/components/mensagem-snackbar/mensagem-snackbar.component';
-import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
+import { SnackbarService } from '../../../../core/services/shared/Snackbar/Snackbar.service';
+import { MensagensService } from '../../../../core/services/shared/Mensagens/Mensagens.service';
 import { ITipoProduto } from 'src/app/shared/models/ITipoProduto';
-import { TipoProdutoService } from '../../../../core/services/TipoProduto/TipoProduto.service';
+import { TipoProdutoService } from '../../../../core/services/server/TipoProduto/TipoProduto.service';
 
 @Component({
   selector: 'app-tipoproduto-geral',
@@ -14,8 +14,8 @@ export class TipoprodutoGeralComponent implements OnInit {
   public TipoProdutos: ITipoProduto[];
 
   constructor(private tipoProdutoService: TipoProdutoService,
-              private snackbar: SnackbarComponent,
-              private mensagemSnackbar: MensagemSnackbarComponent) { }
+              private snackbar: SnackbarService,
+              private mensagemSnackbar: MensagensService) { }
 
   ngOnInit(): void {
     this.ReceberCategorias();

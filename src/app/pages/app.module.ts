@@ -15,6 +15,7 @@ import { ProdutosModule } from './produtos/produtos.module';
 import { SobreModule } from './sobre/sobre.module';
 import { AdminModule } from './admin/admin.module';
 import { CarrinhoModule } from './carrinho/carrinho.module';
+import {NgxImageCompressService} from 'ngx-image-compress';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from '../core/guards/auth.interceptor';
@@ -48,7 +49,9 @@ import { CommonModule } from '@angular/common';
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi: true
-  }],
+    },
+    NgxImageCompressService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

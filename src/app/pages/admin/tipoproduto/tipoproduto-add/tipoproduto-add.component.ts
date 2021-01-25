@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { TipoProdutoService } from 'src/app/core/services/TipoProduto/TipoProduto.service';
-import { MensagemSnackbarComponent } from 'src/app/shared/components/mensagem-snackbar/mensagem-snackbar.component';
-import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
+import { TipoProdutoService } from 'src/app/core/services/server/TipoProduto/TipoProduto.service';
 import { ITipoProduto } from 'src/app/shared/models/ITipoProduto';
+import { SnackbarService } from '../../../../core/services/shared/Snackbar/Snackbar.service';
+import { MensagensService } from '../../../../core/services/shared/Mensagens/Mensagens.service';
 
 @Component({
   selector: 'app-tipoproduto-add',
@@ -20,8 +20,8 @@ export class TipoprodutoAddComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private router: Router,
               private tipoProdutoService: TipoProdutoService,
-              private snackbar: SnackbarComponent,
-              private mensagemSnackbar: MensagemSnackbarComponent) { }
+              private snackbar: SnackbarService,
+              private mensagemSnackbar: MensagensService) { }
 
   ngOnInit(): void {
     this.Validation();

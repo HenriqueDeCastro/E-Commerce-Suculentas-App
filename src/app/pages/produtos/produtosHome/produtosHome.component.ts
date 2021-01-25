@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { CategoriaService } from 'src/app/core/services/Categoria/Categoria.service';
-import { MensagemSnackbarComponent } from 'src/app/shared/components/mensagem-snackbar/mensagem-snackbar.component';
-import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
+import { CategoriaService } from 'src/app/core/services/server/Categoria/Categoria.service';
+import { SnackbarService } from 'src/app/core/services/shared/Snackbar/Snackbar.service';
+import { MensagensService } from 'src/app/core/services/shared/Mensagens/Mensagens.service';
 import { ICategoria } from 'src/app/shared/models/ICategoria';
 
 @Component({
@@ -14,8 +14,8 @@ export class ProdutosHomeComponent implements OnInit {
   Categorias: ICategoria[];
 
   constructor(private categoriaService: CategoriaService,
-              private snackbar: SnackbarComponent,
-              private mensagemSnackbar: MensagemSnackbarComponent) { }
+              private snackbar: SnackbarService,
+              private mensagemSnackbar: MensagensService) { }
 
   ngOnInit(): void {
     this.ReceberCategorias();

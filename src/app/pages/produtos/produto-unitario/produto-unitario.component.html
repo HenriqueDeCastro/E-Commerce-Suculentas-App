@@ -86,8 +86,8 @@
           <mat-list-item class="tamanho-matlineitem">
             <mat-icon class="material-icons-outlined estoque" mat-list-icon>timer</mat-icon>
             <div mat-line class="quebralinha-matline negrito estoque">Vendemos {{Produto.nome}} apenas por encomendas</div>
-            <div mat-line *ngIf="Produto.quantidadeMaxima == 1" class="quebralinha-matline estoque">Limite maximo de {{Produto.quantidadeMaxima}} unidade</div>
-            <div mat-line *ngIf="Produto.quantidadeMaxima > 1" class="quebralinha-matline estoque">Limite maximo de {{Produto.quantidadeMaxima}} unidades</div>
+            <div mat-line *ngIf="Produto.quantidadeMaxima == 1" class="quebralinha-matline estoque">Limite maximo de compras: {{Produto.quantidadeMaxima}} unidade</div>
+            <div mat-line *ngIf="Produto.quantidadeMaxima > 1" class="quebralinha-matline estoque">Limite maximo de compras: {{Produto.quantidadeMaxima}} unidades</div>
             <div mat-line class="quebralinha-matline">Selecione abaixo a quantidade que deseja reservar</div>
           </mat-list-item>
         </ng-container>

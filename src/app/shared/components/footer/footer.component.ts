@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../../environments/environment';
-import { HorarioComponent } from '../horario/horario.component';
+import { HorarioService } from 'src/app/core/services/shared/Horario/Horario.service';
 
 @Component({
   selector: 'app-footer',
@@ -14,7 +14,7 @@ export class FooterComponent implements OnInit {
   urlInstagram: string;
   ano: number;
 
-  constructor(private horario: HorarioComponent) { }
+  constructor(private horario: HorarioService) { }
 
   ngOnInit(): void {
     this.urlWhatsapp = environment.UrlWhats;

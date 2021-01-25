@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TipoProdutoService } from 'src/app/core/services/TipoProduto/TipoProduto.service';
-import { MensagemSnackbarComponent } from 'src/app/shared/components/mensagem-snackbar/mensagem-snackbar.component';
-import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
+import { TipoProdutoService } from 'src/app/core/services/server/TipoProduto/TipoProduto.service';
+import { SnackbarService } from '../../../../core/services/shared/Snackbar/Snackbar.service';
+import { MensagensService } from '../../../../core/services/shared/Mensagens/Mensagens.service';
 import { ITipoProduto } from 'src/app/shared/models/ITipoProduto';
 
 @Component({
@@ -23,8 +23,8 @@ export class TipoprodutoEditComponent implements OnInit {
               public router: Router,
               private activetedRoute: ActivatedRoute,
               private tipoProdutoService: TipoProdutoService,
-              private snackbar: SnackbarComponent,
-              private mensagemSnackbar: MensagemSnackbarComponent) { }
+              private snackbar: SnackbarService,
+              private mensagemSnackbar: MensagensService) { }
 
   ngOnInit(): void {
     this.ReceberValorRota();

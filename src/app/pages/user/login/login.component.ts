@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from 'src/app/core/services/Auth/Auth.service';
-import { MensagemSnackbarComponent } from 'src/app/shared/components/mensagem-snackbar/mensagem-snackbar.component';
-import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
+import { AuthService } from 'src/app/core/services/server/Auth/Auth.service';
+import { SnackbarService } from 'src/app/core/services/shared/Snackbar/Snackbar.service';
+import { MensagensService } from 'src/app/core/services/shared/Mensagens/Mensagens.service';
 
 @Component({
   selector: 'app-login',
@@ -19,9 +19,9 @@ export class LoginComponent implements OnInit {
   constructor(private fb: FormBuilder,
               public router: Router,
               private authService: AuthService,
-              private snackbar: SnackbarComponent,
+              private snackbar: SnackbarService,
               private activetedRoute: ActivatedRoute,
-              private mensagemSnackbar: MensagemSnackbarComponent) { }
+              private mensagemSnackbar: MensagensService) { }
 
   ngOnInit(): void {
     this.ReceberValorRota();

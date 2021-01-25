@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CategoriaService } from 'src/app/core/services/Categoria/Categoria.service';
-import { TipoProdutoService } from 'src/app/core/services/TipoProduto/TipoProduto.service';
-import { MensagemSnackbarComponent } from 'src/app/shared/components/mensagem-snackbar/mensagem-snackbar.component';
-import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
+import { CategoriaService } from 'src/app/core/services/server/Categoria/Categoria.service';
+import { TipoProdutoService } from 'src/app/core/services/server/TipoProduto/TipoProduto.service';
+import { SnackbarService } from 'src/app/core/services/shared/Snackbar/Snackbar.service';
+import { MensagensService } from 'src/app/core/services/shared/Mensagens/Mensagens.service';
 import { ICategoria } from 'src/app/shared/models/ICategoria';
 import { IProduto } from 'src/app/shared/models/IProduto';
 import { ITipoProduto } from 'src/app/shared/models/ITipoProduto';
 import { environment } from 'src/environments/environment';
-import { ProdutoService } from '../../../../core/services/Produto/Produto.service';
-import { RenomearArquivoComponent } from '../../../../shared/components/renomear-arquivo/renomear-arquivo.component';
+import { ProdutoService } from '../../../../core/services/server/Produto/Produto.service';
+import { RenomearArquivoService } from 'src/app/core/services/shared/RenomearArquivo/RenomearArquivo.service';
+import { ImageCompressService } from 'src/app/core/services/shared/ImageCompress/ImageCompress.service';
 
 @Component({
   selector: 'app-adicionarProduto',
@@ -36,9 +37,10 @@ export class AdicionarProdutoComponent implements OnInit {
               private produtoService: ProdutoService,
               private categoriaService: CategoriaService,
               private tipoProdutoService: TipoProdutoService,
-              private renomear: RenomearArquivoComponent,
-              private snackbar: SnackbarComponent,
-              private mensagemSnackbar: MensagemSnackbarComponent) { }
+              private renomear: RenomearArquivoService,
+              private snackbar: SnackbarService,
+              private imageCompressService: ImageCompressService,
+              private mensagemSnackbar: MensagensService) { }
 
   ngOnInit(): void {
     this.ReceberCategorias();
@@ -98,9 +100,16 @@ export class AdicionarProdutoComponent implements OnInit {
     this.ValidationValores();
   }
 
-  OnFileChange(event): void {
-    if (event.target.files && event.target.files.length) {
-      this.file = event.target.files;
+  OnFileChange(event) {
+    if (event.target.files && event.target.files[0]) {
+      this.file = event.target.files[0];
+      const fileName = this.file['name'];
+      var reader = new FileReader();
+      reader.onload = async (event: any) => {
+        const file = await this.imageCompressService.compressFile(event.target.result, fileName);
+        this.file = file;
+      }
+      reader.readAsDataURL(event.target.files[0])
     }
   }
 
@@ -115,7 +124,7 @@ export class AdicionarProdutoComponent implements OnInit {
             nome: this.InformacoesForm.value.nome,
             descricao: this.InformacoesForm.value.descricao,
             preco: Number(this.ValoresForm.value.preco),
-            imagem: this.file[0].name,
+            imagem: this.file.name,
             tipoProdutoId: this.selectedTipo,
             estoque: this.selectedTipo == this.IdEstoque? this.ValoresForm.value.estoque : null,
             quantidadeMaxima: this.selectedTipo == this.IdEncomenda? this.ValoresForm.value.quantidadeMaxima : null,

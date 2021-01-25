@@ -1,11 +1,5 @@
-@import url('https://fonts.googleapis.com/css?family=Pacifico:300,400,500&display=swap');
 @import '~@angular/material/theming';
 @include mat-core();
-
-@font-face {
-  font-family: "Bakerie";
-  src: local("Bakerie"), url(./assets/fonts/bakerie/BakerieRoughWide-Medium.otf) format("truetype");
-}
 
 @import '~./app/shared/SCSS/botoes';
 @import '~./app/shared/SCSS/custom-theme';
@@ -13,18 +7,20 @@
 @import '~./app/shared/SCSS/list';
 @import '~./app/shared/SCSS/mat-accordion';
 @import '~./app/shared/SCSS/mat-card';
+@import '~./app/shared/SCSS/material-icon';
 @import '~./app/shared/SCSS/pagination';
 @import '~./app/shared/SCSS/snackbar';
 @import '~./app/shared/SCSS/titulos';
 @import '~./app/shared/SCSS/utils';
 
+@font-face {
+  font-family: "Bakerie";
+  src: local("Bakerie"), url(./assets/fonts/bakerie/BakerieRoughWide-Medium.otf) format("truetype");
+}
+
 html, body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif !important;
-}
-
-button:focus {
-  outline: none;
 }
 
 :root {
@@ -42,3 +38,6 @@ button:focus {
   --rosa: #ffcbf2;
   --marrom: #cb997e;
 }
+
+
+

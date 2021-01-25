@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ProdutoService } from 'src/app/core/services/Produto/Produto.service';
-import { MelhorEnvioService } from 'src/app/core/services/MelhorEnvio/MelhorEnvio.service';
-import { MensagemSnackbarComponent } from 'src/app/shared/components/mensagem-snackbar/mensagem-snackbar.component';
-import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
+import { ProdutoService } from 'src/app/core/services/server/Produto/Produto.service';
+import { MelhorEnvioService } from 'src/app/core/services/server/MelhorEnvio/MelhorEnvio.service';
+import { SnackbarService } from 'src/app/core/services/shared/Snackbar/Snackbar.service';
+import { MensagensService } from 'src/app/core/services/shared/Mensagens/Mensagens.service';
 import { IProduto } from 'src/app/shared/models/IProduto';
 import { IProdutoCarrinho } from 'src/app/shared/models/IProdutoCarrinho';
 import { environment } from 'src/environments/environment';
@@ -33,11 +33,11 @@ export class ProdutoUnitarioComponent implements OnInit {
   public TextoBotaoCalculo: string = 'Calcular';
 
   constructor(private activetedRoute: ActivatedRoute,
-              private snackbar: SnackbarComponent,
+              private snackbar: SnackbarService,
               private fb: FormBuilder,
               private produtoService: ProdutoService,
               private melhorEnvioService: MelhorEnvioService,
-              private mensagemSnackbar: MensagemSnackbarComponent) { }
+              private mensagemSnackbar: MensagensService) { }
 
   ngOnInit(): void {
     this.link = environment.UrlApi;

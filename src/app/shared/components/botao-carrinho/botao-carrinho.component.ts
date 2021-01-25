@@ -2,9 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { IProdutoCarrinho } from '../../models/IProdutoCarrinho';
 import { IProduto } from '../../models/IProduto';
 import { Location } from '@angular/common';
-import { SnackbarComponent } from '../snackbar/snackbar.component';
 import { environment } from 'src/environments/environment';
-import { MensagemSnackbarComponent } from '../mensagem-snackbar/mensagem-snackbar.component';
+import { SnackbarService } from 'src/app/core/services/shared/Snackbar/Snackbar.service';
+import { MensagensService } from 'src/app/core/services/shared/Mensagens/Mensagens.service';
 
 @Component({
   selector: 'app-botao-carrinho',
@@ -23,9 +23,9 @@ export class BotaoCarrinhoComponent implements OnInit {
   private Produtos: IProdutoCarrinho[];
   private QuantidadeCarrinho: number;
 
-  constructor(private snackbar: SnackbarComponent,
+  constructor(private snackbar: SnackbarService,
               private location: Location,
-              private mensagemSnackbar: MensagemSnackbarComponent) { }
+              private mensagemSnackbar: MensagensService) { }
 
   ngOnInit(): void {
     this.TipoEncomenda = environment.TipoProdutoEncomenda;
