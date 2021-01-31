@@ -8,11 +8,22 @@ export class ImageCompressService {
 
   constructor(private imageCompress: NgxImageCompressService) { }
 
-  async compressFile(image, fileName): Promise<File> {
+  async compressFile50(image, fileName): Promise<File> {
     const orientation = -1;
     let Image: File;
 
     return await this.imageCompress.compressFile(image, orientation, 50, 50).then(result =>
+      {
+        const imageBlob = this.ConvertBlob(result.split(',')[1]);
+        return Image = new File([imageBlob], fileName, { type: 'image/jpeg' });
+      });
+  }
+
+  async compressFile25(image, fileName): Promise<File> {
+    const orientation = -1;
+    let Image: File;
+
+    return await this.imageCompress.compressFile(image, orientation, 25, 25).then(result =>
       {
         const imageBlob = this.ConvertBlob(result.split(',')[1]);
         return Image = new File([imageBlob], fileName, { type: 'image/jpeg' });

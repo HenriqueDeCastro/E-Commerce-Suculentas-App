@@ -10,12 +10,16 @@ export class MensagensService {
   // ERRO
   public ErroServidor = 'Erro no servidor, tente novamente mais tarde !!!';
   public ErroCamposPreenchidos = 'Nem todos os campos foram preenchidos';
-  public ErroUploadImagem = 'Erro ao realizar upload da imagem';
 
   // SUCESSO
   public CadastroConcluido = 'Cadastrado realizado com sucesso';
   public AtualizacaoConcluida = 'Atualização realizada com sucesso';
   public DeletarConcluido = 'Deletado com sucesso';
+
+  // IMAGEM
+
+  public ErroUploadImagem = 'Erro ao realizar upload da imagem';
+  public ErroUploadImagemMini = 'Erro ao realizar upload da imagem minificada';
 
   // CARRINHO
   public ProdutoRemovidoCarrinho = 'Produto removido do carrinho!';
@@ -38,4 +42,7 @@ export class MensagensService {
   public ErroServidorMelhorEnvio = 'Erro inesperado no servidor do "Melhor Envio", tente novamente!!!';
   public ErroCampoCEPPreenchido = 'CEP é obrigatório para calcular o frete';
 
+  // ROLE
+  public ErroRoleAdmin = 'Erro ao adicionar a Role Admin';
+  public ErroRoleEmpresa = 'Erro ao adicionar a Role Empresa';
 }

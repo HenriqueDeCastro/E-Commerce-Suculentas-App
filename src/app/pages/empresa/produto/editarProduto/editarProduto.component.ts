@@ -13,6 +13,7 @@ import { ITipoProduto } from 'src/app/shared/models/ITipoProduto';
 import { environment } from 'src/environments/environment';
 import { TipoProdutoService } from 'src/app/core/services/server/TipoProduto/TipoProduto.service';
 import { ImageCompressService } from 'src/app/core/services/shared/ImageCompress/ImageCompress.service';
+import { HorarioService } from 'src/app/core/services/shared/Horario/Horario.service';
 
 @Component({
   selector: 'app-editarProduto',
@@ -27,6 +28,7 @@ export class EditarProdutoComponent implements OnInit {
   public InformacoesForm: FormGroup;
   public ValoresForm: FormGroup;
   public file: File;
+  public fileMini: File;
   public TiposProdutos: ITipoProduto[];
   public RealizandoCadastro = false;
   public selectedCategoria: number;
@@ -35,6 +37,7 @@ export class EditarProdutoComponent implements OnInit {
   public Categorias: ICategoria[];
   public IdEncomenda: number;
   public IdEstoque: number;
+  public NomeArquivo: string;
 
   constructor(private activetedRoute: ActivatedRoute,
               private snackbar: SnackbarService,
@@ -44,6 +47,7 @@ export class EditarProdutoComponent implements OnInit {
               private fb: FormBuilder,
               private renomear: RenomearArquivoService,
               private location: Location,
+              private horario: HorarioService,
               private imageCompressService: ImageCompressService,
               private mensagemSnackbar: MensagensService) { }
 
@@ -130,32 +134,48 @@ export class EditarProdutoComponent implements OnInit {
       const fileName = this.file['name'];
       var reader = new FileReader();
       reader.onload = async (event: any) => {
-        const file = await this.imageCompressService.compressFile(event.target.result, fileName);
+        const file = await this.imageCompressService.compressFile50(event.target.result, fileName);
+        const fileMini = await this.imageCompressService.compressFile25(event.target.result, fileName);
         this.file = file;
+        this.fileMini = fileMini;
       }
       reader.readAsDataURL(event.target.files[0])
     }
   }
 
-
   Atualizar(): void {
     if (this.IdentificacaoForm.valid && this.InformacoesForm.valid && this.ValoresForm.valid) {
       this.RealizandoCadastro = true;
       if (this.file) {
-        this.UpdateFoto();
+        this.UploadFotos();
       } else {
-        this.Update();
+        this.UpdateProduto();
       }
     } else {
       this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroCamposPreenchidos);
     }
   }
 
-  UpdateFoto(): void {
-    this.file = this.renomear.RenomearArquivo(this.file, this.InformacoesForm.value.nome);
+
+  UploadFotos(): void {
+    const data = this.horario.RetornaDataAtualParaNome();
+    this.NomeArquivo = `${this.InformacoesForm.value.nome}_${data}`;
+    const nomeArquivoMini = `Mini_${this.NomeArquivo}`;
+    this.file = this.renomear.RenomearArquivo(this.file, this.NomeArquivo);
+    this.fileMini = this.renomear.RenomearArquivo(this.fileMini, nomeArquivoMini);
+
     this.produtoService.postUpload(this.file).subscribe(
       () => {
-        this.Update();
+        this.produtoService.postUpload(this.fileMini).subscribe(
+          () => {
+            this.UpdateProduto();
+          },
+          erro => {
+            console.log(erro);
+            this.RealizandoCadastro = false;
+            this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroUploadImagemMini);
+          }
+        );
       },
       erro => {
         console.log(erro);
@@ -166,14 +186,14 @@ export class EditarProdutoComponent implements OnInit {
   }
 
 
-  Update(): void {
+  UpdateProduto(): void {
     let produto: IProduto;
     produto = {
       id: this.Produto.id,
       nome: this.InformacoesForm.value.nome,
       descricao: this.InformacoesForm.value.descricao,
       preco: Number(this.ValoresForm.value.preco),
-      imagem: this.file? this.file.name : this.Produto.imagem,
+      imagem: this.file? `${this.NomeArquivo}.jpg` : this.Produto.imagem,
       tipoProdutoId: this.selectedTipo,
       estoque: this.selectedTipo == this.IdEstoque? this.ValoresForm.value.estoque : null,
       quantidadeMaxima: this.selectedTipo == this.IdEncomenda? this.ValoresForm.value.quantidadeMaxima : null,

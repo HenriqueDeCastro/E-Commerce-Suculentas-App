@@ -1,17 +1,15 @@
 import { Injectable } from '@angular/core';
-import { HorarioService } from '../Horario/Horario.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RenomearArquivoService {
 
-  constructor(private horario: HorarioService) {}
+  constructor() {}
 
   RenomearArquivo(file, nome): any {
     const extension = this.ext(file.name);
-    const data = this.horario.RetornaDataAtualParaNome();
-    const nameFile = `${nome}_${data}.${extension}`;
+    const nameFile = `${nome}.${extension}`;
     Object.defineProperty(file, 'name', {
       writable: true,
       value: nameFile

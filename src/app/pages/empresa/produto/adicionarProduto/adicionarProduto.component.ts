@@ -12,6 +12,7 @@ import { environment } from 'src/environments/environment';
 import { ProdutoService } from '../../../../core/services/server/Produto/Produto.service';
 import { RenomearArquivoService } from 'src/app/core/services/shared/RenomearArquivo/RenomearArquivo.service';
 import { ImageCompressService } from 'src/app/core/services/shared/ImageCompress/ImageCompress.service';
+import { HorarioService } from 'src/app/core/services/shared/Horario/Horario.service';
 
 @Component({
   selector: 'app-adicionarProduto',
@@ -21,6 +22,7 @@ import { ImageCompressService } from 'src/app/core/services/shared/ImageCompress
 export class AdicionarProdutoComponent implements OnInit {
 
   public file: File;
+  public fileMini: File;
   public IdentificacaoForm: FormGroup;
   public InformacoesForm: FormGroup;
   public ValoresForm: FormGroup;
@@ -38,6 +40,7 @@ export class AdicionarProdutoComponent implements OnInit {
               private categoriaService: CategoriaService,
               private tipoProdutoService: TipoProdutoService,
               private renomear: RenomearArquivoService,
+              private horario: HorarioService,
               private snackbar: SnackbarService,
               private imageCompressService: ImageCompressService,
               private mensagemSnackbar: MensagensService) { }
@@ -106,50 +109,75 @@ export class AdicionarProdutoComponent implements OnInit {
       const fileName = this.file['name'];
       var reader = new FileReader();
       reader.onload = async (event: any) => {
-        const file = await this.imageCompressService.compressFile(event.target.result, fileName);
+        const file = await this.imageCompressService.compressFile50(event.target.result, fileName);
+        const fileMini = await this.imageCompressService.compressFile25(event.target.result, fileName);
         this.file = file;
+        this.fileMini = fileMini;
       }
       reader.readAsDataURL(event.target.files[0])
     }
   }
 
+  UploadFotos(): void {
+    const data = this.horario.RetornaDataAtualParaNome();
+    const nomeArquivo = `${this.InformacoesForm.value.nome}_${data}`;
+    const nomeArquivoMini = `Mini_${this.InformacoesForm.value.nome}_${data}`;
+    this.file = this.renomear.RenomearArquivo(this.file, nomeArquivo);
+    this.fileMini = this.renomear.RenomearArquivo(this.fileMini, nomeArquivoMini);
+
+    this.produtoService.postUpload(this.file).subscribe(
+      () => {
+        this.produtoService.postUpload(this.fileMini).subscribe(
+          () => {
+            this.PostProduto();
+          },
+          erro => {
+            console.log(erro);
+            this.RealizandoCadastro = false;
+            this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroUploadImagemMini);
+          }
+        );
+      },
+      erro => {
+        console.log(erro);
+        this.RealizandoCadastro = false;
+        this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroUploadImagem);
+      }
+    );
+  }
+
+  PostProduto(): void {
+    let produto: IProduto;
+    produto = {
+      nome: this.InformacoesForm.value.nome,
+      descricao: this.InformacoesForm.value.descricao,
+      preco: Number(this.ValoresForm.value.preco),
+      imagem: this.file.name,
+      tipoProdutoId: this.selectedTipo,
+      estoque: this.selectedTipo == this.IdEstoque? this.ValoresForm.value.estoque : null,
+      quantidadeMaxima: this.selectedTipo == this.IdEncomenda? this.ValoresForm.value.quantidadeMaxima : null,
+      ativo: true,
+      categoriaId: this.selectedCategoria
+    };
+    this.produtoService.Post(produto).subscribe(
+      () => {
+        this.RealizandoCadastro = false;
+        this.snackbar.OpenSnackBarSuccess(this.mensagemSnackbar.CadastroConcluido);
+        this.router.navigate(['empresa/produto']);
+      },
+      erro => {
+        console.log(erro);
+        this.RealizandoCadastro = false;
+        this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
+      }
+    );
+  }
+
   Registrar(): void {
       if (this.IdentificacaoForm.valid && this.InformacoesForm.valid && this.ValoresForm.valid) {
       this.RealizandoCadastro = true;
-      this.file = this.renomear.RenomearArquivo(this.file, this.InformacoesForm.value.nome);
-      this.produtoService.postUpload(this.file).subscribe(
-        () => {
-          let produto: IProduto;
-          produto = {
-            nome: this.InformacoesForm.value.nome,
-            descricao: this.InformacoesForm.value.descricao,
-            preco: Number(this.ValoresForm.value.preco),
-            imagem: this.file.name,
-            tipoProdutoId: this.selectedTipo,
-            estoque: this.selectedTipo == this.IdEstoque? this.ValoresForm.value.estoque : null,
-            quantidadeMaxima: this.selectedTipo == this.IdEncomenda? this.ValoresForm.value.quantidadeMaxima : null,
-            ativo: true,
-            categoriaId: this.selectedCategoria
-          };
-          this.produtoService.Post(produto).subscribe(
-            () => {
-              this.RealizandoCadastro = false;
-              this.snackbar.OpenSnackBarSuccess(this.mensagemSnackbar.CadastroConcluido);
-              this.router.navigate(['empresa/produto']);
-            },
-            erro => {
-              console.log(erro);
-              this.RealizandoCadastro = false;
-              this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
-            }
-          );
-        },
-        erro => {
-          console.log(erro);
-          this.RealizandoCadastro = false;
-          this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroUploadImagem);
-        }
-      );
+
+
     } else {
       this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroCamposPreenchidos);
     }

@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MensagensService } from 'src/app/core/services/shared/Mensagens/Mensagens.service';
+import { SnackbarService } from 'src/app/core/services/shared/Snackbar/Snackbar.service';
+import { IRole } from 'src/app/shared/models/IRole';
+import { RoleService } from 'src/app/core//services/server/Role/Role.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-gerenciar-rules-add',
@@ -7,9 +13,45 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GerenciarRulesAddComponent implements OnInit {
 
-  constructor() { }
+  public RoleForm: FormGroup;
+  public Registrando = false;
+  private Rule: IRole;
+  public roleSelect: string = null;
 
-  ngOnInit() {
+  constructor(private fb: FormBuilder,
+              private snackbar: SnackbarService,
+              public router: Router,
+              private mensagemSnackbar: MensagensService,
+              private roleService: RoleService) { }
+
+  ngOnInit(): void {
+    this.Validation();
   }
 
+  Validation(): void {
+    this.RoleForm = this.fb.group({
+      name: ['', [Validators.required, Validators.minLength(4)]]
+    });
+  }
+
+  Registrar() {
+    if (this.RoleForm.valid) {
+      this.Registrando = true;
+      this.Rule = {
+        name: this.RoleForm.value.name
+      }
+      this.roleService.Post(this.Rule).subscribe(() => {
+        this.Registrando = false;
+        this.router.navigate(['/admin/gerenciarrules/geral']);
+      },
+      error => {
+        this.Registrando = false;
+        const erro = error.error;
+        console.log(error);
+        this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
+      })
+    } else {
+      this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroCamposPreenchidos);
+    }
+  }
 }
