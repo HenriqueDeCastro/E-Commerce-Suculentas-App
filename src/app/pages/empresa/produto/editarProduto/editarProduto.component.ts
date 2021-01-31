@@ -193,7 +193,7 @@ export class EditarProdutoComponent implements OnInit {
       nome: this.InformacoesForm.value.nome,
       descricao: this.InformacoesForm.value.descricao,
       preco: Number(this.ValoresForm.value.preco),
-      imagem: this.file? `${this.NomeArquivo}.jpg` : this.Produto.imagem,
+      imagem: this.file? this.file['name'] : this.Produto.imagem,
       tipoProdutoId: this.selectedTipo,
       estoque: this.selectedTipo == this.IdEstoque? this.ValoresForm.value.estoque : null,
       quantidadeMaxima: this.selectedTipo == this.IdEncomenda? this.ValoresForm.value.quantidadeMaxima : null,
