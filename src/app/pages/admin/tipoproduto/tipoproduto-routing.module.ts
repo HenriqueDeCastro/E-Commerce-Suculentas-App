@@ -6,18 +6,19 @@ import { TipoprodutoGeralComponent } from './tipoproduto-geral/tipoproduto-geral
 import { TipoprodutoAddComponent } from './tipoproduto-add/tipoproduto-add.component';
 import { TipoprodutoEditComponent } from './tipoproduto-edit/tipoproduto-edit.component';
 import { TipoprodutoComponent } from './tipoproduto.component';
+import { environment } from 'src/environments/environment';
 
 const routes: Routes = [
   { path: '', component: TipoprodutoComponent,
     children:
     [
-      { path: 'geral', component: TipoprodutoGeralComponent, canActivate: [AuthGuard] },
-      { path: 'adicionar', component: TipoprodutoAddComponent, canActivate: [AuthGuard] },
-      { path: 'editar/:tipoProdutoId/:tipoProdutoName', component: TipoprodutoEditComponent, canActivate: [AuthGuard] },
+      { path: 'geral', component: TipoprodutoGeralComponent, canActivate: [AuthGuard], data: { role: environment.RoleAdmin } },
+      { path: 'adicionar', component: TipoprodutoAddComponent, canActivate: [AuthGuard], data: { role: environment.RoleAdmin } },
+      { path: 'editar/:tipoProdutoId/:tipoProdutoName', component: TipoprodutoEditComponent, canActivate: [AuthGuard], data: { role: environment.RoleAdmin } },
       { path: '', redirectTo: 'geral', pathMatch: 'full' },
       { path: '**', redirectTo: 'geral', pathMatch: 'full' }
     ],
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard], data: { role: environment.RoleAdmin }
   },
 ];
 

@@ -134,7 +134,7 @@ export class EditarProdutoComponent implements OnInit {
       const fileName = this.file['name'];
       var reader = new FileReader();
       reader.onload = async (event: any) => {
-        const file = await this.imageCompressService.compressFile50(event.target.result, fileName);
+        const file = await this.imageCompressService.compressFile75(event.target.result, fileName);
         const fileMini = await this.imageCompressService.compressFile25(event.target.result, fileName);
         this.file = file;
         this.fileMini = fileMini;

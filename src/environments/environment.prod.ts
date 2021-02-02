@@ -1,4 +1,5 @@
 export const environment = {
+
   production: true,
   UrlApi: 'https://www.xn--suculentasdar-1lb.com.br',
   UrlWhats: 'https://api.whatsapp.com/send/?phone=WhatsAppNumber5511974513646&text=&app_absent=1',
@@ -13,5 +14,7 @@ export const environment = {
   VariavelProduto: 'produtos',
   VariavelCEP: 'cep',
   TipoProdutoEncomenda:  1,
-  TipoProdutoEstoque:  2
+  TipoProdutoEstoque:  2,
+  RoleAdmin: 'Admin',
+  RoleEmpresa: 'Empresa'
 };

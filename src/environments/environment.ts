@@ -47,6 +47,12 @@ export const environment = {
   TipoProdutoEncomenda:  1,
 
   // VARIAVEIS DA TABELA TIPOPRODUTO
-  TipoProdutoEstoque:  2
+  TipoProdutoEstoque:  2,
+
+  // ROLE ADMIN
+  RoleAdmin: 'Admin',
+
+  // ROLE EMPRESA
+  RoleEmpresa: 'Empresa'
 };
 

@@ -13,6 +13,10 @@ import { ResetScrollService } from 'src/app/core/services/shared/ResetScroll/Res
 })
 export class AppComponent implements OnInit{
 
+  public userRoles: string[];
+  public AcessAdmin: boolean;
+  public AcessEmpresa: boolean;
+
   constructor(private authService: AuthService,
               private route: Router,
               private bottomSheet: MatBottomSheet,
@@ -24,8 +28,26 @@ export class AppComponent implements OnInit{
       if (!(evt instanceof NavigationEnd)) {
           return;
       }
+      this.AcessAdmin = this.AdminAcesso();
+      this.AcessEmpresa = this.EmpresaAcesso();
       this.resetScroll.PositionZero();
     });
+  }
+
+  EmpresaAcesso(): boolean {
+    if(!this.Logado()) {
+      return this.authService.VerifyAcessRole(environment.RoleEmpresa);
+    } else {
+      return false;
+    }
+  }
+
+  AdminAcesso(): boolean {
+    if(!this.Logado()) {
+      return this.authService.VerifyAcessRole(environment.RoleAdmin);
+    } else {
+      return false;
+    }
   }
 
   Logado(): boolean {
@@ -41,7 +63,13 @@ export class AppComponent implements OnInit{
   }
 
   openBottomSheet(): void {
-    this.bottomSheet.open(RotasSiteComponent);
+    this.bottomSheet.open(RotasSiteComponent, {
+      data: {
+        admin: this.AcessAdmin,
+        empresa: this.AcessEmpresa,
+        logado: this.Logado()
+      }
+    });
   }
 
   QuantidadeCarrinho(): any {

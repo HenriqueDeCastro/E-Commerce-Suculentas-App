@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { IUserLogin } from '../../../../shared/models/IUserLogin';
 import { environment } from '../../../../../environments/environment';
 import { IUser } from 'src/app/shared/models/IUser';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -17,13 +18,16 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
+  GetUserByEmail(emailUser: string): Observable<IUser> {
+    return this.http.get<IUser>(`${this.UrlBase}/getByEmail/${emailUser}`);
+  }
+
   Login(model: any) {
     return this.http.post(`${this.UrlBase}/login`, model).pipe(
       map((response: IUserLogin) => {
         const user = response;
         if (user) {
           localStorage.setItem(environment.VariavelToken, user.token);
-          this.decodedToken = this.jwtHelpers.decodeToken(user.token);
           localStorage.setItem(environment.VariavelUsuario, JSON.stringify(user.user));
         }
       })
@@ -44,7 +48,6 @@ export class AuthService {
         const user = response;
         if (user) {
           localStorage.setItem(environment.VariavelToken, user.token);
-          this.decodedToken = this.jwtHelpers.decodeToken(user.token);
           localStorage.setItem(environment.VariavelUsuario, JSON.stringify(user.user));
         }
       })
@@ -57,7 +60,6 @@ export class AuthService {
         const user = response;
         if (user) {
           localStorage.setItem(environment.VariavelToken, user.token);
-          this.decodedToken = this.jwtHelpers.decodeToken(user.token);
           localStorage.setItem(environment.VariavelUsuario, JSON.stringify(user.user));
         }
       })
@@ -68,4 +70,16 @@ export class AuthService {
     const token = localStorage.getItem(environment.VariavelToken);
     return this.jwtHelpers.isTokenExpired(token);
   }
+
+  VerifyAcessRole(roleUser: string): boolean {
+    this.decodedToken = this.jwtHelpers.decodeToken(localStorage.getItem(environment.VariavelToken));
+
+    if (this.decodedToken.role.indexOf(roleUser) === -1) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+
 }

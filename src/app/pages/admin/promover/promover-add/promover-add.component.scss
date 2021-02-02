@@ -1,0 +1,11 @@
+.mat-input-element:disabled {
+  color: black;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  color: rgba(0, 0, 0, 0.12) !important;
+}
+
+mat-label {
+  color: gray !important;
+}

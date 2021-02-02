@@ -19,7 +19,11 @@ export class AuthGuard implements CanActivate {
         this.ReturnUrl(state);
         return false;
       } else {
-        return true;
+        if(next.data.role) {
+          return this.authService.VerifyAcessRole(next.data.role);
+        } else {
+          return true;
+        }
       }
     } else {
       this.ReturnUrl(state);

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/server/Auth/Auth.service';
 import { environment } from '../../../../environments/environment';
@@ -11,24 +11,31 @@ import { environment } from '../../../../environments/environment';
 })
 export class RotasSiteComponent implements OnInit {
 
-  urlWhatsapp: string;
+  public AcessAdmin: boolean;
+  public AcessEmpresa: boolean;
+  public Logado: boolean;
 
   constructor(private bottomSheetRef: MatBottomSheetRef<RotasSiteComponent>,
+              @Inject(MAT_BOTTOM_SHEET_DATA) private data: any,
               private authService: AuthService,
               public router: Router) { }
 
   ngOnInit(): void {
-    this.urlWhatsapp = environment.UrlWhats;
+    this.ReceberProduto();
   }
 
-  Logado(): boolean {
-    return this.authService.LoggedIn();
+  ReceberProduto(): void {
+    if (this.data) {
+      this.AcessAdmin = this.data.admin;
+      this.AcessEmpresa = this.data.empresa;
+      this.Logado = this.data.logado;
+    }
   }
 
   PerfilNavegacao(event: MouseEvent): void {
     this.bottomSheetRef.dismiss();
     event.preventDefault();
-    if (!this.Logado()){
+    if (!this.Logado){
       this.router.navigate(['/user/perfil']);
     } else {
       this.router.navigate(['/user/login']);

@@ -22,7 +22,7 @@ export class RoleService {
     return this.http.post<IRole>(`${this.UrlBase}/CreateRole`, role);
   }
 
-  UpdateUserRole(userRole: IUserRole): Observable<IUserRole>   {
-    return this.http.put<IUserRole>(`${this.UrlBase}/UpdateUserRole`, userRole);
+  UpdateUserRole(userRole: IUserRole)  {
+    return this.http.put(`${this.UrlBase}/UpdateUserRole`, userRole);
   }
 }

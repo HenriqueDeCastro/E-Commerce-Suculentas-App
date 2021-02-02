@@ -9,12 +9,13 @@ import { PromoverRoutingModule } from './promover-routing.module';
 // PAGES
 import { PromoverComponent } from './promover.component';
 import { PromoverGeralComponent } from './promover-geral/promover-geral.component';
-
+import { PromoverAddComponent } from './promover-add/promover-add.component';
 
 @NgModule({
   declarations: [
     PromoverComponent,
-    PromoverGeralComponent
+    PromoverGeralComponent,
+    PromoverAddComponent
   ],
   imports: [
     ReactiveFormsModule,

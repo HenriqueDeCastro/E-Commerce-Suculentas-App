@@ -34,7 +34,7 @@
           <div mat-line class="negrito-leve">Produtos feitos com carinho para você</div>
         </mat-list-item>
         <mat-divider></mat-divider>
-        <ng-container *ngIf="!Logado()">
+        <ng-container *ngIf="AcessEmpresa">
           <mat-list-item [routerLink]="'/empresa/home'" (click)="sidenav.toggle()">
             <mat-icon class="material-icons-outlined icone-empresa" mat-list-icon>store_mall_directory</mat-icon>
             <div mat-line class="negrito">Empresa</div>
@@ -42,7 +42,7 @@
           </mat-list-item>
           <mat-divider></mat-divider>
         </ng-container>
-        <ng-container *ngIf="!Logado()">
+        <ng-container *ngIf="AcessAdmin">
           <mat-list-item [routerLink]="'/admin'" (click)="sidenav.toggle()">
             <mat-icon class="material-icons-outlined icone-admin" mat-list-icon>vpn_key</mat-icon>
             <div mat-line class="negrito">Admin</div>
@@ -85,16 +85,3 @@
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>
-
-<!-- <a mat-list-item [routerLink]="'/accounts'"> Accounts </a>
-  <a mat-list-item [routerLink]="'/create-account'"> Create Account </a>
-  <a mat-list-item [routerLink]="'/contacts'"> Contacts </a>
-  <a mat-list-item [routerLink]="'/create-contact'"> Create Contact </a>
-  <a mat-list-item [routerLink]="'/activities'"> Activities </a>
-  <a mat-list-item [routerLink]="'/create-activity'"> Create Activity </a>
-  <a mat-list-item (click)="sidenav.toggle()" href="" mat-list-item>Close</a> -->
-
-
-       <!-- <button mat-icon-button matTooltip="Conta" (click)="IconePerfilNavegacao()">
-        <mat-icon class="material-icons-outlined">account_circle</mat-icon>
-      </button> -->

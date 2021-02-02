@@ -29,7 +29,7 @@ export class MensagensService {
 
   // ESQUECI A SENHA && RESET SENHA
   public VerificarCaixaEmail = 'Verifique sua caixa de e-mail';
-  public EmailNaoEncontrado = 'Não foi encontrado o e-mail informado !!!';
+  public EmailNaoEncontrado = 'Não foi encontrado nenhum usuário com o e-mail informado !!!';
   public SenhaRedefinida = 'Senha redefinida com sucesso';
 
   // LOGIN

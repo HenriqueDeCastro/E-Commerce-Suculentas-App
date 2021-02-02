@@ -36,9 +36,9 @@ export class GerenciarRulesGeralComponent implements OnInit {
 
   Registrar() {
     this.Registrando = true;
-    const role: IRole = { name: 'Admin' };
+    const role: IRole = { name: environment.RoleAdmin };
     this.roleService.Post(role).subscribe(() => {
-      const role2: IRole = { name: 'Empresa' };
+      const role2: IRole = { name: environment.RoleEmpresa };
       this.roleService.Post(role2).subscribe(() => {
         this.snackbar.OpenSnackBarSuccess(this.mensagemSnackbar.CadastroConcluido);
         this.VerificaRoles();
