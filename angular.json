@@ -31,7 +31,8 @@
             "styles": [
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/app/shared/SCSS/material-icon.scss"
             ],
             "scripts": []
           },
@@ -96,7 +97,8 @@
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/app/shared/SCSS/material-icon.scss"
             ],
             "scripts": []
           }
