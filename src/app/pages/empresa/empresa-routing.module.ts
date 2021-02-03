@@ -4,7 +4,6 @@ import { AuthGuard } from '../../core/guards/auth.guard';
 
 import { EmpresaComponent } from './empresa.component';
 import { HomeComponent } from './home/home.component';
-import { FreteManualComponent } from './frete-manual/frete-manual.component';
 import { environment } from 'src/environments/environment';
 
 const routes: Routes = [

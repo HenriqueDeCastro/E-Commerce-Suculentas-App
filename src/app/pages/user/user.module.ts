@@ -13,6 +13,7 @@ import { ComponentModule } from 'src/app/shared/components/component.module';
 import { EsqueciSenhaComponent } from './esqueciSenha/esqueciSenha.component';
 import { ResetSenhaComponent } from './resetSenha/resetSenha.component';
 import { PerfilModule } from './perfil/perfil.module';
+import { NotAcessComponent } from './notAcess/notAcess.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { PerfilModule } from './perfil/perfil.module';
     LoginComponent,
     RegisterComponent,
     EsqueciSenhaComponent,
-    ResetSenhaComponent
+    ResetSenhaComponent,
+    NotAcessComponent
   ],
   imports: [
     MaterialModule,

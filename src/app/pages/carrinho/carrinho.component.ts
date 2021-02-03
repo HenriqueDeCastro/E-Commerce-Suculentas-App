@@ -26,7 +26,9 @@ export class CarrinhoComponent implements OnInit {
 
   ReceberProdutoCarrinho(): void {
     let Produtos: IProdutoCarrinho[] = JSON.parse(localStorage.getItem(environment.VariavelProduto));
-    this.SepararTiposProdutos(Produtos);
+    if(Produtos) {
+      this.SepararTiposProdutos(Produtos);
+    }
   }
 
   ReceberAtt(event: boolean): void {

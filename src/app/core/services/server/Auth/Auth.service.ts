@@ -14,7 +14,6 @@ export class AuthService {
 
   private UrlBase = `${environment.UrlApi}/user`;
   public jwtHelpers = new JwtHelperService();
-  public decodedToken: any;
 
   constructor(private http: HttpClient) { }
 
@@ -72,14 +71,16 @@ export class AuthService {
   }
 
   VerifyAcessRole(roleUser: string): boolean {
-    this.decodedToken = this.jwtHelpers.decodeToken(localStorage.getItem(environment.VariavelToken));
+    const decodedToken = this.jwtHelpers.decodeToken(localStorage.getItem(environment.VariavelToken));
 
-    if (this.decodedToken.role.indexOf(roleUser) === -1) {
-      return false;
+    if(decodedToken.role != undefined) {
+      if (decodedToken.role.indexOf(roleUser) === -1) {
+        return false;
+      } else {
+        return true;
+      }
     } else {
-      return true;
+      return false;
     }
   }
-
-
 }

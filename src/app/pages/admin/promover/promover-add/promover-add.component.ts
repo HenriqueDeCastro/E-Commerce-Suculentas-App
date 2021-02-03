@@ -39,7 +39,6 @@ export class PromoverAddComponent implements OnInit {
   ReceberRoles(): void {
     this.roleService.GetRole().subscribe((roles: IRole[]) => {
       this.Roles = roles
-      console.log(roles)
     },
     error => {
       const erro = error.error;
@@ -68,7 +67,6 @@ export class PromoverAddComponent implements OnInit {
         this.Pesquisando = false;
         this.UserForm.controls["user"].disable();
         this.User = user;
-        console.log(user)
       },
       error => {
         const erro = error.error;

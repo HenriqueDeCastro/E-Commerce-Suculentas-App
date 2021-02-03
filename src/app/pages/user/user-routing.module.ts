@@ -7,7 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { EsqueciSenhaComponent } from './esqueciSenha/esqueciSenha.component';
 import { ResetSenhaComponent } from './resetSenha/resetSenha.component';
-import { PerfilComponent } from './perfil/perfil.component';
+import { NotAcessComponent } from './notAcess/notAcess.component';
 
 const routes: Routes = [
   { path: '', component: UserComponent,
@@ -16,6 +16,7 @@ const routes: Routes = [
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
       { path: 'esquecisenha', component: EsqueciSenhaComponent },
+      { path: 'sem-acesso', component: NotAcessComponent },
       { path: 'perfil', loadChildren: './perfil/perfil.module#PerfilModule', canActivate: [AuthGuard] },
       { path: 'reset/:email/:token', component: ResetSenhaComponent },
       { path: '', redirectTo: 'login', pathMatch: 'full' },

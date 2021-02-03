@@ -20,7 +20,12 @@ export class AuthGuard implements CanActivate {
         return false;
       } else {
         if(next.data.role) {
-          return this.authService.VerifyAcessRole(next.data.role);
+          if(this.authService.VerifyAcessRole(next.data.role)) {
+            return true;
+          } else {
+            this.router.navigate(['/user/sem-acesso']);
+            return false;
+          }
         } else {
           return true;
         }
