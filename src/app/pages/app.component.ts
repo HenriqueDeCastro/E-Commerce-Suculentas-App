@@ -5,6 +5,7 @@ import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { RotasSiteComponent } from 'src/app/shared/components/Rotas-Site/Rotas-Site.component';
 import { environment } from '../../environments/environment';
 import { ResetScrollService } from 'src/app/core/services/shared/ResetScroll/ResetScroll.service';
+import * as WebFont from 'webfontloader';
 
 @Component({
   selector: 'app-root',
@@ -31,6 +32,10 @@ export class AppComponent implements OnInit{
       this.AcessAdmin = this.AdminAcesso();
       this.AcessEmpresa = this.EmpresaAcesso();
       this.resetScroll.PositionZero();
+    });
+
+    WebFont.load({
+      custom: { families: ['Material Icons', 'Material Icons Outline'], }
     });
   }
 

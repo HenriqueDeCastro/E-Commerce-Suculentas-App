@@ -1,3 +1,7 @@
+.wf-loading body {
+  display: none;
+}
+
 /* fallback */
 @font-face {
   font-family: 'Material Icons';
@@ -43,4 +47,8 @@
   direction: ltr;
   -webkit-font-feature-settings: 'liga';
   -webkit-font-smoothing: antialiased;
+}
+
+.wf-loading body {
+  display: none;
 }
