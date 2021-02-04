@@ -35,7 +35,7 @@ export class AppComponent implements OnInit{
     });
 
     WebFont.load({
-      custom: { families: ['Material Icons', 'Material Icons Outline'], }
+      custom: { families: ['Material Icons', 'Material Icons Outline', 'Bakerie']}
     });
   }
 

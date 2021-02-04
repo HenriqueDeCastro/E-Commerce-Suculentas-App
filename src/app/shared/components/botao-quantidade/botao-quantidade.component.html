@@ -1,9 +1,9 @@
 <div class="centralizar">
   <button mat-icon-button color color="warn" class="btn-menos mat-elevation-z0" (click)="DiminuirQuantidade()" [disabled]="Quantidade <= 1">
-    <mat-icon>remove_circle_outline</mat-icon>
+    <mat-icon class="material-icons-outlined">remove_circle_outline</mat-icon>
   </button>
   <button mat-icon-button class="btn-quantidade mat-elevation-z0" style="font-size: 17px;">{{Quantidade}}</button>
   <button mat-icon-button color="primary" class="btn-mais mat-elevation-z0" (click)="AumentarQuantidade()" [disabled]="Quantidade >= QuantidadeMaxima">
-    <mat-icon>add_circle_outline</mat-icon>
+    <mat-icon class="material-icons-outlined">add_circle_outline</mat-icon>
   </button>
 </div>
