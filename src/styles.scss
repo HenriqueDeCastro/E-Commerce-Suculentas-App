@@ -6,9 +6,9 @@
   src: local("Bakerie"), url(./assets/fonts/bakerie/BakerieRoughWide-Medium.otf) format("truetype");
 }
 
-// .wf-inactive .titulo-site {
-//   display: none;
-// }
+.wf-inactive .titulo-site {
+  display: none;
+}
 
 @import '~./app/shared/SCSS/botoes';
 @import '~./app/shared/SCSS/custom-theme';
