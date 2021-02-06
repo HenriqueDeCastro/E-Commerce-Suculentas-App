@@ -6,7 +6,7 @@
   src: local("Bakerie"), url(./assets/fonts/bakerie/BakerieRoughWide-Medium.otf) format("truetype");
 }
 
-.wf-fontloading .titulo-site {
+.wf-loading .Bakerie .titulo-site {
   display: none;
 }
 
@@ -20,7 +20,6 @@
 @import '~./app/shared/SCSS/snackbar';
 @import '~./app/shared/SCSS/titulos';
 @import '~./app/shared/SCSS/utils';
-
 
 html, body {
   margin: 0;
