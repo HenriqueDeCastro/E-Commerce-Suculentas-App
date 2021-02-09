@@ -21,6 +21,7 @@ export class EnderecoEditComponent implements OnInit {
   public Endereco: IEndereco;
   public Estados: IEstado[];
   public Cidades: ICidade[];
+  public Carregando: boolean = true;
   public IdentificacaoForm: FormGroup;
   public DomicilioForm: FormGroup;
   public Procurandocidades: boolean = false;
@@ -49,8 +50,12 @@ export class EnderecoEditComponent implements OnInit {
 
   ReceberEndereco() {
     this.enderecoService.GetById(this.EnderecoId).subscribe((endereco: IEndereco) => {
-      this.Endereco = endereco;
-      this.ReceberCidades();
+      if(endereco) {
+        this.Endereco = endereco;
+        this.ReceberCidades();
+      } else {
+        this.Carregando = false;
+      }
     },
     erro => {
       console.log(erro);
@@ -67,6 +72,7 @@ export class EnderecoEditComponent implements OnInit {
     this.Cidades = this.cidadeService.GetCidadesByEstadoId(estadoSelecionado[0].id);
     this.ValidationIdentificacao();
     this.ValidationDomicilio();
+    this.Carregando = false;
   }
 
   ValidationIdentificacao(): void {

@@ -20,6 +20,7 @@ export class ProdutoUnitarioComponent implements OnInit {
   public produtoId: number;
   public categoriaNome: string;
   public ProdutoCarrinho: IProdutoCarrinho;
+  public Carregando: boolean = true;
   public Produto: IProduto;
   public link: string;
   public Quantidade: number;
@@ -57,8 +58,13 @@ export class ProdutoUnitarioComponent implements OnInit {
 
   ReceberProduto(): void {
     this.produtoService.GetById(this.produtoId).subscribe((produto: IProduto) => {
-      this.VerificarProdutoCarrinho(produto);
-      this.Produto = produto;
+      if(produto) {
+        this.VerificarProdutoCarrinho(produto);
+        this.Produto = produto;
+        this.Carregando = false;
+      } else {
+        this.Carregando = false;
+      }
     },
     (erro) => {
       console.log(erro);

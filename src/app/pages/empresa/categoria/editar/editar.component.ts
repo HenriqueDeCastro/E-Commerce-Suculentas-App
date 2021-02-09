@@ -16,6 +16,7 @@ export class EditarComponent implements OnInit {
   private CategoriaId: number;
   public Categoria: ICategoria;
   public CategoriaForm: FormGroup;
+  public Carregando: boolean = true;
   public EditandoCategoria = false;
   public selected: any;
   public selectedTipo: number;
@@ -38,9 +39,15 @@ export class EditarComponent implements OnInit {
 
   ReceberCategoria(): void {
     this.categoriaService.GetById(this.CategoriaId).subscribe((categoria: ICategoria) => {
-      this.Categoria = categoria;
-      this.selected = String(this.Categoria.ativo);
-      this.Validation(this.Categoria);
+      if(categoria) {
+        this.Categoria = categoria;
+        this.selected = String(this.Categoria.ativo);
+        this.Validation(this.Categoria);
+        this.Carregando = false;
+      } else {
+        console.log(this.Categoria)
+        this.Carregando = false;
+      }
     });
   }
 

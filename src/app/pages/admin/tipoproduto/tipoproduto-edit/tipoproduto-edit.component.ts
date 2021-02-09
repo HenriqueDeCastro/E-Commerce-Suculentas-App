@@ -13,10 +13,10 @@ import { ITipoProduto } from 'src/app/shared/models/ITipoProduto';
 })
 export class TipoprodutoEditComponent implements OnInit {
 
-
   private TipoProdutoId: number;
   public TipoProduto: ITipoProduto;
   public TipoProdutoForm: FormGroup;
+  public Carregando: boolean = true;
   public EditandoTipoProduto = false;
 
   constructor(private fb: FormBuilder,
@@ -37,8 +37,13 @@ export class TipoprodutoEditComponent implements OnInit {
 
   ReceberTipoCategoria(): void {
     this.tipoProdutoService.GetById(this.TipoProdutoId).subscribe((tipoProduto: ITipoProduto) => {
-      this.TipoProduto = tipoProduto;
-      this.Validation(this.TipoProduto);
+      if(tipoProduto) {
+        this.TipoProduto = tipoProduto;
+        this.Validation(this.TipoProduto);
+        this.Carregando = false;
+      } else {
+        this.Carregando = false;
+      }
     });
   }
 

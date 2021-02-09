@@ -26,8 +26,8 @@ export class AuthService {
       map((response: IUserLogin) => {
         const user = response;
         if (user) {
+          console.log(user.user)
           localStorage.setItem(environment.VariavelToken, user.token);
-          localStorage.setItem(environment.VariavelUsuario, JSON.stringify(user.user));
         }
       })
     );
@@ -47,7 +47,6 @@ export class AuthService {
         const user = response;
         if (user) {
           localStorage.setItem(environment.VariavelToken, user.token);
-          localStorage.setItem(environment.VariavelUsuario, JSON.stringify(user.user));
         }
       })
     );
@@ -59,7 +58,6 @@ export class AuthService {
         const user = response;
         if (user) {
           localStorage.setItem(environment.VariavelToken, user.token);
-          localStorage.setItem(environment.VariavelUsuario, JSON.stringify(user.user));
         }
       })
     );
@@ -68,6 +66,10 @@ export class AuthService {
   LoggedIn() {
     const token = localStorage.getItem(environment.VariavelToken);
     return this.jwtHelpers.isTokenExpired(token);
+  }
+
+  GetUserToken(): IUser {
+    return this.jwtHelpers.decodeToken(localStorage.getItem(environment.VariavelToken));
   }
 
   VerifyAcessRole(roleUser: string): boolean {

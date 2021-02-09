@@ -29,10 +29,7 @@ export const environment = {
   UrlApiMelhorEnvio: 'https://www.melhorenvio.com.br',
 
   // VARIAVEL DE TOKEN DO LOCALSTORAGE
-  VariavelToken: 'token',
-
-  // VARIAVEL DE USUARIO DO LOCALSTORAGE
-  VariavelUsuario: 'user',
+  VariavelToken: 'grZix5vAH_A_E5t0ggRyUQ',
 
   // VARIAVEL DE QUANTIDADE DO LOCALSTORAGE
   VariavelQuantidade: 'quantidade',
@@ -41,7 +38,7 @@ export const environment = {
   VariavelProduto: 'produtos',
 
   // VARIAVEL DE CEP DO LOCALSTORAGE
-  VariavelCEP: 'cep',
+  VariavelCEP: 'uM92t0blAA5b_DlpjYiZKw',
 
   // VARIAVEIS DA TABELA TIPOPRODUTO
   TipoProdutoEncomenda:  1,

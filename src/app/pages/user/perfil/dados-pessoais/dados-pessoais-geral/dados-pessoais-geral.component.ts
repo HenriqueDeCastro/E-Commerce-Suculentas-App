@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/core/services/server/Auth/Auth.service';
 import { IUser } from 'src/app/shared/models/IUser';
 import { environment } from 'src/environments/environment';
 
@@ -15,6 +16,7 @@ export class DadosPessoaisGeralComponent implements OnInit {
   public UserForm: FormGroup;
 
   constructor(private fb: FormBuilder,
+              private authService: AuthService,
               public router: Router) { }
 
   ngOnInit(): void {
@@ -22,7 +24,7 @@ export class DadosPessoaisGeralComponent implements OnInit {
   }
 
   ReceberUserLogado(): void{
-    this.Form(JSON.parse(localStorage.getItem(environment.VariavelUsuario)));
+    this.Form(this.authService.GetUserToken());
   }
 
   Form(user: IUser) {

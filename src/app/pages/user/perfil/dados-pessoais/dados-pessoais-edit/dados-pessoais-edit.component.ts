@@ -28,7 +28,7 @@ export class DadosPessoaisEditComponent implements OnInit {
               private mensagemSnackbar: MensagensService) { }
 
   ngOnInit() {
-    const user = JSON.parse(localStorage.getItem(environment.VariavelUsuario))
+    const user = this.authService.GetUserToken();
     this.ValidationDados(user);
     this.ValidationContatos(user);
   }
@@ -64,7 +64,7 @@ export class DadosPessoaisEditComponent implements OnInit {
   }
 
   Atualizar() {
-    const user = JSON.parse(localStorage.getItem(environment.VariavelUsuario))
+    const user = this.authService.GetUserToken();
 
     if (this.DadosForm.valid && this.ContatosForm.valid) {
       this.Atualizando = true;

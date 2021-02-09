@@ -11,6 +11,7 @@ import { IEndereco } from 'src/app/shared/models/IEndereco';
 import { environment } from 'src/environments/environment';
 import { IUser } from 'src/app/shared/models/IUser';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/core/services/server/Auth/Auth.service';
 
 @Component({
   selector: 'app-endereco-add',
@@ -33,6 +34,7 @@ export class EnderecoAddComponent implements OnInit {
               private enderecoService: EnderecoService,
               private snackbar: SnackbarService,
               private fb: FormBuilder,
+              private authService: AuthService,
               public router: Router,
               private mensagemSnackbar: MensagensService) { }
 
@@ -83,7 +85,7 @@ export class EnderecoAddComponent implements OnInit {
   Registrar() {
     if (this.IdentificacaoForm.valid && this.DomicilioForm.valid) {
       this.Registrando = true;
-      const user: IUser = JSON.parse(localStorage.getItem(environment.VariavelUsuario))
+      const user: IUser = this.authService.GetUserToken();
       let Endereco: IEndereco = {
         descricao: this.IdentificacaoForm.value.apelido,
         cidade: this.IdentificacaoForm.value.cidade,

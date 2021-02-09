@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/core/services/server/Auth/Auth.service';
 import { IUser } from 'src/app/shared/models/IUser';
 import { environment } from 'src/environments/environment';
 
@@ -12,13 +13,14 @@ export class HomeAdminComponent implements OnInit {
 
   public User: IUser;
 
-  constructor(public router: Router) { }
+  constructor(public router: Router,
+              private authService: AuthService) { }
 
   ngOnInit(): void {
     this.ReceberLogado();
   }
 
   ReceberLogado(): void{
-    this.User = JSON.parse(localStorage.getItem(environment.VariavelUsuario));
+    this.User = this.authService.GetUserToken();
   }
 }

@@ -1,63 +1,68 @@
-<ng-container *ngIf="!Categoria">
+<ng-container *ngIf="Carregando">
   <app-spinner></app-spinner>
 </ng-container>
-<ng-container *ngIf="Categoria">
+<ng-container *ngIf="!Carregando">
   <app-voltar></app-voltar>
   <br>
   <br>
   <br>
-  <div class="container-titulo">
-    <h1 class="h1-btn titulo">{{Categoria.nome}}</h1>
-    <div class="btn-titulo">
-      <mat-icon *ngIf="!open" class="material-icons cursor btn-search " matTooltip="Pesquisar" color=primary (click)="openAccordion()">search</mat-icon>
-      <mat-icon *ngIf="open" class="material-icons cursor btn-search " matTooltip="Fechar pesquisa" (click)="openAccordion()">clear</mat-icon>
-
-      <!-- botoes filtro -->
-      <mat-icon class="material-icons cursor btn-mobile" matTooltip="Ordenar" color=accent (click)="openBottomSheet()">swap_vert</mat-icon>
-      <mat-icon class="material-icons cursor btn-pc btn-orderby" matTooltip="Ordenar" color=accent (click)="openDialog()">swap_vert</mat-icon>
-    </div>
-  </div>
-  <br>
-  <br>
-  <br>
-  <div>
-    <mat-accordion>
-      <mat-expansion-panel [expanded]="open == true" class="mat-elevation-z0" hideToggle>
-        <br>
-        <ng-container *ngIf="open">
-          <app-pesquisa (OnTyping)="receberFiltro($event)" (page)="pages = $event" [value]="filter"></app-pesquisa>
-        </ng-container>
-      </mat-expansion-panel>
-    </mat-accordion>
-  </div>
-  <br>
-  <ng-container *ngIf="Produtos.length > 0">
-    <div class="row">
-      <ng-container *ngFor="let produto of Produtos | paginate: { itemsPerPage: 8, currentPage: pages }">
-        <div class="col-md-3">
-          <app-card-produto [produto]="produto" [Categoria]="Categoria"></app-card-produto>
-        </div>
-      </ng-container>
-    </div>
-    <br>
-    <br>
-    <br>
-    <div class="d-flex justify-content-center">
-      <pagination-controls
-        (pageChange)="onChangePage($event)"
-        maxSize="9"
-        autoHide="true"
-        responsive="true"
-        previousLabel="Anterior"
-        nextLabel="Próximo"></pagination-controls>
-    </div>
-    <br>
-    <br>
+  <ng-container *ngIf="!Categoria">
+    <app-not-found></app-not-found>
   </ng-container>
-  <ng-container *ngIf="Produtos.length == 0">
+  <ng-container *ngIf="Categoria">
+    <div class="container-titulo">
+      <h1 class="h1-btn titulo">{{Categoria.nome}}</h1>
+      <div class="btn-titulo">
+        <mat-icon *ngIf="!open" class="material-icons cursor btn-search " matTooltip="Pesquisar" color=primary (click)="openAccordion()">search</mat-icon>
+        <mat-icon *ngIf="open" class="material-icons cursor btn-search " matTooltip="Fechar pesquisa" (click)="openAccordion()">clear</mat-icon>
+
+        <!-- botoes filtro -->
+        <mat-icon class="material-icons cursor btn-mobile" matTooltip="Ordenar" color=accent (click)="openBottomSheet()">swap_vert</mat-icon>
+        <mat-icon class="material-icons cursor btn-pc btn-orderby" matTooltip="Ordenar" color=accent (click)="openDialog()">swap_vert</mat-icon>
+      </div>
+    </div>
     <br>
     <br>
-    <h3 class="titulo centralizar">Não encontramos nenhum(a) {{this.Categoria.nome}} que tenha em seu nome "{{filter}}".🤔 </h3>
+    <br>
+    <div>
+      <mat-accordion>
+        <mat-expansion-panel [expanded]="open == true" class="mat-elevation-z0" hideToggle>
+          <br>
+          <ng-container *ngIf="open">
+            <app-pesquisa (OnTyping)="receberFiltro($event)" (page)="pages = $event" [value]="filter"></app-pesquisa>
+          </ng-container>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+    <br>
+    <ng-container *ngIf="Produtos.length > 0">
+      <div class="row">
+        <ng-container *ngFor="let produto of Produtos | paginate: { itemsPerPage: 8, currentPage: pages }">
+          <div class="col-md-3">
+            <app-card-produto [produto]="produto" [Categoria]="Categoria"></app-card-produto>
+          </div>
+        </ng-container>
+      </div>
+      <br>
+      <br>
+      <br>
+      <div class="d-flex justify-content-center">
+        <pagination-controls
+          (pageChange)="onChangePage($event)"
+          maxSize="9"
+          autoHide="true"
+          responsive="true"
+          previousLabel="Anterior"
+          nextLabel="Próximo"></pagination-controls>
+      </div>
+      <br>
+      <br>
+    </ng-container>
+    <ng-container *ngIf="Produtos.length == 0">
+      <br>
+      <br>
+      <h3 class="titulo centralizar">Não encontramos nenhum(a) {{this.Categoria.nome}} que tenha em seu nome "{{filter}}".🤔 </h3>
+    </ng-container>
   </ng-container>
 </ng-container>
 

@@ -6,6 +6,7 @@ import { RotasSiteComponent } from 'src/app/shared/components/Rotas-Site/Rotas-S
 import { environment } from '../../environments/environment';
 import { ResetScrollService } from 'src/app/core/services/shared/ResetScroll/ResetScroll.service';
 import * as WebFont from 'webfontloader';
+import { IUser } from '../shared/models/IUser';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +18,7 @@ export class AppComponent implements OnInit{
   public userRoles: string[];
   public AcessAdmin: boolean;
   public AcessEmpresa: boolean;
+  public teste: IUser;
 
   constructor(private authService: AuthService,
               private route: Router,

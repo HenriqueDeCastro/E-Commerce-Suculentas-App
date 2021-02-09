@@ -18,6 +18,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
 import { TituloMaisAddComponent } from './titulo-mais-add/titulo-mais-add.component';
 import { VoltarComponent } from './voltar/voltar.component';
 import { EditCarrinhoComponent } from './edit-carrinho/edit-carrinho.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { EditCarrinhoComponent } from './edit-carrinho/edit-carrinho.component';
     BotaoVermaisComponent,
     ListaOrderbyProdutoComponent,
     EditCarrinhoComponent,
-    BotaoQuantidadeComponent
+    BotaoQuantidadeComponent,
+    NotFoundComponent
   ],
   exports: [
     ProgressbarComponent,
@@ -50,7 +52,8 @@ import { EditCarrinhoComponent } from './edit-carrinho/edit-carrinho.component';
     BotaoVermaisComponent,
     ListaOrderbyProdutoComponent,
     EditCarrinhoComponent,
-    BotaoQuantidadeComponent
+    BotaoQuantidadeComponent,
+    NotFoundComponent
   ],
   imports: [
     CommonModule,

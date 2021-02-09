@@ -11,16 +11,16 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(private router: Router) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (localStorage.getItem('token') !== null && req.url.includes(environment.UrlApi)) {
+    if (localStorage.getItem(environment.VariavelToken) !== null && req.url.includes(environment.UrlApi)) {
       const cloneReq = req.clone({
-        headers: req.headers.set('Authorization', `Bearer ${localStorage.getItem('token')}`)
+        headers: req.headers.set('Authorization', `Bearer ${localStorage.getItem(environment.VariavelToken)}`)
       });
       return next.handle(cloneReq).pipe(
         tap(
           succ => { },
           err => {
             if (err.status === 401) {
-              localStorage.removeItem('token');
+              localStorage.removeItem(environment.VariavelToken);
               this.router.navigate(['/user/login']);
             }
           }

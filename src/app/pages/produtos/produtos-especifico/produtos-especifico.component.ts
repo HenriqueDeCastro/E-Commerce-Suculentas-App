@@ -21,6 +21,7 @@ export class ProdutosEspecificoComponent implements OnInit {
 
   public CategoriaId: number;
   public Categoria: ICategoria;
+  public Carregando: boolean = true;
   public link: string;
   public pages = 1;
   public open = false;
@@ -47,8 +48,13 @@ export class ProdutosEspecificoComponent implements OnInit {
 
   ReceberCategoria(): void {
     this.categoriaService.GetByIdCliente(this.CategoriaId).subscribe((categoria: ICategoria) => {
-      this.Categoria = categoria;
-      this.Produtos = this.Categoria.produtos;
+      if(categoria) {
+        this.Categoria = categoria;
+        this.Produtos = this.Categoria.produtos;
+        this.Carregando = false;
+      } else {
+        this.Carregando = false;
+      }
     },
     erro => {
       console.log(erro);

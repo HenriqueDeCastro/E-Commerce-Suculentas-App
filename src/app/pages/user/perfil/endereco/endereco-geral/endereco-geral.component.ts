@@ -10,6 +10,7 @@ import { IUser } from 'src/app/shared/models/IUser';
 import { environment } from 'src/environments/environment';
 import { DialogEnderecoDeleteComponent } from './components/dialog-endereco-delete/dialog-endereco-delete.component';
 import { BottomEnderecoDeleteComponent } from './components/bottom-endereco-delete/bottom-endereco-delete.component';
+import { AuthService } from 'src/app/core/services/server/Auth/Auth.service';
 
 @Component({
   selector: 'app-endereco-geral',
@@ -24,6 +25,7 @@ export class EnderecoGeralComponent implements OnInit {
   constructor(public router: Router,
               public dialog: MatDialog,
               private enderecoService: EnderecoService,
+              private authService: AuthService,
               private snackbar: SnackbarService,
               private bottomSheet: MatBottomSheet,
               private mensagemSnackbar: MensagensService) { }
@@ -34,7 +36,7 @@ export class EnderecoGeralComponent implements OnInit {
   }
 
   ReceberUserLogado(): void{
-    this.User = JSON.parse(localStorage.getItem(environment.VariavelUsuario));
+    this.User = this.authService.GetUserToken();
   }
 
   ReceberEnderecoUser() {

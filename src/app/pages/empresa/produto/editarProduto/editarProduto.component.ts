@@ -27,6 +27,7 @@ export class EditarProdutoComponent implements OnInit {
   public IdentificacaoForm: FormGroup;
   public InformacoesForm: FormGroup;
   public ValoresForm: FormGroup;
+  public Carregando: boolean = true;
   public file: File;
   public fileMini: File;
   public TiposProdutos: ITipoProduto[];
@@ -66,13 +67,19 @@ export class EditarProdutoComponent implements OnInit {
 
   ReceberProdutos(): void {
     this.produtoService.GetById(this.ProdutoId).subscribe((produto: IProduto) => {
-      this.Produto = produto;
-      this.selectedCategoria = produto.categoriaId;
-      this.selectedTipo = produto.tipoProdutoId;
-      this.selectedAtivo = String(this.Produto.ativo);
-      this.ValidationIndetificacao();
-      this.ValidationInformacoes();
-      this.ValidationValores();    },
+      if(produto) {
+        this.Produto = produto;
+        this.selectedCategoria = produto.categoriaId;
+        this.selectedTipo = produto.tipoProdutoId;
+        this.selectedAtivo = String(this.Produto.ativo);
+        this.ValidationIndetificacao();
+        this.ValidationInformacoes();
+        this.ValidationValores();
+        this.Carregando = false;
+      } else {
+        this.Carregando = false;
+      }
+    },
     erro => {
       console.log(erro);
       this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
