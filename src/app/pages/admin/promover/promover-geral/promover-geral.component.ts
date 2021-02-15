@@ -7,7 +7,7 @@ import { MensagensService } from 'src/app/core/services/shared/Mensagens/Mensage
 import { SnackbarService } from 'src/app/core/services/shared/Snackbar/Snackbar.service';
 import { IRole } from 'src/app/shared/models/IRole';
 import { IUser } from 'src/app/shared/models/IUser';
-import { IUserByRole } from 'src/app/shared/models/IUserByrole';
+import { IUserByRole } from '../../../../shared/models/IUserByRole';
 import { BottomDeletePromoverComponent } from './components/bottom-delete-promover/bottom-delete-promover.component';
 import { DialogDeletePromoverComponent } from './components/dialog-delete-promover/dialog-delete-promover.component';
 
