@@ -3,7 +3,6 @@ import { RoleService } from 'src/app/core/services/server/Role/Role.service';
 import { MensagensService } from 'src/app/core/services/shared/Mensagens/Mensagens.service';
 import { SnackbarService } from 'src/app/core/services/shared/Snackbar/Snackbar.service';
 import { IUser } from 'src/app/shared/models/IUser';
-import { IUserByRole } from 'src/app/shared/models/IUserByrole';
 import { IUserRole } from 'src/app/shared/models/IUserRole';
 
 @Component({
