@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { CryptService } from 'src/app/core/services/shared/Crypt/Crypt.service';
 import { IProdutoCarrinho } from 'src/app/shared/models/IProdutoCarrinho';
 import { environment } from 'src/environments/environment';
 
@@ -15,7 +16,8 @@ export class BotoesCarrinhoComponent implements OnInit {
   public TipoEstoque: number;
   @Output() esvaziado = new EventEmitter<boolean>();
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+              private cryptService: CryptService) { }
 
   ngOnInit(): void {
     this.TipoEncomenda = environment.TipoProdutoEncomenda;
@@ -28,28 +30,34 @@ export class BotoesCarrinhoComponent implements OnInit {
   }
 
   RetiraProdutosPorTipo() {
-    let Produtos: IProdutoCarrinho[] = JSON.parse(localStorage.getItem(environment.VariavelProduto));
-    let ProdutosQueContinuam: IProdutoCarrinho[];
-    let QuantidadeQueContinua: number = 0;
+    const ProdutosCrypt = localStorage.getItem(environment.VariavelProduto);
 
-    localStorage.removeItem(environment.VariavelProduto);
-    localStorage.removeItem(environment.VariavelQuantidade);
+    if(ProdutosCrypt) {
+      let Produtos: IProdutoCarrinho[] = this.cryptService.descryptObject(ProdutosCrypt);
+      let ProdutosQueContinuam: IProdutoCarrinho[];
+      let QuantidadeQueContinua: number = 0;
 
-    if(this.Tipo == this.TipoEncomenda)
-    {
-      ProdutosQueContinuam = Produtos.filter(p => p.tipoProdutoId == this.TipoEstoque);
+      localStorage.removeItem(environment.VariavelProduto);
+      localStorage.removeItem(environment.VariavelQuantidade);
+
+      if(this.Tipo == this.TipoEncomenda)
+      {
+        ProdutosQueContinuam = Produtos.filter(p => p.tipoProdutoId == this.TipoEstoque);
+      }
+      else
+      {
+        ProdutosQueContinuam = Produtos.filter(p => p.tipoProdutoId == this.TipoEncomenda);
+      }
+
+      ProdutosQueContinuam.forEach((produto: IProdutoCarrinho) => {
+        QuantidadeQueContinua += produto.quantidadePedido;
+      })
+
+      if(ProdutosQueContinuam && QuantidadeQueContinua) {
+        localStorage.setItem(environment.VariavelProduto, this.cryptService.cryptObject(ProdutosQueContinuam));
+        localStorage.setItem(environment.VariavelQuantidade, this.cryptService.cryptText(String(QuantidadeQueContinua)));
+      }
     }
-    else
-    {
-      ProdutosQueContinuam = Produtos.filter(p => p.tipoProdutoId == this.TipoEncomenda);
-    }
-
-    ProdutosQueContinuam.forEach((produto: IProdutoCarrinho) => {
-      QuantidadeQueContinua += produto.quantidadePedido;
-    })
-
-    localStorage.setItem(environment.VariavelQuantidade, String(QuantidadeQueContinua));
-    localStorage.setItem(environment.VariavelProduto, JSON.stringify(ProdutosQueContinuam));
 
     this.esvaziado.emit(true);
   }

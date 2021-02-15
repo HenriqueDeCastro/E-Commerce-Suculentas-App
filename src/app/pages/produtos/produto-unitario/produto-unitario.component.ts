@@ -4,6 +4,7 @@ import { ProdutoService } from 'src/app/core/services/server/Produto/Produto.ser
 import { MelhorEnvioService } from 'src/app/core/services/server/MelhorEnvio/MelhorEnvio.service';
 import { SnackbarService } from 'src/app/core/services/shared/Snackbar/Snackbar.service';
 import { MensagensService } from 'src/app/core/services/shared/Mensagens/Mensagens.service';
+import { CryptService } from 'src/app/core/services/shared/Crypt/Crypt.service';
 import { IProduto } from 'src/app/shared/models/IProduto';
 import { IProdutoCarrinho } from 'src/app/shared/models/IProdutoCarrinho';
 import { environment } from 'src/environments/environment';
@@ -38,6 +39,7 @@ export class ProdutoUnitarioComponent implements OnInit {
               private fb: FormBuilder,
               private produtoService: ProdutoService,
               private melhorEnvioService: MelhorEnvioService,
+              private cryptService: CryptService,
               private mensagemSnackbar: MensagensService) { }
 
   ngOnInit(): void {
@@ -83,9 +85,11 @@ export class ProdutoUnitarioComponent implements OnInit {
   }
 
   VerificaCEPStorage() {
-    this.CEPStorage = localStorage.getItem(environment.VariavelCEP);
-    if(this.CEPStorage) {
-      this.melhorEnvioService.CalcularFretePacote(this.CEPStorage).subscribe((result: ICalculoFrete) => {
+    const cepCrypt = localStorage.getItem(environment.VariavelCEP);
+    if(cepCrypt) {
+      const cepDescrypt = this.cryptService.descryptText(cepCrypt);
+      this.CEPStorage = cepDescrypt;
+      this.melhorEnvioService.CalcularFretePacote(cepDescrypt).subscribe((result: ICalculoFrete) => {
         this.ValorFrete = result;
       },
       (erro) => {
@@ -100,8 +104,9 @@ export class ProdutoUnitarioComponent implements OnInit {
       this.Calculando = true;
       this.TextoBotaoCalculo = 'Calculando...';
       this.melhorEnvioService.CalcularFretePacote(this.FreteForm.value.cep).subscribe((result: ICalculoFrete) => {
-        this.CEPStorage = this.FreteForm.value.cep;
-        localStorage.setItem(environment.VariavelCEP, this.FreteForm.value.cep);
+        const cepCrypt = this.cryptService.cryptText(this.FreteForm.value.cep)
+        this.CEPStorage = cepCrypt;
+        localStorage.setItem(environment.VariavelCEP, cepCrypt);
         this.ValorFrete = result;
         this.TextoBotaoCalculo = 'Calcular';
         this.Calculando = false;
@@ -124,10 +129,11 @@ export class ProdutoUnitarioComponent implements OnInit {
   }
 
   VerificarProdutoCarrinho(produto: IProduto) {
-    const ProdutosCarrinho = JSON.parse(localStorage.getItem(environment.VariavelProduto));
+    const ProdutosCrypt = localStorage.getItem(environment.VariavelProduto);
 
-    if (ProdutosCarrinho)
+    if (ProdutosCrypt)
     {
+      const ProdutosCarrinho = this.cryptService.descryptObject(ProdutosCrypt);
       const produtoFiltrado: IProdutoCarrinho[] = ProdutosCarrinho.filter(p => p.id == produto.id);
       this.ProdutoCarrinho = produtoFiltrado[0];
 

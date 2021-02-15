@@ -29,13 +29,13 @@ export const environment = {
   UrlApiMelhorEnvio: 'https://www.melhorenvio.com.br',
 
   // VARIAVEL DE TOKEN DO LOCALSTORAGE
-  VariavelToken: 'grZix5vAH_A_E5t0ggRyUQ',
+  VariavelToken: 'Mo-EocXJumIfVw1z1xxXuw',
 
   // VARIAVEL DE QUANTIDADE DO LOCALSTORAGE
-  VariavelQuantidade: 'quantidade',
+  VariavelQuantidade: 'igLdC-4yNrr1jtkekQDC3Q',
 
   // VARIAVEL DE PRODUTO DO LOCALSTORAGE
-  VariavelProduto: 'produtos',
+  VariavelProduto: 'KHNRFu00jvdr1Axdu90bfA',
 
   // VARIAVEL DE CEP DO LOCALSTORAGE
   VariavelCEP: 'uM92t0blAA5b_DlpjYiZKw',
@@ -50,6 +50,9 @@ export const environment = {
   RoleAdmin: 'Admin',
 
   // ROLE EMPRESA
-  RoleEmpresa: 'Empresa'
+  RoleEmpresa: 'Empresa',
+
+  // CHAVE PARA CRIPTOGRAFIA
+  ChaveCript: 'd8BH7WKJ4w2cx11qIjYT7Mv4fkRqsn5PSz16GkYHy7c'
 };
 

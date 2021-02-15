@@ -1,6 +1,7 @@
 /* fallback */
 @font-face {
   font-family: 'Material Icons Outlined';
+  font-display: block;
   font-style: normal;
   font-weight: 400;
   src: url(../../../assets/fonts/material-icon/Material_Icon_OutLine.woff2) format('woff2');
@@ -9,6 +10,7 @@
 /* fallback */
 @font-face {
   font-family: 'Material Icons';
+  font-display: block;
   font-style: normal;
   font-weight: 400;
   src: url(../../../assets/fonts/material-icon/Material_Icon_Regular.woff2) format('woff2');

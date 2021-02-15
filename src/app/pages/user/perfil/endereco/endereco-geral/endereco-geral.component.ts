@@ -7,7 +7,6 @@ import { SnackbarService } from 'src/app/core/services/shared/Snackbar/Snackbar.
 import { MensagensService } from 'src/app/core/services/shared/Mensagens/Mensagens.service';
 import { IEndereco } from 'src/app/shared/models/IEndereco';
 import { IUser } from 'src/app/shared/models/IUser';
-import { environment } from 'src/environments/environment';
 import { DialogEnderecoDeleteComponent } from './components/dialog-endereco-delete/dialog-endereco-delete.component';
 import { BottomEnderecoDeleteComponent } from './components/bottom-endereco-delete/bottom-endereco-delete.component';
 import { AuthService } from 'src/app/core/services/server/Auth/Auth.service';

@@ -21,12 +21,15 @@ export class AuthService {
     return this.http.get<IUser>(`${this.UrlBase}/getByEmail/${emailUser}`);
   }
 
+  GetUserByRole(roleName: string): Observable<IUser[]> {
+    return this.http.get<IUser[]>(`${this.UrlBase}/getByRole/${roleName}`);
+  }
+
   Login(model: any) {
     return this.http.post(`${this.UrlBase}/login`, model).pipe(
       map((response: IUserLogin) => {
         const user = response;
         if (user) {
-          console.log(user.user)
           localStorage.setItem(environment.VariavelToken, user.token);
         }
       })

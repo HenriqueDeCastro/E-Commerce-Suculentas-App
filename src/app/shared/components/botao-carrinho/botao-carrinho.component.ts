@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 import { environment } from 'src/environments/environment';
 import { SnackbarService } from 'src/app/core/services/shared/Snackbar/Snackbar.service';
 import { MensagensService } from 'src/app/core/services/shared/Mensagens/Mensagens.service';
+import { CryptService } from 'src/app/core/services/shared/Crypt/Crypt.service';
 
 @Component({
   selector: 'app-botao-carrinho',
@@ -25,6 +26,7 @@ export class BotaoCarrinhoComponent implements OnInit {
 
   constructor(private snackbar: SnackbarService,
               private location: Location,
+              private cryptService: CryptService,
               private mensagemSnackbar: MensagensService) { }
 
   ngOnInit(): void {
@@ -46,7 +48,10 @@ export class BotaoCarrinhoComponent implements OnInit {
   }
 
   RecuperarProdutosStorage() {
-    this.Produtos = JSON.parse(localStorage.getItem(environment.VariavelProduto));
+    const produtos = localStorage.getItem(environment.VariavelProduto);
+
+    if(produtos)
+    this.Produtos = this.cryptService.descryptObject(produtos);
   }
 
   FiltraProduto(): IProdutoCarrinho[] {
@@ -67,7 +72,11 @@ export class BotaoCarrinhoComponent implements OnInit {
     if (this.ValidaProdutoDisponivel(this.Produto))
     {
       this.RecuperarProdutosStorage();
-      this.QuantidadeCarrinho = JSON.parse(localStorage.getItem(environment.VariavelQuantidade));
+
+      const quantidade = localStorage.getItem(environment.VariavelQuantidade);
+
+      if(quantidade)
+      this.QuantidadeCarrinho = Number(this.cryptService.descryptText(quantidade));
 
       if (this.Produtos == null)
       {
@@ -81,8 +90,8 @@ export class BotaoCarrinhoComponent implements OnInit {
   }
 
   InserirStoragePrimeiraVez() {
-    localStorage.setItem(environment.VariavelProduto, JSON.stringify([this.ConvertProdutoinCarrinho(this.Produto)]));
-    localStorage.setItem(environment.VariavelQuantidade, String(this.Quantidade));
+    localStorage.setItem(environment.VariavelProduto, this.cryptService.cryptObject([this.ConvertProdutoinCarrinho(this.Produto)]));
+    localStorage.setItem(environment.VariavelQuantidade, this.cryptService.cryptText(String(this.Quantidade)));
     this.snackbar.OpenSnackBarSuccess(this.mensagemSnackbar.ProdutoAdicionadoCarrinho);
     this.VerificaTotalProduto();
     this.VoltarPagina();
@@ -102,11 +111,12 @@ export class BotaoCarrinhoComponent implements OnInit {
         });
 
         this.QuantidadeCarrinho = this.QuantidadeCarrinho + this.Quantidade;
-        localStorage.setItem(environment.VariavelQuantidade, String(this.QuantidadeCarrinho));
+
+        localStorage.setItem(environment.VariavelQuantidade, this.cryptService.cryptText(String(this.QuantidadeCarrinho)));
 
         produto.quantidadePedido = produto.quantidadePedido + this.Quantidade;
         this.Produtos.push(produto);
-        localStorage.setItem(environment.VariavelProduto, JSON.stringify(this.Produtos));
+        localStorage.setItem(environment.VariavelProduto, this.cryptService.cryptObject(this.Produtos));
 
         this.snackbar.OpenSnackBarSuccess(this.mensagemSnackbar.ProdutoAdicionadoCarrinho);
 
@@ -120,9 +130,9 @@ export class BotaoCarrinhoComponent implements OnInit {
     }
     else {
       this.Produtos.push(this.ConvertProdutoinCarrinho(this.Produto));
-      localStorage.setItem(environment.VariavelProduto, JSON.stringify(this.Produtos));
+      localStorage.setItem(environment.VariavelProduto, this.cryptService.cryptObject(this.Produtos));
       this.QuantidadeCarrinho = this.QuantidadeCarrinho + this.Quantidade;
-      localStorage.setItem(environment.VariavelQuantidade, String(this.QuantidadeCarrinho));
+      localStorage.setItem(environment.VariavelQuantidade, this.cryptService.cryptText(String(this.QuantidadeCarrinho)));
 
       this.snackbar.OpenSnackBarSuccess(this.mensagemSnackbar.ProdutoAdicionadoCarrinho);
 

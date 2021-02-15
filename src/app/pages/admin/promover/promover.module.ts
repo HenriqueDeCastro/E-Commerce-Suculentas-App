@@ -10,12 +10,18 @@ import { PromoverRoutingModule } from './promover-routing.module';
 import { PromoverComponent } from './promover.component';
 import { PromoverGeralComponent } from './promover-geral/promover-geral.component';
 import { PromoverAddComponent } from './promover-add/promover-add.component';
+import { BottomDeletePromoverComponent } from './promover-geral/components/bottom-delete-promover/bottom-delete-promover.component'
+import { DialogDeletePromoverComponent } from './promover-geral/components/dialog-delete-promover/dialog-delete-promover.component'
+import { ListDeletePromoverComponent } from './promover-geral/components/list-delete-promover/list-delete-promover.component'
 
 @NgModule({
   declarations: [
     PromoverComponent,
     PromoverGeralComponent,
-    PromoverAddComponent
+    PromoverAddComponent,
+    BottomDeletePromoverComponent,
+    DialogDeletePromoverComponent,
+    ListDeletePromoverComponent
   ],
   imports: [
     ReactiveFormsModule,

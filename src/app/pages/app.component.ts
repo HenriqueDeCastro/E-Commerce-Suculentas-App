@@ -7,6 +7,7 @@ import { environment } from '../../environments/environment';
 import { ResetScrollService } from 'src/app/core/services/shared/ResetScroll/ResetScroll.service';
 import * as WebFont from 'webfontloader';
 import { IUser } from '../shared/models/IUser';
+import { CryptService } from '../core/services/shared/Crypt/Crypt.service';
 
 @Component({
   selector: 'app-root',
@@ -23,6 +24,7 @@ export class AppComponent implements OnInit{
   constructor(private authService: AuthService,
               private route: Router,
               private bottomSheet: MatBottomSheet,
+              private cryptService: CryptService,
               public router: Router,
               private resetScroll: ResetScrollService) { }
 
@@ -80,11 +82,12 @@ export class AppComponent implements OnInit{
   }
 
   QuantidadeCarrinho(): any {
-    const quantidade = JSON.parse(localStorage.getItem(environment.VariavelQuantidade));
+    const quantidade = localStorage.getItem(environment.VariavelQuantidade);
 
-    if(quantidade > 0)
+    if(quantidade)
     {
-      return quantidade
+      const quantidadeDescrypt = Number(this.cryptService.descryptText(quantidade));
+      return quantidadeDescrypt
     }
     else {
       return null

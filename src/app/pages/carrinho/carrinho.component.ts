@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CryptService } from 'src/app/core/services/shared/Crypt/Crypt.service';
 import { IProdutoCarrinho } from 'src/app/shared/models/IProdutoCarrinho';
 import { environment } from 'src/environments/environment';
 
@@ -15,7 +16,7 @@ export class CarrinhoComponent implements OnInit {
   public TipoEstoque: number;
   public link: string;
 
-  constructor() { }
+  constructor(private cryptService: CryptService) { }
 
   ngOnInit(): void {
     this.link = environment.UrlApi;
@@ -25,16 +26,27 @@ export class CarrinhoComponent implements OnInit {
   }
 
   ReceberProdutoCarrinho(): void {
-    let Produtos: IProdutoCarrinho[] = JSON.parse(localStorage.getItem(environment.VariavelProduto));
-    if(Produtos) {
+    const produtosCrypt = localStorage.getItem(environment.VariavelProduto);
+    if(produtosCrypt) {
+      let Produtos: IProdutoCarrinho[] = this.cryptService.descryptObject(produtosCrypt);
       this.SepararTiposProdutos(Produtos);
+    } else {
+      this.ProdutosEncomenda = null;
+      this.ProdutosEstoque = null;
     }
   }
 
   ReceberAtt(event: boolean): void {
     if (event) {
-      let Produtos: IProdutoCarrinho[] = JSON.parse(localStorage.getItem(environment.VariavelProduto));
-      this.SepararTiposProdutos(Produtos);
+      const produtosCrypt = localStorage.getItem(environment.VariavelProduto);
+
+      if(produtosCrypt) {
+        let Produtos: IProdutoCarrinho[] = this.cryptService.descryptObject(produtosCrypt);
+        this.SepararTiposProdutos(Produtos);
+      } else {
+        this.ProdutosEncomenda = null;
+        this.ProdutosEstoque = null;
+      }
     }
   }
 

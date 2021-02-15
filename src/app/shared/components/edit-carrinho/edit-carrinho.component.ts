@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IProdutoCarrinho } from '../../models/IProdutoCarrinho';
 import { environment } from 'src/environments/environment';
+import { CryptService } from 'src/app/core/services/shared/Crypt/Crypt.service';
 
 @Component({
   selector: 'app-edit-carrinho',
@@ -14,7 +15,7 @@ export class EditCarrinhoComponent implements OnInit {
   public Quantidade: number;
   public QuantidadeMaxima: number;
 
-  constructor() { }
+  constructor(private cryptService: CryptService) { }
 
   ngOnInit(): void {
     this.Quantidade = this.Produto.quantidadePedido;
@@ -26,24 +27,36 @@ export class EditCarrinhoComponent implements OnInit {
   }
 
   RemoverItem(): void {
-    const Produtos = JSON.parse(localStorage.getItem(environment.VariavelProduto));
+    const ProdutosCrypt = localStorage.getItem(environment.VariavelProduto);
+    const Produtos = this.cryptService.descryptObject(ProdutosCrypt);
     Produtos.forEach((produto, index) => {
       if (produto.id === this.Produto.id) {
         Produtos.splice(index, 1);
       }
     });
 
-    let QuantidadeStorage = JSON.parse(localStorage.getItem(environment.VariavelQuantidade));
+    const QuantidadeCrypt = localStorage.getItem(environment.VariavelQuantidade);
+    let QuantidadeStorage = Number(this.cryptService.descryptText(QuantidadeCrypt));
     QuantidadeStorage = QuantidadeStorage - this.Produto.quantidadePedido;
 
-    localStorage.setItem(environment.VariavelProduto, JSON.stringify(Produtos));
-    localStorage.setItem(environment.VariavelQuantidade, String(QuantidadeStorage));
+    console.log(Produtos)
+    console.log(QuantidadeStorage)
+
+    if(Produtos.length > 0 && QuantidadeStorage > 0) {
+      localStorage.setItem(environment.VariavelProduto, this.cryptService.cryptObject(Produtos));
+      localStorage.setItem(environment.VariavelQuantidade, this.cryptService.cryptText(String(QuantidadeStorage)));
+    } else {
+      localStorage.removeItem(environment.VariavelProduto);
+      localStorage.removeItem(environment.VariavelQuantidade);
+    }
 
     this.Acao.emit('Removido');
   }
 
   EditItem(): void {
-    const Produtos = JSON.parse(localStorage.getItem(environment.VariavelProduto));
+    const ProdutosCrypt = localStorage.getItem(environment.VariavelProduto);
+    const Produtos = this.cryptService.descryptObject(ProdutosCrypt);
+
     let QuantidadeCarrinho = 0;
 
     Produtos.forEach((produto) => {
@@ -53,8 +66,8 @@ export class EditCarrinhoComponent implements OnInit {
       QuantidadeCarrinho = QuantidadeCarrinho + produto.quantidadePedido;
     });
 
-    localStorage.setItem(environment.VariavelProduto, JSON.stringify(Produtos));
-    localStorage.setItem(environment.VariavelQuantidade, String(QuantidadeCarrinho));
+    localStorage.setItem(environment.VariavelProduto, this.cryptService.cryptObject(Produtos));
+    localStorage.setItem(environment.VariavelQuantidade, this.cryptService.cryptText(String(QuantidadeCarrinho)));
 
     this.Acao.emit('Editado');
   }
