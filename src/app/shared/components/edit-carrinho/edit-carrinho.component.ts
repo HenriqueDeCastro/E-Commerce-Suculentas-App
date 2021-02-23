@@ -39,9 +39,6 @@ export class EditCarrinhoComponent implements OnInit {
     let QuantidadeStorage = Number(this.cryptService.descryptText(QuantidadeCrypt));
     QuantidadeStorage = QuantidadeStorage - this.Produto.quantidadePedido;
 
-    console.log(Produtos)
-    console.log(QuantidadeStorage)
-
     if(Produtos.length > 0 && QuantidadeStorage > 0) {
       localStorage.setItem(environment.VariavelProduto, this.cryptService.cryptObject(Produtos));
       localStorage.setItem(environment.VariavelQuantidade, this.cryptService.cryptText(String(QuantidadeStorage)));

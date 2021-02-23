@@ -14,6 +14,8 @@ export class BotoesCarrinhoComponent implements OnInit {
   @Input() Tipo: number;
   public TipoEncomenda: number;
   public TipoEstoque: number;
+  public IdEstoque: number;
+  public IdEncomenda: number;
   @Output() esvaziado = new EventEmitter<boolean>();
 
   constructor(private router: Router,
@@ -22,6 +24,8 @@ export class BotoesCarrinhoComponent implements OnInit {
   ngOnInit(): void {
     this.TipoEncomenda = environment.TipoProdutoEncomenda;
     this.TipoEstoque = environment.TipoProdutoEstoque;
+    this.IdEstoque = environment.TipoProdutoEstoque;
+    this.IdEncomenda = environment.TipoProdutoEncomenda;
   }
 
   LimparCarrinho(): void {
@@ -60,5 +64,9 @@ export class BotoesCarrinhoComponent implements OnInit {
     }
 
     this.esvaziado.emit(true);
+  }
+
+  Finalizar(id: number) {
+    this.router.navigate(['/vendas/finalizar/' + id]);
   }
 }

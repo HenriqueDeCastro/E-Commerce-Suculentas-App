@@ -1,0 +1,26 @@
+<ng-container *ngIf="Produtos.length == 0">
+  <app-spinner></app-spinner>
+</ng-container>
+<ng-container *ngIf="Produtos.length > 0">
+  <app-voltar></app-voltar>
+  <br>
+  <br>
+  <br>
+  <h1 class="titulo centralizar">Finalizar Compra</h1>
+  <br>
+  <br>
+  <h1 class="titulo" *ngIf="Produtos.length > 1">Produtos</h1>
+  <h1 class="titulo" *ngIf="Produtos.length == 1">Produto</h1>
+  <br>
+  <div class="row">
+    <ng-container *ngFor="let produto of Produtos">
+      <div class="col-sm-6">
+        <app-produtos-venda [produto]=produto (atualizacao)="ReceberAtt($event)"></app-produtos-venda>
+      </div>
+    </ng-container>
+  </div>
+  <mat-divider></mat-divider>
+  <br>
+  <h1 class="titulo">Endereço</h1>
+</ng-container>
+

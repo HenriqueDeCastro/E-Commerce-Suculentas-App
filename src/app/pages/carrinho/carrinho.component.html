@@ -4,7 +4,13 @@
 <br>
 <h1 class="titulo-lista responsive">Carrinho</h1>
 <br>
+<ng-container *ngIf="(ProdutosEncomenda && ProdutosEncomenda.length > 0) && (ProdutosEstoque && ProdutosEstoque.length > 0)">
+  <div class="alert alert-warning" role="alert">
+    Produtos por encomenda são vendidos separadamentes
+  </div>
+</ng-container>
 <ng-container *ngIf="ProdutosEncomenda && ProdutosEncomenda.length > 0">
+  <br>
   <h2 class="titulo-lista responsive">Produtos por Encomenda</h2>
   <br>
   <div class="row">
@@ -42,5 +48,5 @@
 <ng-container *ngIf="(!ProdutosEncomenda && !ProdutosEstoque) || (ProdutosEncomenda.length == 0 && ProdutosEstoque.length == 0)">
   <br>
   <br>
-  <h2 class="titulo centralizar-vertical centralizar"> Não há produtos no carrinho ainda 😞 !</h2>
+  <h1 class="titulo centralizar-vertical centralizar"> Não há produtos no carrinho ainda 😞 !</h1>
 </ng-container>
