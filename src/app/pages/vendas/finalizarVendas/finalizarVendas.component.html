@@ -67,7 +67,7 @@
     <br>
   </ng-container>
   <ng-container *ngIf="EnderecoSelecionado && ValorFrete">
-    <h3 class="titulo negrito">O Frete fica no valor de {{ValorFrete.price | currency:'BRL'}} para {{this.EnderecoSelecionado.cep| mask:'00000-000'}}.
+    <h3 class="titulo">O Frete fica no valor de <span class="negrito">{{ValorFrete.price | currency:'BRL'}}</span> para {{this.EnderecoSelecionado.cep| mask:'00000-000'}}.
       <div class="titulo">Entregue por <span style="color:var(--vermelho)">{{ValorFrete.company.name}}©</span></div>
     </h3>
     <br>
