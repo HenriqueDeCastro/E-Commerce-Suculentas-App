@@ -11,7 +11,7 @@
     <br>
     <form [formGroup]="DadosForm" autocomplete="off">
       <mat-form-field appearance="fill" class="w-100">
-        <mat-label> Nome completo </mat-label>
+        <mat-label> Nome completo <span class="asteristico-obrigatorio">*</span></mat-label>
         <input matInput formControlName="fullname">
         <mat-icon class="material-icons-outlined" matSuffix>person</mat-icon>
         <mat-error *ngIf="DadosForm.get('fullname').hasError('required')" class="invalid-feedback">Nome é obrigatório</mat-error>
@@ -21,7 +21,7 @@
       <br>
       <br>
       <mat-form-field appearance="fill" class="w-100">
-        <mat-label> CPF </mat-label>
+        <mat-label> CPF <span class="asteristico-obrigatorio">*</span></mat-label>
         <input matInput formControlName="cpf" mask="000.000.000/00">
         <mat-icon class="material-icons-outlined" matSuffix>person</mat-icon>
         <mat-error *ngIf="DadosForm.get('cpf').hasError('required')" class="invalid-feedback">CPF é obrigatório</mat-error>
@@ -31,7 +31,7 @@
       <br>
       <br>
       <mat-form-field appearance="fill" class="w-100">
-        <mat-label> Data de nascimento </mat-label>
+        <mat-label> Data de nascimento <span class="asteristico-obrigatorio">*</span></mat-label>
         <input matInput formControlName="dataNascimento" [dropSpecialCharacters]="false" mask="00/00/0000">
         <mat-icon class="material-icons-outlined" matSuffix>cake</mat-icon>
         <mat-error *ngIf="DadosForm.get('dataNascimento').hasError('required')" class="invalid-feedback">Data de Nascimento é obrigatória</mat-error>
@@ -51,7 +51,7 @@
     <br>
     <form [formGroup]="ContatosForm" (ngSubmit)="Atualizar()" autocomplete="off">
       <mat-form-field appearance="fill" class="w-100">
-        <mat-label> Celular + DDD </mat-label>
+        <mat-label> Celular + DDD <span class="asteristico-obrigatorio">*</span></mat-label>
         <input matInput formControlName="phoneNumber" mask="(00)00000-0000">
         <mat-icon class="material-icons-outlined" matSuffix>phone_iphone</mat-icon>
         <mat-error *ngIf="ContatosForm.get('phoneNumber').hasError('required')" class="invalid-feedback">Número é obrigatório</mat-error>

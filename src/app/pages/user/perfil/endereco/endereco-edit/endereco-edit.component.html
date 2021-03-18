@@ -10,8 +10,9 @@
     <app-not-found></app-not-found>
   </ng-container>
   <ng-container *ngIf="Endereco">
-    <h1 class="titulo">Editar Endereço</h1>
+    <h1 class="titulo centralizar">Editar Endereço</h1>
     <br>
+    <app-alert-campos-obrigatorios></app-alert-campos-obrigatorios>
     <br>
     <mat-vertical-stepper [linear]="true" #stepper>
       <!-- Identificação -->
@@ -22,11 +23,12 @@
           <mat-form-field  appearance="fill" class="w-100">
             <mat-label>Apelido</mat-label>
             <input matInput formControlName="apelido">
+            <mat-hint>Ex: Casa, Trabalho, Vizinho...</mat-hint>
           </mat-form-field>
           <br>
           <br>
           <mat-form-field appearance="fill" class="w-100">
-            <mat-label>Estado</mat-label>
+            <mat-label>Estado <span class="asteristico-obrigatorio">*</span></mat-label>
               <mat-select formControlName="estado">
               <mat-option *ngFor="let estado of Estados" (click)="SelecaoEstado(estado.id)" [value]="estado.uf">
                 {{estado.nome}}
@@ -43,7 +45,7 @@
           <br>
           <br>
           <mat-form-field appearance="fill" class="w-100">
-            <mat-label>Cidade</mat-label>
+            <mat-label>Cidade <span class="asteristico-obrigatorio">*</span></mat-label>
               <mat-select formControlName="cidade">
               <mat-option *ngFor="let cidade of Cidades"[value]="cidade.nome">
                 {{cidade.nome}}
@@ -54,7 +56,7 @@
           <br>
           <br>
           <mat-form-field  appearance="fill" class="w-100">
-            <mat-label>Bairro</mat-label>
+            <mat-label>Bairro <span class="asteristico-obrigatorio">*</span></mat-label>
             <input matInput formControlName="bairro">
             <mat-error *ngIf="IdentificacaoForm.get('bairro').hasError('required')" class="invalid-feedback">Bairro é obrigatório</mat-error>
           </mat-form-field>
@@ -71,7 +73,7 @@
         <br>
         <form [formGroup]="DomicilioForm" (ngSubmit)="Atualizar()" autocomplete="off">
           <mat-form-field  appearance="fill" class="w-100">
-            <mat-label>CEP</mat-label>
+            <mat-label>CEP <span class="asteristico-obrigatorio">*</span></mat-label>
             <input matInput formControlName="cep" mask="00000-000">
             <mat-error *ngIf="DomicilioForm.get('cep').hasError('required')" class="invalid-feedback">CEP é obrigatório</mat-error>
             <mat-error *ngIf="DomicilioForm.get('cep').hasError('minlength')" class="invalid-feedback">Insira um CEP valido</mat-error>
@@ -79,14 +81,14 @@
           <br>
           <br>
           <mat-form-field  appearance="fill" class="w-100">
-            <mat-label>Rua</mat-label>
+            <mat-label>Rua <span class="asteristico-obrigatorio">*</span></mat-label>
             <input matInput formControlName="rua">
             <mat-error *ngIf="DomicilioForm.get('rua').hasError('required')" class="invalid-feedback">Rua é obrigatória</mat-error>
           </mat-form-field>
           <br>
           <br>
           <mat-form-field  appearance="fill" class="w-100">
-            <mat-label>Número</mat-label>
+            <mat-label>Número <span class="asteristico-obrigatorio">*</span></mat-label>
             <input matInput type="number" formControlName="numero">
             <mat-error *ngIf="DomicilioForm.get('numero').hasError('required')" class="invalid-feedback">Número é obrigatório</mat-error>
           </mat-form-field>

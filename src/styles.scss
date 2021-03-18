@@ -7,6 +7,10 @@
   src: local("Bakerie"), url(./assets/fonts/bakerie-woff/BakerieRoughWide-Medium.woff) format("woff");
 }
 
+.wf-bakerie-n4-loading .titulo-site {
+  display: none;
+}
+
 @import '~./app/shared/SCSS/botoes';
 @import '~./app/shared/SCSS/custom-theme';
 @import '~./app/shared/SCSS/icons';

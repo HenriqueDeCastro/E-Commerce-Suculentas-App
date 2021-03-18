@@ -21,6 +21,66 @@
   </div>
   <mat-divider></mat-divider>
   <br>
-  <h1 class="titulo">Endereço</h1>
-</ng-container>
+  <ng-container *ngIf="!Enderecos">
+    <h1 class="titulo">Endereços</h1>
+    <br>
+    <br>
+    <app-progressbar></app-progressbar>
+    <br>
+    <br>
+  </ng-container>
+  <ng-container *ngIf="Enderecos && Enderecos.length > 0">
+    <h1 class="titulo">Endereços
+      <h3 class="titulo">Selecione o endereço de entrega</h3>
+    </h1>
+    <mat-radio-group class="radios-endereco-group" [(ngModel)]="EnderecoSelecionado">
+      <mat-radio-button color=primary class="radios-endereco-button" *ngFor="let endereco of Enderecos" (click)="SelecionaEndereco(endereco)" [value]="endereco">
+        <ng-container *ngIf="!endereco.descricao">
+          <span class="negrito quebralinha-matline">{{endereco.rua}}, {{endereco.numero}} - {{endereco.bairro}}</span> ({{endereco.cep}})
+        </ng-container>
+        <ng-container *ngIf="endereco.descricao">
+          <span class="negrito quebralinha-matline">{{endereco.descricao}}</span> ({{endereco.cep}})
+        </ng-container>
+      </mat-radio-button>
+    </mat-radio-group>
+    <button mat-button class="btn-responsive" color="primary" (click)="router.navigate(['user/perfil/endereco'])">Gerenciar meus endereços</button>
+    <br>
+  </ng-container>
+  <ng-container *ngIf="Enderecos && Enderecos.length == 0">
+    <h1 class="titulo">Endereços</h1>
+    <br>
+    <h3 class="titulo centralizar">Clique no botão abaixo para adicionar um endereço</h3>
+    <br>
+    <div class="form-group col-md-12 centralizar">
+      <button mat-flat-button class="btn-responsive" color="primary" (click)="router.navigate(['user/perfil/endereco'])">Meus Endereços</button>
+    </div>
+  </ng-container>
+  <br>
+  <mat-divider></mat-divider>
+  <br>
+  <h1 class="titulo">Frete</h1>
+  <ng-container *ngIf="EnderecoSelecionado && !ValorFrete">
+    <br>
+    <br>
+    <app-progressbar></app-progressbar>
+    <br>
+    <br>
+  </ng-container>
+  <ng-container *ngIf="EnderecoSelecionado && ValorFrete">
+    <h3 class="titulo negrito">O Frete fica no valor de {{ValorFrete.price | currency:'BRL'}} para {{this.EnderecoSelecionado.cep| mask:'00000-000'}}.
+      <div class="titulo">Entregue por <span style="color:var(--vermelho)">{{ValorFrete.company.name}}©</span></div>
+    </h3>
+    <br>
+  </ng-container>
+  <ng-container *ngIf="!EnderecoSelecionado">
+    <br>
+    <h3 class="titulo centralizar">Seleciona um endereço de entrega!!!</h3>
+    <br>
+    <br>
+  </ng-container>
+  <mat-divider></mat-divider>
+  <br>
+  <h1 class="titulo">Total</h1>
+  <br>
 
+</ng-container>

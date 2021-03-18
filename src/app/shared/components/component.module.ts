@@ -19,6 +19,7 @@ import { TituloMaisAddComponent } from './titulo-mais-add/titulo-mais-add.compon
 import { VoltarComponent } from './voltar/voltar.component';
 import { EditCarrinhoComponent } from './edit-carrinho/edit-carrinho.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { AlertCamposObrigatoriosComponent } from './alert-campos-obrigatorios/alert-campos-obrigatorios.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     ListaOrderbyProdutoComponent,
     EditCarrinhoComponent,
     BotaoQuantidadeComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    AlertCamposObrigatoriosComponent
   ],
   exports: [
     ProgressbarComponent,
@@ -53,7 +55,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     ListaOrderbyProdutoComponent,
     EditCarrinhoComponent,
     BotaoQuantidadeComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    AlertCamposObrigatoriosComponent
   ],
   imports: [
     CommonModule,
