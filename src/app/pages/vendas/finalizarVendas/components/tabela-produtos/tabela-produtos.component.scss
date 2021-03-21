@@ -1,0 +1,31 @@
+table {
+  width: 100%;
+}
+
+.mat-table{
+  border-radius: 20px;
+  overflow:hidden !important;
+}
+
+tr.mat-footer-row {
+  font-weight: bold;
+}
+
+.coluna-valor {
+  text-align: center;
+}
+
+th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
+  border-bottom-width: 0px !important;
+}
+
+.mat-table-sticky {
+  border-top: 6px solid var(--cinza-fundo) ;
+}
+
+table tr:last-child td /*To remove the last border*/
+{
+  border-bottom:0 solid
+}
+
+

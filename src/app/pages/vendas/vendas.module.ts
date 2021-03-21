@@ -8,7 +8,8 @@ import { CommonModule } from '@angular/common';
 import { ComponentModule } from '../../shared/components/component.module';
 
 // COMPONENTS
-import { ProdutosVendaComponent } from './finalizarVendas/components/produtos-venda/produtos-venda.component'
+import { ProdutosVendaComponent } from './finalizarVendas/components/produtos-venda/produtos-venda.component';
+import { TabelaProdutosComponent } from './finalizarVendas/components/tabela-produtos/tabela-produtos.component';
 
 // PAGES
 import { VendasComponent } from './vendas.component';
@@ -18,7 +19,8 @@ import { FinalizarVendasComponent } from './finalizarVendas/finalizarVendas.comp
   declarations: [
     VendasComponent,
     FinalizarVendasComponent,
-    ProdutosVendaComponent
+    ProdutosVendaComponent,
+    TabelaProdutosComponent
   ],
   imports: [
     MaterialModule,

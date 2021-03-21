@@ -81,6 +81,14 @@
   <mat-divider></mat-divider>
   <br>
   <h1 class="titulo">Total</h1>
-  <br>
-
+  <ng-container *ngIf="!EnderecoSelecionado">
+    <br>
+    <h3 class="titulo centralizar">Seleciona um endereço de entrega!!!</h3>
+    <br>
+    <br>
+  </ng-container>
+  <ng-container *ngIf="Produtos && EnderecoSelecionado && ValorFrete">
+    <br>
+    <app-tabela-produtos [Produtos]="Produtos" [ValorFrete]="ValorFrete.price"></app-tabela-produtos>
+  </ng-container>
 </ng-container>

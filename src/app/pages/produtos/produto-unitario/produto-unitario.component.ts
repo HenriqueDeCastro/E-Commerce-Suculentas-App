@@ -113,7 +113,6 @@ export class ProdutoUnitarioComponent implements OnInit {
       },
       (erro) => {
         console.log(erro);
-        this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidorMelhorEnvio);
         this.TextoBotaoCalculo = 'Calcular';
         this.Calculando = false;
       });

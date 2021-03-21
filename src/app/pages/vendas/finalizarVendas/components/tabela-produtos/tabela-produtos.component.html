@@ -1,0 +1,30 @@
+<ng-container *ngIf="!Carregando">
+  <br>
+  <br>
+  <app-progressbar></app-progressbar>
+  <br>
+  <br>
+</ng-container>
+<ng-container *ngIf="Carregando">
+  <div class="mat-elevation-z0">
+    <table mat-table [dataSource]="DataSource">
+      <!-- Item Column -->
+      <ng-container matColumnDef="Item">
+        <th mat-header-cell *matHeaderCellDef> Item </th>
+        <td mat-cell *matCellDef="let transaction"> {{transaction.item}} </td>
+        <td mat-footer-cell *matFooterCellDef> Total </td>
+      </ng-container>
+
+      <!-- Cost Column -->
+      <ng-container matColumnDef="Valor">
+        <th mat-header-cell *matHeaderCellDef class="coluna-valor"> Valor </th>
+        <td mat-cell *matCellDef="let transaction" class="coluna-valor"> {{transaction.valor | currency: 'BRL'}} </td>
+        <td mat-footer-cell *matFooterCellDef class="coluna-valor"> {{getTotalCost() | currency: 'BRL'}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
+    </table>
+  </div>
+</ng-container>
