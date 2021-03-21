@@ -21,13 +21,14 @@
     </ng-container>
   </div>
   <br>
+  <app-subtotal [Produtos]="ProdutosEncomenda"></app-subtotal>
+  <br>
   <br>
   <app-botoes-carrinho [Tipo]=TipoEncomenda (esvaziado)="ReceberAtt($event)"></app-botoes-carrinho>
 </ng-container>
 <ng-container *ngIf="(ProdutosEncomenda && ProdutosEstoque) && (ProdutosEncomenda.length > 0 && ProdutosEstoque.length > 0)">
   <br>
   <br>
-  <mat-divider></mat-divider>
   <br>
   <br>
 </ng-container>
@@ -41,6 +42,8 @@
       </div>
     </ng-container>
   </div>
+  <br>
+  <app-subtotal [Produtos]="ProdutosEstoque"></app-subtotal>
   <br>
   <br>
   <app-botoes-carrinho [Tipo]=TipoEstoque (esvaziado)="ReceberAtt($event)"></app-botoes-carrinho>

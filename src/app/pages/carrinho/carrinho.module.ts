@@ -13,6 +13,7 @@ import { ProdutoCarrrinhoComponent } from './components/produto-carrrinho/produt
 import { BotoesCarrinhoComponent } from './components/botoes-carrinho/botoes-carrinho.component';
 import { DialogEditCarrinhoComponent } from './components/dialog-edit-carrinho/dialog-edit-carrinho.component';
 import { BottoomEditCarrinhoComponent } from './components/bottoom-edit-carrinho/bottoom-edit-carrinho.component';
+import { SubtotalComponent } from './components/subtotal/subtotal.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { BottoomEditCarrinhoComponent } from './components/bottoom-edit-carrinho
     ProdutoCarrrinhoComponent,
     BotoesCarrinhoComponent,
     DialogEditCarrinhoComponent,
-    BottoomEditCarrinhoComponent
+    BottoomEditCarrinhoComponent,
+    SubtotalComponent
   ],
   imports: [
     MaterialModule,
