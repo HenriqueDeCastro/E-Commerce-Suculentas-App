@@ -11,6 +11,7 @@ import { ComponentModule } from '../../shared/components/component.module';
 import { ProdutosVendaComponent } from './finalizarVendas/components/produtos-venda/produtos-venda.component';
 import { TabelaProdutosComponent } from './finalizarVendas/components/tabela-produtos/tabela-produtos.component';
 import { SelecaoEnderecosComponent } from './finalizarVendas/components/selecao-enderecos/selecao-enderecos.component';
+import { BotaoVendaComponent } from './finalizarVendas/components/botao-venda/botao-venda.component';
 
 // PAGES
 import { VendasComponent } from './vendas.component';
@@ -22,7 +23,8 @@ import { FinalizarVendasComponent } from './finalizarVendas/finalizarVendas.comp
     FinalizarVendasComponent,
     ProdutosVendaComponent,
     TabelaProdutosComponent,
-    SelecaoEnderecosComponent
+    SelecaoEnderecosComponent,
+    BotaoVendaComponent
   ],
   imports: [
     MaterialModule,

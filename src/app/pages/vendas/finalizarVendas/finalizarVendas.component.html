@@ -9,6 +9,7 @@
   <h1 class="titulo centralizar">Finalizar Compra</h1>
   <br>
   <br>
+  <!-- PRODUTOS -->
   <h1 class="titulo" *ngIf="Produtos.length > 1">Produtos</h1>
   <h1 class="titulo" *ngIf="Produtos.length == 1">Produto</h1>
   <br>
@@ -21,6 +22,7 @@
   </div>
   <mat-divider></mat-divider>
   <br>
+  <!-- ENDEREÇOS -->
   <ng-container *ngIf="!Enderecos">
     <h1 class="titulo">Endereços</h1>
     <br>
@@ -35,6 +37,7 @@
   <br>
   <mat-divider></mat-divider>
   <br>
+  <!-- FRETE -->
   <h1 class="titulo">Frete</h1>
   <ng-container *ngIf="EnderecoSelecionado">
     <ng-container *ngIf="!ValorFrete && TipoId == IdEstoque">
@@ -48,7 +51,7 @@
       <h3 class="titulo">Texto da isabela</h3>
       <br>
     </ng-container>
-    <ng-container *ngIf="ValorFrete">
+    <ng-container *ngIf="ValorFrete && TipoId == IdEstoque">
       <h3 class="titulo">O Frete fica no valor de <span class="negrito">{{ValorFrete.price | currency:'BRL'}}</span> para {{this.EnderecoSelecionado.cep| mask:'00000-000'}}.
         <div class="titulo">Entregue por <span style="color:var(--vermelho)">{{ValorFrete.company.name}}©</span></div>
       </h3>
