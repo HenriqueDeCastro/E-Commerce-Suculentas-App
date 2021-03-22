@@ -7,10 +7,10 @@
   <br>
   <br>
   <br>
-  <ng-container *ngIf="!Produto">
+  <ng-container *ngIf="!Produto || !Produto.ativo">
     <app-not-found></app-not-found>
   </ng-container>
-  <ng-container *ngIf="Produto">
+  <ng-container *ngIf="Produto && Produto.ativo">
     <div class="mobile">
       <h1 class="titulo centralizar">{{Produto.nome}}</h1>
       <br>
@@ -25,11 +25,11 @@
           Os produtos do site são reais e tentamos sempre enviar o mais idêntico possível da foto disposta,
           mas cada ítem é único, sendo assim natural a variabilidade de tamanho ou coloração.
         </div>
+        <div *ngIf="Produto.tipoProdutoId === IdEncomenda" class="alert alert-warning" role="alert">
+          Só entregamos esse produto para as cidades de Santo André, São Bernardo do Campo, São Caetano do Sul e Mauá
+        </div>
         <div *ngIf="ProdutoCarrinho" class="alert alert-primary" role="alert">
           Você já adicionou {{ProdutoCarrinho.quantidadePedido}} {{ProdutoCarrinho.nome}} ao carrinho!
-        </div>
-        <div *ngIf="Produto.tipoProdutoId === IdEncomenda" class="alert alert-danger" role="alert">
-          Só entregamos esse produto para a região do Grande ABC Paulista!
         </div>
       </div>
       <div class="col-sm-7">
@@ -86,9 +86,16 @@
           <br>
           <!-- ENCOMENDAR -->
           <ng-container *ngIf="Produto.tipoProdutoId === IdEncomenda">
+            <div mat-subheader class="cabecalho-lista negrito">Prazo de Entrega</div>
+            <mat-list-item class="tamanho-matlineitem">
+              <mat-icon class="material-icons-outlined prazo" mat-list-icon>timer</mat-icon>
+              <div mat-line class="quebralinha-matline negrito prazo">Produtos por encomenda tem um prazo de entrega estimado em 30 dias</div>
+              <div mat-line class="quebralinha-matline">Compre com antecedência!</div>
+            </mat-list-item>
+            <br>
             <div mat-subheader class="cabecalho-lista negrito">Encomendar</div>
             <mat-list-item class="tamanho-matlineitem">
-              <mat-icon class="material-icons-outlined estoque" mat-list-icon>timer</mat-icon>
+              <mat-icon class="material-icons-outlined estoque" mat-list-icon>local_mall</mat-icon>
               <div mat-line class="quebralinha-matline negrito estoque">Vendemos {{Produto.nome}} apenas por encomendas</div>
               <div mat-line *ngIf="Produto.quantidadeMaxima == 1" class="quebralinha-matline estoque">Limite maximo de compras: {{Produto.quantidadeMaxima}} unidade</div>
               <div mat-line *ngIf="Produto.quantidadeMaxima > 1" class="quebralinha-matline estoque">Limite maximo de compras: {{Produto.quantidadeMaxima}} unidades</div>

@@ -6,10 +6,10 @@
   <br>
   <br>
   <br>
-  <ng-container *ngIf="!Categoria">
+  <ng-container *ngIf="!Categoria || !Categoria.ativo">
     <app-not-found></app-not-found>
   </ng-container>
-  <ng-container *ngIf="Categoria">
+  <ng-container *ngIf="Categoria && Categoria.ativo">
     <div class="container-titulo">
       <h1 class="h1-btn titulo">{{Categoria.nome}}</h1>
       <div class="btn-titulo">

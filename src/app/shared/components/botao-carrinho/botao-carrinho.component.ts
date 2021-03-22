@@ -45,6 +45,10 @@ export class BotaoCarrinhoComponent implements OnInit {
       if(produto)
         this.Desabilitar = this.ValidaQuantidadeDisponivel(produto);
     }
+
+    if(!this.Produto.ativo) {
+      this.Desabilitar = true;
+    }
   }
 
   RecuperarProdutosStorage() {

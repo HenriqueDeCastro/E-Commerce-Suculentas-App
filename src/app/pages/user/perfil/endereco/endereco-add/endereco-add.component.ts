@@ -4,11 +4,10 @@ import { SnackbarService } from 'src/app/core/services/shared/Snackbar/Snackbar.
 import { MensagensService } from 'src/app/core/services/shared/Mensagens/Mensagens.service';
 import { IEstado } from 'src/app/shared/models/IEstado';
 import { ICidade } from 'src/app/shared/models/ICidade';
-import { EstadosService } from '../../../../../core/services/server/Estados/Estados.service';
-import { CidadesService } from '../../../../../core/services/server/Cidades/Cidades.service';
+import { EstadosService } from '../../../../../core/services/shared/Estados/Estados.service';
+import { CidadesService } from '../../../../../core/services/shared/Cidades/Cidades.service';
 import { EnderecoService } from '../../../../../core/services/server/Endereco/Endereco.service';
 import { IEndereco } from 'src/app/shared/models/IEndereco';
-import { environment } from 'src/environments/environment';
 import { IUser } from 'src/app/shared/models/IUser';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/server/Auth/Auth.service';

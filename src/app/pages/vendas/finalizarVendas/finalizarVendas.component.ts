@@ -86,10 +86,12 @@ export class FinalizarVendasComponent implements OnInit {
     });
   }
 
-  SelecionaEndereco(endereco: IEndereco) {
+  ReceberEndereco(endereco: IEndereco) {
     this.ValorFrete = null;
     this.EnderecoSelecionado = endereco;
-    this.CalcularFrete();
+    if(this.TipoId == this.IdEstoque) {
+      this.CalcularFrete();
+    }
   }
 
   CalcularFrete() {

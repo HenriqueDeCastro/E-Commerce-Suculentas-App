@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CidadesService } from 'src/app/core/services/server/Cidades/Cidades.service';
+import { CidadesService } from 'src/app/core/services/shared/Cidades/Cidades.service';
 import { EnderecoService } from 'src/app/core/services/server/Endereco/Endereco.service';
-import { EstadosService } from 'src/app/core/services/server/Estados/Estados.service';
+import { EstadosService } from 'src/app/core/services/shared/Estados/Estados.service';
 import { SnackbarService } from 'src/app/core/services/shared/Snackbar/Snackbar.service';
 import { MensagensService } from 'src/app/core/services/shared/Mensagens/Mensagens.service';
 import { ICidade } from 'src/app/shared/models/ICidade';

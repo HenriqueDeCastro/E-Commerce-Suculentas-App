@@ -29,48 +29,31 @@
     <br>
     <br>
   </ng-container>
-  <ng-container *ngIf="Enderecos && Enderecos.length > 0">
-    <h1 class="titulo">Endereços
-      <h3 class="titulo">Selecione o endereço de entrega</h3>
-    </h1>
-    <mat-radio-group class="radios-endereco-group" [(ngModel)]="EnderecoSelecionado">
-      <mat-radio-button color=primary class="radios-endereco-button" *ngFor="let endereco of Enderecos" (click)="SelecionaEndereco(endereco)" [value]="endereco">
-        <ng-container *ngIf="!endereco.descricao">
-          <span class="negrito quebralinha-matline">{{endereco.rua}}, {{endereco.numero}} - {{endereco.bairro}}</span> ({{endereco.cep}})
-        </ng-container>
-        <ng-container *ngIf="endereco.descricao">
-          <span class="negrito quebralinha-matline">{{endereco.descricao}}</span> ({{endereco.cep}})
-        </ng-container>
-      </mat-radio-button>
-    </mat-radio-group>
-    <button mat-button class="btn-responsive" color="primary" (click)="router.navigate(['user/perfil/endereco'])">Gerenciar meus endereços</button>
-    <br>
-  </ng-container>
-  <ng-container *ngIf="Enderecos && Enderecos.length == 0">
-    <h1 class="titulo">Endereços</h1>
-    <br>
-    <h3 class="titulo centralizar">Clique no botão abaixo para adicionar um endereço</h3>
-    <br>
-    <div class="form-group col-md-12 centralizar">
-      <button mat-flat-button class="btn-responsive" color="primary" (click)="router.navigate(['user/perfil/endereco'])">Meus Endereços</button>
-    </div>
+  <ng-container *ngIf="Enderecos">
+    <app-selecao-enderecos [Enderecos]="Enderecos" [TipoProduto]="TipoId" (EnderecoEnviado)="ReceberEndereco($event)"></app-selecao-enderecos>
   </ng-container>
   <br>
   <mat-divider></mat-divider>
   <br>
   <h1 class="titulo">Frete</h1>
-  <ng-container *ngIf="EnderecoSelecionado && !ValorFrete">
-    <br>
-    <br>
-    <app-progressbar></app-progressbar>
-    <br>
-    <br>
-  </ng-container>
-  <ng-container *ngIf="EnderecoSelecionado && ValorFrete">
-    <h3 class="titulo">O Frete fica no valor de <span class="negrito">{{ValorFrete.price | currency:'BRL'}}</span> para {{this.EnderecoSelecionado.cep| mask:'00000-000'}}.
-      <div class="titulo">Entregue por <span style="color:var(--vermelho)">{{ValorFrete.company.name}}©</span></div>
-    </h3>
-    <br>
+  <ng-container *ngIf="EnderecoSelecionado">
+    <ng-container *ngIf="!ValorFrete && TipoId == IdEstoque">
+      <br>
+      <br>
+      <app-progressbar></app-progressbar>
+      <br>
+      <br>
+    </ng-container>
+    <ng-container *ngIf="!ValorFrete && TipoId == IdEncomenda">
+      <h3 class="titulo">Texto da isabela</h3>
+      <br>
+    </ng-container>
+    <ng-container *ngIf="ValorFrete">
+      <h3 class="titulo">O Frete fica no valor de <span class="negrito">{{ValorFrete.price | currency:'BRL'}}</span> para {{this.EnderecoSelecionado.cep| mask:'00000-000'}}.
+        <div class="titulo">Entregue por <span style="color:var(--vermelho)">{{ValorFrete.company.name}}©</span></div>
+      </h3>
+      <br>
+    </ng-container>
   </ng-container>
   <ng-container *ngIf="!EnderecoSelecionado">
     <br>
@@ -87,8 +70,12 @@
     <br>
     <br>
   </ng-container>
-  <ng-container *ngIf="Produtos && EnderecoSelecionado && ValorFrete">
+  <ng-container *ngIf="Produtos && EnderecoSelecionado && ValorFrete && TipoId == IdEstoque">
     <br>
     <app-tabela-produtos [Produtos]="Produtos" [ValorFrete]="ValorFrete.price"></app-tabela-produtos>
+  </ng-container>
+  <ng-container *ngIf="Produtos && EnderecoSelecionado && TipoId == IdEncomenda">
+    <br>
+    <app-tabela-produtos [Produtos]="Produtos"></app-tabela-produtos>
   </ng-container>
 </ng-container>

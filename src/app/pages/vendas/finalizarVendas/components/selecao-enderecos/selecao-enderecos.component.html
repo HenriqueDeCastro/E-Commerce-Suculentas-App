@@ -1,0 +1,31 @@
+<ng-container *ngIf="Enderecos.length > 0">
+  <h1 class="titulo">Endereços
+    <h3 class="titulo">Selecione o endereço de entrega</h3>
+  </h1>
+  <ng-container *ngIf="TipoProduto == IdEncomenda">
+    <div class="alert alert-warning" role="alert">
+      Só entregamos produtos por encomenda para as cidades de Santo André, São Bernardo do Campo, São Caetano do Sul e Mauá
+    </div>
+  </ng-container>
+  <mat-radio-group class="radios-endereco-group" [(ngModel)]="EnderecoSelecionado">
+    <mat-radio-button color=primary class="radios-endereco-button" *ngFor="let endereco of Enderecos" [disabled]=VerificaEnderecoEncomenda(endereco) (click)="EnviarEndereco(endereco)" [value]="endereco">
+      <ng-container *ngIf="!endereco.descricao">
+        <span class="negrito quebralinha-matline">{{endereco.rua}}, {{endereco.numero}} - {{endereco.bairro}}</span> ({{endereco.cep}})
+      </ng-container>
+      <ng-container *ngIf="endereco.descricao">
+        <span class="negrito quebralinha-matline">{{endereco.descricao}}</span> ({{endereco.cep}})
+      </ng-container>
+    </mat-radio-button>
+  </mat-radio-group>
+  <button mat-button class="btn-responsive" color="primary" (click)="router.navigate(['user/perfil/endereco'])">Gerenciar meus endereços</button>
+  <br>
+</ng-container>
+<ng-container *ngIf="Enderecos.length == 0">
+  <h1 class="titulo">Endereços</h1>
+  <br>
+  <h3 class="titulo centralizar">Clique no botão abaixo para adicionar um endereço</h3>
+  <br>
+  <div class="form-group col-md-12 centralizar">
+    <button mat-flat-button class="btn-responsive" color="primary" (click)="router.navigate(['user/perfil/endereco'])">Meus Endereços</button>
+  </div>
+</ng-container>

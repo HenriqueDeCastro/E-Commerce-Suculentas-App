@@ -22,24 +22,26 @@ export class TabelaProdutosComponent implements OnInit {
   }
 
   FazerDataSource() {
-    if(this.Produtos && this.ValorFrete) {
+    if(this.Produtos) {
       this.Produtos.forEach((produto: IProdutoCarrinho) => {
         const auxDataSource: ITabelaProdutoVenda = {
-          item: `${produto.quantidadePedido}un - ${produto.nome}`,
+          item: `${produto.quantidadePedido}un. de ${produto.nome}`,
           valor: produto.preco * produto.quantidadePedido
         }
 
         this.DataSource.push(auxDataSource);
       })
+    }
 
+    if(this.ValorFrete) {
       const auxDataSource: ITabelaProdutoVenda = {
         item: 'Frete',
         valor: Number(this.ValorFrete)
       }
       this.DataSource.push(auxDataSource);
-
-      this.Carregando = true;
     }
+
+    this.Carregando = true;
   }
 
   /** Gets the total cost of all transactions. */
