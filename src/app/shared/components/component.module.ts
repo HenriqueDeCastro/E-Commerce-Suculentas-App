@@ -20,6 +20,7 @@ import { VoltarComponent } from './voltar/voltar.component';
 import { EditCarrinhoComponent } from './edit-carrinho/edit-carrinho.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AlertCamposObrigatoriosComponent } from './alert-campos-obrigatorios/alert-campos-obrigatorios.component';
+import { AlertCidadesEncomendaComponent } from './alert-cidades-encomenda/alert-cidades-encomenda.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { AlertCamposObrigatoriosComponent } from './alert-campos-obrigatorios/al
     EditCarrinhoComponent,
     BotaoQuantidadeComponent,
     NotFoundComponent,
-    AlertCamposObrigatoriosComponent
+    AlertCamposObrigatoriosComponent,
+    AlertCidadesEncomendaComponent
   ],
   exports: [
     ProgressbarComponent,
@@ -56,7 +58,8 @@ import { AlertCamposObrigatoriosComponent } from './alert-campos-obrigatorios/al
     EditCarrinhoComponent,
     BotaoQuantidadeComponent,
     NotFoundComponent,
-    AlertCamposObrigatoriosComponent
+    AlertCamposObrigatoriosComponent,
+    AlertCidadesEncomendaComponent
   ],
   imports: [
     CommonModule,

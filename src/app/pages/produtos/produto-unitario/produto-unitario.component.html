@@ -25,12 +25,14 @@
           Os produtos do site são reais e tentamos sempre enviar o mais idêntico possível da foto disposta,
           mas cada ítem é único, sendo assim natural a variabilidade de tamanho ou coloração.
         </div>
-        <div *ngIf="Produto.tipoProdutoId === IdEncomenda" class="alert alert-warning" role="alert">
-          Só entregamos esse produto para as cidades de Santo André, São Bernardo do Campo, São Caetano do Sul e Mauá
-        </div>
-        <div *ngIf="ProdutoCarrinho" class="alert alert-primary" role="alert">
-          Você já adicionou {{ProdutoCarrinho.quantidadePedido}} {{ProdutoCarrinho.nome}} ao carrinho!
-        </div>
+        <ng-container *ngIf="Produto.tipoProdutoId === IdEncomenda">
+          <app-alert-cidades-encomenda></app-alert-cidades-encomenda>
+        </ng-container>
+        <ng-container *ngIf="ProdutoCarrinho">
+          <div class="alert alert-primary" role="alert">
+            Você já adicionou {{ProdutoCarrinho.quantidadePedido}} {{ProdutoCarrinho.nome}} ao carrinho!
+          </div>
+        </ng-container>
       </div>
       <div class="col-sm-7">
         <h1 class="titulo centralizar pc">{{Produto.nome}}</h1>
@@ -84,15 +86,16 @@
             </mat-list-item>
           </ng-container>
           <br>
-          <!-- ENCOMENDAR -->
           <ng-container *ngIf="Produto.tipoProdutoId === IdEncomenda">
+            <!-- PRAZO -->
             <div mat-subheader class="cabecalho-lista negrito">Prazo de Entrega</div>
             <mat-list-item class="tamanho-matlineitem">
               <mat-icon class="material-icons-outlined prazo" mat-list-icon>timer</mat-icon>
-              <div mat-line class="quebralinha-matline negrito prazo">Produtos por encomenda tem um prazo de entrega estimado em 30 dias</div>
-              <div mat-line class="quebralinha-matline">Compre com antecedência!</div>
+              <div mat-line class="quebralinha-matline negrito prazo">Esse produto tem um prazo de entrega estimado em 30 dias</div>
+              <div mat-line class="quebralinha-matline">Compre com antecedência ;)</div>
             </mat-list-item>
             <br>
+            <!-- ENCOMENDAR -->
             <div mat-subheader class="cabecalho-lista negrito">Encomendar</div>
             <mat-list-item class="tamanho-matlineitem">
               <mat-icon class="material-icons-outlined estoque" mat-list-icon>local_mall</mat-icon>

@@ -27,6 +27,7 @@ export class FinalizarVendasComponent implements OnInit {
   public Enderecos: IEndereco[];
   public EnderecoSelecionado: IEndereco;
   public ValorFrete: ICalculoFrete;
+  public urlMaps: string;
 
   constructor(private activetedRoute: ActivatedRoute,
               private snackbar: SnackbarService,
@@ -40,6 +41,7 @@ export class FinalizarVendasComponent implements OnInit {
   ngOnInit() {
     this.IdEncomenda = environment.TipoProdutoEncomenda;
     this.IdEstoque = environment.TipoProdutoEstoque;
+    this.urlMaps = environment.UrlMaps;
     this.ReceberValorRota();
     this.ReceberProdutoCarrinho();
     this.ReceberUserLogado();
