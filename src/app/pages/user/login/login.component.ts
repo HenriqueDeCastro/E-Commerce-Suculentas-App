@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/server/Auth/Auth.service';
 import { SnackbarService } from 'src/app/core/services/shared/Snackbar/Snackbar.service';
 import { MensagensService } from 'src/app/core/services/shared/Mensagens/Mensagens.service';
+import { ProgressBarService } from 'src/app/core/services/shared/ProgressBar/ProgressBar.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,8 @@ import { MensagensService } from 'src/app/core/services/shared/Mensagens/Mensage
 export class LoginComponent implements OnInit {
 
   public LoginForm: FormGroup;
-  public RealizandoLogin = false;
+  public Desabilitar = false;
+  public TextoBotaoLogin = "Acessar";
   private FromUrl: string;
 
   constructor(private fb: FormBuilder,
@@ -21,6 +23,7 @@ export class LoginComponent implements OnInit {
               private authService: AuthService,
               private snackbar: SnackbarService,
               private activetedRoute: ActivatedRoute,
+              private progressBarService: ProgressBarService,
               private mensagemSnackbar: MensagensService) { }
 
   ngOnInit(): void {
@@ -41,10 +44,13 @@ export class LoginComponent implements OnInit {
 
   Login(): void {
     if (this.LoginForm.valid) {
-      this.RealizandoLogin = true;
+      this.Desabilitar = true;
+      this.progressBarService.Mostrar = true;
+      this.TextoBotaoLogin = "Acessando";
+
       this.authService.Login(this.LoginForm.value).subscribe(
         () => {
-          this.RealizandoLogin = false;
+          this.progressBarService.Mostrar = false;
           if (this.FromUrl) {
             this.router.navigateByUrl(this.FromUrl);
           } else {
@@ -52,7 +58,10 @@ export class LoginComponent implements OnInit {
           }
         },
         error => {
-          this.RealizandoLogin = false;
+          this.Desabilitar = false;
+          this.TextoBotaoLogin = "Acessar";
+          this.progressBarService.Mostrar = true;
+
           const erro = error.error;
           console.log(error);
 

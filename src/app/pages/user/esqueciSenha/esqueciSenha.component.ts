@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/core/services/server/Auth/Auth.service';
 import { SnackbarService } from 'src/app/core/services/shared/Snackbar/Snackbar.service';
 import { MensagensService } from 'src/app/core/services/shared/Mensagens/Mensagens.service';
 import { IEsqueciSenha } from 'src/app/shared/models/IEsqueciSenha';
+import { ProgressBarService } from 'src/app/core/services/shared/ProgressBar/ProgressBar.service';
 
 @Component({
   selector: 'app-esqueciSenha',
@@ -16,11 +17,13 @@ export class EsqueciSenhaComponent implements OnInit {
   public EsqueciForm: FormGroup;
   public EnviandoRequisicao = false;
   public EsqueciObjeto: IEsqueciSenha;
+  public TextoBotao = "Enviar"
 
   constructor(private fb: FormBuilder,
               public router: Router,
               private authService: AuthService,
               private snackbar: SnackbarService,
+              private progressBarService: ProgressBarService,
               private mensagemSnackbar: MensagensService) { }
 
   ngOnInit(): void {
@@ -36,17 +39,24 @@ export class EsqueciSenhaComponent implements OnInit {
   EsqueciSenha(): void {
     if (this.EsqueciForm.valid) {
       this.EnviandoRequisicao = true;
+      this.progressBarService.Mostrar = true;
+      this.TextoBotao = "Enviando";
+
       this.EsqueciObjeto = {
         email: this.EsqueciForm.value.email
       };
       this.authService.EsqueciSenha(this.EsqueciObjeto).subscribe(
         () => {
-          this.EnviandoRequisicao = false;
+          this.progressBarService.Mostrar = false;
+
           this.snackbar.OpenSnackBarSuccess(this.mensagemSnackbar.VerificarCaixaEmail);
           this.router.navigate(['/user/login']);
         },
         error => {
+          this.progressBarService.Mostrar = false;
           this.EnviandoRequisicao = false;
+          this.TextoBotao = "Enviar";
+
           const erro = error.error;
           console.log(error);
           switch (erro) {

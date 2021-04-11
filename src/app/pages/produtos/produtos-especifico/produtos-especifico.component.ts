@@ -11,6 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogOrderbyComponent } from './components/dialog-orderby/dialog-orderby.component';
 import { FiltroNomeService } from 'src/app/core/services/shared/FiltroNome/FiltroNome.service';
 import { IProduto } from 'src/app/shared/models/IProduto';
+import { ProgressBarService } from 'src/app/core/services/shared/ProgressBar/ProgressBar.service';
 
 @Component({
   selector: 'app-produtos-especifico',
@@ -21,7 +22,7 @@ export class ProdutosEspecificoComponent implements OnInit {
 
   public CategoriaId: number;
   public Categoria: ICategoria;
-  public Carregando: boolean = true;
+  public Carregou: boolean = false;
   public link: string;
   public pages = 1;
   public open = false;
@@ -35,9 +36,11 @@ export class ProdutosEspecificoComponent implements OnInit {
               private resetScroll: ResetScrollService,
               public dialog: MatDialog,
               private filtroNome: FiltroNomeService,
+              private progressBarService: ProgressBarService,
               private mensagemSnackbar: MensagensService) { }
 
   ngOnInit(): void {
+    this.progressBarService.Mostrar = true;
     this.ReceberValorRota();
     this.ReceberCategoria();
   }
@@ -51,10 +54,12 @@ export class ProdutosEspecificoComponent implements OnInit {
       if(categoria) {
         this.Categoria = categoria;
         this.Produtos = this.Categoria.produtos;
-        this.Carregando = false;
+        this.Carregou = true;
       } else {
-        this.Carregando = false;
+        this.Carregou = true;
       }
+
+      this.progressBarService.Mostrar = false;
     },
     erro => {
       console.log(erro);

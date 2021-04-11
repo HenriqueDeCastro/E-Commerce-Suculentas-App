@@ -56,6 +56,14 @@ export const environment = {
   RoleEmpresa: 'Empresa',
 
   // CHAVE PARA CRIPTOGRAFIA
-  ChaveCript: 'd8BH7WKJ4w2cx11qIjYT7Mv4fkRqsn5PSz16GkYHy7c'
+  ChaveCript: 'd8BH7WKJ4w2cx11qIjYT7Mv4fkRqsn5PSz16GkYHy7c',
+
+  // STATUS DAS VENDAS
+  AguardandoPagamento: 1,
+  AguardandoEnvio: 2,
+  Enviado: 3,
+  Finalizado: 4,
+  Cancelado: 5,
+  EmDisputa: 6
 };
 

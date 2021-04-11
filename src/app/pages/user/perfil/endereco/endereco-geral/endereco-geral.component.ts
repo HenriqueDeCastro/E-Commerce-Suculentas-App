@@ -10,6 +10,7 @@ import { IUser } from 'src/app/shared/models/IUser';
 import { DialogEnderecoDeleteComponent } from './components/dialog-endereco-delete/dialog-endereco-delete.component';
 import { BottomEnderecoDeleteComponent } from './components/bottom-endereco-delete/bottom-endereco-delete.component';
 import { AuthService } from 'src/app/core/services/server/Auth/Auth.service';
+import { ProgressBarService } from 'src/app/core/services/shared/ProgressBar/ProgressBar.service';
 
 @Component({
   selector: 'app-endereco-geral',
@@ -27,9 +28,11 @@ export class EnderecoGeralComponent implements OnInit {
               private authService: AuthService,
               private snackbar: SnackbarService,
               private bottomSheet: MatBottomSheet,
+              private progressBarService: ProgressBarService,
               private mensagemSnackbar: MensagensService) { }
 
   ngOnInit() {
+    this.progressBarService.Mostrar = true;
     this.ReceberUserLogado();
     this.ReceberEnderecoUser();
   }
@@ -41,10 +44,12 @@ export class EnderecoGeralComponent implements OnInit {
   ReceberEnderecoUser() {
     this.enderecoService.GetByUserId(this.User.id).subscribe((enderecos: IEndereco[]) => {
       this.Enderecos = enderecos;
+      this.progressBarService.Mostrar = false;
     },
     erro => {
       console.log(erro);
       this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
+      this.progressBarService.Mostrar = false;
     });
   }
 

@@ -16,6 +16,7 @@ import { BotaoVendaComponent } from './finalizarVendas/components/botao-venda/bo
 // PAGES
 import { VendasComponent } from './vendas.component';
 import { FinalizarVendasComponent } from './finalizarVendas/finalizarVendas.component';
+import { ConcluidaComponent } from './concluida/concluida.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { FinalizarVendasComponent } from './finalizarVendas/finalizarVendas.comp
     ProdutosVendaComponent,
     TabelaProdutosComponent,
     SelecaoEnderecosComponent,
-    BotaoVendaComponent
+    BotaoVendaComponent,
+    ConcluidaComponent
   ],
   imports: [
     MaterialModule,

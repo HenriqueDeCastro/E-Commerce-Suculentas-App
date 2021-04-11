@@ -26,11 +26,8 @@
       <button mat-button type="button" class="btn btn-link btn-register btn-block" (click)="router.navigate(['user/register'])">Quero me cadastrar</button>
     </div>
   </div>
-  <ng-container *ngIf="RealizandoLogin">
-    <app-progressbar></app-progressbar>
-  </ng-container>
   <br>
   <div class="form-group col-md-12 centralizar">
-    <button mat-flat-button class="btn-responsive" color="primary" [disabled]=RealizandoLogin>Acessar</button>
+    <button mat-flat-button class="btn-responsive" color="primary" [disabled]=Desabilitar>{{TextoBotaoLogin}}</button>
   </div>
 </form>

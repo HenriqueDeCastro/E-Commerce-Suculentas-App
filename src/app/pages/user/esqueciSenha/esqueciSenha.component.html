@@ -17,13 +17,9 @@
     <mat-error *ngIf="EsqueciForm.get('email').hasError('required')" class="invalid-feedback">E-mail é obrigatório</mat-error>
   </mat-form-field>
   <br>
-  <ng-container *ngIf="EnviandoRequisicao">
-    <br>
-    <app-progressbar></app-progressbar>
-  </ng-container>
   <br>
   <div class="form-group col-md-12 centralizar">
-    <button mat-flat-button class="btn-responsive" color="primary" [disabled]=EnviandoRequisicao>Enviar</button>
+    <button mat-flat-button class="btn-responsive" color="primary" [disabled]=EnviandoRequisicao>{{TextoBotao}}</button>
   </div>
 </form>
 

@@ -17,5 +17,11 @@ export const environment = {
   TipoProdutoEstoque:  2,
   RoleAdmin: 'Admin',
   RoleEmpresa: 'Empresa',
-  ChaveCript: 'd8BH7WKJ4w2cx11qIjYT7Mv4fkRqsn5PSz16GkYHy7c'
+  ChaveCript: 'd8BH7WKJ4w2cx11qIjYT7Mv4fkRqsn5PSz16GkYHy7c',
+  AguardandoPagamento: 1,
+  AguardandoEnvio: 2,
+  Enviado: 3,
+  Finalizado: 4,
+  Cancelado: 5,
+  EmDisputa: 6
 };

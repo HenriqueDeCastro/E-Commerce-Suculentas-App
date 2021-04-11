@@ -5,7 +5,7 @@ import { AuthService } from 'src/app/core/services/server/Auth/Auth.service';
 import { SnackbarService } from 'src/app/core/services/shared/Snackbar/Snackbar.service';
 import { MensagensService } from 'src/app/core/services/shared/Mensagens/Mensagens.service';
 import { IUser } from 'src/app/shared/models/IUser';
-import { environment } from 'src/environments/environment';
+import { ProgressBarService } from 'src/app/core/services/shared/ProgressBar/ProgressBar.service';
 
 @Component({
   selector: 'app-dados-pessoais-edit',
@@ -19,12 +19,14 @@ export class DadosPessoaisEditComponent implements OnInit {
   public Atualizando = false;
   public step = 0;
   public User: IUser;
+  public TextoBotao = "Finalizar";
   private Email: string;
 
   constructor(private fb: FormBuilder,
               public router: Router,
               private authService: AuthService,
               private snackbar: SnackbarService,
+              private progressBarService: ProgressBarService,
               private mensagemSnackbar: MensagensService) { }
 
   ngOnInit() {
@@ -68,6 +70,9 @@ export class DadosPessoaisEditComponent implements OnInit {
 
     if (this.DadosForm.valid && this.ContatosForm.valid) {
       this.Atualizando = true;
+      this.progressBarService.Mostrar = true;
+      this.TextoBotao = 'Finalizando';
+
       this.User = {
         id: user.id,
         fullName: this.DadosForm.value.fullname,
@@ -79,12 +84,16 @@ export class DadosPessoaisEditComponent implements OnInit {
 
       this.authService.Put(this.User).subscribe(
         () => {
-          this.Atualizando = false;
+          this.progressBarService.Mostrar = false;
+
           this.snackbar.OpenSnackBarSuccess(this.mensagemSnackbar.AtualizacaoConcluida);
           this.router.navigate(['/user/perfil/dados']);
         },
         error => {
           this.Atualizando = false;
+          this.progressBarService.Mostrar = false;
+          this.TextoBotao = 'Finalizar';
+
           const erro = error.error;
           console.log(error);
           switch (erro) {

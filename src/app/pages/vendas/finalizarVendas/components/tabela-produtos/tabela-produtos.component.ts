@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { IEndereco } from 'src/app/shared/models/IEndereco';
 import { IProdutoCarrinho } from 'src/app/shared/models/IProdutoCarrinho';
 import { ITabelaProdutoVenda } from 'src/app/shared/models/ITabelaProdutoVenda';
 
@@ -11,14 +12,17 @@ export class TabelaProdutosComponent implements OnInit {
 
   @Input() Produtos: IProdutoCarrinho[]
   @Input() ValorFrete: number;
+  @Input() Endereco: IEndereco;
   public Carregando: boolean = false;
   public DataSource: ITabelaProdutoVenda[] = [];
   public displayedColumns = ['Item', 'Valor'];
+  public ValorTotal: number = 0;
 
   constructor() { }
 
   ngOnInit() {
     this.FazerDataSource();
+    this.getTotal();
   }
 
   FazerDataSource() {
@@ -44,8 +48,8 @@ export class TabelaProdutosComponent implements OnInit {
     this.Carregando = true;
   }
 
-  /** Gets the total cost of all transactions. */
-  getTotalCost() {
-    return this.DataSource.map(t => t.valor).reduce((acc, value) => acc + value, 0);
+  getTotal() {
+    this.ValorTotal = this.DataSource.map(t => t.valor).reduce((acc, value) => acc + value, 0);
+    return this.ValorTotal;
   }
 }

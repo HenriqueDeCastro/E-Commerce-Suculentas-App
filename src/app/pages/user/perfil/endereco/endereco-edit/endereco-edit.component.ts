@@ -9,6 +9,7 @@ import { MensagensService } from 'src/app/core/services/shared/Mensagens/Mensage
 import { ICidade } from 'src/app/shared/models/ICidade';
 import { IEndereco } from 'src/app/shared/models/IEndereco';
 import { IEstado } from 'src/app/shared/models/IEstado';
+import { ProgressBarService } from 'src/app/core/services/shared/ProgressBar/ProgressBar.service';
 
 @Component({
   selector: 'app-endereco-edit',
@@ -21,13 +22,14 @@ export class EnderecoEditComponent implements OnInit {
   public Endereco: IEndereco;
   public Estados: IEstado[];
   public Cidades: ICidade[];
-  public Carregando: boolean = true;
+  public Carregou: boolean = false;
   public IdentificacaoForm: FormGroup;
   public DomicilioForm: FormGroup;
   public Procurandocidades: boolean = false;
   public DesabilitarEstados: boolean= false;
   public DesabilitarCidades: boolean= true;
   public Atualizando: boolean = false;
+  public TextoBotao = 'Atualizar';
 
   constructor(private fb: FormBuilder,
               public router: Router,
@@ -36,9 +38,11 @@ export class EnderecoEditComponent implements OnInit {
               private snackbar: SnackbarService,
               private mensagemSnackbar: MensagensService,
               private estadosService: EstadosService,
+              private progressBarService: ProgressBarService,
               private cidadeService: CidadesService) { }
 
   ngOnInit() {
+    this.progressBarService.Mostrar = true;
     this.ReceberValorRota();
     this.ReceberEndereco();
     this.ReceberEstados();
@@ -54,8 +58,10 @@ export class EnderecoEditComponent implements OnInit {
         this.Endereco = endereco;
         this.ReceberCidades();
       } else {
-        this.Carregando = false;
+        this.Carregou = true;
       }
+
+      this.progressBarService.Mostrar = false;
     },
     erro => {
       console.log(erro);
@@ -72,7 +78,9 @@ export class EnderecoEditComponent implements OnInit {
     this.Cidades = this.cidadeService.GetCidadesByEstadoId(estadoSelecionado[0].id);
     this.ValidationIdentificacao();
     this.ValidationDomicilio();
-    this.Carregando = false;
+
+    this.Carregou = true;
+    this.progressBarService.Mostrar = false;
   }
 
   ValidationIdentificacao(): void {
@@ -112,7 +120,10 @@ export class EnderecoEditComponent implements OnInit {
 
   Atualizar() {
     if (this.IdentificacaoForm.valid && this.DomicilioForm.valid) {
+      this.progressBarService.Mostrar = true;
       this.Atualizando = true;
+      this.TextoBotao = 'Atualizando';
+
       let Endereco: IEndereco = {
         id: this.Endereco.id,
         descricao: this.IdentificacaoForm.value.apelido,
@@ -126,13 +137,17 @@ export class EnderecoEditComponent implements OnInit {
         userId: this.Endereco.userId
       }
       this.enderecoService.Put(Endereco).subscribe((enderecos: IEndereco) => {
-        this.Atualizando = false;
+        this.progressBarService.Mostrar = false;
+
         this.snackbar.OpenSnackBarSuccess(this.mensagemSnackbar.AtualizacaoConcluida);
         this.router.navigate(['user/perfil/endereco']);
       },
       erro => {
-        console.log(erro);
+        this.progressBarService.Mostrar = false;
         this.Atualizando = false;
+        this.TextoBotao = 'Atualizar';
+
+        console.log(erro);
         this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
       });
     } else {

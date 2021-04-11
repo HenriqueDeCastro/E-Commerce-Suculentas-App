@@ -10,6 +10,7 @@ import { IProdutoCarrinho } from 'src/app/shared/models/IProdutoCarrinho';
 import { environment } from 'src/environments/environment';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ICalculoFrete } from 'src/app/shared/models/ICalculoFrete';
+import { ProgressBarService } from 'src/app/core/services/shared/ProgressBar/ProgressBar.service';
 
 @Component({
   selector: 'app-produto-unitario',
@@ -21,7 +22,7 @@ export class ProdutoUnitarioComponent implements OnInit {
   public produtoId: number;
   public categoriaNome: string;
   public ProdutoCarrinho: IProdutoCarrinho;
-  public Carregando: boolean = true;
+  public Carregou: boolean = false;
   public Produto: IProduto;
   public link: string;
   public Quantidade: number;
@@ -40,9 +41,11 @@ export class ProdutoUnitarioComponent implements OnInit {
               private produtoService: ProdutoService,
               private melhorEnvioService: MelhorEnvioService,
               private cryptService: CryptService,
+              private progressBarService: ProgressBarService,
               private mensagemSnackbar: MensagensService) { }
 
   ngOnInit(): void {
+    this.progressBarService.Mostrar = true;
     this.link = environment.UrlApi;
     this.IdEncomenda = environment.TipoProdutoEncomenda;
     this.IdEstoque = environment.TipoProdutoEstoque;
@@ -63,10 +66,12 @@ export class ProdutoUnitarioComponent implements OnInit {
       if(produto) {
         this.VerificarProdutoCarrinho(produto);
         this.Produto = produto;
-        this.Carregando = false;
+        this.Carregou = true;
       } else {
-        this.Carregando = false;
+        this.Carregou = true;
       }
+
+      this.progressBarService.Mostrar = false;
     },
     (erro) => {
       console.log(erro);

@@ -3,6 +3,7 @@ import { CategoriaService } from 'src/app/core/services/server/Categoria/Categor
 import { SnackbarService } from 'src/app/core/services/shared/Snackbar/Snackbar.service';
 import { MensagensService } from 'src/app/core/services/shared/Mensagens/Mensagens.service';
 import { ICategoria } from 'src/app/shared/models/ICategoria';
+import { ProgressBarService } from 'src/app/core/services/shared/ProgressBar/ProgressBar.service';
 
 @Component({
   selector: 'app-produtosHome',
@@ -15,17 +16,21 @@ export class ProdutosHomeComponent implements OnInit {
 
   constructor(private categoriaService: CategoriaService,
               private snackbar: SnackbarService,
+              private progressBarService: ProgressBarService,
               private mensagemSnackbar: MensagensService) { }
 
   ngOnInit(): void {
+    this.progressBarService.Mostrar = true;
     this.ReceberCategorias();
   }
 
   ReceberCategorias(): void {
     this.categoriaService.GetAllPagInicial().subscribe((categorias: ICategoria[]) => {
       this.Categorias = categorias;
+      this.progressBarService.Mostrar = false;
     },
     erro => {
+      this.progressBarService.Mostrar = false;
       console.log(erro);
       this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
     });

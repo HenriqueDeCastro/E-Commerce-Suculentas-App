@@ -8,6 +8,7 @@ import { ComponentModule } from '../../../shared/components/component.module';
 import { PerfilRoutingModule } from './perfil-routing.module';
 import { EnderecoModule } from './endereco/endereco.module';
 import { DadosPessoaisModule } from './dados-pessoais/dados-pessoais.module';
+import { ComprasModule } from './compras/compras.module';
 
 import { PerfilComponent } from '../perfil/perfil.component';
 import { PerfilGeralComponent } from '../perfil/perfil-geral/perfil-geral.component';
@@ -27,7 +28,8 @@ import { PerfilGeralComponent } from '../perfil/perfil-geral/perfil-geral.compon
     ComponentModule,
     MaskModule,
     EnderecoModule,
-    DadosPessoaisModule
+    DadosPessoaisModule,
+    ComprasModule
   ]
 })
 export class PerfilModule {}

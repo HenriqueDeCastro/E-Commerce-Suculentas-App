@@ -22,7 +22,6 @@ export class AppComponent implements OnInit{
   public teste: IUser;
 
   constructor(private authService: AuthService,
-              private route: Router,
               private bottomSheet: MatBottomSheet,
               private cryptService: CryptService,
               public router: Router,
@@ -65,9 +64,9 @@ export class AppComponent implements OnInit{
 
   PerfilNavegacao(): void {
     if (!this.Logado()){
-      this.route.navigate(['/user/perfil']);
+      this.router.navigate(['/user/perfil']);
     } else {
-      this.route.navigate(['/user/login']);
+      this.router.navigate(['/user/login']);
     }
   }
 

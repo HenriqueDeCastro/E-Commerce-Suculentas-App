@@ -1,1 +1,4 @@
-<mat-progress-bar mode="indeterminate" class="loading"></mat-progress-bar>
+<ng-container *ngIf="progressBarService.Mostrar">
+  <mat-progress-bar mode="query" class="loading" [diameter]="100"></mat-progress-bar>
+</ng-container>
+

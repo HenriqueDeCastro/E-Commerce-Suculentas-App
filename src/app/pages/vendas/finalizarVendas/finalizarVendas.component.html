@@ -90,10 +90,10 @@
   </ng-container>
   <ng-container *ngIf="Produtos && EnderecoSelecionado && ValorFrete && TipoId == IdEstoque">
     <br>
-    <app-tabela-produtos [Produtos]="Produtos" [ValorFrete]="ValorFrete.price"></app-tabela-produtos>
+    <app-tabela-produtos [Produtos]="Produtos" [ValorFrete]="ValorFrete.price" [Endereco]=EnderecoSelecionado></app-tabela-produtos>
   </ng-container>
   <ng-container *ngIf="Produtos && EnderecoSelecionado && TipoId == IdEncomenda">
     <br>
-    <app-tabela-produtos [Produtos]="Produtos"></app-tabela-produtos>
+    <app-tabela-produtos [Produtos]="Produtos" [Endereco]=EnderecoSelecionado></app-tabela-produtos>
   </ng-container>
 </ng-container>
