@@ -5,11 +5,15 @@ import { Injectable } from '@angular/core';
 })
 export class ProgressBarService {
 
-  private Condição: boolean = false;
+  private Condicao: boolean = false;
 
   constructor() { }
 
   Mostrar() {
-    this.Condição = !this.Condição;
+    this.Condicao = !this.Condicao;
+  }
+
+  RetornarValor(): boolean {
+    return this.Condicao;
   }
 }
