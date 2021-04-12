@@ -39,7 +39,7 @@ export class EsqueciSenhaComponent implements OnInit {
   EsqueciSenha(): void {
     if (this.EsqueciForm.valid) {
       this.EnviandoRequisicao = true;
-      this.progressBarService.Mostrar = true;
+      this.progressBarService.Mostrar();
       this.TextoBotao = "Enviando";
 
       this.EsqueciObjeto = {
@@ -47,13 +47,13 @@ export class EsqueciSenhaComponent implements OnInit {
       };
       this.authService.EsqueciSenha(this.EsqueciObjeto).subscribe(
         () => {
-          this.progressBarService.Mostrar = false;
+          this.progressBarService.Mostrar();
 
           this.snackbar.OpenSnackBarSuccess(this.mensagemSnackbar.VerificarCaixaEmail);
           this.router.navigate(['/user/login']);
         },
         error => {
-          this.progressBarService.Mostrar = false;
+          this.progressBarService.Mostrar();
           this.EnviandoRequisicao = false;
           this.TextoBotao = "Enviar";
 

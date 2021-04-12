@@ -19,7 +19,7 @@ export class DadosPessoaisEditComponent implements OnInit {
   public Atualizando = false;
   public step = 0;
   public User: IUser;
-  public TextoBotao = "Finalizar";
+  public TextoBotao = "Atualizar";
   private Email: string;
 
   constructor(private fb: FormBuilder,
@@ -70,8 +70,8 @@ export class DadosPessoaisEditComponent implements OnInit {
 
     if (this.DadosForm.valid && this.ContatosForm.valid) {
       this.Atualizando = true;
-      this.progressBarService.Mostrar = true;
-      this.TextoBotao = 'Finalizando';
+      this.progressBarService.Mostrar();
+      this.TextoBotao = 'Atualizando';
 
       this.User = {
         id: user.id,
@@ -84,15 +84,15 @@ export class DadosPessoaisEditComponent implements OnInit {
 
       this.authService.Put(this.User).subscribe(
         () => {
-          this.progressBarService.Mostrar = false;
+          this.progressBarService.Mostrar();
 
           this.snackbar.OpenSnackBarSuccess(this.mensagemSnackbar.AtualizacaoConcluida);
           this.router.navigate(['/user/perfil/dados']);
         },
         error => {
           this.Atualizando = false;
-          this.progressBarService.Mostrar = false;
-          this.TextoBotao = 'Finalizar';
+          this.progressBarService.Mostrar();
+          this.TextoBotao = 'Atualizar';
 
           const erro = error.error;
           console.log(error);

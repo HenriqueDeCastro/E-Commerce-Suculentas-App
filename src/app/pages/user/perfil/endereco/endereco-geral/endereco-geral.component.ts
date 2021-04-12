@@ -32,7 +32,7 @@ export class EnderecoGeralComponent implements OnInit {
               private mensagemSnackbar: MensagensService) { }
 
   ngOnInit() {
-    this.progressBarService.Mostrar = true;
+    this.progressBarService.Mostrar();
     this.ReceberUserLogado();
     this.ReceberEnderecoUser();
   }
@@ -44,12 +44,12 @@ export class EnderecoGeralComponent implements OnInit {
   ReceberEnderecoUser() {
     this.enderecoService.GetByUserId(this.User.id).subscribe((enderecos: IEndereco[]) => {
       this.Enderecos = enderecos;
-      this.progressBarService.Mostrar = false;
+      this.progressBarService.Mostrar();
     },
     erro => {
+      this.progressBarService.Mostrar();
       console.log(erro);
       this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
-      this.progressBarService.Mostrar = false;
     });
   }
 

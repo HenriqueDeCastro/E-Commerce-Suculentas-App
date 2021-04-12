@@ -33,12 +33,6 @@
             </mat-select>
             <mat-error *ngIf="IdentificacaoForm.get('estado').hasError('required')" class="invalid-feedback">Estado é obrigatório</mat-error>
           </mat-form-field>
-          <ng-container *ngIf="Procurandocidades">
-            <br>
-            <br>
-            <br>
-            <app-progressbar></app-progressbar>
-          </ng-container>
           <br>
           <br>
           <mat-form-field appearance="fill" class="w-100">

@@ -40,7 +40,7 @@ export class ProdutosEspecificoComponent implements OnInit {
               private mensagemSnackbar: MensagensService) { }
 
   ngOnInit(): void {
-    this.progressBarService.Mostrar = true;
+    this.progressBarService.Mostrar();
     this.ReceberValorRota();
     this.ReceberCategoria();
   }
@@ -58,11 +58,12 @@ export class ProdutosEspecificoComponent implements OnInit {
       } else {
         this.Carregou = true;
       }
-
-      this.progressBarService.Mostrar = false;
+      this.progressBarService.Mostrar();
     },
     erro => {
+      this.progressBarService.Mostrar();
       console.log(erro);
+
       this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
     });
   }

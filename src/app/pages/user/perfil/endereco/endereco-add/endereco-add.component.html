@@ -1,6 +1,3 @@
-<ng-container *ngIf="!Estados">
-  <app-spinner></app-spinner>
-</ng-container>
 <ng-container *ngIf="Estados">
   <app-voltar></app-voltar>
   <br>
@@ -32,12 +29,6 @@
           </mat-select>
           <mat-error *ngIf="IdentificacaoForm.get('estado').hasError('required')" class="invalid-feedback">Estado é obrigatório</mat-error>
         </mat-form-field>
-        <ng-container *ngIf="Procurandocidades">
-          <br>
-          <br>
-          <br>
-          <app-progressbar></app-progressbar>
-        </ng-container>
         <br>
         <br>
         <mat-form-field appearance="fill" class="w-100">
@@ -96,13 +87,9 @@
         </mat-form-field>
         <br>
         <br>
-        <ng-container *ngIf="Registrando">
-          <app-progressbar></app-progressbar>
-        </ng-container>
-        <br>
         <div class="form-group col-md-12 centralizar">
           <button mat-button matStepperPrevious class="w-50" color="warn">Anterior</button>
-          <button mat-button matStepperNext class="w-50" color="primary" [disabled]="Registrando">Finalizar</button>
+          <button mat-button matStepperNext class="w-50" color="primary" [disabled]="Registrando">{{TextoBotao}}</button>
         </div>
       </form>
     </mat-step>

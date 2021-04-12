@@ -45,7 +45,7 @@ export class ProdutoUnitarioComponent implements OnInit {
               private mensagemSnackbar: MensagensService) { }
 
   ngOnInit(): void {
-    this.progressBarService.Mostrar = true;
+    this.progressBarService.Mostrar();
     this.link = environment.UrlApi;
     this.IdEncomenda = environment.TipoProdutoEncomenda;
     this.IdEstoque = environment.TipoProdutoEstoque;
@@ -70,11 +70,12 @@ export class ProdutoUnitarioComponent implements OnInit {
       } else {
         this.Carregou = true;
       }
-
-      this.progressBarService.Mostrar = false;
+      this.progressBarService.Mostrar();
     },
     (erro) => {
+      this.progressBarService.Mostrar();
       console.log(erro);
+
       this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
     });
   }

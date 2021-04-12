@@ -11,6 +11,7 @@ import { IEndereco } from 'src/app/shared/models/IEndereco';
 import { IUser } from 'src/app/shared/models/IUser';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/server/Auth/Auth.service';
+import { ProgressBarService } from 'src/app/core/services/shared/ProgressBar/ProgressBar.service';
 
 @Component({
   selector: 'app-endereco-add',
@@ -27,6 +28,7 @@ export class EnderecoAddComponent implements OnInit {
   public DesabilitarEstados: boolean= false;
   public DesabilitarCidades: boolean= true;
   public Registrando: boolean = false;
+  public TextoBotao = 'Finalizar';
 
   constructor(private estadosService: EstadosService,
               private cidadeService: CidadesService,
@@ -35,9 +37,11 @@ export class EnderecoAddComponent implements OnInit {
               private fb: FormBuilder,
               private authService: AuthService,
               public router: Router,
+              private progressBarService: ProgressBarService,
               private mensagemSnackbar: MensagensService) { }
 
   ngOnInit() {
+    this.progressBarService.Mostrar();
     this.ReceberEstados();
     this.ValidationIdentificacao();
     this.ValidationDomicilio();
@@ -45,6 +49,7 @@ export class EnderecoAddComponent implements OnInit {
 
   ReceberEstados() {
     this.Estados = this.estadosService.GetEstados();
+    this.progressBarService.Mostrar();
   }
 
   ValidationIdentificacao(): void {
@@ -83,7 +88,10 @@ export class EnderecoAddComponent implements OnInit {
 
   Registrar() {
     if (this.IdentificacaoForm.valid && this.DomicilioForm.valid) {
+      this.progressBarService.Mostrar();
       this.Registrando = true;
+      this.TextoBotao = 'Adicionando';
+
       const user: IUser = this.authService.GetUserToken();
       let Endereco: IEndereco = {
         descricao: this.IdentificacaoForm.value.apelido,
@@ -97,13 +105,17 @@ export class EnderecoAddComponent implements OnInit {
         userId: user.id
       }
       this.enderecoService.Post(Endereco).subscribe((enderecos: IEndereco) => {
-        this.Registrando = false;
+        this.progressBarService.Mostrar();
+
         this.snackbar.OpenSnackBarSuccess(this.mensagemSnackbar.CadastroConcluido);
         this.router.navigate(['user/perfil/endereco']);
       },
       erro => {
-        console.log(erro);
         this.Registrando = false;
+        this.progressBarService.Mostrar();
+        this.TextoBotao = 'Finalizar';
+
+        console.log(erro);
         this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
       });
     } else {

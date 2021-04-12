@@ -11,7 +11,6 @@ const routes: Routes = [
     children:
     [
       { path: 'home', component: HomeAdminComponent, canActivate: [AuthGuard], data: { role: environment.RoleAdmin } },
-      { path: 'tipoproduto', loadChildren: './tipoproduto/tipoproduto.module#TipoProdutoModule', canActivate: [AuthGuard], data: { role: environment.RoleAdmin } },
       { path: 'promover', loadChildren: './promover/promover.module#PromoverModule', canActivate: [AuthGuard], data: { role: environment.RoleAdmin } },
       { path: 'gerenciarrules', loadChildren: './gerenciar-rules/gerenciar-rules.module#GerenciarRulesModule', canActivate: [AuthGuard], data: { role: environment.RoleAdmin } },
       { path: '', redirectTo: 'home', pathMatch: 'full' },

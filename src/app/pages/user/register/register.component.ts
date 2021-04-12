@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/core/services/server/Auth/Auth.service';
 import { SnackbarService } from 'src/app/core/services/shared/Snackbar/Snackbar.service';
 import { MensagensService } from 'src/app/core/services/shared/Mensagens/Mensagens.service';
 import { IUser } from '../../../shared/models/IUser';
+import { ProgressBarService } from 'src/app/core/services/shared/ProgressBar/ProgressBar.service';
 
 @Component({
   selector: 'app-register',
@@ -17,13 +18,15 @@ export class RegisterComponent implements OnInit {
   public ContatosForm: FormGroup;
   public SenhaForm: FormGroup;
   public Registrando = false;
-  private User: IUser;
   public step = 0;
+  public TextoBotao = 'Registrar';
+  private User: IUser;
 
   constructor(private fb: FormBuilder,
               public router: Router,
               private authService: AuthService,
               private snackbar: SnackbarService,
+              private progressBarService: ProgressBarService,
               private mensagemSnackbar: MensagensService) { }
 
   ngOnInit(): void {
@@ -58,7 +61,10 @@ export class RegisterComponent implements OnInit {
 
   Registrar(): void {
     if (this.DadosForm.valid && this.ContatosForm.valid && this.SenhaForm.valid) {
+      this.progressBarService.Mostrar();
+      this.TextoBotao = 'Registrando';
       this.Registrando = true;
+
       this.User = {
         fullName: this.DadosForm.value.fullname,
         cpf: this.DadosForm.value.cpf,
@@ -70,12 +76,16 @@ export class RegisterComponent implements OnInit {
       };
       this.authService.Register(this.User).subscribe(
         () => {
-          this.Registrando = false;
+          this.progressBarService.Mostrar();
+
           this.snackbar.OpenSnackBarSuccess(this.mensagemSnackbar.CadastroConcluido);
           this.router.navigate(['/produtos']);
         },
         error => {
           this.Registrando = false;
+          this.progressBarService.Mostrar();
+          this.TextoBotao = 'Registrar';
+
           const erro = error.error;
           console.log(error);
           switch (erro) {

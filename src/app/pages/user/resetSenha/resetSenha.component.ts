@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/core/services/server/Auth/Auth.service';
 import { SnackbarService } from 'src/app/core/services/shared/Snackbar/Snackbar.service';
 import { MensagensService } from 'src/app/core/services/shared/Mensagens/Mensagens.service';
 import { IResetSenha } from '../../../shared/models/IResetSenha';
+import { ProgressBarService } from 'src/app/core/services/shared/ProgressBar/ProgressBar.service';
 
 @Component({
   selector: 'app-resetSenha',
@@ -13,17 +14,19 @@ import { IResetSenha } from '../../../shared/models/IResetSenha';
 })
 export class ResetSenhaComponent implements OnInit {
 
-  Token: string;
-  Email: string;
-  public SenhaForm: FormGroup;
   public Registrando = false;
-  Reset: IResetSenha;
+  public SenhaForm: FormGroup;
+  public TextoBotao = 'Redefinir';
+  private Token: string;
+  private Email: string;
+  private Reset: IResetSenha;
 
   constructor(private activetedRoute: ActivatedRoute,
               private fb: FormBuilder,
               public router: Router,
               private authService: AuthService,
               private snackbar: SnackbarService,
+              private progressBarService: ProgressBarService,
               private mensagemSnackbar: MensagensService) { }
 
   ngOnInit(): void {
@@ -47,7 +50,10 @@ export class ResetSenhaComponent implements OnInit {
 
   ResetSenha(): void {
     if (this.SenhaForm.valid) {
+      this.progressBarService.Mostrar();
       this.Registrando = true;
+      this.TextoBotao = 'Redefinir';
+
       this.Reset = {
         token: this.Token,
         email: this.Email,
@@ -55,12 +61,16 @@ export class ResetSenhaComponent implements OnInit {
         confirmedPassword: this.SenhaForm.get('passwords.confirmedPassword').value
       };
       this.authService.ResetSenha(this.Reset).subscribe((model: any) => {
-        this.Registrando = false;
+        this.progressBarService.Mostrar();
+
         this.snackbar.OpenSnackBarSuccess(this.mensagemSnackbar.SenhaRedefinida);
         this.router.navigate(['/user/login']);
       },
       (error) => {
+        this.progressBarService.Mostrar();
         this.Registrando = false;
+        this.TextoBotao = 'Redefinindo';
+
         const erro = error.error;
         console.log(error);
         switch (erro) {
