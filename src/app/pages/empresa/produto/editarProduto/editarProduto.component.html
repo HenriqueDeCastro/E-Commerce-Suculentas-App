@@ -1,7 +1,4 @@
-<ng-container *ngIf="Carregando || !Categorias || !TiposProdutos">
-  <app-spinner></app-spinner>
-</ng-container>
-<ng-container *ngIf="!Carregando && Categorias && TiposProdutos">
+<ng-container *ngIf="Carregou && Categorias && TiposProdutos">
   <app-voltar></app-voltar>
   <br>
   <br>
@@ -10,7 +7,7 @@
     <app-not-found></app-not-found>
   </ng-container>
   <ng-container *ngIf="Produto">
-    <h1 class="titulo">Criar Produto</h1>
+    <h1 class="titulo">Editar Produto</h1>
     <br>
     <br>
     <mat-vertical-stepper [linear]="" #stepper>
@@ -114,13 +111,9 @@
             </mat-form-field>
             <br>
             <br>
-            <ng-container *ngIf="RealizandoCadastro">
-              <app-progressbar></app-progressbar>
-            </ng-container>
-            <br>
             <div class="form-group col-md-12 centralizar">
               <button mat-button matStepperPrevious class="w-50" color="warn">Anterior</button>
-              <button mat-button matStepperNext class="w-50" color="primary" [disabled]="RealizandoCadastro">Finalizar</button>
+              <button mat-button matStepperNext class="w-50" color="primary" [disabled]="RealizandoCadastro">{{TextoBotao}}</button>
             </div>
           </form>
         </mat-step>

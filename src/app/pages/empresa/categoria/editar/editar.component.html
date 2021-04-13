@@ -1,7 +1,4 @@
-<ng-container *ngIf="Carregando">
-  <app-spinner></app-spinner>
-</ng-container>
-<ng-container *ngIf="!Carregando">
+<ng-container *ngIf="Carregou">
   <app-voltar></app-voltar>
   <br>
   <br>
@@ -38,12 +35,8 @@
       </mat-form-field>
       <br>
       <br>
-      <ng-container *ngIf="EditandoCategoria">
-        <app-progressbar></app-progressbar>
-      </ng-container>
-      <br>
       <div class="form-group col-md-12 centralizar">
-        <button mat-flat-button class="btn-responsive" color="primary" [disabled]=EditandoCategoria>Editar</button>
+        <button mat-flat-button class="btn-responsive" color="primary" [disabled]=EditandoCategoria>{{TextoBotao}}</button>
       </div>
     </form>
   </ng-container>

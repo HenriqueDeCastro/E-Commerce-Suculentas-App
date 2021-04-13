@@ -14,9 +14,6 @@
       <mat-error *ngIf="RoleForm.get('name').hasError('required')" class="invalid-feedback">Nome é obrigatório</mat-error>
     </mat-form-field>
     <br>
-    <ng-container *ngIf="Registrando">
-      <app-progressbar></app-progressbar>
-    </ng-container>
     <br>
     <div class="form-group col-md-12 centralizar">
       <button mat-flat-button class="btn-responsive" color="primary" [disabled]=Registrando>Registrar</button>

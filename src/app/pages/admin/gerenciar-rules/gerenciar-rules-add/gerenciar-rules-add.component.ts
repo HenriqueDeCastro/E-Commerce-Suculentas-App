@@ -5,6 +5,7 @@ import { SnackbarService } from 'src/app/core/services/shared/Snackbar/Snackbar.
 import { IRole } from 'src/app/shared/models/IRole';
 import { RoleService } from 'src/app/core//services/server/Role/Role.service';
 import { Router } from '@angular/router';
+import { ProgressBarService } from 'src/app/core/services/shared/ProgressBar/ProgressBar.service';
 
 @Component({
   selector: 'app-gerenciar-rules-add',
@@ -22,6 +23,7 @@ export class GerenciarRulesAddComponent implements OnInit {
               private snackbar: SnackbarService,
               public router: Router,
               private mensagemSnackbar: MensagensService,
+              private progressBarService: ProgressBarService,
               private roleService: RoleService) { }
 
   ngOnInit(): void {
@@ -37,15 +39,21 @@ export class GerenciarRulesAddComponent implements OnInit {
   Registrar() {
     if (this.RoleForm.valid) {
       this.Registrando = true;
+      this.progressBarService.Mostrar();
+
       this.Rule = {
         name: this.RoleForm.value.name
       }
       this.roleService.Post(this.Rule).subscribe(() => {
         this.Registrando = false;
+        this.progressBarService.Mostrar();
+
         this.router.navigate(['/admin/gerenciarrules/geral']);
       },
       error => {
         this.Registrando = false;
+        this.progressBarService.Mostrar();
+
         const erro = error.error;
         console.log(error);
         this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);

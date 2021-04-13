@@ -1,6 +1,3 @@
-<ng-container *ngIf="!Categorias || !TiposProdutos">
-  <app-spinner></app-spinner>
-</ng-container>
 <ng-container *ngIf="Categorias && TiposProdutos">
   <app-voltar></app-voltar>
   <br>
@@ -107,7 +104,7 @@
           <br>
           <div class="form-group col-md-12 centralizar">
             <button mat-button matStepperPrevious class="w-50" color="warn">Anterior</button>
-            <button mat-button matStepperNext class="w-50" color="primary" [disabled]="RealizandoCadastro">Finalizar</button>
+            <button mat-button matStepperNext class="w-50" color="primary" [disabled]="RealizandoCadastro">{{TextoBotao}}</button>
           </div>
         </form>
       </mat-step>

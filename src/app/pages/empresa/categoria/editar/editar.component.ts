@@ -5,6 +5,7 @@ import { ICategoria } from 'src/app/shared/models/ICategoria';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SnackbarService } from '../../../../core/services/shared/Snackbar/Snackbar.service';
 import { MensagensService } from '../../../../core/services/shared/Mensagens/Mensagens.service';
+import { ProgressBarService } from 'src/app/core/services/shared/ProgressBar/ProgressBar.service';
 
 @Component({
   selector: 'app-editar',
@@ -16,19 +17,22 @@ export class EditarComponent implements OnInit {
   private CategoriaId: number;
   public Categoria: ICategoria;
   public CategoriaForm: FormGroup;
-  public Carregando: boolean = true;
+  public Carregou: boolean = false;
   public EditandoCategoria = false;
   public selected: any;
   public selectedTipo: number;
+  public TextoBotao = 'Editar';
 
   constructor(private fb: FormBuilder,
               public router: Router,
               private activetedRoute: ActivatedRoute,
               private categoriaService: CategoriaService,
               private snackbar: SnackbarService,
+              private progressBarService: ProgressBarService,
               private mensagemSnackbar: MensagensService) { }
 
   ngOnInit(): void {
+    this.progressBarService.Mostrar();
     this.ReceberValorRota();
     this.ReceberCategoria();
   }
@@ -43,10 +47,14 @@ export class EditarComponent implements OnInit {
         this.Categoria = categoria;
         this.selected = String(this.Categoria.ativo);
         this.Validation(this.Categoria);
-        this.Carregando = false;
+
+        this.Carregou = true;
+        this.progressBarService.Mostrar();
       } else {
+        this.Carregou = true;
+        this.progressBarService.Mostrar();
+
         console.log(this.Categoria)
-        this.Carregando = false;
       }
     });
   }
@@ -60,18 +68,25 @@ export class EditarComponent implements OnInit {
 
   Editar(): void {
     if (this.CategoriaForm.valid) {
+      this.progressBarService.Mostrar();
+      this.TextoBotao = 'Editando';
       this.EditandoCategoria = true;
+
       this.Categoria.nome = this.CategoriaForm.value.nome;
       this.Categoria.descricao = this.CategoriaForm.value.descricao;
       this.Categoria.ativo = this.selected;
       this.categoriaService.Put(this.Categoria).subscribe(
         () => {
-          this.EditandoCategoria = false;
+          this.progressBarService.Mostrar();
+
           this.snackbar.OpenSnackBarSuccess(this.mensagemSnackbar.AtualizacaoConcluida);
           this.router.navigate(['empresa/categoria']);
         },
         error => {
           this.EditandoCategoria = false;
+          this.TextoBotao = 'Editar';
+          this.progressBarService.Mostrar();
+
           console.log(error);
           this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
         });

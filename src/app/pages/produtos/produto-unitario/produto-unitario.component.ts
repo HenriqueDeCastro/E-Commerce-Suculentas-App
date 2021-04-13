@@ -94,7 +94,7 @@ export class ProdutoUnitarioComponent implements OnInit {
     const cepCrypt = localStorage.getItem(environment.VariavelCEP);
     if(cepCrypt) {
       const cepDescrypt = this.cryptService.descryptText(cepCrypt);
-      this.CEPStorage = cepDescrypt == ""? cepCrypt: cepDescrypt;
+      this.CEPStorage = cepDescrypt.length <= 1? cepCrypt: cepDescrypt;
       this.melhorEnvioService.CalcularFretePacote(this.CEPStorage).subscribe((result: ICalculoFrete) => {
         this.ValorFrete = result;
       },
@@ -111,8 +111,8 @@ export class ProdutoUnitarioComponent implements OnInit {
       this.TextoBotaoCalculo = 'Calculando...';
       this.melhorEnvioService.CalcularFretePacote(this.FreteForm.value.cep).subscribe((result: ICalculoFrete) => {
         const cepCrypt = this.cryptService.cryptText(this.FreteForm.value.cep)
-        this.CEPStorage = cepCrypt;
         localStorage.setItem(environment.VariavelCEP, cepCrypt);
+        this.CEPStorage = this.FreteForm.value.cep;
         this.ValorFrete = result;
         this.TextoBotaoCalculo = 'Calcular';
         this.Calculando = false;

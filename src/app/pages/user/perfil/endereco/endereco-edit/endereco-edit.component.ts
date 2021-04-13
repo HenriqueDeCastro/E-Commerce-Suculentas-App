@@ -59,12 +59,14 @@ export class EnderecoEditComponent implements OnInit {
         this.ReceberCidades();
       } else {
         this.Carregou = true;
+        this.progressBarService.Mostrar();
       }
 
-      this.progressBarService.Mostrar();
     },
     erro => {
       console.log(erro);
+      this.progressBarService.Mostrar();
+
       this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
     });
   }
@@ -76,11 +78,11 @@ export class EnderecoEditComponent implements OnInit {
   ReceberCidades() {
     const estadoSelecionado = this.Estados.filter(estado => estado.uf == this.Endereco.estado)
     this.Cidades = this.cidadeService.GetCidadesByEstadoId(estadoSelecionado[0].id);
+    this.progressBarService.Mostrar();
     this.ValidationIdentificacao();
     this.ValidationDomicilio();
 
     this.Carregou = true;
-    this.progressBarService.Mostrar();
   }
 
   ValidationIdentificacao(): void {
@@ -100,7 +102,6 @@ export class EnderecoEditComponent implements OnInit {
       cep: [this.Endereco.cep, [Validators.required, Validators.minLength(8)]]
     });
   }
-
 
   SelecaoEstado(estadoId: number) {
     this.Procurandocidades = true;

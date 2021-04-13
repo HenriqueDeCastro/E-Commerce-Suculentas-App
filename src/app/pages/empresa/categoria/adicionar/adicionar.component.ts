@@ -5,6 +5,7 @@ import { CategoriaService } from 'src/app/core/services/server/Categoria/Categor
 import { SnackbarService } from '../../../../core/services/shared/Snackbar/Snackbar.service';
 import { MensagensService } from '../../../../core/services/shared/Mensagens/Mensagens.service';
 import { ICategoria } from '../../../../shared/models/ICategoria';
+import { ProgressBarService } from 'src/app/core/services/shared/ProgressBar/ProgressBar.service';
 
 @Component({
   selector: 'app-adicionar',
@@ -15,13 +16,15 @@ export class AdicionarComponent implements OnInit {
 
   public CategoriaForm: FormGroup;
   public RealizandoCadastro = false;
-  private Categoria: ICategoria;
   public selected: number;
+  public TextoBotao = 'Cadastrar';
+  private Categoria: ICategoria;
 
   constructor(private fb: FormBuilder,
               public router: Router,
               private categoriaService: CategoriaService,
               private snackbar: SnackbarService,
+              private progressBarService: ProgressBarService,
               private mensagemSnackbar: MensagensService) { }
 
   ngOnInit(): void {
@@ -37,7 +40,10 @@ export class AdicionarComponent implements OnInit {
 
   Registrar(): void {
     if (this.CategoriaForm.valid) {
+      this.progressBarService.Mostrar();
+      this.TextoBotao = 'Cadastrando';
       this.RealizandoCadastro = true;
+
       this.Categoria = {
         nome: this.CategoriaForm.value.nome,
         descricao: this.CategoriaForm.value.descricao,
@@ -45,12 +51,16 @@ export class AdicionarComponent implements OnInit {
       };
       this.categoriaService.Post(this.Categoria).subscribe(
         () => {
-          this.RealizandoCadastro = false;
+          this.progressBarService.Mostrar();
+
           this.snackbar.OpenSnackBarSuccess(this.mensagemSnackbar.CadastroConcluido);
           this.router.navigate(['empresa/categoria']);
         },
         error => {
+          this.TextoBotao = 'Cadastrar';
           this.RealizandoCadastro = false;
+          this.progressBarService.Mostrar();
+
           console.log(error);
           this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
         });

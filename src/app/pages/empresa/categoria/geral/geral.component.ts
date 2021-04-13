@@ -3,6 +3,7 @@ import { CategoriaService } from 'src/app/core/services/server/Categoria/Categor
 import { SnackbarService } from '../../../../core/services/shared/Snackbar/Snackbar.service';
 import { MensagensService } from '../../../../core/services/shared/Mensagens/Mensagens.service';
 import { ICategoria } from 'src/app/shared/models/ICategoria';
+import { ProgressBarService } from 'src/app/core/services/shared/ProgressBar/ProgressBar.service';
 
 @Component({
   selector: 'app-geral',
@@ -17,9 +18,11 @@ export class GeralComponent implements OnInit {
 
   constructor(private categoriaService: CategoriaService,
               private snackbar: SnackbarService,
+              private progressBarService: ProgressBarService,
               private mensagemSnackbar: MensagensService) { }
 
   ngOnInit(): void {
+    this.progressBarService.Mostrar();
     this.ReceberCategorias();
   }
 
@@ -29,7 +32,9 @@ export class GeralComponent implements OnInit {
       this.SepararCategorias(this.Categorias);
     },
     erro => {
+    this.progressBarService.Mostrar();
       console.log(erro);
+
       this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
     });
   }
@@ -42,5 +47,6 @@ export class GeralComponent implements OnInit {
         this.CategoriasInativas.push(categoria);
       }
     });
+    this.progressBarService.Mostrar();
   }
 }

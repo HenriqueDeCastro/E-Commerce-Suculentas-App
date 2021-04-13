@@ -13,6 +13,7 @@ import { ProdutoService } from '../../../../core/services/server/Produto/Produto
 import { RenomearArquivoService } from 'src/app/core/services/shared/RenomearArquivo/RenomearArquivo.service';
 import { ImageCompressService } from 'src/app/core/services/shared/ImageCompress/ImageCompress.service';
 import { HorarioService } from 'src/app/core/services/shared/Horario/Horario.service';
+import { ProgressBarService } from 'src/app/core/services/shared/ProgressBar/ProgressBar.service';
 
 @Component({
   selector: 'app-adicionarProduto',
@@ -33,6 +34,7 @@ export class AdicionarProdutoComponent implements OnInit {
   public Categorias: ICategoria[];
   public IdEstoque: number;
   public IdEncomenda: number;
+  public TextoBotao = 'Finalizar';
 
   constructor(private fb: FormBuilder,
               public router: Router,
@@ -43,9 +45,11 @@ export class AdicionarProdutoComponent implements OnInit {
               private horario: HorarioService,
               private snackbar: SnackbarService,
               private imageCompressService: ImageCompressService,
+              private progressBarService: ProgressBarService,
               private mensagemSnackbar: MensagensService) { }
 
   ngOnInit(): void {
+    this.progressBarService.Mostrar();
     this.ReceberCategorias();
     this.ReceberTiposCategorias();
     this.ValidationIndetificacao();
@@ -91,6 +95,7 @@ export class AdicionarProdutoComponent implements OnInit {
   ReceberTiposCategorias() {
     this.tipoProdutoService.GetAllSemProduto().subscribe((tipoProdutos: ITipoProduto[]) => {
       this.TiposProdutos = tipoProdutos
+      this.progressBarService.Mostrar();
     },
     erro => {
       console.log(erro);
@@ -161,13 +166,17 @@ export class AdicionarProdutoComponent implements OnInit {
     };
     this.produtoService.Post(produto).subscribe(
       () => {
-        this.RealizandoCadastro = false;
+        this.progressBarService.Mostrar();
+
         this.snackbar.OpenSnackBarSuccess(this.mensagemSnackbar.CadastroConcluido);
         this.router.navigate(['empresa/produto']);
       },
       erro => {
-        console.log(erro);
+        this.progressBarService.Mostrar();
         this.RealizandoCadastro = false;
+        this.TextoBotao = 'Finalizar';
+
+        console.log(erro);
         this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
       }
     );
@@ -176,6 +185,9 @@ export class AdicionarProdutoComponent implements OnInit {
   Registrar(): void {
       if (this.IdentificacaoForm.valid && this.InformacoesForm.valid && this.ValoresForm.valid) {
       this.RealizandoCadastro = true;
+      this.TextoBotao = 'Finalizando';
+      this.progressBarService.Mostrar();
+
       this.UploadFotos();
     } else {
       this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroCamposPreenchidos);

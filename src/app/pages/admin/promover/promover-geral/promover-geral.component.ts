@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from 'src/app/core/services/server/Auth/Auth.service';
 import { RoleService } from 'src/app/core/services/server/Role/Role.service';
 import { MensagensService } from 'src/app/core/services/shared/Mensagens/Mensagens.service';
+import { ProgressBarService } from 'src/app/core/services/shared/ProgressBar/ProgressBar.service';
 import { SnackbarService } from 'src/app/core/services/shared/Snackbar/Snackbar.service';
 import { IRole } from 'src/app/shared/models/IRole';
 import { IUser } from 'src/app/shared/models/IUser';
@@ -26,9 +27,11 @@ export class PromoverGeralComponent implements OnInit {
               private snackbar: SnackbarService,
               public dialog: MatDialog,
               private bottomSheet: MatBottomSheet,
+              private progressBarService: ProgressBarService,
               private mensagemSnackbar: MensagensService) { }
 
   ngOnInit() {
+    this.progressBarService.Mostrar();
     this.ReceberRoles();
   }
 
@@ -38,6 +41,7 @@ export class PromoverGeralComponent implements OnInit {
       this.ReceberUsuariosPorRole();
     },
     error => {
+      this.progressBarService.Mostrar();
       const erro = error.error;
       console.log(error);
       this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
@@ -51,7 +55,6 @@ export class PromoverGeralComponent implements OnInit {
           roleName: role.name,
           users: users
         }
-
         this.Users.push(aux);
       },
       error => {
@@ -60,6 +63,8 @@ export class PromoverGeralComponent implements OnInit {
         this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
       })
     });
+
+    this.progressBarService.Mostrar();
   }
 
   OpenDialog(user: IUser, rolename: string): void {

@@ -21,12 +21,8 @@
   </mat-form-field>
   <br>
   <br>
-  <ng-container *ngIf="RealizandoCadastro">
-    <app-progressbar></app-progressbar>
-  </ng-container>
-  <br>
   <div class="form-group col-md-12 centralizar">
-    <button mat-flat-button class="btn-responsive" color="primary" [disabled]=RealizandoCadastro>Cadastrar</button>
+    <button mat-flat-button class="btn-responsive" color="primary" [disabled]=RealizandoCadastro>{{TextoBotao}}</button>
   </div>
 </form>
 

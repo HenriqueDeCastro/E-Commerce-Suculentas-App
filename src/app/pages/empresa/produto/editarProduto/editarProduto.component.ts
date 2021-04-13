@@ -14,6 +14,7 @@ import { environment } from 'src/environments/environment';
 import { TipoProdutoService } from 'src/app/core/services/server/TipoProduto/TipoProduto.service';
 import { ImageCompressService } from 'src/app/core/services/shared/ImageCompress/ImageCompress.service';
 import { HorarioService } from 'src/app/core/services/shared/Horario/Horario.service';
+import { ProgressBarService } from 'src/app/core/services/shared/ProgressBar/ProgressBar.service';
 
 @Component({
   selector: 'app-editarProduto',
@@ -27,7 +28,7 @@ export class EditarProdutoComponent implements OnInit {
   public IdentificacaoForm: FormGroup;
   public InformacoesForm: FormGroup;
   public ValoresForm: FormGroup;
-  public Carregando: boolean = true;
+  public Carregou: boolean = false;
   public file: File;
   public fileMini: File;
   public TiposProdutos: ITipoProduto[];
@@ -39,6 +40,7 @@ export class EditarProdutoComponent implements OnInit {
   public IdEncomenda: number;
   public IdEstoque: number;
   public NomeArquivo: string;
+  public TextoBotao = 'Editar';
 
   constructor(private activetedRoute: ActivatedRoute,
               private snackbar: SnackbarService,
@@ -50,9 +52,11 @@ export class EditarProdutoComponent implements OnInit {
               private location: Location,
               private horario: HorarioService,
               private imageCompressService: ImageCompressService,
+              private progressBarService: ProgressBarService,
               private mensagemSnackbar: MensagensService) { }
 
   ngOnInit(): void {
+    this.progressBarService.Mostrar();
     this.ReceberValorRota();
     this.ReceberProdutos();
     this.ReceberCategorias();
@@ -75,10 +79,10 @@ export class EditarProdutoComponent implements OnInit {
         this.ValidationIndetificacao();
         this.ValidationInformacoes();
         this.ValidationValores();
-        this.Carregando = false;
-      } else {
-        this.Carregando = false;
       }
+
+      this.Carregou = true;
+      this.progressBarService.Mostrar();
     },
     erro => {
       console.log(erro);
@@ -152,7 +156,10 @@ export class EditarProdutoComponent implements OnInit {
 
   Atualizar(): void {
     if (this.IdentificacaoForm.valid && this.InformacoesForm.valid && this.ValoresForm.valid) {
+      this.progressBarService.Mostrar();
       this.RealizandoCadastro = true;
+      this.TextoBotao = 'Editando';
+
       if (this.file) {
         this.UploadFotos();
       } else {
@@ -209,13 +216,16 @@ export class EditarProdutoComponent implements OnInit {
     };
     this.produtoService.Put(produto).subscribe(
       () => {
-        this.RealizandoCadastro = false;
+        this.progressBarService.Mostrar();
+
         this.snackbar.OpenSnackBarSuccess(this.mensagemSnackbar.AtualizacaoConcluida);
         this.location.back();
       },
       erro => {
         console.log(erro);
         this.RealizandoCadastro = false;
+        this.TextoBotao = 'Editar';
+        this.progressBarService.Mostrar();
         this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
       }
     );
