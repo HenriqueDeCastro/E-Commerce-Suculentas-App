@@ -26,7 +26,7 @@
         <mat-expansion-panel [expanded]="open == true" class="mat-elevation-z0" hideToggle>
           <br>
           <ng-container *ngIf="open">
-            <app-pesquisa (OnTyping)="receberFiltro($event)" (page)="pages = $event" [value]="filter"></app-pesquisa>
+            <app-pesquisa (OnTyping)="receberPesquisa($event)" (page)="pages = $event" [value]="search"></app-pesquisa>
           </ng-container>
         </mat-expansion-panel>
       </mat-accordion>
@@ -58,7 +58,7 @@
     <ng-container *ngIf="Produtos.length == 0">
       <br>
       <br>
-      <h3 class="titulo centralizar">Não encontramos nenhum(a) {{this.Categoria.nome}} que tenha em seu nome "{{filter}}".🤔 </h3>
+      <h3 class="titulo centralizar">Não encontramos nenhum(a) {{this.Categoria.nome}} que tenha em seu nome "{{search}}".🤔 </h3>
     </ng-container>
   </ng-container>
 </ng-container>

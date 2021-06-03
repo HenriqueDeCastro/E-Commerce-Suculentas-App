@@ -12,6 +12,6 @@ export interface IVenda {
   codigoRastreio?: string;
   statusId?: number;
   userId: number;
-  enderecoId: number;
+  endereco: string;
   pedidos?: IPedido[];
 }

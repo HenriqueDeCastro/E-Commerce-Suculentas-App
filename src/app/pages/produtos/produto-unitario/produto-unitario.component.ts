@@ -74,7 +74,7 @@ export class ProdutoUnitarioComponent implements OnInit {
     },
     (erro) => {
       this.progressBarService.Mostrar();
-      console.log(erro);
+      console.error(erro);
 
       this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
     });
@@ -99,7 +99,7 @@ export class ProdutoUnitarioComponent implements OnInit {
         this.ValorFrete = result;
       },
       (erro) => {
-        console.log(erro);
+        console.error(erro);
         this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidorMelhorEnvio);
       });
     }
@@ -118,7 +118,7 @@ export class ProdutoUnitarioComponent implements OnInit {
         this.Calculando = false;
       },
       (erro) => {
-        console.log(erro);
+        console.error(erro);
         this.TextoBotaoCalculo = 'Calcular';
         this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidorMelhorEnvio);
         this.Calculando = false;

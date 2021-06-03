@@ -53,8 +53,6 @@ export class EditarComponent implements OnInit {
       } else {
         this.Carregou = true;
         this.progressBarService.Mostrar();
-
-        console.log(this.Categoria)
       }
     });
   }
@@ -87,7 +85,7 @@ export class EditarComponent implements OnInit {
           this.TextoBotao = 'Editar';
           this.progressBarService.Mostrar();
 
-          console.log(error);
+          console.error(error);
           this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
         });
     } else {

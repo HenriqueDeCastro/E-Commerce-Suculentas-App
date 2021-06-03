@@ -11,4 +11,6 @@ export interface IProdutoCarrinho {
   tipoProdutoId: number;
   categoriaId: number;
   quantidadePedido: number;
+  indisponivel?: boolean;
+  categoriaNome: string;
 }

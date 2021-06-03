@@ -35,7 +35,7 @@ export class GerenciarRulesGeralComponent implements OnInit {
       const erro = error.error;
       this.progressBarService.Mostrar();
 
-      console.log(error);
+      console.error(error);
       this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
     })
   }
@@ -57,14 +57,14 @@ export class GerenciarRulesGeralComponent implements OnInit {
         this.Registrando = false;
 
         const erro = error.error;
-        console.log(error);
+        console.error(error);
         this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroRoleAdmin);
       })
     },
     error => {
       this.Registrando = false;
       const erro = error.error;
-      console.log(error);
+      console.error(error);
       this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroRoleAdmin);
     })
   }

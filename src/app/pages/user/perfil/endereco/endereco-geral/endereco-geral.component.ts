@@ -48,7 +48,7 @@ export class EnderecoGeralComponent implements OnInit {
     },
     erro => {
       this.progressBarService.Mostrar();
-      console.log(erro);
+      console.error(erro);
       this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
     });
   }
@@ -91,6 +91,7 @@ export class EnderecoGeralComponent implements OnInit {
   ResultDelete(result: boolean) {
     if(result) {
       this.Enderecos = null;
+      this.progressBarService.Mostrar();
       this.ReceberEnderecoUser()
     }
   }

@@ -8,7 +8,7 @@ import { ProgressBarService } from 'src/app/core/services/shared/ProgressBar/Pro
 })
 export class ProgressbarComponent implements OnInit {
 
-  constructor(public progressBarService: ProgressBarService) { }
+  constructor() { }
 
   ngOnInit(): void {}
 

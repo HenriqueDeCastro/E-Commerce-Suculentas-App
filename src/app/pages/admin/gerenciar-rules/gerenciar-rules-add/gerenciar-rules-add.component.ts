@@ -55,7 +55,7 @@ export class GerenciarRulesAddComponent implements OnInit {
         this.progressBarService.Mostrar();
 
         const erro = error.error;
-        console.log(error);
+        console.error(error);
         this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
       })
     } else {

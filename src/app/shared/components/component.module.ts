@@ -13,6 +13,7 @@ import { FooterComponent } from './footer/footer.component';
 import { ListaOrderbyProdutoComponent } from './lista-orderby-produto/lista-orderby-produto.component';
 import { PesquisaComponent } from './pesquisa/pesquisa.component';
 import { ProgressbarComponent } from './progressbar/progressbar.component';
+import { ProgressbarToolbarComponent } from './progressbar-toolbar/progressbar-toolbar.component';
 import { RotasSiteComponent } from './Rotas-Site/Rotas-Site.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { TituloMaisAddComponent } from './titulo-mais-add/titulo-mais-add.component';
@@ -40,7 +41,8 @@ import { AlertCidadesEncomendaComponent } from './alert-cidades-encomenda/alert-
     BotaoQuantidadeComponent,
     NotFoundComponent,
     AlertCamposObrigatoriosComponent,
-    AlertCidadesEncomendaComponent
+    AlertCidadesEncomendaComponent,
+    ProgressbarToolbarComponent
   ],
   exports: [
     ProgressbarComponent,
@@ -59,7 +61,8 @@ import { AlertCidadesEncomendaComponent } from './alert-cidades-encomenda/alert-
     BotaoQuantidadeComponent,
     NotFoundComponent,
     AlertCamposObrigatoriosComponent,
-    AlertCidadesEncomendaComponent
+    AlertCidadesEncomendaComponent,
+    ProgressbarToolbarComponent
   ],
   imports: [
     CommonModule,

@@ -85,7 +85,7 @@ export class EditarProdutoComponent implements OnInit {
       this.progressBarService.Mostrar();
     },
     erro => {
-      console.log(erro);
+      console.error(erro);
       this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
     });
   }
@@ -95,7 +95,7 @@ export class EditarProdutoComponent implements OnInit {
       this.Categorias = categorias;
     },
     erro => {
-      console.log(erro);
+      console.error(erro);
       this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
     });
   }
@@ -105,7 +105,7 @@ export class EditarProdutoComponent implements OnInit {
       this.TiposProdutos = tipoProdutos
     },
     erro => {
-      console.log(erro);
+      console.error(erro);
       this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroUploadImagem);
     })
   }
@@ -185,14 +185,14 @@ export class EditarProdutoComponent implements OnInit {
             this.UpdateProduto();
           },
           erro => {
-            console.log(erro);
+            console.error(erro);
             this.RealizandoCadastro = false;
             this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroUploadImagemMini);
           }
         );
       },
       erro => {
-        console.log(erro);
+        console.error(erro);
         this.RealizandoCadastro = false;
         this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroUploadImagem);
       }
@@ -222,7 +222,7 @@ export class EditarProdutoComponent implements OnInit {
         this.location.back();
       },
       erro => {
-        console.log(erro);
+        console.error(erro);
         this.RealizandoCadastro = false;
         this.TextoBotao = 'Editar';
         this.progressBarService.Mostrar();

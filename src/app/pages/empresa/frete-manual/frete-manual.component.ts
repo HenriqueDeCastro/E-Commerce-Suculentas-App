@@ -53,7 +53,7 @@ export class FreteManualComponent implements OnInit {
         this.ValoresFretes = result;
       },
       (erro) => {
-        console.log(erro);
+        console.error(erro);
         this.progressBarService.Mostrar();
         this.Calculando = false;
         this.TextoBotao = 'Calcular';

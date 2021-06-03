@@ -30,7 +30,7 @@ export class GeralProdutosComponent implements OnInit {
       this.progressBarService.Mostrar();
     },
     erro => {
-      console.log(erro);
+      console.error(erro);
       this.progressBarService.Mostrar();
       this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
     });

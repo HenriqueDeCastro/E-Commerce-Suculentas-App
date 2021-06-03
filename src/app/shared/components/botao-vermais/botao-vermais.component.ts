@@ -18,6 +18,14 @@ export class BotaoVermaisComponent implements OnInit {
   }
 
   Navegar(): void {
-    this.router.navigate([this.Rota + this.Categoria.id + '/' + this.Categoria.nome]);
+    this.router.navigate(
+      [this.Rota + this.Categoria.nome + '/' + this.Categoria.id],
+      {
+        queryParams: {
+          page: 1,
+          filter: ''
+        }
+      }
+    );
   }
 }

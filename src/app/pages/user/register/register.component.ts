@@ -87,7 +87,7 @@ export class RegisterComponent implements OnInit {
           this.TextoBotao = 'Registrar';
 
           const erro = error.error;
-          console.log(error);
+          console.error(error);
           switch (erro) {
             case 'DuplicateUserName':
               this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroCadastroDuplicado);

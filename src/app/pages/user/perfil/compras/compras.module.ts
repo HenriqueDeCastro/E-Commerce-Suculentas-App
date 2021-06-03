@@ -7,13 +7,20 @@ import { MaterialModule } from '../../../../shared/components/material/material.
 import { ComponentModule } from '../../../../shared/components/component.module';
 import { ComprasRoutingModule } from './compras-routing.module';
 
+// COMPONENT
+import { ProdutoCompraDetalheComponent } from './compras-detalhe/components/produto-compra-detalhe/produto-compra-detalhe.component';
+
+// PAGE
 import { ComprasComponent } from './compras.component';
 import { ComprasStatusComponent } from './compras-status/compras-status.component';
+import { ComprasDetalheComponent } from './compras-detalhe/compras-detalhe.component';
 
 @NgModule({
   declarations: [
     ComprasComponent,
-    ComprasStatusComponent
+    ComprasStatusComponent,
+    ComprasDetalheComponent,
+    ProdutoCompraDetalheComponent
   ],
   imports: [
     MaterialModule,

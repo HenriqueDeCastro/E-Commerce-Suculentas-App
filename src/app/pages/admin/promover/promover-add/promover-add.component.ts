@@ -42,7 +42,7 @@ export class PromoverAddComponent implements OnInit {
     },
     error => {
       const erro = error.error;
-      console.log(error);
+      console.error(error);
       this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
     })
   }
@@ -77,7 +77,7 @@ export class PromoverAddComponent implements OnInit {
             break;
           default:
             this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
-            console.log(error);
+            console.error(error);
             break;
         }
       }
@@ -104,7 +104,7 @@ export class PromoverAddComponent implements OnInit {
         this.router.navigate(['/admin/promover/geral']);
       },
       erro => {
-        console.log(erro);
+        console.error(erro);
         this.RealizandoCadastro = false;
         this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
       }

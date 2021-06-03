@@ -17,16 +17,16 @@ export class VendaService {
     return this.http.get<IVenda[]>(`${this.UrlBase}`);
   }
 
-  GetById(tipocategoriaId: number): Observable<IVenda> {
-    return this.http.get<IVenda>(`${this.UrlBase}/${tipocategoriaId}`);
+  GetById(vendaId: number): Observable<IVenda> {
+    return this.http.get<IVenda>(`${this.UrlBase}/${vendaId}`);
   }
 
-  GetByUserId(userId: number, statusId: number): Observable<IVenda> {
-    return this.http.get<IVenda>(`${this.UrlBase}/getByUser/${userId}/${statusId}`);
+  GetByUserId(userId: number, statusId: number): Observable<IVenda[]> {
+    return this.http.get<IVenda[]>(`${this.UrlBase}/getByUser/${userId}/${statusId}`);
   }
 
-  GetByStatusId(statusId: number): Observable<IVenda> {
-    return this.http.get<IVenda>(`${this.UrlBase}/getByStatus/${statusId}`);
+  GetByStatusId(statusId: number): Observable<IVenda[]> {
+    return this.http.get<IVenda[]>(`${this.UrlBase}/getByStatus/${statusId}`);
   }
 
   Post(venda: IVenda): Observable<IVenda>   {

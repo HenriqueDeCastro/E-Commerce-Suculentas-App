@@ -58,7 +58,7 @@ export class EsqueciSenhaComponent implements OnInit {
           this.TextoBotao = "Enviar";
 
           const erro = error.error;
-          console.log(error);
+          console.error(error);
           switch (erro) {
             case 'Usuario não encontrado!':
               this.snackbar.OpenSnackBarError(this.mensagemSnackbar.EmailNaoEncontrado);

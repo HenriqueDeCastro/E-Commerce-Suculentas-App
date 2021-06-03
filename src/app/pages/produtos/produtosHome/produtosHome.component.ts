@@ -31,7 +31,7 @@ export class ProdutosHomeComponent implements OnInit {
     },
     erro => {
       this.progressBarService.Mostrar();
-      console.log(erro);
+      console.error(erro);
 
       this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
     });

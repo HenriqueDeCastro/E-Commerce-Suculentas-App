@@ -1,0 +1,58 @@
+<ng-container *ngIf="Venda">
+  <app-voltar></app-voltar>
+  <br>
+  <br>
+  <br>
+  <h1 class="titulo centralizar">#{{Venda.id}}</h1>
+  <br>
+  <br>
+  <h3 *ngIf="Venda.pedidos.length == 1" class="titulo">Produto</h3>
+  <h3 *ngIf="Venda.pedidos.length > 1" class="titulo">Produtos</h3>
+  <div class="row">
+    <ng-container *ngFor="let pedido of Venda.pedidos">
+      <div class="col-sm-6">
+        <app-produto-compra-detalhe [produto]=pedido.produto [pedido]=pedido></app-produto-compra-detalhe>
+      </div>
+    </ng-container>
+  </div>
+  <br>
+  <mat-divider class="pontilhado"></mat-divider>
+  <br>
+  <h3 class="titulo">Valores</h3>
+  <div class="row">
+    <div class="col-sm-6">
+      <mat-list>
+        <mat-list-item class="tamanho-matlineitem">
+          <mat-icon class="material-icons-outlined produto" mat-list-icon>local_mall</mat-icon>
+          <div mat-line *ngIf="Venda.pedidos.length == 1" class="quebralinha-matline negrito">Valor do Produto</div>
+          <div mat-line *ngIf="Venda.pedidos.length > 1" class="quebralinha-matline negrito ">Valor dos Produtos</div>
+          <div mat-line class="quebralinha-matline">{{Venda.valor | currency:'BRL'}}</div>
+        </mat-list-item>
+      </mat-list>
+    </div>
+    <div class="col-sm-6">
+      <mat-list>
+        <mat-list-item class="tamanho-matlineitem">
+          <mat-icon class="material-icons-outlined frete" mat-list-icon>local_shipping</mat-icon>
+          <div mat-line class="quebralinha-matline negrito">Valor do Frete</div>
+          <div mat-line *ngIf="Venda.frete" class="quebralinha-matline">{{ Venda.valorFrete | currency:'BRL'}}</div>
+          <div mat-line *ngIf="!Venda.frete" class="quebralinha-matline">{{ 0 | currency:'BRL'}}</div>
+        </mat-list-item>
+      </mat-list>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <br>
+  <h3 class="titulo">Total</h3>
+  <mat-list>
+    <mat-list-item class="tamanho-matlineitem">
+      <mat-icon class="material-icons-outlined dinheiro" mat-list-icon>payments</mat-icon>
+      <div mat-line *ngIf="Venda.frete" class="quebralinha-matline negrito" style="font-size:23px">{{Total | currency:'BRL'}}</div>
+    </mat-list-item>
+  </mat-list>
+  <br>
+  <br>
+  <h3 class="titulo centralizar">Para dúvidas ou cancelamento nos contate por Whatsapp</h3>
+  <h3 class="titulo centralizar">O link para nosso chat se encontra no rodapé de todas as paginas ;)</h3>
+</ng-container>
+

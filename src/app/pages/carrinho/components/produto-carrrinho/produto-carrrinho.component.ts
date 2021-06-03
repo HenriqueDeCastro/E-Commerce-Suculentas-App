@@ -31,7 +31,7 @@ export class ProdutoCarrrinhoComponent implements OnInit {
   }
 
   Navegar(): void {
-    this.router.navigate(['/produtos/' + this.produto.categoriaId  + '/' + this.produto.id + '/' + this.produto.nome]);
+    this.router.navigate(['/produtos/' + this.produto.categoriaNome  + '/' + this.produto.id + '/' + this.produto.nome]);
   }
 
   OpenDialog(produtoCarrinho: IProdutoCarrinho): void {

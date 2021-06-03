@@ -34,8 +34,9 @@ export class ListEnderecoDeleteComponent implements OnInit {
       this.Acao.emit(true);
     },
     erro => {
-      console.log(erro);
+      console.error(erro);
       this.Apagando = false;
+      this.Acao.emit(false);
       this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
     });
   }

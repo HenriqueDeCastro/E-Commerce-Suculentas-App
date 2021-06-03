@@ -41,7 +41,7 @@ export class ListDeletePromoverComponent implements OnInit {
       this.Acao.emit(true);
     },
     erro => {
-      console.log(erro);
+      console.error(erro);
       this.Apagando = false;
       this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
     });

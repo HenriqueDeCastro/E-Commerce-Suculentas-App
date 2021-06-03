@@ -92,7 +92,7 @@
           <form [formGroup]="ValoresForm" (ngSubmit)="Atualizar()" autocomplete="off">
             <mat-form-field  appearance="fill" class="w-100">
               <mat-label>Preço</mat-label>
-              <input matInput formControlName="preco"  mask="separator.2" separatorLimit="1000" thousandSeparator=".">
+              <input matInput formControlName="preco"  mask="separator.2" separatorLimit="1000"  step=".01">
               <mat-error *ngIf="ValoresForm.get('preco').hasError('required')" class="invalid-feedback">Preço é obrigatório</mat-error>
             </mat-form-field>
             <br>

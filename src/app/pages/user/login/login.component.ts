@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit {
           this.progressBarService.Mostrar();
 
           const erro = error.error;
-          console.log(error);
+          console.error(error);
 
           switch (erro.title) {
             case 'Unauthorized':

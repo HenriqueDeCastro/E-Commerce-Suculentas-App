@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-voltar',
@@ -8,11 +9,16 @@ import { Location } from '@angular/common';
 })
 export class VoltarComponent implements OnInit {
 
-  constructor(private location: Location) { }
+  private returnUrl: string;
+
+  constructor(private router: Router,
+              private activetedRoute: ActivatedRoute,
+              private location: Location) {}
 
   ngOnInit(): void {}
 
   Voltar(): void {
     this.location.back();
   }
+
 }

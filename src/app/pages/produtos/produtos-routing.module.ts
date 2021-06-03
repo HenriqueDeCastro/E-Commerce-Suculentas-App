@@ -11,7 +11,7 @@ const routes: Routes = [
     children:
     [
       { path: 'home', component: ProdutosHomeComponent },
-      { path: ':categoriaId/:categoriaName', component: ProdutosEspecificoComponent },
+      { path: ':categoriaName/:categoriaId', component: ProdutosEspecificoComponent },
       { path: ':categoriaName/:produtoId/:produtoName', component: ProdutoUnitarioComponent },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: '**', redirectTo: 'home', pathMatch: 'full' }

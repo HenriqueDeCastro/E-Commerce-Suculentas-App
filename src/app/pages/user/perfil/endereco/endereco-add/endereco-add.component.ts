@@ -115,7 +115,7 @@ export class EnderecoAddComponent implements OnInit {
         this.progressBarService.Mostrar();
         this.TextoBotao = 'Finalizar';
 
-        console.log(erro);
+        console.error(erro);
         this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
       });
     } else {

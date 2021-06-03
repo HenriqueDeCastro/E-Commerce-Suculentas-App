@@ -26,6 +26,9 @@ export class MensagensService {
   public ProdutoSalvoCarrinho = 'Produto salvo com sucesso!';
   public ProdutoAdicionadoCarrinho = 'Produto adicionado ao carrinho!';
   public ErroEstoqueMaximo = 'Você já adicionou o máximo que temos em estoque';
+  public ProdutoIndisponivelNoServidor = 'Um produto em seu carrinho se encontra indisponível !!!';
+  public ErroPagSeguro = 'OPS! Infelizmente o PagSeguro está fora do ar atualmente, tente finalizar a compra mais tarde';
+  public VendaComSucesso = 'Venda Realizada com sucesso!!!';
 
   // ESQUECI A SENHA && RESET SENHA
   public VerificarCaixaEmail = 'Verifique sua caixa de e-mail';

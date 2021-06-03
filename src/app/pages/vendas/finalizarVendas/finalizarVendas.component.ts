@@ -5,6 +5,7 @@ import { EnderecoService } from 'src/app/core/services/server/Endereco/Endereco.
 import { MelhorEnvioService } from 'src/app/core/services/server/MelhorEnvio/MelhorEnvio.service';
 import { CryptService } from 'src/app/core/services/shared/Crypt/Crypt.service';
 import { MensagensService } from 'src/app/core/services/shared/Mensagens/Mensagens.service';
+import { ProgressBarService } from 'src/app/core/services/shared/ProgressBar/ProgressBar.service';
 import { SnackbarService } from 'src/app/core/services/shared/Snackbar/Snackbar.service';
 import { ICalculoFrete } from 'src/app/shared/models/ICalculoFrete';
 import { IEndereco } from 'src/app/shared/models/IEndereco';
@@ -36,9 +37,11 @@ export class FinalizarVendasComponent implements OnInit {
               private cryptService: CryptService,
               private router: Router,
               private authService: AuthService,
+              private progressBarService: ProgressBarService,
               private mensagemSnackbar: MensagensService) { }
 
   ngOnInit() {
+    this.progressBarService.Mostrar();
     this.IdEncomenda = environment.TipoProdutoEncomenda;
     this.IdEstoque = environment.TipoProdutoEstoque;
     this.urlMaps = environment.UrlMaps;
@@ -52,6 +55,7 @@ export class FinalizarVendasComponent implements OnInit {
     this.TipoId = this.activetedRoute.snapshot.params.idTipoProduto;
 
     if(this.TipoId != this.IdEncomenda && this.TipoId != this.IdEstoque) {
+      this.progressBarService.Mostrar();
       this.router.navigate(['/carrinho']);
     }
   }
@@ -62,15 +66,16 @@ export class FinalizarVendasComponent implements OnInit {
       let Produtos: IProdutoCarrinho[] = this.cryptService.descryptObject(produtosCrypt);
       this.SepararTiposProdutos(Produtos);
     } else {
-      this.router.navigate(['/produtos']);
+      this.router.navigate(['/carrinho']);
     }
   }
 
 
   SepararTiposProdutos(Produtos: IProdutoCarrinho[]) {
     this.Produtos = Produtos.filter(p => p.tipoProdutoId == this.TipoId);
+    this.progressBarService.Mostrar();
     if(this.Produtos.length <= 0) {
-      this.router.navigate(['/produtos']);
+      this.router.navigate(['/carrinho']);
     }
   }
 
@@ -83,7 +88,7 @@ export class FinalizarVendasComponent implements OnInit {
       this.Enderecos = enderecos;
     },
     erro => {
-      console.log(erro);
+      console.error(erro);
       this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
     });
   }
@@ -102,7 +107,7 @@ export class FinalizarVendasComponent implements OnInit {
         this.ValorFrete = result;
       },
       (erro) => {
-        console.log(erro);
+        console.error(erro);
         this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidorMelhorEnvio);
       });
     } else {

@@ -3,6 +3,13 @@
 <br>
 <br>
 <h1 class="titulo-lista responsive">Carrinho</h1>
+<ng-container *ngIf="Indisponivel">
+  <div class="alert alert-danger" role="alert">
+    <strong>Um</strong> ou <strong>mais produtos</strong> se <strong>esgotaram</strong> enquanto você navegava na página :(
+    <hr>
+    <strong>Recomendamos removê-los </strong>para poder efetuar a compra dos demais!
+  </div>
+</ng-container>
 <br>
 <ng-container *ngIf="(ProdutosEncomenda && ProdutosEncomenda.length > 0) && (ProdutosEstoque && ProdutosEstoque.length > 0)">
   <div class="alert alert-warning" role="alert">

@@ -17,24 +17,34 @@
     <div mat-line>Endereços</div>
   </mat-list-item>
   <div mat-subheader>Compras</div>
-  <mat-list-item class="lista cursor">
+  <mat-list-item class="lista cursor" (click)="router.navigate(['user/perfil/compras/1'])">
     <mat-icon class="material-icons-outlined" mat-list-icon>credit_card</mat-icon>
     <div mat-line>Aguardando Pagamento</div>
   </mat-list-item>
   <mat-divider></mat-divider>
-  <mat-list-item class="lista cursor">
+  <mat-list-item class="lista cursor" (click)="router.navigate(['user/perfil/compras/2'])">
     <mat-icon class="material-icons-outlined" mat-list-icon>departure_board</mat-icon>
     <div mat-line>Aguardando Envio</div>
   </mat-list-item>
   <mat-divider></mat-divider>
-  <mat-list-item class="lista cursor">
+  <mat-list-item class="lista cursor" (click)="router.navigate(['user/perfil/compras/3'])">
     <mat-icon class="material-icons-outlined" mat-list-icon>local_shipping</mat-icon>
-    <div mat-line>Enviados</div>
+    <div mat-line>Enviadas</div>
   </mat-list-item>
   <mat-divider></mat-divider>
-  <mat-list-item class="lista cursor">
+  <mat-list-item class="lista cursor" (click)="router.navigate(['user/perfil/compras/4'])">
     <mat-icon class="material-icons-outlined" mat-list-icon>check</mat-icon>
-    <div mat-line>Finalizados</div>
+    <div mat-line>Finalizadas</div>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-list-item class="lista cursor" (click)="router.navigate(['user/perfil/compras/5'])">
+    <mat-icon class="material-icons-outlined" mat-list-icon>cancel</mat-icon>
+    <div mat-line>Canceladas</div>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-list-item class="lista cursor" (click)="router.navigate(['user/perfil/compras/6'])">
+    <mat-icon class="material-icons-outlined" mat-list-icon>shield</mat-icon>
+    <div mat-line>Em Disputa</div>
   </mat-list-item>
 </mat-list>
 <br>

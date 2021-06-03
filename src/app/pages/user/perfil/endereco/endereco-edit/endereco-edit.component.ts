@@ -64,7 +64,7 @@ export class EnderecoEditComponent implements OnInit {
 
     },
     erro => {
-      console.log(erro);
+      console.error(erro);
       this.progressBarService.Mostrar();
 
       this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
@@ -148,7 +148,7 @@ export class EnderecoEditComponent implements OnInit {
         this.Atualizando = false;
         this.TextoBotao = 'Atualizar';
 
-        console.log(erro);
+        console.error(erro);
         this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
       });
     } else {

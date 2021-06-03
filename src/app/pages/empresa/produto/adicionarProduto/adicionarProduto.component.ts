@@ -87,7 +87,7 @@ export class AdicionarProdutoComponent implements OnInit {
       this.Categorias = categorias;
     },
     erro => {
-      console.log(erro);
+      console.error(erro);
       this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroUploadImagem);
     });
   }
@@ -98,7 +98,7 @@ export class AdicionarProdutoComponent implements OnInit {
       this.progressBarService.Mostrar();
     },
     erro => {
-      console.log(erro);
+      console.error(erro);
       this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroUploadImagem);
     })
   }
@@ -137,14 +137,14 @@ export class AdicionarProdutoComponent implements OnInit {
             this.PostProduto();
           },
           erro => {
-            console.log(erro);
+            console.error(erro);
             this.RealizandoCadastro = false;
             this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroUploadImagemMini);
           }
         );
       },
       erro => {
-        console.log(erro);
+        console.error(erro);
         this.RealizandoCadastro = false;
         this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroUploadImagem);
       }
@@ -176,7 +176,7 @@ export class AdicionarProdutoComponent implements OnInit {
         this.RealizandoCadastro = false;
         this.TextoBotao = 'Finalizar';
 
-        console.log(erro);
+        console.error(erro);
         this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
       }
     );

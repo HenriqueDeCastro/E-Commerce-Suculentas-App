@@ -10,6 +10,7 @@
           <mat-icon matTooltip="Editar" class="material-icons-outlined btn-edit btn-mobile" (click)="openBottomSheet(produto)">edit</mat-icon>
         </div>
         <div mat-line class="quebralinha-matline negrito-leve">Quantidade: {{produto.quantidadePedido}}</div>
+        <div mat-line *ngIf="produto.indisponivel" class="quebralinha-matline negrito indisponivel">INDISPONÍVEL</div>
         <div mat-line class="quebralinha-matline negrito-leve">{{produto.preco | currency:'BRL'}}</div>
       </mat-list-item>
     </mat-list>

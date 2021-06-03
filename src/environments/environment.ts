@@ -2,13 +2,13 @@ export const environment = {
   production: false,
 
   // LOCAL VSCODE
-  // UrlApi: 'http://localhost:5000',
+  UrlApi: 'http://localhost:5000',
 
   // LOCAL VS STUDIO
   // UrlApi: 'https://localhost:44350',
 
   // HOMOLOGAÇÂO
-  UrlApi: 'https://www.xn--suculentasdar-1lb.com.br',
+  // UrlApi: 'https://www.xn--suculentasdar-1lb.com.br',
 
   // WHATSAPP
   UrlWhats: 'https://api.whatsapp.com/send/?phone=WhatsAppNumber5511974513646&text=&app_absent=1',

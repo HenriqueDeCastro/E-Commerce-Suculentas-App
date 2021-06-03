@@ -22,9 +22,6 @@
           Os produtos do site são reais e tentamos sempre enviar o mais idêntico possível da foto disposta,
           mas cada ítem é único, sendo assim natural a variabilidade de tamanho ou coloração.
         </div>
-        <ng-container *ngIf="Produto.tipoProdutoId === IdEncomenda">
-          <app-alert-cidades-encomenda></app-alert-cidades-encomenda>
-        </ng-container>
         <ng-container *ngIf="ProdutoCarrinho">
           <div class="alert alert-primary" role="alert">
             Você já adicionou {{ProdutoCarrinho.quantidadePedido}} {{ProdutoCarrinho.nome}} ao carrinho!
@@ -51,6 +48,9 @@
           <br>
           <!-- FRETE -->
           <div mat-subheader class="cabecalho-lista negrito">Frete</div>
+          <ng-container *ngIf="Produto.tipoProdutoId === IdEncomenda">
+            <app-alert-cidades-encomenda></app-alert-cidades-encomenda>
+          </ng-container>
           <ng-container *ngIf="!ValorFrete">
             <mat-list-item class="tamanho-matlineitem">
               <mat-icon class="material-icons-outlined frete" mat-list-icon>local_shipping</mat-icon>
@@ -107,7 +107,7 @@
             <div mat-subheader class="cabecalho-lista negrito">Estoque</div>
             <mat-list-item class="tamanho-matlineitem">
               <mat-icon class="material-icons-outlined estoque" mat-list-icon>local_mall</mat-icon>
-              <div mat-line class="quebralinha-matline negrito  estoque">Temos {{QuantidadeMaxima == null? Produto.estoque : QuantidadeMaxima}} {{Produto.nome}} em estoque</div>
+              <div mat-line class="quebralinha-matline negrito  estoque">Temos {{QuantidadeMaxima == null || Produto.estoque <= 0? Produto.estoque : QuantidadeMaxima}} {{Produto.nome}} em estoque</div>
               <div mat-line class="quebralinha-matline">Selecione abaixo a quantidade que deseja levar</div>
             </mat-list-item>
           </ng-container>
@@ -119,8 +119,8 @@
           <br>
           <br>
           <br>
-          <app-botao-carrinho *ngIf="Produto.tipoProdutoId === IdEstoque" [TipoBotao]="'solido'" [Quantidade]="Quantidade" [Produto]="Produto" [Voltar]=true></app-botao-carrinho>
-          <app-botao-carrinho *ngIf="Produto.tipoProdutoId === IdEncomenda" [TipoBotao]="'solido'" [Quantidade]="Quantidade"[Produto]="Produto" [Voltar]=true></app-botao-carrinho>
+          <app-botao-carrinho *ngIf="Produto.tipoProdutoId === IdEstoque" [TipoBotao]="'solido'" [Quantidade]="Quantidade" [Produto]="Produto" [Voltar]=true [Categoria]="categoriaNome"></app-botao-carrinho>
+          <app-botao-carrinho *ngIf="Produto.tipoProdutoId === IdEncomenda" [TipoBotao]="'solido'" [Quantidade]="Quantidade"[Produto]="Produto" [Voltar]=true [Categoria]="categoriaNome"></app-botao-carrinho>
         </div>
       </div>
     </div>

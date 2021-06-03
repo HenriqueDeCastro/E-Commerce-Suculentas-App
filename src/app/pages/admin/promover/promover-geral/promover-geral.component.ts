@@ -43,7 +43,7 @@ export class PromoverGeralComponent implements OnInit {
     error => {
       this.progressBarService.Mostrar();
       const erro = error.error;
-      console.log(error);
+      console.error(error);
       this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
     })
   }
@@ -59,7 +59,7 @@ export class PromoverGeralComponent implements OnInit {
       },
       error => {
         const erro = error.error;
-        console.log(error);
+        console.error(error);
         this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
       })
     });

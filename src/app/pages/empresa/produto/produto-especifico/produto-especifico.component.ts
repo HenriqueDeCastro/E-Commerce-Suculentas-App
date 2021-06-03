@@ -59,7 +59,7 @@ export class ProdutoEspecificoComponent implements OnInit {
       }
     },
     erro => {
-      console.log(erro);
+      console.error(erro);
       this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
     });
   }

@@ -17,6 +17,7 @@ export class BotaoCarrinhoComponent implements OnInit {
   @Input() TipoBotao: string;
   @Input() Quantidade: number;
   @Input() Voltar = false;
+  @Input() Categoria: string;
   @Input() Produto: IProduto;
   public Desabilitar: boolean;
   private TipoEncomenda: number;
@@ -159,7 +160,8 @@ export class BotaoCarrinhoComponent implements OnInit {
       tipoProdutoId: produto.tipoProdutoId,
       categoriaId: produto.categoriaId,
       quantidadeMaxima: produto.quantidadeMaxima,
-      quantidadePedido: this.Quantidade
+      quantidadePedido: this.Quantidade,
+      categoriaNome: this.Categoria
     };
   }
 
