@@ -37,6 +37,11 @@ export class AppComponent implements OnInit{
       this.AcessAdmin = this.AdminAcesso();
       this.AcessEmpresa = this.EmpresaAcesso();
       this.resetScroll.PositionZero();
+      if(this.progressBarService.RetornarValor())
+      {
+        this.progressBarService.Mostrar();
+      }
+
     });
 
     WebFont.load({
