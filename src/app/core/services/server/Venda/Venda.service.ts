@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IVenda } from 'src/app/shared/models/IVenda';
@@ -41,4 +41,10 @@ export class VendaService {
     return this.http.delete<IVenda>(`${this.UrlBase}/${vendaId}`);
   }
 
+  Notification() {
+    let params = new HttpParams();
+    params = params.set('notificationCode', 'aaaaaaaa');
+    params = params.set('notificationType', 'aaaaaaaaa');
+    return this.http.post<IVenda>(`${this.UrlBase}/notificationPagSeguro`, params);
+  }
 }
