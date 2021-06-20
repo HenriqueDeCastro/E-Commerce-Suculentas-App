@@ -22,18 +22,18 @@ export class GerenciarRulesGeralComponent implements OnInit {
               private mensagemSnackbar: MensagensService) { }
 
   ngOnInit() {
-    this.progressBarService.Mostrar();
+    this.progressBarService.Mostrar(true);
     this.VerificaRoles();
   }
 
   VerificaRoles(): void {
     this.roleService.GetRole().subscribe((roles: IRole[]) => {
-      this.progressBarService.Mostrar();
+      this.progressBarService.Mostrar(false);
       this.Roles = roles
     },
     error => {
       const erro = error.error;
-      this.progressBarService.Mostrar();
+      this.progressBarService.Mostrar(false);
 
       console.error(error);
       this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
@@ -42,18 +42,18 @@ export class GerenciarRulesGeralComponent implements OnInit {
 
   Registrar() {
     this.Registrando = true;
-    this.progressBarService.Mostrar();
+    this.progressBarService.Mostrar(true);
 
     const role: IRole = { name: environment.RoleAdmin };
     this.roleService.Post(role).subscribe(() => {
       const role2: IRole = { name: environment.RoleEmpresa };
       this.roleService.Post(role2).subscribe(() => {
-        this.progressBarService.Mostrar();
+        this.progressBarService.Mostrar(false);
         this.snackbar.OpenSnackBarSuccess(this.mensagemSnackbar.CadastroConcluido);
         this.VerificaRoles();
       },
       error => {
-        this.progressBarService.Mostrar();
+        this.progressBarService.Mostrar(false);
         this.Registrando = false;
 
         const erro = error.error;

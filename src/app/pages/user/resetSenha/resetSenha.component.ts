@@ -50,7 +50,7 @@ export class ResetSenhaComponent implements OnInit {
 
   ResetSenha(): void {
     if (this.SenhaForm.valid) {
-      this.progressBarService.Mostrar();
+      this.progressBarService.Mostrar(true);
       this.Registrando = true;
       this.TextoBotao = 'Redefinir';
 
@@ -61,13 +61,13 @@ export class ResetSenhaComponent implements OnInit {
         confirmedPassword: this.SenhaForm.get('passwords.confirmedPassword').value
       };
       this.authService.ResetSenha(this.Reset).subscribe((model: any) => {
-        this.progressBarService.Mostrar();
+        this.progressBarService.Mostrar(false);
 
         this.snackbar.OpenSnackBarSuccess(this.mensagemSnackbar.SenhaRedefinida);
         this.router.navigate(['/user/login']);
       },
       (error) => {
-        this.progressBarService.Mostrar();
+        this.progressBarService.Mostrar(false);
         this.Registrando = false;
         this.TextoBotao = 'Redefinindo';
 

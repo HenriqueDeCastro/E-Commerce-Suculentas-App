@@ -41,7 +41,7 @@ export class FinalizarVendasComponent implements OnInit {
               private mensagemSnackbar: MensagensService) { }
 
   ngOnInit() {
-    this.progressBarService.Mostrar();
+    this.progressBarService.Mostrar(true);
     this.IdEncomenda = environment.TipoProdutoEncomenda;
     this.IdEstoque = environment.TipoProdutoEstoque;
     this.urlMaps = environment.UrlMaps;
@@ -55,7 +55,7 @@ export class FinalizarVendasComponent implements OnInit {
     this.TipoId = this.activetedRoute.snapshot.params.idTipoProduto;
 
     if(this.TipoId != this.IdEncomenda && this.TipoId != this.IdEstoque) {
-      this.progressBarService.Mostrar();
+      this.progressBarService.Mostrar(false);
       this.router.navigate(['/carrinho']);
     }
   }
@@ -70,10 +70,9 @@ export class FinalizarVendasComponent implements OnInit {
     }
   }
 
-
   SepararTiposProdutos(Produtos: IProdutoCarrinho[]) {
     this.Produtos = Produtos.filter(p => p.tipoProdutoId == this.TipoId);
-    this.progressBarService.Mostrar();
+    this.progressBarService.Mostrar(false);
     if(this.Produtos.length <= 0) {
       this.router.navigate(['/carrinho']);
     }

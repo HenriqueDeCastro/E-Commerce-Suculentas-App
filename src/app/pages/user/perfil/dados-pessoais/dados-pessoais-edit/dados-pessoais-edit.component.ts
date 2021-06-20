@@ -70,7 +70,7 @@ export class DadosPessoaisEditComponent implements OnInit {
 
     if (this.DadosForm.valid && this.ContatosForm.valid) {
       this.Atualizando = true;
-      this.progressBarService.Mostrar();
+      this.progressBarService.Mostrar(true);
       this.TextoBotao = 'Atualizando';
 
       this.User = {
@@ -84,14 +84,14 @@ export class DadosPessoaisEditComponent implements OnInit {
 
       this.authService.Put(this.User).subscribe(
         () => {
-          this.progressBarService.Mostrar();
+          this.progressBarService.Mostrar(false);
 
           this.snackbar.OpenSnackBarSuccess(this.mensagemSnackbar.AtualizacaoConcluida);
           this.router.navigate(['/user/perfil/dados']);
         },
         error => {
           this.Atualizando = false;
-          this.progressBarService.Mostrar();
+          this.progressBarService.Mostrar(false);
           this.TextoBotao = 'Atualizar';
 
           const erro = error.error;

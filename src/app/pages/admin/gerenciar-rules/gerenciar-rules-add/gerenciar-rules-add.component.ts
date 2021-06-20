@@ -39,20 +39,20 @@ export class GerenciarRulesAddComponent implements OnInit {
   Registrar() {
     if (this.RoleForm.valid) {
       this.Registrando = true;
-      this.progressBarService.Mostrar();
+      this.progressBarService.Mostrar(true);
 
       this.Rule = {
         name: this.RoleForm.value.name
       }
       this.roleService.Post(this.Rule).subscribe(() => {
         this.Registrando = false;
-        this.progressBarService.Mostrar();
+        this.progressBarService.Mostrar(false);
 
         this.router.navigate(['/admin/gerenciarrules/geral']);
       },
       error => {
         this.Registrando = false;
-        this.progressBarService.Mostrar();
+        this.progressBarService.Mostrar(false);
 
         const erro = error.error;
         console.error(error);

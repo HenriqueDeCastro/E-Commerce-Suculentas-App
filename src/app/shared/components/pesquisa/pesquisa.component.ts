@@ -18,7 +18,6 @@ export class PesquisaComponent implements OnInit {
       this.debounce.pipe(debounceTime(300)).subscribe(filter => { this.OnTyping.emit(filter); this.page.emit(1); });
   }
 
-  // tslint:disable-next-line: use-lifecycle-interface
   ngOnDestroy(): void {
       this.debounce.unsubscribe();
   }

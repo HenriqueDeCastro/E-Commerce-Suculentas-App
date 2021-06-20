@@ -56,7 +56,7 @@ export class EditarProdutoComponent implements OnInit {
               private mensagemSnackbar: MensagensService) { }
 
   ngOnInit(): void {
-    this.progressBarService.Mostrar();
+    this.progressBarService.Mostrar(true);
     this.ReceberValorRota();
     this.ReceberProdutos();
     this.ReceberCategorias();
@@ -82,7 +82,7 @@ export class EditarProdutoComponent implements OnInit {
       }
 
       this.Carregou = true;
-      this.progressBarService.Mostrar();
+      this.progressBarService.Mostrar(false);
     },
     erro => {
       console.error(erro);
@@ -156,7 +156,7 @@ export class EditarProdutoComponent implements OnInit {
 
   Atualizar(): void {
     if (this.IdentificacaoForm.valid && this.InformacoesForm.valid && this.ValoresForm.valid) {
-      this.progressBarService.Mostrar();
+      this.progressBarService.Mostrar(true);
       this.RealizandoCadastro = true;
       this.TextoBotao = 'Editando';
 
@@ -216,7 +216,7 @@ export class EditarProdutoComponent implements OnInit {
     };
     this.produtoService.Put(produto).subscribe(
       () => {
-        this.progressBarService.Mostrar();
+        this.progressBarService.Mostrar(false);
 
         this.snackbar.OpenSnackBarSuccess(this.mensagemSnackbar.AtualizacaoConcluida);
         this.location.back();
@@ -225,7 +225,7 @@ export class EditarProdutoComponent implements OnInit {
         console.error(erro);
         this.RealizandoCadastro = false;
         this.TextoBotao = 'Editar';
-        this.progressBarService.Mostrar();
+        this.progressBarService.Mostrar(false);
         this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
       }
     );

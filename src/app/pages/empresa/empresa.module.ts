@@ -8,6 +8,8 @@ import { ComponentModule } from 'src/app/shared/components/component.module';
 import { CategoriaModule } from './categoria/categoria.module';
 import { FreteManualModule } from './frete-manual/frete-manual.module';
 import { ProdutoModule } from './produto/produto.module';
+import { VendasModule } from './vendas/vendas.module';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -16,11 +18,13 @@ import { ProdutoModule } from './produto/produto.module';
   ],
   imports: [
     ComponentModule,
+    CommonModule,
     MaterialModule,
     EmpresaRoutingModule,
     CategoriaModule,
     ProdutoModule,
-    FreteManualModule
+    FreteManualModule,
+    VendasModule
   ]
 })
 export class EmpresaModule {}

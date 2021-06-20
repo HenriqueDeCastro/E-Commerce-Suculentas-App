@@ -3,7 +3,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   exports: [
-    NgxPaginationModule
+
   ]
 })
 

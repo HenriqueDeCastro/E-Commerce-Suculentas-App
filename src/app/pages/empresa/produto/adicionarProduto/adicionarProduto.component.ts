@@ -49,7 +49,7 @@ export class AdicionarProdutoComponent implements OnInit {
               private mensagemSnackbar: MensagensService) { }
 
   ngOnInit(): void {
-    this.progressBarService.Mostrar();
+    this.progressBarService.Mostrar(true);
     this.ReceberCategorias();
     this.ReceberTiposCategorias();
     this.ValidationIndetificacao();
@@ -95,7 +95,7 @@ export class AdicionarProdutoComponent implements OnInit {
   ReceberTiposCategorias() {
     this.tipoProdutoService.GetAllSemProduto().subscribe((tipoProdutos: ITipoProduto[]) => {
       this.TiposProdutos = tipoProdutos
-      this.progressBarService.Mostrar();
+      this.progressBarService.Mostrar(false);
     },
     erro => {
       console.error(erro);
@@ -166,13 +166,13 @@ export class AdicionarProdutoComponent implements OnInit {
     };
     this.produtoService.Post(produto).subscribe(
       () => {
-        this.progressBarService.Mostrar();
+        this.progressBarService.Mostrar(false);
 
         this.snackbar.OpenSnackBarSuccess(this.mensagemSnackbar.CadastroConcluido);
         this.router.navigate(['empresa/produto']);
       },
       erro => {
-        this.progressBarService.Mostrar();
+        this.progressBarService.Mostrar(false);
         this.RealizandoCadastro = false;
         this.TextoBotao = 'Finalizar';
 
@@ -186,7 +186,7 @@ export class AdicionarProdutoComponent implements OnInit {
       if (this.IdentificacaoForm.valid && this.InformacoesForm.valid && this.ValoresForm.valid) {
       this.RealizandoCadastro = true;
       this.TextoBotao = 'Finalizando';
-      this.progressBarService.Mostrar();
+      this.progressBarService.Mostrar(true);
 
       this.UploadFotos();
     } else {

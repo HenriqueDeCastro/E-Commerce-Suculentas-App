@@ -20,17 +20,17 @@ export class ProdutosHomeComponent implements OnInit {
               private mensagemSnackbar: MensagensService) { }
 
   ngOnInit(): void {
-    this.progressBarService.Mostrar();
+    this.progressBarService.Mostrar(true);
     this.ReceberCategorias();
   }
 
   ReceberCategorias(): void {
     this.categoriaService.GetAllPagInicial().subscribe((categorias: ICategoria[]) => {
       this.Categorias = categorias;
-      this.progressBarService.Mostrar();
+      this.progressBarService.Mostrar(false);
     },
     erro => {
-      this.progressBarService.Mostrar();
+      this.progressBarService.Mostrar(false);
       console.error(erro);
 
       this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);

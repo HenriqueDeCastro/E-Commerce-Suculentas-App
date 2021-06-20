@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ComponentFactoryResolver, OnInit } from '@angular/core';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { CategoriaService } from 'src/app/core/services/server/Categoria/Categoria.service';
@@ -9,10 +9,10 @@ import { ICategoria } from 'src/app/shared/models/ICategoria';
 import { ResetScrollService } from 'src/app/core/services/shared/ResetScroll/ResetScroll.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogOrderbyComponent } from './components/dialog-orderby/dialog-orderby.component';
-import { FiltroNomeService } from 'src/app/core/services/shared/FiltroNome/FiltroNome.service';
 import { IProduto } from 'src/app/shared/models/IProduto';
 import { ProgressBarService } from 'src/app/core/services/shared/ProgressBar/ProgressBar.service';
-import { Location } from '@angular/common';
+import { ICategoriaPagination } from 'src/app/shared/models/ICategoriaPagination';
+import { HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-produtos-especifico',
@@ -21,16 +21,14 @@ import { Location } from '@angular/common';
 })
 export class ProdutosEspecificoComponent implements OnInit {
 
+  public Produtos: IProduto[];
   public CategoriaId: number;
   public Categoria: ICategoria;
-  public Carregou: boolean = false;
-  public link: string;
-  public pages = 1;
+  public OrderBy: string;
+  public PaginaAtual = 0;
+  public UltimaPagina = false;
+  public Search: string;
   public open = false;
-  public filter: string;
-  private filtroParacomparacao: string = '';
-  public search = '';
-  public Produtos: IProduto[];
 
   constructor(private activetedRoute: ActivatedRoute,
               private categoriaService: CategoriaService,
@@ -39,48 +37,59 @@ export class ProdutosEspecificoComponent implements OnInit {
               private resetScroll: ResetScrollService,
               public dialog: MatDialog,
               public router: Router,
-              private location: Location,
-              private filtroNome: FiltroNomeService,
-              private progressBarService: ProgressBarService,
-              private mensagemSnackbar: MensagensService)
-  {
-    router.events.subscribe((event) => {
-      let filterUrl: string;
-
-      if (event instanceof NavigationEnd && this.Categoria && this.filter != this.filtroParacomparacao) {
-          this.OrderByResult(this.filter);
-        }
-    });
-  }
+              public progressBarService: ProgressBarService,
+              private mensagemSnackbar: MensagensService) {}
 
   ngOnInit(): void {
-    this.progressBarService.Mostrar();
     this.ReceberValorRota();
-    this.ReceberCategoria();
+    this.GetProdutos();
   }
 
   ReceberValorRota(): void {
     this.CategoriaId = this.activetedRoute.snapshot.params.categoriaId;
-    this.activetedRoute.queryParams.subscribe(params => this.pages = params.page);
-    this.activetedRoute.queryParams.subscribe(params => this.filter = params.filter);
+    this.activetedRoute.queryParams.subscribe(params => this.OrderBy = params.orderBy);
+    this.activetedRoute.queryParams.subscribe(params => this.Search = params.search? params.search : '');
+
   }
 
-  ReceberCategoria(): void {
-    this.categoriaService.GetByIdCliente(this.CategoriaId).subscribe((categoria: ICategoria) => {
+  VerMais() {
+    this.PaginaAtual++;
+    this.GetProdutos();
+  }
 
-      if(categoria) {
-        this.Categoria = categoria;
-        this.Produtos = this.Categoria.produtos;
-        this.OrderByResult(this.filter);
+  GetProdutos(voltando: boolean = false) {
+    this.progressBarService.Mostrar(true);
 
-        this.Carregou = true;
-      } else {
-        this.Carregou = true;
+    this.categoriaService.GetByCliente(this.CategoriaId, this.PaginaAtual, this.OrderBy, this.Search).subscribe((categoriaPagination: ICategoriaPagination) => {
+
+      let OrderByQueryString:string;
+      let SearchQueryString: string;
+      this.activetedRoute.queryParams.subscribe(params => OrderByQueryString = params.orderBy);
+      this.activetedRoute.queryParams.subscribe(params => SearchQueryString = params.search? params.search : '');
+
+      if(this.Search != SearchQueryString)
+        this.ChangePage();
+
+      if(this.Produtos == undefined || voltando == true) {
+        this.Produtos = categoriaPagination.produtos;
       }
-      this.progressBarService.Mostrar();
+      else if(this.OrderBy != OrderByQueryString || this.Search != SearchQueryString) {
+        this.Produtos = categoriaPagination.produtos;
+        this.PaginaAtual = 0;
+        this.ChangePage();
+        this.resetScroll.PositionZero();
+      }
+      else {
+        this.Produtos = this.Produtos.concat(categoriaPagination.produtos);
+      }
+
+      this.UltimaPagina = categoriaPagination.ultimaPagina;
+      this.Categoria = categoriaPagination.categoria;
+
+      this.progressBarService.Mostrar(false);
     },
     erro => {
-      this.progressBarService.Mostrar();
+      this.progressBarService.Mostrar(false);
       console.error(erro);
 
       this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
@@ -94,8 +103,7 @@ export class ProdutosEspecificoComponent implements OnInit {
   openBottomSheet(): void {
     const bottomSheetRef = this.bottomSheet.open(BottomOrderbyComponent);
     bottomSheetRef.afterDismissed().subscribe((result) => {
-      if(result)
-      this.Filtrar(result);
+      this.OrderByResult(result);
     });
   }
 
@@ -104,47 +112,38 @@ export class ProdutosEspecificoComponent implements OnInit {
       autoFocus: false,
     });
     dialogRef.afterClosed().subscribe(result => {
-      if(result)
-      this.Filtrar(result);
+      this.OrderByResult(result);
     });
   }
 
-  receberPesquisa(valor: string): void {
-    this.search = valor;
-    if (this.search === '') {
-      this.Produtos = this.Categoria.produtos;
-    } else {
-      this.Produtos = this.filtroNome.transform(this.Categoria.produtos, this.search);
+  OrderByResult(result: any) {
+    if(result) {
+      this.OrderBy = result;
+      this.PaginaAtual = 0;
+      this.GetProdutos();
     }
   }
 
-  Filtrar(result: string): void {
-    this.router.navigate([], { queryParams: { page: 1, filter: result } });
+  receberPesquisa(event) {
+    this.Search = event;
+    this.GetProdutos()
   }
 
-  OrderByResult(result: string) {
-    if (result === 'Alfabetica') {
-      this.Categoria.produtos.sort((a, b) => a.nome > b.nome ? 1 : -1);
-      this.Produtos = this.filtroNome.transform(this.Categoria.produtos, this.search);
-    }
-    if (result === 'Preço maior para menor') {
-      this.Categoria.produtos.sort((a, b) => a.preco < b.preco ? 1 : -1);
-      this.Produtos = this.filtroNome.transform(this.Categoria.produtos, this.search);
-    }
-    if (result === 'Preço menor para maior') {
-      this.Categoria.produtos.sort((a, b) => a.preco > b.preco ? 1 : -1);
-      this.Produtos = this.filtroNome.transform(this.Categoria.produtos, this.search);
-    }
-    if (result === '') {
-      this.Categoria.produtos.sort((a, b) => a.id < b.id ? 1 : -1);
-      this.Produtos = this.filtroNome.transform(this.Categoria.produtos, this.search);
-    }
-
-    this.filtroParacomparacao = this.filter;
+  ChangePage() {
+    this.router.navigate([], { queryParams: { orderBy: this.OrderBy, search: this.Search } });
   }
 
-  onChangePage(evento: any): void {
-    this.router.navigate([], { queryParams: { page: evento, filter: this.filter } });
-    this.resetScroll.PositionZero();
+  @HostListener('window:popstate', ['$event'])
+  onPopState(event) {
+    this.Produtos = undefined;
+    this.PaginaAtual = 0;
+
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.ReceberValorRota();
+        this.GetProdutos(true);
+      }
+    });
+
   }
 }

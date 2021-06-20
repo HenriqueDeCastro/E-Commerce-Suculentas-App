@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-lista-orderby-produto',
@@ -9,12 +11,20 @@ export class ListaOrderbyProdutoComponent implements OnInit {
 
   @Output() TipoOrdenacao = new EventEmitter<string>();
   @Input() Estoque = false;
+  public env = environment;
+  public OrderByQueryString: string;
 
-  constructor() { }
+  constructor(private activetedRoute: ActivatedRoute) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.activetedRoute.queryParams.subscribe(params => this.OrderByQueryString = params.orderBy);
+  }
 
   Fechar(value: string): void{
-    this.TipoOrdenacao.emit(value);
+    if(this.OrderByQueryString != value) {
+      this.TipoOrdenacao.emit(value);
+    } else {
+      this.TipoOrdenacao.emit(null);
+    }
   }
 }

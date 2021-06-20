@@ -42,7 +42,7 @@ export class EnderecoEditComponent implements OnInit {
               private cidadeService: CidadesService) { }
 
   ngOnInit() {
-    this.progressBarService.Mostrar();
+    this.progressBarService.Mostrar(true);
     this.ReceberValorRota();
     this.ReceberEndereco();
     this.ReceberEstados();
@@ -59,13 +59,13 @@ export class EnderecoEditComponent implements OnInit {
         this.ReceberCidades();
       } else {
         this.Carregou = true;
-        this.progressBarService.Mostrar();
+        this.progressBarService.Mostrar(false);
       }
 
     },
     erro => {
       console.error(erro);
-      this.progressBarService.Mostrar();
+      this.progressBarService.Mostrar(false);
 
       this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
     });
@@ -78,7 +78,7 @@ export class EnderecoEditComponent implements OnInit {
   ReceberCidades() {
     const estadoSelecionado = this.Estados.filter(estado => estado.uf == this.Endereco.estado)
     this.Cidades = this.cidadeService.GetCidadesByEstadoId(estadoSelecionado[0].id);
-    this.progressBarService.Mostrar();
+    this.progressBarService.Mostrar(false);
     this.ValidationIdentificacao();
     this.ValidationDomicilio();
 
@@ -122,7 +122,7 @@ export class EnderecoEditComponent implements OnInit {
   Atualizar() {
     if (this.IdentificacaoForm.valid && this.DomicilioForm.valid) {
       this.Atualizando = true;
-      this.progressBarService.Mostrar();
+      this.progressBarService.Mostrar(true);
       this.TextoBotao = 'Atualizando';
 
       let Endereco: IEndereco = {
@@ -138,13 +138,13 @@ export class EnderecoEditComponent implements OnInit {
         userId: this.Endereco.userId
       }
       this.enderecoService.Put(Endereco).subscribe((enderecos: IEndereco) => {
-        this.progressBarService.Mostrar();
+        this.progressBarService.Mostrar(false);
 
         this.snackbar.OpenSnackBarSuccess(this.mensagemSnackbar.AtualizacaoConcluida);
         this.router.navigate(['user/perfil/endereco']);
       },
       erro => {
-        this.progressBarService.Mostrar();
+        this.progressBarService.Mostrar(false);
         this.Atualizando = false;
         this.TextoBotao = 'Atualizar';
 

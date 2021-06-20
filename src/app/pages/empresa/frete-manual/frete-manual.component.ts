@@ -41,20 +41,20 @@ export class FreteManualComponent implements OnInit {
 
   CalcularFrete(): void {
     if (this.FreteForm.valid) {
-      this.progressBarService.Mostrar();
+      this.progressBarService.Mostrar(true);
       this.Calculando = true;
       this.TextoBotao = 'Calculando...';
 
       this.melhorEnvioService.CalcularFretePacoteTodosServicos(this.FreteForm.value.cep).subscribe((result: ICalculoFrete[]) => {
         localStorage.setItem(environment.VariavelCEP, this.FreteForm.value.cep);
-        this.progressBarService.Mostrar();
+        this.progressBarService.Mostrar(false);
         this.Calculando = false;
         this.TextoBotao = 'Calcular';
         this.ValoresFretes = result;
       },
       (erro) => {
         console.error(erro);
-        this.progressBarService.Mostrar();
+        this.progressBarService.Mostrar(false);
         this.Calculando = false;
         this.TextoBotao = 'Calcular';
         this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidorMelhorEnvio);

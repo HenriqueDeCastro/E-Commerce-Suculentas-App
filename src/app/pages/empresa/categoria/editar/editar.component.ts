@@ -32,7 +32,7 @@ export class EditarComponent implements OnInit {
               private mensagemSnackbar: MensagensService) { }
 
   ngOnInit(): void {
-    this.progressBarService.Mostrar();
+    this.progressBarService.Mostrar(true);
     this.ReceberValorRota();
     this.ReceberCategoria();
   }
@@ -49,10 +49,10 @@ export class EditarComponent implements OnInit {
         this.Validation(this.Categoria);
 
         this.Carregou = true;
-        this.progressBarService.Mostrar();
+        this.progressBarService.Mostrar(false);
       } else {
         this.Carregou = true;
-        this.progressBarService.Mostrar();
+        this.progressBarService.Mostrar(false);
       }
     });
   }
@@ -66,7 +66,7 @@ export class EditarComponent implements OnInit {
 
   Editar(): void {
     if (this.CategoriaForm.valid) {
-      this.progressBarService.Mostrar();
+      this.progressBarService.Mostrar(true);
       this.TextoBotao = 'Editando';
       this.EditandoCategoria = true;
 
@@ -75,7 +75,7 @@ export class EditarComponent implements OnInit {
       this.Categoria.ativo = this.selected;
       this.categoriaService.Put(this.Categoria).subscribe(
         () => {
-          this.progressBarService.Mostrar();
+          this.progressBarService.Mostrar(false);
 
           this.snackbar.OpenSnackBarSuccess(this.mensagemSnackbar.AtualizacaoConcluida);
           this.router.navigate(['empresa/categoria']);
@@ -83,7 +83,7 @@ export class EditarComponent implements OnInit {
         error => {
           this.EditandoCategoria = false;
           this.TextoBotao = 'Editar';
-          this.progressBarService.Mostrar();
+          this.progressBarService.Mostrar(false);
 
           console.error(error);
           this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);

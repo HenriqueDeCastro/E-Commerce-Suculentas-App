@@ -7,28 +7,30 @@ import { ProgressBarService } from 'src/app/core/services/shared/ProgressBar/Pro
 import { SnackbarService } from 'src/app/core/services/shared/Snackbar/Snackbar.service';
 import { IUser } from 'src/app/shared/models/IUser';
 import { IVenda } from 'src/app/shared/models/IVenda';
+import { IVendasPagination } from 'src/app/shared/models/IVendasPagination';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-compras-status',
-  templateUrl: './compras-status.component.html',
-  styleUrls: ['./compras-status.component.scss']
+  selector: 'app-vendas-status',
+  templateUrl: './vendas-status.component.html',
+  styleUrls: ['./vendas-status.component.scss']
 })
-export class ComprasStatusComponent implements OnInit {
+export class VendasStatusComponent implements OnInit {
 
   public Vendas: IVenda[];
   public User: IUser;
   public Titulo: string;
   public statusNaoTem: string;
+  public PaginaAtual = 0;
+  public UltimaPagina = false;
   private statusId: number;
 
   constructor(private activetedRoute: ActivatedRoute,
               public router: Router,
               private vendaService: VendaService,
-              private authService: AuthService,
               private snackbar: SnackbarService,
               private mensagemSnackbar: MensagensService,
-              private progressBarService: ProgressBarService) { }
+              public progressBarService: ProgressBarService) { }
 
   ngOnInit() {
     this.progressBarService.Mostrar(true);
@@ -38,20 +40,11 @@ export class ComprasStatusComponent implements OnInit {
 
   ReceberVendas() {
     if(this.VerificarStatus()) {
-      this.User = this.ReceberLogado();
-      this.vendaService.GetByUserId(this.User.id, this.statusId).subscribe((vendas: IVenda[]) => {
-        this.Vendas = vendas;
-        this.progressBarService.Mostrar(false);
-      },
-      error => {
-        this.progressBarService.Mostrar(false);
-        console.error(error);
-        this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
-      });
+      this.GetVendas();
     }
     else {
       this.progressBarService.Mostrar(false);
-      this.router.navigate(['/user/perfil']);
+      this.router.navigate(['/empresa']);
     }
   }
 
@@ -96,11 +89,36 @@ export class ComprasStatusComponent implements OnInit {
     }
   }
 
-  ReceberLogado(): IUser{
-    return this.authService.GetUserToken();
-  }
-
   Navegar(idVenda: number) {
     this.router.navigate(['/user/perfil/compras/detalhe/' + idVenda]);
+  }
+
+  VerMais() {
+    this.PaginaAtual++;
+    this.GetVendas();
+  }
+
+  GetVendas() {
+    this.progressBarService.Mostrar(true);
+
+    this.vendaService.GetByStatusId(this.statusId, this.PaginaAtual).subscribe((vendasPagination: IVendasPagination) => {
+
+      this.UltimaPagina = vendasPagination.ultimaPagina;
+
+      if(this.Vendas == undefined) {
+        this.Vendas = vendasPagination.vendas;
+        this.progressBarService.Mostrar(false);
+      }
+      else {
+        this.Vendas = this.Vendas.concat(vendasPagination.vendas);
+      }
+
+      this.progressBarService.Mostrar(false);
+    },
+    error => {
+      this.progressBarService.Mostrar(false);
+      console.error(error);
+      this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
+    });
   }
 }

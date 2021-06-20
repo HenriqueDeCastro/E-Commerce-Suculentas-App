@@ -45,12 +45,12 @@ export class LoginComponent implements OnInit {
   Login(): void {
     if (this.LoginForm.valid) {
       this.Desabilitar = true;
-      this.progressBarService.Mostrar();
+      this.progressBarService.Mostrar(true);
       this.TextoBotaoLogin = "Acessando";
 
       this.authService.Login(this.LoginForm.value).subscribe(
         () => {
-          this.progressBarService.Mostrar();
+          this.progressBarService.Mostrar(false);
           if (this.FromUrl) {
             this.router.navigateByUrl(this.FromUrl);
           } else {
@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
         error => {
           this.Desabilitar = false;
           this.TextoBotaoLogin = "Acessar";
-          this.progressBarService.Mostrar();
+          this.progressBarService.Mostrar(false);
 
           const erro = error.error;
           console.error(error);

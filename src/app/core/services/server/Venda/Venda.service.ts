@@ -1,7 +1,9 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { IVendasCount } from 'src/app/shared/models/IVendasCount';
 import { IVenda } from 'src/app/shared/models/IVenda';
+import { IVendasPagination } from 'src/app/shared/models/IVendasPagination';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -25,8 +27,12 @@ export class VendaService {
     return this.http.get<IVenda[]>(`${this.UrlBase}/getByUser/${userId}/${statusId}`);
   }
 
-  GetByStatusId(statusId: number): Observable<IVenda[]> {
-    return this.http.get<IVenda[]>(`${this.UrlBase}/getByStatus/${statusId}`);
+  GetByStatusId(statusId: number, pageAtual: number): Observable<IVendasPagination> {
+    return this.http.get<IVendasPagination>(`${this.UrlBase}/getByStatus?statusId=${statusId}&pageAtual=${pageAtual}`);
+  }
+
+  GetByStatusCountEmpresa(): Observable<IVendasCount[]> {
+    return this.http.get<IVendasCount[]>(`${this.UrlBase}/getByStatusCountEmpresa`);
   }
 
   Post(venda: IVenda): Observable<IVenda>   {
@@ -45,6 +51,6 @@ export class VendaService {
     let params = new HttpParams();
     params = params.set('notificationCode', 'aaaaaaaa');
     params = params.set('notificationType', 'aaaaaaaaa');
-    return this.http.post<IVenda>(`${this.UrlBase}/notificationPagSeguro`, params);
+    return this.http.post<IVenda>(`http://www.xn--suculentasdar-1lb.com.br/venda/notificationPagSeguro`, params);
   }
 }

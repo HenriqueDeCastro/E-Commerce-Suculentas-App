@@ -3,7 +3,6 @@ import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { CategoriaService } from 'src/app/core/services/server/Categoria/Categoria.service';
-import { FiltroNomeService } from 'src/app/core/services/shared/FiltroNome/FiltroNome.service';
 import { SnackbarService } from 'src/app/core/services/shared/Snackbar/Snackbar.service';
 import { MensagensService } from 'src/app/core/services/shared/Mensagens/Mensagens.service';
 import { ResetScrollService } from 'src/app/core/services/shared/ResetScroll/ResetScroll.service';
@@ -35,7 +34,6 @@ export class ProdutoEspecificoComponent implements OnInit {
               private snackbar: SnackbarService,
               private resetScroll: ResetScrollService,
               public dialog: MatDialog,
-              private filtroNome: FiltroNomeService,
               private mensagemSnackbar: MensagensService) { }
 
   ngOnInit(): void {
@@ -71,7 +69,6 @@ export class ProdutoEspecificoComponent implements OnInit {
   openBottomSheet(): void {
     const bottomSheetRef = this.bottomSheet.open(BottomOrderbyEmpresaComponent);
     bottomSheetRef.afterDismissed().subscribe((result) => {
-      this.resultOrderBy(result);
     });
   }
 
@@ -80,7 +77,6 @@ export class ProdutoEspecificoComponent implements OnInit {
       autoFocus: false,
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.resultOrderBy(result);
     });
   }
 
@@ -89,32 +85,32 @@ export class ProdutoEspecificoComponent implements OnInit {
     if (this.filter === '') {
       this.Produtos = this.Categoria.produtos;
     } else {
-      this.Produtos = this.filtroNome.transform(this.Categoria.produtos, this.filter);
+      // this.Produtos = this.filtroNome.transform(this.Categoria.produtos, this.filter);
     }
   }
 
-  resultOrderBy(result: string): void {
-    if (result === 'Alfabetica') {
-      this.Categoria.produtos.sort((a, b) => a.nome > b.nome ? 1 : -1);
-      this.Produtos = this.filtroNome.transform(this.Categoria.produtos, this.filter);
-      this.pages = 1;
-    }
-    if (result === 'Preço maior para menor') {
-      this.Categoria.produtos.sort((a, b) => a.preco < b.preco ? 1 : -1);
-      this.Produtos = this.filtroNome.transform(this.Categoria.produtos, this.filter);
-      this.pages = 1;
-    }
-    if (result === 'Preço menor para maior') {
-      this.Categoria.produtos.sort((a, b) => a.preco > b.preco ? 1 : -1);
-      this.Produtos = this.filtroNome.transform(this.Categoria.produtos, this.filter);
-      this.pages = 1;
-    }
-    if (result === 'Estoque') {
-      this.Categoria.produtos.sort((a, b) => a.estoque > b.estoque ? 1 : -1);
-      this.Produtos = this.filtroNome.transform(this.Categoria.produtos, this.filter);
-      this.pages = 1;
-    }
-  }
+  // resultOrderBy(result: string): void {
+  //   if (result === 'Alfabetica') {
+  //     this.Categoria.produtos.sort((a, b) => a.nome > b.nome ? 1 : -1);
+  //     this.Produtos = this.filtroNome.transform(this.Categoria.produtos, this.filter);
+  //     this.pages = 1;
+  //   }
+  //   if (result === 'Preço maior para menor') {
+  //     this.Categoria.produtos.sort((a, b) => a.preco < b.preco ? 1 : -1);
+  //     this.Produtos = this.filtroNome.transform(this.Categoria.produtos, this.filter);
+  //     this.pages = 1;
+  //   }
+  //   if (result === 'Preço menor para maior') {
+  //     this.Categoria.produtos.sort((a, b) => a.preco > b.preco ? 1 : -1);
+  //     this.Produtos = this.filtroNome.transform(this.Categoria.produtos, this.filter);
+  //     this.pages = 1;
+  //   }
+  //   if (result === 'Estoque') {
+  //     this.Categoria.produtos.sort((a, b) => a.estoque > b.estoque ? 1 : -1);
+  //     this.Produtos = this.filtroNome.transform(this.Categoria.produtos, this.filter);
+  //     this.pages = 1;
+  //   }
+  // }
 
   onChangePage(evento: any): void {
     this.pages = evento;

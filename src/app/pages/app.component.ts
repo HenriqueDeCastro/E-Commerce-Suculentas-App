@@ -8,7 +8,6 @@ import { ResetScrollService } from 'src/app/core/services/shared/ResetScroll/Res
 import * as WebFont from 'webfontloader';
 import { IUser } from '../shared/models/IUser';
 import { CryptService } from '../core/services/shared/Crypt/Crypt.service';
-import { ProgressBarService } from '../core/services/shared/ProgressBar/ProgressBar.service';
 
 @Component({
   selector: 'app-root',
@@ -26,7 +25,6 @@ export class AppComponent implements OnInit{
               private bottomSheet: MatBottomSheet,
               private cryptService: CryptService,
               public router: Router,
-              public progressBarService: ProgressBarService,
               private resetScroll: ResetScrollService) { }
 
   ngOnInit(): void {
@@ -37,11 +35,6 @@ export class AppComponent implements OnInit{
       this.AcessAdmin = this.AdminAcesso();
       this.AcessEmpresa = this.EmpresaAcesso();
       this.resetScroll.PositionZero();
-      if(this.progressBarService.RetornarValor())
-      {
-        this.progressBarService.Mostrar();
-      }
-
     });
 
     WebFont.load({

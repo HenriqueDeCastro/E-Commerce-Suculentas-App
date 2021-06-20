@@ -25,7 +25,7 @@ export class ComprasDetalheComponent implements OnInit {
               private progressBarService: ProgressBarService) { }
 
   ngOnInit() {
-    this.progressBarService.Mostrar();
+    this.progressBarService.Mostrar(true);
     this.vendaId = this.activetedRoute.snapshot.params.vendaId;
     this.ReceberVendas();
   }
@@ -34,10 +34,10 @@ export class ComprasDetalheComponent implements OnInit {
     this.vendaService.GetById(this.vendaId).subscribe((venda: IVenda) => {
       this.Venda = venda;
       this.CalcularTotal();
-      this.progressBarService.Mostrar();
+      this.progressBarService.Mostrar(false);
     },
     error => {
-      this.progressBarService.Mostrar();
+      this.progressBarService.Mostrar(false);
       console.error(error);
       this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
     });

@@ -61,7 +61,7 @@ export class RegisterComponent implements OnInit {
 
   Registrar(): void {
     if (this.DadosForm.valid && this.ContatosForm.valid && this.SenhaForm.valid) {
-      this.progressBarService.Mostrar();
+      this.progressBarService.Mostrar(true);
       this.TextoBotao = 'Registrando';
       this.Registrando = true;
 
@@ -76,14 +76,14 @@ export class RegisterComponent implements OnInit {
       };
       this.authService.Register(this.User).subscribe(
         () => {
-          this.progressBarService.Mostrar();
+          this.progressBarService.Mostrar(false);
 
           this.snackbar.OpenSnackBarSuccess(this.mensagemSnackbar.CadastroConcluido);
           this.router.navigate(['/produtos']);
         },
         error => {
           this.Registrando = false;
-          this.progressBarService.Mostrar();
+          this.progressBarService.Mostrar(false);
           this.TextoBotao = 'Registrar';
 
           const erro = error.error;

@@ -41,7 +41,7 @@ export class EnderecoAddComponent implements OnInit {
               private mensagemSnackbar: MensagensService) { }
 
   ngOnInit() {
-    this.progressBarService.Mostrar();
+    this.progressBarService.Mostrar(true);
     this.ReceberEstados();
     this.ValidationIdentificacao();
     this.ValidationDomicilio();
@@ -49,7 +49,7 @@ export class EnderecoAddComponent implements OnInit {
 
   ReceberEstados() {
     this.Estados = this.estadosService.GetEstados();
-    this.progressBarService.Mostrar();
+    this.progressBarService.Mostrar(false);
   }
 
   ValidationIdentificacao(): void {
@@ -88,7 +88,7 @@ export class EnderecoAddComponent implements OnInit {
 
   Registrar() {
     if (this.IdentificacaoForm.valid && this.DomicilioForm.valid) {
-      this.progressBarService.Mostrar();
+      this.progressBarService.Mostrar(true);
       this.Registrando = true;
       this.TextoBotao = 'Adicionando';
 
@@ -105,14 +105,14 @@ export class EnderecoAddComponent implements OnInit {
         userId: user.id
       }
       this.enderecoService.Post(Endereco).subscribe((enderecos: IEndereco) => {
-        this.progressBarService.Mostrar();
+        this.progressBarService.Mostrar(false);
 
         this.snackbar.OpenSnackBarSuccess(this.mensagemSnackbar.CadastroConcluido);
         this.router.navigate(['user/perfil/endereco']);
       },
       erro => {
         this.Registrando = false;
-        this.progressBarService.Mostrar();
+        this.progressBarService.Mostrar(false);
         this.TextoBotao = 'Finalizar';
 
         console.error(erro);

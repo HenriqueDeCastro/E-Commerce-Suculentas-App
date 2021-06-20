@@ -40,7 +40,7 @@ export class AdicionarComponent implements OnInit {
 
   Registrar(): void {
     if (this.CategoriaForm.valid) {
-      this.progressBarService.Mostrar();
+      this.progressBarService.Mostrar(true);
       this.TextoBotao = 'Cadastrando';
       this.RealizandoCadastro = true;
 
@@ -51,7 +51,7 @@ export class AdicionarComponent implements OnInit {
       };
       this.categoriaService.Post(this.Categoria).subscribe(
         () => {
-          this.progressBarService.Mostrar();
+          this.progressBarService.Mostrar(false);
 
           this.snackbar.OpenSnackBarSuccess(this.mensagemSnackbar.CadastroConcluido);
           this.router.navigate(['empresa/categoria']);
@@ -59,7 +59,7 @@ export class AdicionarComponent implements OnInit {
         error => {
           this.TextoBotao = 'Cadastrar';
           this.RealizandoCadastro = false;
-          this.progressBarService.Mostrar();
+          this.progressBarService.Mostrar(false);
 
           console.error(error);
           this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ICategoria } from 'src/app/shared/models/ICategoria';
+import { ICategoriaPagination } from 'src/app/shared/models/ICategoriaPagination';
 import { environment } from '../../../../../environments/environment';
 
 @Injectable({
@@ -33,8 +34,8 @@ export class CategoriaService {
     return this.http.get<ICategoria>(`${this.UrlBase}/${categoriaId}`);
   }
 
-  GetByIdCliente(categoriaId: number): Observable<ICategoria> {
-    return this.http.get<ICategoria>(`${this.UrlBase}/getCliente/${categoriaId}`);
+  GetByCliente(categoriaId: number, pageAtual: number, orderBy: string, search: string): Observable<ICategoriaPagination> {
+    return this.http.get<ICategoriaPagination>(`${this.UrlBase}/getCliente?Id=${categoriaId}&pageAtual=${pageAtual}&orderBy=${orderBy}&search=${search}`);
   }
 
   GetByIdEmpresa(categoriaId: number): Observable<ICategoria> {

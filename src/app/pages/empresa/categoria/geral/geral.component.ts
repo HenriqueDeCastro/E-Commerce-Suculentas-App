@@ -22,7 +22,7 @@ export class GeralComponent implements OnInit {
               private mensagemSnackbar: MensagensService) { }
 
   ngOnInit(): void {
-    this.progressBarService.Mostrar();
+    this.progressBarService.Mostrar(true);
     this.ReceberCategorias();
   }
 
@@ -32,7 +32,7 @@ export class GeralComponent implements OnInit {
       this.SepararCategorias(this.Categorias);
     },
     erro => {
-    this.progressBarService.Mostrar();
+    this.progressBarService.Mostrar(false);
       console.error(erro);
 
       this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
@@ -47,6 +47,6 @@ export class GeralComponent implements OnInit {
         this.CategoriasInativas.push(categoria);
       }
     });
-    this.progressBarService.Mostrar();
+    this.progressBarService.Mostrar(false);
   }
 }

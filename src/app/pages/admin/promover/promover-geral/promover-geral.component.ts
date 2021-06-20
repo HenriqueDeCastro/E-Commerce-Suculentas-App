@@ -31,7 +31,7 @@ export class PromoverGeralComponent implements OnInit {
               private mensagemSnackbar: MensagensService) { }
 
   ngOnInit() {
-    this.progressBarService.Mostrar();
+    this.progressBarService.Mostrar(true);
     this.ReceberRoles();
   }
 
@@ -41,7 +41,7 @@ export class PromoverGeralComponent implements OnInit {
       this.ReceberUsuariosPorRole();
     },
     error => {
-      this.progressBarService.Mostrar();
+      this.progressBarService.Mostrar(false);
       const erro = error.error;
       console.error(error);
       this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
@@ -64,7 +64,7 @@ export class PromoverGeralComponent implements OnInit {
       })
     });
 
-    this.progressBarService.Mostrar();
+    this.progressBarService.Mostrar(false);
   }
 
   OpenDialog(user: IUser, rolename: string): void {

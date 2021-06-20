@@ -9,8 +9,8 @@ export class ProgressBarService {
 
   constructor() { }
 
-  Mostrar() {
-    this.Condicao = !this.Condicao;
+  Mostrar(condicao: boolean) {
+    this.Condicao = condicao;
   }
 
   RetornarValor(): boolean {

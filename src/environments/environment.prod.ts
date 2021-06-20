@@ -23,5 +23,9 @@ export const environment = {
   Enviado: 3,
   Finalizado: 4,
   Cancelado: 5,
-  EmDisputa: 6
+  EmDisputa: 6,
+  Alfabetica: "Alfabetica",
+  PrecoMaior: "Preço Maior",
+  PrecoMenor: "Preço Menor",
+  Estoque: "Estoque"
 };
