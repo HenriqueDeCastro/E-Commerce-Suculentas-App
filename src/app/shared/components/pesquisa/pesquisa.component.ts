@@ -15,7 +15,7 @@ export class PesquisaComponent implements OnInit {
   debounce: Subject<string> = new Subject<string>();
 
   ngOnInit(): void {
-      this.debounce.pipe(debounceTime(300)).subscribe(filter => { this.OnTyping.emit(filter); this.page.emit(1); });
+      this.debounce.pipe(debounceTime(500)).subscribe(filter => { this.OnTyping.emit(filter); this.page.emit(1); });
   }
 
   ngOnDestroy(): void {
