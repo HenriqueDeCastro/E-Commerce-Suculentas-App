@@ -9,7 +9,7 @@
     <mat-list>
       <ng-container *ngFor="let venda of Vendas; let i = index">
         <mat-list-item class="lista cursor" (click)="Navegar(venda.id)">
-          <div mat-line><span class="negrito" style="color: var(--verde);">Pedido N.º {{venda.id}}</span><span class="negrito-leve"> - {{venda.dataVenda | mask: '00/00/0000'}}</span></div>
+          <div mat-line><span class="negrito" style="color: var(--verde);">Pedido N.º {{venda.id}}</span><span class="negrito-leve"> - {{venda.dataVenda | date: 'dd/MM/yyyy'}}</span></div>
           <div mat-line class="subtitulo negrito">Produtos:</div>
           <div mat-line *ngFor="let pedido of venda.pedidos" class="negrito-leve">{{pedido.quantidade}}x - {{pedido.produto.nome}}</div>
           <div mat-line class="subtitulo negrito">Valores:</div>

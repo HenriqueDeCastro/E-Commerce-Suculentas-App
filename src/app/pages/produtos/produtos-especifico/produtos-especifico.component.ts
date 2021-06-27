@@ -1,4 +1,4 @@
-import { Component, ComponentFactoryResolver, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { CategoriaService } from 'src/app/core/services/server/Categoria/Categoria.service';
@@ -135,11 +135,10 @@ export class ProdutosEspecificoComponent implements OnInit {
 
   @HostListener('window:popstate', ['$event'])
   onPopState(event) {
-    this.Produtos = undefined;
-    this.PaginaAtual = 0;
-
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
+        this.Produtos = undefined;
+        this.PaginaAtual = 0;
         this.ReceberValorRota();
         this.GetProdutos(true);
       }

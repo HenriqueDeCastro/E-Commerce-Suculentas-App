@@ -35,11 +35,11 @@ export class CategoriaService {
   }
 
   GetByCliente(categoriaId: number, pageAtual: number, orderBy: string, search: string): Observable<ICategoriaPagination> {
-    return this.http.get<ICategoriaPagination>(`${this.UrlBase}/getCliente?Id=${categoriaId}&pageAtual=${pageAtual}&orderBy=${orderBy}&search=${search}`);
+    return this.http.get<ICategoriaPagination>(`${this.UrlBase}/getCliente?id=${categoriaId}&pageAtual=${pageAtual}&orderBy=${orderBy}&search=${search}`);
   }
 
-  GetByIdEmpresa(categoriaId: number): Observable<ICategoria> {
-    return this.http.get<ICategoria>(`${this.UrlBase}/getEmpresa/${categoriaId}`);
+  GetByEmpresa(categoriaId: number, pageAtual: number, orderBy: string, search: string): Observable<ICategoriaPagination> {
+    return this.http.get<ICategoriaPagination>(`${this.UrlBase}/getEmpresa?id=${categoriaId}&pageAtual=${pageAtual}&orderBy=${orderBy}&search=${search}`);
   }
 
   Post(categoria: ICategoria): Observable<ICategoria>   {

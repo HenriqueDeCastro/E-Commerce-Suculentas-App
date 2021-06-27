@@ -7,6 +7,7 @@ import { ProgressBarService } from 'src/app/core/services/shared/ProgressBar/Pro
 import { SnackbarService } from 'src/app/core/services/shared/Snackbar/Snackbar.service';
 import { IUser } from 'src/app/shared/models/IUser';
 import { IVenda } from 'src/app/shared/models/IVenda';
+import { IVendasPagination } from 'src/app/shared/models/IVendasPagination';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -21,6 +22,8 @@ export class ComprasStatusComponent implements OnInit {
   public Titulo: string;
   public statusNaoTem: string;
   private statusId: number;
+  public PaginaAtual = 0;
+  public UltimaPagina = false;
 
   constructor(private activetedRoute: ActivatedRoute,
               public router: Router,
@@ -38,16 +41,7 @@ export class ComprasStatusComponent implements OnInit {
 
   ReceberVendas() {
     if(this.VerificarStatus()) {
-      this.User = this.ReceberLogado();
-      this.vendaService.GetByUserId(this.User.id, this.statusId).subscribe((vendas: IVenda[]) => {
-        this.Vendas = vendas;
-        this.progressBarService.Mostrar(false);
-      },
-      error => {
-        this.progressBarService.Mostrar(false);
-        console.error(error);
-        this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
-      });
+      this.GetVendas();
     }
     else {
       this.progressBarService.Mostrar(false);
@@ -102,5 +96,35 @@ export class ComprasStatusComponent implements OnInit {
 
   Navegar(idVenda: number) {
     this.router.navigate(['/user/perfil/compras/detalhe/' + idVenda]);
+  }
+
+  VerMais() {
+    this.PaginaAtual++;
+    this.GetVendas();
+  }
+
+  GetVendas() {
+    this.progressBarService.Mostrar(true);
+    this.User = this.ReceberLogado();
+
+    this.vendaService.GetByUserId(this.User.id, this.statusId, this.PaginaAtual).subscribe((vendasPagination: IVendasPagination) => {
+
+      this.UltimaPagina = vendasPagination.ultimaPagina;
+
+      if(this.Vendas == undefined) {
+        this.Vendas = vendasPagination.vendas;
+        this.progressBarService.Mostrar(false);
+      }
+      else {
+        this.Vendas = this.Vendas.concat(vendasPagination.vendas);
+      }
+
+      this.progressBarService.Mostrar(false);
+    },
+    error => {
+      this.progressBarService.Mostrar(false);
+      console.error(error);
+      this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
+    });
   }
 }

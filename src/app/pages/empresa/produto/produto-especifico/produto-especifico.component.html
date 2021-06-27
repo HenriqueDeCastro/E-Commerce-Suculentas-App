@@ -1,7 +1,4 @@
-<ng-container *ngIf="Carregando">
-  <app-spinner></app-spinner>
-</ng-container>
-<ng-container *ngIf="!Carregando">
+<ng-container *ngIf="Categoria && Produtos">
   <app-voltar></app-voltar>
   <br>
   <br>
@@ -28,38 +25,30 @@
       <mat-accordion>
         <mat-expansion-panel [expanded]="open == true" class="mat-elevation-z0" hideToggle>
           <br>
-          <app-pesquisa (OnTyping)="receberFiltro($event)" (page)="pages = $event" [value]="filter"></app-pesquisa>
+          <app-pesquisa (OnTyping)="receberPesquisa($event)" [value]="Search"></app-pesquisa>
         </mat-expansion-panel>
       </mat-accordion>
     </div>
     <br>
     <ng-container *ngIf="Produtos.length > 0">
       <div class="row">
-        <ng-container *ngFor="let produto of Produtos | paginate: { itemsPerPage: 8, currentPage: pages }">
+        <ng-container *ngFor="let produto of Produtos">
           <div class="col-md-3">
             <app-card-produto-empresa [produto]=produto [categoriaNome]="Categoria.nome"></app-card-produto-empresa>
           </div>
         </ng-container>
       </div>
       <br>
-      <br>
-      <br>
-      <div class="d-flex justify-content-center">
-        <pagination-controls
-          (pageChange)="onChangePage($event)"
-          maxSize="9"
-          autoHide="true"
-          responsive="true"
-          previousLabel="Anterior"
-          nextLabel="Próximo"></pagination-controls>
-      </div>
-      <br>
-      <br>
+      <ng-container *ngIf="!UltimaPagina">
+        <div class="centralizar">
+          <button mat-button class="btn-responsive light-button"  color="accent" (click)="VerMais()" [disabled]="progressBarService.RetornarValor()">Ver Mais</button>
+        </div>
+      </ng-container>
     </ng-container>
     <ng-container *ngIf="Produtos.length == 0">
       <br>
       <br>
-      <h3 class="titulo centralizar">Não encontramos nenhum(a) {{this.Categoria.nome}} que tenha em seu nome "{{filter}}".🤔 </h3>
+      <h3 class="titulo centralizar">Não encontramos nenhum(a) {{this.Categoria.nome}} que tenha em seu nome "{{Search}}".🤔 </h3>
     </ng-container>
 
   </ng-container>

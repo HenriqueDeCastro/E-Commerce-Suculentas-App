@@ -15,7 +15,7 @@ const routes: Routes = [
     [
       { path: 'geral', component: GeralProdutosComponent, canActivate: [AuthGuard], data: { role: environment.RoleEmpresa } },
       { path: 'adicionar', component: AdicionarProdutoComponent, canActivate: [AuthGuard], data: { role: environment.RoleEmpresa } },
-      { path: ':categoriaId/:categoriaName', component: ProdutoEspecificoComponent, canActivate: [AuthGuard], data: { role: environment.RoleEmpresa } },
+      { path: ':categoriaName/:categoriaId', component: ProdutoEspecificoComponent, canActivate: [AuthGuard], data: { role: environment.RoleEmpresa } },
       { path: 'editar/:produtoId/:produtoName', component: EditarProdutoComponent, canActivate: [AuthGuard], data: { role: environment.RoleEmpresa } },
       { path: '', redirectTo: 'geral', pathMatch: 'full' },
       { path: '**', redirectTo: 'geral', pathMatch: 'full' }

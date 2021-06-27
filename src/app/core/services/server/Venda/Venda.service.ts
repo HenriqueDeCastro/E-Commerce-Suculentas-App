@@ -23,8 +23,8 @@ export class VendaService {
     return this.http.get<IVenda>(`${this.UrlBase}/${vendaId}`);
   }
 
-  GetByUserId(userId: number, statusId: number): Observable<IVenda[]> {
-    return this.http.get<IVenda[]>(`${this.UrlBase}/getByUser/${userId}/${statusId}`);
+  GetByUserId(userId: number, statusId: number, pageAtual: number): Observable<IVendasPagination> {
+    return this.http.get<IVendasPagination>(`${this.UrlBase}/getStatusByUser?UserId=${userId}&statusId=${statusId}&pageAtual=${pageAtual}`);
   }
 
   GetByStatusId(statusId: number, pageAtual: number): Observable<IVendasPagination> {
@@ -33,6 +33,10 @@ export class VendaService {
 
   GetByStatusCountEmpresa(): Observable<IVendasCount[]> {
     return this.http.get<IVendasCount[]>(`${this.UrlBase}/getByStatusCountEmpresa`);
+  }
+
+  GetByStatusCountUser(userId: number): Observable<IVendasCount[]> {
+    return this.http.get<IVendasCount[]>(`${this.UrlBase}/getByStatusCountUser/${userId}`);
   }
 
   Post(venda: IVenda): Observable<IVenda>   {

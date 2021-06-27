@@ -23,6 +23,12 @@ export class HomeComponent implements OnInit {
   public CountFinalizado = null;
   public CountCancelado = null;
   public CountEmDisputa = null;
+  public StatusAguardandoPagamento = null;
+  public StatusAguardandoEnvio = null;
+  public StatusEnviado = null;
+  public StatusFinalizado = null;
+  public StatusCancelado = null;
+  public StatusEmDisputa = null;
   public Carregou = false;
   public env = environment;
 
@@ -36,11 +42,21 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.progressBarService.Mostrar(true);
     this.ReceberLogado();
+    this.ReceberStatusEnvironment();
     this.ReceberCountVendas();
   }
 
   ReceberLogado(): void{
     this.User = this.authService.GetUserToken();
+  }
+
+  ReceberStatusEnvironment() {
+    this.StatusAguardandoPagamento = this.env.AguardandoPagamento;
+    this.StatusAguardandoEnvio = this.env.AguardandoEnvio;
+    this.StatusEnviado = this.env.Enviado;
+    this.StatusFinalizado = this.env.Finalizado;
+    this.StatusCancelado = this.env.Cancelado;
+    this.StatusEmDisputa = this.env.EmDisputa;
   }
 
   ReceberCountVendas() {
@@ -60,27 +76,27 @@ export class HomeComponent implements OnInit {
   }
 
   NumeroVendasPorStatus(vendasCount: IVendasCount) {
-    if(vendasCount.statusId == this.env.AguardandoPagamento) {
+    if(vendasCount.statusId == this.StatusAguardandoPagamento) {
       this.CountAguardandoPagamento = vendasCount.countVenda;
     }
-    else if(vendasCount.statusId == this.env.AguardandoEnvio) {
+    else if(vendasCount.statusId == this.StatusAguardandoEnvio) {
       this.CountAguardandoEnvio = vendasCount.countVenda;
     }
-    else if(vendasCount.statusId == this.env.Enviado) {
+    else if(vendasCount.statusId == this.StatusEnviado) {
       this.CountEnviado = vendasCount.countVenda;
     }
-    else if(vendasCount.statusId == this.env.Finalizado) {
+    else if(vendasCount.statusId == this.StatusFinalizado) {
       this.CountFinalizado = vendasCount.countVenda;
     }
-    else if(vendasCount.statusId == this.env.Cancelado) {
+    else if(vendasCount.statusId == this.StatusCancelado) {
       this.CountCancelado = vendasCount.countVenda;
     }
-    else if(vendasCount.statusId == this.env.EmDisputa) {
+    else if(vendasCount.statusId == this.StatusEmDisputa) {
       this.CountEmDisputa = vendasCount.countVenda;
     }
   }
 
-  Navegar(status: number) {
-    this.router.navigate(['empresa/vendas/' + status]);
+  Teste() {
+    this.router.navigate(['empresa/vendas/' + 6]);
   }
 }
