@@ -13,8 +13,8 @@ const routes: Routes = [
     [
       { path: ':statusId', component: VendasStatusComponent, canActivate: [AuthGuard], data: { role: environment.RoleEmpresa } },
       { path: 'detalhe/:vendaId', component: VendasDetalheComponent, canActivate: [AuthGuard], data: { role: environment.RoleEmpresa } },
-      { path: '', redirectTo: 'vendas/1', pathMatch: 'full' },
-      { path: '**', redirectTo: 'vendas/1', pathMatch: 'full' }
+      { path: '', redirectTo: 'vendas', pathMatch: 'full' },
+      { path: '**', redirectTo: 'empresa', pathMatch: 'full' }
     ],
     canActivate: [AuthGuard], data: { role: environment.RoleEmpresa }
   },
