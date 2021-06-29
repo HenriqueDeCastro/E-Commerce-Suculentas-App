@@ -20,12 +20,12 @@
     <!-- VENDAS -->
     <mat-list>
       <div mat-subheader>Compras</div>
-      <mat-list-item class="lista cursor" (click)="router.navigate(['empresa/categoria'])">
+      <mat-list-item class="lista cursor" (click)="router.navigate(['empresa/vendas/1'])">
         <mat-icon matBadge="{{CountAguardandoPagamento}}" class="material-icons-outlined" mat-list-icon>credit_card</mat-icon>
         <div mat-line>Aguardando Pagamento</div>
       </mat-list-item>
       <mat-divider></mat-divider>
-      <mat-list-item class="lista cursor" (click)="router.navigate(['empresa/vendas/2'])">
+      <mat-list-item class="lista cursor" (click)="router.navigate(['empresa/vendas'])">
         <mat-icon matBadge="{{CountAguardandoEnvio}}" class="material-icons-outlined" mat-list-icon>departure_board</mat-icon>
         <div mat-line>Aguardando Envio</div>
       </mat-list-item>

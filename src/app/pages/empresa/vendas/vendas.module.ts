@@ -27,9 +27,9 @@ import { VendasDetalheComponent } from './vendas-detalhe/vendas-detalhe.componen
     CommonModule,
     ComponentModule,
     MaterialModule,
-    VendasRoutingModule,
     MaskModule,
-    PaginationModule
+    PaginationModule,
+    VendasRoutingModule
   ]
 })
 export class VendasModule {}
