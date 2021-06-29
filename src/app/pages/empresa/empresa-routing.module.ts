@@ -14,7 +14,7 @@ const routes: Routes = [
       { path: 'produto', loadChildren: './produto/produto.module#ProdutoModule', canActivate: [AuthGuard], data: { role: environment.RoleEmpresa } },
       { path: 'categoria', loadChildren: './categoria/categoria.module#CategoriaModule', canActivate: [AuthGuard], data: { role: environment.RoleEmpresa } },
       { path: 'fretemanual', loadChildren: './frete-manual/frete-manual.module#FreteManualModule', canActivate: [AuthGuard], data: { role: environment.RoleEmpresa } },
-      { path: 'vendas', loadChildren: './vendas/vendas.module#VendasModule' },
+      { path: 'vendas', loadChildren: './vendas/vendas.module#VendasModule', canActivate: [AuthGuard], data: { role: environment.RoleEmpresa } },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: '**', redirectTo: 'home', pathMatch: 'full' }
     ],
