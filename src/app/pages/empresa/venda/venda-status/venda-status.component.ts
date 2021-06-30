@@ -12,10 +12,10 @@ import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-vendas-status',
-  templateUrl: './vendas-status.component.html',
-  styleUrls: ['./vendas-status.component.scss']
+  templateUrl: './venda-status.component.html',
+  styleUrls: ['./venda-status.component.scss']
 })
-export class VendasStatusComponent implements OnInit {
+export class VendaStatusComponent implements OnInit {
 
   public Vendas: IVenda[];
   public User: IUser;

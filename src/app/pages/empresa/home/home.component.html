@@ -20,32 +20,32 @@
     <!-- VENDAS -->
     <mat-list>
       <div mat-subheader>Compras</div>
-      <mat-list-item class="lista cursor" (click)="router.navigate(['vendas/1'])">
+      <mat-list-item class="lista cursor" (click)="router.navigate(['empresa/venda/1'])">
         <mat-icon matBadge="{{CountAguardandoPagamento}}" class="material-icons-outlined" mat-list-icon>credit_card</mat-icon>
         <div mat-line>Aguardando Pagamento</div>
       </mat-list-item>
       <mat-divider></mat-divider>
-      <mat-list-item class="lista cursor" (click)="router.navigate(['empresa/vendas'])">
+      <mat-list-item class="lista cursor" (click)="router.navigate(['empresa/venda/2'])">
         <mat-icon matBadge="{{CountAguardandoEnvio}}" class="material-icons-outlined" mat-list-icon>departure_board</mat-icon>
         <div mat-line>Aguardando Envio</div>
       </mat-list-item>
       <mat-divider></mat-divider>
-      <mat-list-item class="lista cursor" (click)="router.navigate(['empresa/vendas/3'])">
+      <mat-list-item class="lista cursor" (click)="router.navigate(['empresa/venda/3'])">
         <mat-icon matBadge="{{CountEnviado}}" class="material-icons-outlined" mat-list-icon>local_shipping</mat-icon>
         <div mat-line>Enviadas</div>
       </mat-list-item>
       <mat-divider></mat-divider>
-      <mat-list-item class="lista cursor" (click)="router.navigate(['empresa/vendas/4'])">
+      <mat-list-item class="lista cursor" (click)="router.navigate(['empresa/venda/4'])">
         <mat-icon matBadge="{{CountFinalizado}}" class="material-icons-outlined" mat-list-icon>check</mat-icon>
         <div mat-line>Finalizadas</div>
       </mat-list-item>
       <mat-divider></mat-divider>
-      <mat-list-item class="lista cursor" (click)="router.navigate(['empresa/vendas/5'])">
+      <mat-list-item class="lista cursor" (click)="router.navigate(['empresa/venda/5'])">
         <mat-icon matBadge="{{CountCancelado}}" class="material-icons-outlined" mat-list-icon>cancel</mat-icon>
         <div mat-line>Canceladas</div>
       </mat-list-item>
       <mat-divider></mat-divider>
-      <mat-list-item class="lista cursor" (click)="router.navigate(['empresa/vendas/6'])">
+      <mat-list-item class="lista cursor" (click)="router.navigate(['empresa/venda/6'])">
         <mat-icon matBadge="{{CountEmDisputa}}" class="material-icons-outlined" mat-list-icon>shield</mat-icon>
         <div mat-line>Em Disputa</div>
       </mat-list-item>

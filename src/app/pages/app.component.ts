@@ -32,11 +32,11 @@ export class AppComponent implements OnInit{
       if (!(evt instanceof NavigationEnd)) {
           return;
       }
+      this.AcessAdmin = this.AdminAcesso();
+      this.AcessEmpresa = this.EmpresaAcesso();
       this.resetScroll.PositionZero();
     });
 
-    this.AcessAdmin = this.AdminAcesso();
-    this.AcessEmpresa = this.EmpresaAcesso();
 
     WebFont.load({
       custom: { families: ['Material Icons', 'Material Icons Outline', 'Bakerie']}

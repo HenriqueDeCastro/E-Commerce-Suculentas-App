@@ -4,22 +4,19 @@ import { MaterialModule } from '../../../shared/components/material/material.mod
 import { ComponentModule } from '../../../shared/components/component.module';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { VendasRoutingModule } from './vendas-routing.module';
+import { VendaRoutingModule } from './venda-routing.module';
 import { MaskModule } from '../../../shared/components/mask/mask.module';
-import { PaginationModule } from '../../../shared/components/pagination/pagination.module';
 
 // PAGES
-import { VendasComponent } from './vendas.component';
-import { VendasStatusComponent } from './vendas-status/vendas-status.component';
-import { VendasDetalheComponent } from './vendas-detalhe/vendas-detalhe.component';
-
-// COMPONENTS
+import { VendaComponent } from './venda.component';
+import { VendaStatusComponent } from './venda-status/venda-status.component';
+import { VendaDetalheComponent } from './venda-detalhe/venda-detalhe.component';
 
 @NgModule({
   declarations: [
-    VendasComponent,
-    VendasStatusComponent,
-    VendasDetalheComponent
+    VendaComponent,
+    VendaStatusComponent,
+    VendaDetalheComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -28,8 +25,7 @@ import { VendasDetalheComponent } from './vendas-detalhe/vendas-detalhe.componen
     ComponentModule,
     MaterialModule,
     MaskModule,
-    PaginationModule,
-    VendasRoutingModule
+    VendaRoutingModule
   ]
 })
-export class VendasModule {}
+export class VendaModule {}

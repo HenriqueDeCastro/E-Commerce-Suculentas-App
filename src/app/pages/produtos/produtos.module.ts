@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { ComponentModule } from 'src/app/shared/components/component.module';
 import { MaterialModule } from 'src/app/shared/components/material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { PaginationModule } from '../../shared/components/pagination/pagination.module';
 
 // PAGES
 import { ProdutosComponent } from './produtos.component';
@@ -35,8 +34,7 @@ import { MaskModule } from 'src/app/shared/components/mask/mask.module';
     CommonModule,
     ComponentModule,
     MaskModule,
-    ProdutosRoutingModule,
-    PaginationModule
+    ProdutosRoutingModule
   ]
 })
 export class ProdutosModule {}

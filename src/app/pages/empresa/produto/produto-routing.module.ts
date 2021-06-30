@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { environment } from 'src/environments/environment';
 import { AuthGuard } from '../../../core/guards/auth.guard';
 
 import { ProdutoComponent } from './produto.component';
@@ -7,7 +8,6 @@ import { GeralProdutosComponent } from './geralProdutos/geralProdutos.component'
 import { AdicionarProdutoComponent } from './adicionarProduto/adicionarProduto.component';
 import { ProdutoEspecificoComponent } from './produto-especifico/produto-especifico.component';
 import { EditarProdutoComponent } from './editarProduto/editarProduto.component';
-import { environment } from 'src/environments/environment';
 
 const routes: Routes = [
   { path: '', component: ProdutoComponent,

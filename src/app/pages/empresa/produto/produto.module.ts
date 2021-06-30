@@ -7,7 +7,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProdutoRoutingModule } from './produto-routing.module';
 import { FileInputModule } from 'src/app/shared/components/file input/file-input.module';
 import { MaskModule } from 'src/app/shared/components/mask/mask.module';
-import { PaginationModule } from 'src/app/shared/components/pagination/pagination.module';
 
 // PAGES
 import { ProdutoComponent } from './produto.component';
@@ -38,8 +37,7 @@ import { DialogOrderbyEmpresaComponent } from './produto-especifico/components/d
     MaterialModule,
     FileInputModule,
     ProdutoRoutingModule,
-    MaskModule,
-    PaginationModule
+    MaskModule
   ]
 })
 export class ProdutoModule {}
