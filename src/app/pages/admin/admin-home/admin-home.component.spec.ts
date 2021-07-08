@@ -3,21 +3,21 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { BotoesCarrinhoComponent } from './botoes-carrinho.component';
+import { AdminHomeComponent } from './admin-home.component';
 
-describe('BotoesCarrinhoComponent', () => {
-  let component: BotoesCarrinhoComponent;
-  let fixture: ComponentFixture<BotoesCarrinhoComponent>;
+describe('HomeAdminComponent', () => {
+  let component: AdminHomeComponent;
+  let fixture: ComponentFixture<AdminHomeComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ BotoesCarrinhoComponent ]
+      declarations: [ AdminHomeComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BotoesCarrinhoComponent);
+    fixture = TestBed.createComponent(AdminHomeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

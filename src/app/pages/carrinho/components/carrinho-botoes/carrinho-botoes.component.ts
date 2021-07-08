@@ -5,9 +5,9 @@ import { IProdutoCarrinho } from 'src/app/shared/models/IProdutoCarrinho';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-botoes-carrinho',
-  templateUrl: './botoes-carrinho.component.html',
-  styleUrls: ['./botoes-carrinho.component.scss']
+  selector: 'app-carrinho-botoes',
+  templateUrl: './carrinho-botoes.component.html',
+  styleUrls: ['./carrinho-botoes.component.scss']
 })
 export class BotoesCarrinhoComponent implements OnInit {
 

@@ -90,7 +90,7 @@ export class VendaStatusComponent implements OnInit {
   }
 
   Navegar(idVenda: number) {
-    this.router.navigate(['/user/perfil/compras/detalhe/' + idVenda]);
+    this.router.navigate(['/empresa/venda/detalhe/' + idVenda]);
   }
 
   VerMais() {

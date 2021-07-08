@@ -29,6 +29,7 @@ export class FinalizarVendasComponent implements OnInit {
   public EnderecoSelecionado: IEndereco;
   public ValorFrete: ICalculoFrete;
   public urlMaps: string;
+  public env = environment;
 
   constructor(private activetedRoute: ActivatedRoute,
               private snackbar: SnackbarService,
@@ -42,9 +43,9 @@ export class FinalizarVendasComponent implements OnInit {
 
   ngOnInit() {
     this.progressBarService.Mostrar(true);
-    this.IdEncomenda = environment.TipoProdutoEncomenda;
-    this.IdEstoque = environment.TipoProdutoEstoque;
-    this.urlMaps = environment.UrlMaps;
+    this.IdEncomenda = this.env.TipoProdutoEncomenda;
+    this.IdEstoque = this.env.TipoProdutoEstoque;
+    this.urlMaps = this.env.UrlMaps;
     this.ReceberValorRota();
     this.ReceberProdutoCarrinho();
     this.ReceberUserLogado();
@@ -61,7 +62,7 @@ export class FinalizarVendasComponent implements OnInit {
   }
 
   ReceberProdutoCarrinho(): void {
-    const produtosCrypt = localStorage.getItem(environment.VariavelProduto);
+    const produtosCrypt = localStorage.getItem(this.env.VariavelProduto);
     if(produtosCrypt) {
       let Produtos: IProdutoCarrinho[] = this.cryptService.descryptObject(produtosCrypt);
       this.SepararTiposProdutos(Produtos);

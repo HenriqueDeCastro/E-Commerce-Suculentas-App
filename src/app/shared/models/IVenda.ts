@@ -1,4 +1,5 @@
 import { IPedido } from './IPedido';
+import { IUser } from './IUser';
 
 export interface IVenda {
 
@@ -13,5 +14,6 @@ export interface IVenda {
   statusId?: number;
   userId: number;
   endereco: string;
+  user?: IUser;
   pedidos?: IPedido[];
 }

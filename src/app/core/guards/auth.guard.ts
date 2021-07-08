@@ -32,8 +32,6 @@ export class AuthGuard implements CanActivate {
       }
     } else {
       this.ReturnUrl(state);
-      console.log('sim')
-
       return false;
     }
   }

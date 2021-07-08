@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
 
 // COMPONENTS
 import { ProdutoCarrrinhoComponent } from './components/produto-carrrinho/produto-carrrinho.component';
-import { BotoesCarrinhoComponent } from './components/botoes-carrinho/botoes-carrinho.component';
+import { BotoesCarrinhoComponent } from './components/carrinho-botoes/carrinho-botoes.component';
 import { DialogEditCarrinhoComponent } from './components/dialog-edit-carrinho/dialog-edit-carrinho.component';
 import { BottoomEditCarrinhoComponent } from './components/bottoom-edit-carrinho/bottoom-edit-carrinho.component';
 import { SubtotalComponent } from './components/subtotal/subtotal.component';

@@ -5,11 +5,11 @@ import { IUser } from 'src/app/shared/models/IUser';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-homeAdmin',
-  templateUrl: './homeAdmin.component.html',
-  styleUrls: ['./homeAdmin.component.scss']
+  selector: 'app-admin-home',
+  templateUrl: './admin-home.component.html',
+  styleUrls: ['./admin-home.component.scss']
 })
-export class HomeAdminComponent implements OnInit {
+export class AdminHomeComponent implements OnInit {
 
   public User: IUser;
 

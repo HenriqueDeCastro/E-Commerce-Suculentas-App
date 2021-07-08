@@ -79,7 +79,7 @@ export class BotaoVendaComponent implements OnInit {
 
       this.TextoBotao = 'Redirecionando...';
 
-      window.location.href = "https://pagseguro.uol.com.br/v2/checkout/payment.html?code=" + venda.codigoTransacao;
+      window.location.href = environment.UrlPagSegurosCheckout + venda.codigoTransacao;
 
       this.router.navigate(['/vendas/concluida/' + venda.id]);
       this.snackbar.OpenSnackBarSuccess(this.mensagemSnackbar.VendaComSucesso);

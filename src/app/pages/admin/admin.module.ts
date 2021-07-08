@@ -5,13 +5,13 @@ import { ComponentModule } from '../../shared/components/component.module';
 import { GerenciarRulesModule } from './gerenciar-rules/gerenciar-rules.module';
 
 import { AdminComponent } from './admin.component';
-import { HomeAdminComponent } from './homeAdmin/homeAdmin.component';
+import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { PromoverModule } from './promover/promover.module';
 
 @NgModule({
   declarations: [
     AdminComponent,
-    HomeAdminComponent
+    AdminHomeComponent
   ],
   imports: [
     ComponentModule,

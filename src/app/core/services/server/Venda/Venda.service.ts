@@ -23,6 +23,10 @@ export class VendaService {
     return this.http.get<IVenda>(`${this.UrlBase}/${vendaId}`);
   }
 
+  GetByIdEmpresa(vendaId: number): Observable<IVenda> {
+    return this.http.get<IVenda>(`${this.UrlBase}/getByIdEmpresa/${vendaId}`);
+  }
+
   GetByUserId(userId: number, statusId: number, pageAtual: number): Observable<IVendasPagination> {
     return this.http.get<IVendasPagination>(`${this.UrlBase}/getStatusByUser?UserId=${userId}&statusId=${statusId}&pageAtual=${pageAtual}`);
   }

@@ -6,6 +6,7 @@ import { ProgressBarService } from 'src/app/core/services/shared/ProgressBar/Pro
 import { SnackbarService } from 'src/app/core/services/shared/Snackbar/Snackbar.service';
 import { IPedido } from 'src/app/shared/models/IPedido';
 import { IVenda } from 'src/app/shared/models/IVenda';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-compras-detalhe',
@@ -15,8 +16,8 @@ import { IVenda } from 'src/app/shared/models/IVenda';
 export class ComprasDetalheComponent implements OnInit {
 
   public Venda: IVenda;
-  public Total: number = 0;
   private vendaId: number;
+  public env = environment;
 
   constructor(private vendaService: VendaService,
               private activetedRoute: ActivatedRoute,
@@ -33,7 +34,6 @@ export class ComprasDetalheComponent implements OnInit {
   ReceberVendas() {
     this.vendaService.GetById(this.vendaId).subscribe((venda: IVenda) => {
       this.Venda = venda;
-      this.CalcularTotal();
       this.progressBarService.Mostrar(false);
     },
     error => {
@@ -43,13 +43,7 @@ export class ComprasDetalheComponent implements OnInit {
     });
   }
 
-  CalcularTotal() {
-    this.Venda.pedidos.forEach((pedido: IPedido) => {
-      this.Total += pedido.preco;
-    });
-
-    if(this.Venda.frete) {
-      this.Total += this.Venda.valorFrete;
-    }
+   CheckoutPagSeguro() {
+    window.location.href = environment.UrlPagSegurosCheckout + this.Venda.codigoTransacao;
    }
 }

@@ -1,3 +1,126 @@
-<p>
-  venda-detalhe works!
-</p>
+<ng-container *ngIf="Venda">
+  <app-voltar></app-voltar>
+  <br>
+  <br>
+  <br>
+  <h1 class="titulo centralizar">#{{Venda.id}}</h1>
+  <br>
+  <br>
+  <h3 *ngIf="Venda.pedidos.length == 1" class="titulo">Produto</h3>
+  <h3 *ngIf="Venda.pedidos.length > 1" class="titulo">Produtos</h3>
+  <div class="row">
+    <ng-container *ngFor="let pedido of Venda.pedidos">
+      <div class="col-sm-6">
+        <app-produto-venda-detalhe [produto]=pedido.produto [pedido]=pedido></app-produto-venda-detalhe>
+      </div>
+    </ng-container>
+  </div>
+  <br>
+  <mat-divider class="pontilhado"></mat-divider>
+  <br>
+  <h3 class="titulo">Valores</h3>
+  <div class="row">
+    <div class="col-sm-4">
+      <mat-list>
+        <mat-list-item class="tamanho-matlineitem">
+          <mat-icon class="material-icons-outlined produto" mat-list-icon>local_mall</mat-icon>
+          <div mat-line *ngIf="Venda.pedidos.length == 1" class="quebralinha-matline negrito">Valor do Produto</div>
+          <div mat-line *ngIf="Venda.pedidos.length > 1" class="quebralinha-matline negrito ">Valores dos Produtos</div>
+          <div mat-line class="quebralinha-matline">{{Venda.valor - Venda.valorFrete | currency:'BRL'}}</div>
+        </mat-list-item>
+      </mat-list>
+    </div>
+    <div class="col-sm-4">
+      <mat-list>
+        <mat-list-item class="tamanho-matlineitem">
+          <mat-icon class="material-icons-outlined frete" mat-list-icon>local_shipping</mat-icon>
+          <div mat-line class="quebralinha-matline negrito">Valor do Frete</div>
+          <div mat-line *ngIf="Venda.frete" class="quebralinha-matline">{{ Venda.valorFrete | currency:'BRL'}}</div>
+          <div mat-line *ngIf="!Venda.frete" class="quebralinha-matline">{{ 0 | currency:'BRL'}}</div>
+        </mat-list-item>
+      </mat-list>
+    </div>
+    <div class="col-sm-4">
+      <mat-list>
+        <mat-list-item class="tamanho-matlineitem">
+          <div mat-line class="quebralinha-matline negrito">Total</div>
+          <mat-icon class="material-icons-outlined dinheiro" mat-list-icon>payments</mat-icon>
+          <div mat-line class="quebralinha-matline negrito" style="font-size:23px">{{Venda.valor | currency:'BRL'}}</div>
+        </mat-list-item>
+      </mat-list>
+    </div>
+  </div>
+  <br>
+  <mat-divider class="pontilhado"></mat-divider>
+  <br>
+  <h3 class="titulo" *ngIf="Venda.frete">Dados de entrega</h3>
+  <h3 class="titulo" *ngIf="!Venda.frete">Dados para retirada</h3>
+  <ng-container *ngIf="Venda.frete">
+    <div class="row">
+      <div class="col-sm-6">
+        <mat-list>
+          <mat-list-item class="tamanho-matlineitem">
+            <mat-icon class="material-icons-outlined casa" mat-list-icon>home</mat-icon>
+            <div mat-line class="quebralinha-matline negrito">Endereço de Entrega</div>
+            <div mat-line class="quebralinha-matline">{{Venda.endereco}}.</div>
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="!Venda.frete">
+    <div class="row">
+      <div class="col-sm-6">
+        <mat-list>
+          <mat-list-item class="tamanho-matlineitem">
+            <mat-icon class="material-icons-outlined casa" mat-list-icon>home</mat-icon>
+            <div mat-line class="quebralinha-matline negrito">Endereço residêncial do cliente</div>
+            <div mat-line class="quebralinha-matline">{{Venda.endereco}}</div>
+          </mat-list-item>
+        </mat-list>
+      </div>
+      <div class="col-sm-6">
+        <mat-list>
+          <mat-list-item class="tamanho-matlineitem">
+            <mat-icon class="material-icons-outlined mapa" mat-list-icon>pin_drop</mat-icon>
+            <div mat-line class="quebralinha-matline negrito">Endereço de retirada</div>
+            <div mat-line class="quebralinha-matline">{{env.Endereco}}</div>
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </div>
+  </ng-container>
+  <br>
+  <mat-divider class="pontilhado"></mat-divider>
+  <br>
+  <div class="row">
+    <div class="col-sm-6">
+      <h3 class="titulo">Dados do cliente</h3>
+      <mat-list>
+        <mat-list-item class="tamanho-matlineitem">
+          <mat-icon class="material-icons-outlined user" mat-list-icon>person</mat-icon>
+          <div mat-line class="quebralinha-matline negrito">{{User.fullName}}</div>
+          <div mat-line class="quebralinha-matline">Celular: {{User.phoneNumber | mask:'(00)00000-0000'}}</div>
+          <div mat-line class="quebralinha-matline">E-mail: {{User.email}}</div>
+          <div mat-line class="quebralinha-matline">CPF: {{User.cpf | mask:'000.000.000/00'}}</div>
+        </mat-list-item>
+      </mat-list>
+    </div>
+    <div class="col-sm-6">
+      <h3 class="titulo">Dados da venda</h3>
+      <mat-list>
+        <mat-list-item class="tamanho-matlineitem">
+          <mat-icon class="material-icons-outlined feed" mat-list-icon>content_paste</mat-icon>
+          <div mat-line class="quebralinha-matline negrito">{{Venda.statusPagSeguro? Venda.statusPagSeguro: 'Sem status do PagSeguro'}}</div>
+          <div mat-line class="quebralinha-matline">Data: {{Venda.dataVenda | date: 'dd/MM/yyyy'}}</div>
+        </mat-list-item>
+      </mat-list>
+    </div>
+  </div>
+  <br>
+  <mat-divider class="pontilhado"></mat-divider>
+  <br>
+  <app-venda-detalhe-editar-venda [Venda]=Venda></app-venda-detalhe-editar-venda>
+
+</ng-container>
+

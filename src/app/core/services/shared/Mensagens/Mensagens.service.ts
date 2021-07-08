@@ -48,4 +48,8 @@ export class MensagensService {
   // ROLE
   public ErroRoleAdmin = 'Erro ao adicionar a Role Admin';
   public ErroRoleEmpresa = 'Erro ao adicionar a Role Empresa';
+
+  // VENDA
+  public ErroCamposSemAlteracao = 'Não houve nenhuma alteração nos campos';
+
 }
