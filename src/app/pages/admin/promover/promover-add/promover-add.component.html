@@ -1,6 +1,3 @@
-<ng-container *ngIf="!Roles">
-  <app-spinner></app-spinner>
-</ng-container>
 <ng-container *ngIf="Roles">
   <app-voltar></app-voltar>
   <br>
@@ -21,12 +18,6 @@
         <mat-error *ngIf="UserForm.get('user').hasError('required')" class="invalid-feedback">E-mail é obrigatório</mat-error>
       </mat-form-field>
       <ng-container *ngIf="!User">
-        <br>
-        <br>
-        <ng-container *ngIf="Pesquisando">
-          <app-progressbar></app-progressbar>
-          <br>
-        </ng-container>
         <button mat-flat-button class="w-100" color="primary" [disabled]=Pesquisando>Pesquisar</button>
       </ng-container>
       <ng-container *ngIf="User">
@@ -65,11 +56,6 @@
         </mat-select>
         <mat-error *ngIf="RoleForm.get('roles').hasError('required')" class="invalid-feedback">Função é obrigatória</mat-error>
       </mat-form-field>
-      <br>
-      <br>
-      <ng-container *ngIf="RealizandoCadastro">
-        <app-progressbar></app-progressbar>
-      </ng-container>
       <br>
       <div class="form-group col-md-12 centralizar">
         <button mat-button matStepperPrevious class="w-50" color="warn">Anterior</button>

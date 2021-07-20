@@ -88,7 +88,7 @@ export class AdicionarProdutoComponent implements OnInit {
     },
     erro => {
       console.error(erro);
-      this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroUploadImagem);
+      this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
     });
   }
 
@@ -99,7 +99,7 @@ export class AdicionarProdutoComponent implements OnInit {
     },
     erro => {
       console.error(erro);
-      this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroUploadImagem);
+      this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
     })
   }
 
@@ -126,13 +126,13 @@ export class AdicionarProdutoComponent implements OnInit {
   UploadFotos(): void {
     const data = this.horario.RetornaDataAtualParaNome();
     const nomeArquivo = `${this.InformacoesForm.value.nome}_${data}`;
-    const nomeArquivoMini = `Mini_${this.InformacoesForm.value.nome}_${data}`;
-    this.file = this.renomear.RenomearArquivo(this.file, nomeArquivo);
-    this.fileMini = this.renomear.RenomearArquivo(this.fileMini, nomeArquivoMini);
 
-    this.produtoService.postUpload(this.file).subscribe(
+    this.file = this.renomear.RenomearArquivo(this.file, nomeArquivo);
+    this.fileMini = this.renomear.RenomearArquivo(this.fileMini, nomeArquivo);
+
+    this.produtoService.postUpload(this.file, false).subscribe(
       () => {
-        this.produtoService.postUpload(this.fileMini).subscribe(
+        this.produtoService.postUpload(this.fileMini, true).subscribe(
           () => {
             this.PostProduto();
           },

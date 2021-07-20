@@ -55,6 +55,10 @@
   margin: 0px !important;
 }
 
+::ng-deep .mat-list-base {
+  padding: 0!important;
+}
+
 
 @media (max-width: 600px)
 {

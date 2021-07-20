@@ -8,6 +8,8 @@ import { RegisterComponent } from './register/register.component';
 import { EsqueciSenhaComponent } from './esqueciSenha/esqueciSenha.component';
 import { ResetSenhaComponent } from './resetSenha/resetSenha.component';
 import { NotAcessComponent } from './notAcess/notAcess.component';
+import { PoliticaPrivacidadeComponent } from './politicaPrivacidade/politicaPrivacidade.component';
+import { TermoUsoComponent } from './termoUso/termoUso.component';
 
 const routes: Routes = [
   { path: '', component: UserComponent,
@@ -17,6 +19,8 @@ const routes: Routes = [
       { path: 'register', component: RegisterComponent },
       { path: 'esquecisenha', component: EsqueciSenhaComponent },
       { path: 'sem-acesso', component: NotAcessComponent },
+      { path: 'politica-privacidade', component: PoliticaPrivacidadeComponent },
+      { path: 'termos-de-uso', component: TermoUsoComponent },
       { path: 'perfil', loadChildren: './perfil/perfil.module#PerfilModule', canActivate: [AuthGuard] },
       { path: 'reset/:email/:token', component: ResetSenhaComponent },
       { path: '', redirectTo: 'login', pathMatch: 'full' },

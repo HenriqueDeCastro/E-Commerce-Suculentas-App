@@ -39,7 +39,7 @@ export class RegisterComponent implements OnInit {
     this.DadosForm = this.fb.group({
       fullname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(70)]],
       cpf: ['', [Validators.required, Validators.minLength(11), Validators.maxLength(11)]],
-      dataNascimento: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]]
+      dataNascimento: ['', [Validators.minLength(10), Validators.maxLength(10)]]
     });
   }
 

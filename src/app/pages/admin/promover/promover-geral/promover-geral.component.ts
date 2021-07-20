@@ -21,6 +21,7 @@ export class PromoverGeralComponent implements OnInit {
 
   public Roles: IRole[] = [];
   public Users: IUserByRole[] = [];
+  public Carregou: boolean = false;
 
   constructor(private authService: AuthService,
               private roleService: RoleService,
@@ -65,6 +66,7 @@ export class PromoverGeralComponent implements OnInit {
     });
 
     this.progressBarService.Mostrar(false);
+    this.Carregou = true;
   }
 
   OpenDialog(user: IUser, rolename: string): void {

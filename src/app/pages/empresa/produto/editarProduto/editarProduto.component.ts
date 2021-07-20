@@ -174,13 +174,12 @@ export class EditarProdutoComponent implements OnInit {
   UploadFotos(): void {
     const data = this.horario.RetornaDataAtualParaNome();
     this.NomeArquivo = `${this.InformacoesForm.value.nome}_${data}`;
-    const nomeArquivoMini = `Mini_${this.NomeArquivo}`;
     this.file = this.renomear.RenomearArquivo(this.file, this.NomeArquivo);
-    this.fileMini = this.renomear.RenomearArquivo(this.fileMini, nomeArquivoMini);
+    this.fileMini = this.renomear.RenomearArquivo(this.fileMini, this.NomeArquivo);
 
-    this.produtoService.postUpload(this.file).subscribe(
+    this.produtoService.postUpload(this.file, false).subscribe(
       () => {
-        this.produtoService.postUpload(this.fileMini).subscribe(
+        this.produtoService.postUpload(this.fileMini, true).subscribe(
           () => {
             this.UpdateProduto();
           },

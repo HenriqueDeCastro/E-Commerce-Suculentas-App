@@ -64,6 +64,25 @@
   pointer-events: none !important;
 }
 
+p, li {
+  font-family:Verdana, Geneva, Tahoma, sans-serif !important;
+  text-align: justify;
+}
+
+ol>li {
+  padding:0 0 0 2em;
+  text-indent:-1.5em;
+  list-style-type:none;
+  counter-increment:item;
+  margin-bottom: 0.5em;
+}
+
+ol>li:before {
+  color: var(--verde);
+  text-align:right;
+  content:counter(item) ".";
+}
+
 @media (max-width: 600px)
 {
   .btn-responsive {

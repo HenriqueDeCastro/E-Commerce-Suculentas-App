@@ -39,9 +39,9 @@ export class DadosPessoaisEditComponent implements OnInit {
   ValidationDados(user: IUser): void {
     this.DadosForm = this.fb.group({
       fullname: [{value: user.fullName, disabled: false}, [Validators.required, Validators.minLength(3), Validators.maxLength(70)]],
-      cpf: [{value: user.cpf, disabled: false}, [Validators.required, Validators.minLength(11), Validators.maxLength(11)]],
-      dataNascimento: [{value: user.dataNascimento, disabled: false}, [Validators.required, Validators.minLength(10)]]
+      cpf: [{value: user.cpf, disabled: false}, [Validators.required, Validators.minLength(11), Validators.maxLength(11)]]
     });
+    // dataNascimento: [{value: user.dataNascimento, disabled: false}, [Validators.required, Validators.minLength(10)]]
   }
 
   ValidationContatos(user: IUser): void {
@@ -77,10 +77,10 @@ export class DadosPessoaisEditComponent implements OnInit {
         id: user.id,
         fullName: this.DadosForm.value.fullname,
         cpf: this.DadosForm.value.cpf,
-        dataNascimento: `${this.DadosForm.value.dataNascimento}`,
         phoneNumber: this.ContatosForm.value.phoneNumber,
         email: this.Email
       };
+      //dataNascimento: `${this.DadosForm.value.dataNascimento}`,
 
       this.authService.Put(this.User).subscribe(
         () => {

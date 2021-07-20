@@ -30,7 +30,7 @@
       </mat-form-field>
       <br>
       <br>
-      <mat-form-field appearance="fill" class="w-100">
+      <!-- <mat-form-field appearance="fill" class="w-100">
         <mat-label> Data de nascimento <span class="asteristico-obrigatorio">*</span></mat-label>
         <input matInput formControlName="dataNascimento" [dropSpecialCharacters]="false" mask="00/00/0000">
         <mat-icon class="material-icons-outlined" matSuffix>cake</mat-icon>
@@ -39,7 +39,7 @@
         <mat-error *ngIf="DadosForm.get('dataNascimento').hasError('maxlength')" class="invalid-feedback">Valor inserido não confere como data valida 2</mat-error>
       </mat-form-field>
       <br>
-      <br>
+      <br> -->
       <div class="form-group col-md-12 centralizar">
         <button mat-button matStepperNext class="btn-responsive" color="primary" [disabled]=!DadosForm.valid>Próximo</button>
       </div>

@@ -13,10 +13,6 @@
     <ng-container *ngIf="Roles.length == 0">
       <h2 class="titulo centralizar">Adicionar Admin e Empresa:</h2>
       <br>
-      <ng-container *ngIf="Registrando">
-        <app-progressbar></app-progressbar>
-      </ng-container>
-      <br>
       <div class="form-group col-md-12 centralizar">
         <button mat-flat-button class="btn-responsive" color="primary" [disabled]="Registrando" (click)="Registrar()">Adicionar</button>
       </div>

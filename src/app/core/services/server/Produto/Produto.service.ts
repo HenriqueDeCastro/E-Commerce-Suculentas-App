@@ -25,9 +25,10 @@ export class ProdutoService {
     return this.http.post<IProduto>(`${this.UrlBase}`, produto);
   }
 
-  postUpload(file: File) {
+  postUpload(file: File, mini: boolean) {
     const formData = new FormData();
     formData.append('file', file, file.name);
+    formData.append('mini', String(mini));
 
     return this.http.post(`${this.UrlBase}/upload`, formData);
   }

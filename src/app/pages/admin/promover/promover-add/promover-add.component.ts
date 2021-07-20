@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/server/Auth/Auth.service';
 import { RoleService } from 'src/app/core/services/server/Role/Role.service';
 import { MensagensService } from 'src/app/core/services/shared/Mensagens/Mensagens.service';
+import { ProgressBarService } from 'src/app/core/services/shared/ProgressBar/ProgressBar.service';
 import { SnackbarService } from 'src/app/core/services/shared/Snackbar/Snackbar.service';
 import { IRole } from 'src/app/shared/models/IRole';
 import { IUser } from 'src/app/shared/models/IUser';
@@ -28,6 +29,7 @@ export class PromoverAddComponent implements OnInit {
               private fb: FormBuilder,
               public router: Router,
               private snackbar: SnackbarService,
+              private progressBarService: ProgressBarService,
               private mensagemSnackbar: MensagensService) { }
 
   ngOnInit() {
@@ -37,8 +39,10 @@ export class PromoverAddComponent implements OnInit {
   }
 
   ReceberRoles(): void {
+    this.progressBarService.Mostrar(true);
     this.roleService.GetRole().subscribe((roles: IRole[]) => {
       this.Roles = roles
+      this.progressBarService.Mostrar(false);
     },
     error => {
       const erro = error.error;
@@ -92,6 +96,7 @@ export class PromoverAddComponent implements OnInit {
 
   Promover() {
     if(this.User && this.RoleForm.valid) {
+      this.progressBarService.Mostrar(true);
       this.RealizandoCadastro = true;
       const userRole: IUserRole = {
         email: this.User.email,
@@ -100,12 +105,14 @@ export class PromoverAddComponent implements OnInit {
       };
       this.roleService.UpdateUserRole(userRole).subscribe(() => {
         this.RealizandoCadastro = false;
+        this.progressBarService.Mostrar(false);
         this.snackbar.OpenSnackBarSuccess(this.mensagemSnackbar.CadastroConcluido);
         this.router.navigate(['/admin/promover/geral']);
       },
       erro => {
         console.error(erro);
         this.RealizandoCadastro = false;
+        this.progressBarService.Mostrar(false);
         this.snackbar.OpenSnackBarError(this.mensagemSnackbar.ErroServidor);
       }
     );

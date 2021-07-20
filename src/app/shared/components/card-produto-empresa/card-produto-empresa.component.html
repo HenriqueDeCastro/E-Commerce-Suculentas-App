@@ -1,5 +1,5 @@
 <mat-card class="mat-elevation-z0" (click)="Navegar(produto.id, produto.nome)">
-  <img mat-card-image src="{{link}}/resources/Mini_{{produto.imagem}}" alt="{{produto.nome}}">
+  <img mat-card-image src="{{link}}/resources/Mini/{{produto.imagem}}" alt="{{produto.nome}}">
     <mat-card-header>
       <mat-card-title class="quebra-linha-texto titulo">{{produto.nome}}</mat-card-title>
       <mat-card-title *ngIf="produto.tipoProdutoId == IdEstoque" style="font-size: 14px;" class="{{ColorEstoque(produto.estoque)}}">Estoque: {{produto.estoque}}</mat-card-title>
