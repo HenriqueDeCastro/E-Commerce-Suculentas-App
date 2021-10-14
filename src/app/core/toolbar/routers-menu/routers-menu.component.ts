@@ -27,7 +27,7 @@ export class RoutersMenuComponent implements OnInit {
     this.mobile = this.deviceService.itsMobile();
   }
 
-  navegar(event: MouseEvent, link: string): void {
+  nav(event: MouseEvent, link: string): void {
     if(this.mobile) {
       this.bottomSheet.dismiss();
     }
