@@ -1,0 +1,54 @@
+<ng-container *ngIf="mobile">
+  <h1 class="mt-2 title text-center">Menu</h1>
+</ng-container>
+
+<mat-nav-list>
+
+  <mat-list-item (click)="nav($event, '/products')">
+    <mat-icon class="material-icons-outlined dark-blue-material" mat-list-icon>local_offer</mat-icon>
+    <div mat-line>Produtos</div>
+    <div mat-line>Produtos feitos com carinho para você</div>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+
+  <ng-container>
+    <mat-list-item (click)="nav($event, '/company')">
+      <mat-icon class="material-icons-outlined red-material" mat-list-icon>store_mall_directory</mat-icon>
+      <div mat-line>Empresa</div>
+      <div mat-line>Gerenciar informações do site</div>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+  </ng-container>
+
+  <ng-container>
+    <mat-list-item (click)="nav($event, '/admin')">
+      <mat-icon class="material-icons-outlined yellow-material" mat-list-icon>vpn_key</mat-icon>
+      <div mat-line>Admin</div>
+      <div mat-line>Gerenciar informações sensiveis</div>
+    </mat-list-item>
+  <mat-divider></mat-divider>
+  </ng-container>
+
+  <ng-container *ngIf="loggedIn; else login">
+    <mat-list-item (click)="nav($event, '/profile')">
+      <mat-icon class="material-icons-outlined green-material" mat-list-icon>account_circle</mat-icon>
+      <div mat-line>Perfil</div>
+      <div mat-line>Confira suas compras e dados pessoais</div>
+    </mat-list-item>
+  </ng-container>
+
+  <ng-template #login>
+    <mat-list-item (click)="nav($event, '/user/login')">
+      <mat-icon class="material-icons-outlined green-material" mat-list-icon>account_circle</mat-icon>
+      <div mat-line class="">Login</div>
+      <div mat-line >Entre no site ou faça seu cadastro</div>
+    </mat-list-item>
+  </ng-template>
+
+  <mat-divider></mat-divider>
+  <mat-list-item (click)="nav($event, 'about')">
+    <mat-icon class="material-icons-outlined blue-material" mat-list-icon>info</mat-icon>
+    <div mat-line>Sobre</div>
+    <div mat-line>Vem descobrir quem somos</div>
+  </mat-list-item>
+</mat-nav-list>

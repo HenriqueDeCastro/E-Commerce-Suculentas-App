@@ -1,18 +1,19 @@
-import { IVenda } from './IVenda';
-import { IEndereco } from './IEndereco';
-import { IUserRole } from './IUserRole';
+import { IAddress } from "./iaddress";
+import { IUserRole } from "./iuser-role";
+import { ISale } from "./isale";
 
 export interface IUser {
-
   id?: number
-  fullName: string;
+  fullName?: string;
   password?: string;
-  cpf: string;
-  dataNascimento?: string;
-  phoneNumber: string;
-  email: string;
+  cpf?: string;
+  acceptTerms?: boolean;
+  birthDate?: string;
+  phoneNumber?: string;
+  email?: string;
   confirmedPassword?: string;
-  vendas?: IVenda[];
-  enderecos?: IEndereco[];
+  role?: string[];
+  vendas?: ISale[];
+  enderecos?: IAddress[];
   userRoles?: IUserRole[];
 }

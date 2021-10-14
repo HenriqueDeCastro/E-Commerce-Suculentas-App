@@ -1,0 +1,38 @@
+// mat-step
+.mat-stepper-horizontal, .mat-stepper-vertical  {
+  background-color: transparent !important;
+}
+
+.mat-step-header {
+  pointer-events: none !important;
+}
+
+// mat-checkbox
+.mat-checkbox-layout{
+  white-space: normal !important;
+}
+
+.mat-checkbox-inner-container{
+  margin-top: 4px;
+}
+
+// snackbar
+.snackbar-success {
+  background-color: var(--green-material) !important;
+  color: white !important;
+  text-align: center !important;
+}
+
+.snackbar-error {
+  background-color: var(--red-material) !important;
+  color: white !important;
+  text-align: center !important;
+}
+
+.mat-snack-bar-container {
+  text-align: center;
+}
+
+.mat-simple-snackbar {
+  display: inline-block !important;
+}

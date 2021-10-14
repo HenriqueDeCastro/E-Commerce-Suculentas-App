@@ -1,0 +1,9 @@
+<div class="text-center">
+  <button mat-icon-button color color="warn" class="btn-less mat-elevation-z0" (click)="decreaseQuantity()" [disabled]="quantity <= 1">
+    <mat-icon class="material-icons-outlined">remove_circle_outline</mat-icon>
+  </button>
+  <button mat-icon-button class="btn-quantity mat-elevation-z0" style="font-size: 17px;">{{quantity}}</button>
+  <button mat-icon-button color="primary" class="btn-more mat-elevation-z0" (click)="increaseQuantity()" [disabled]="quantity >= maximumQuantity">
+    <mat-icon class="material-icons-outlined">add_circle_outline</mat-icon>
+  </button>
+</div>

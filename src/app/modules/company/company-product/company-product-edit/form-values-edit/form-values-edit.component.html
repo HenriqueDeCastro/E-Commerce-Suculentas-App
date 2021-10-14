@@ -1,0 +1,33 @@
+<form [formGroup]="valuesForm" (ngSubmit)="return()" autocomplete="off">
+  <mat-form-field  appearance="fill" class="w-100 mt-4">
+    <mat-label>Preço <span class="red-material">*</span></mat-label>
+    <input matInput formControlName="price"  mask="separator.2" separatorLimit="1000"  step=".01" >
+    <mat-error *ngIf="valuesForm.get('price')?.errors?.required">Preço é obrigatório</mat-error>
+  </mat-form-field>
+
+  <mat-form-field  appearance="fill" class="w-100 mt-4">
+    <mat-label>Estoque <span class="red-material">*</span></mat-label>
+    <input type="number" matInput formControlName="inventory">
+    <mat-error *ngIf="valuesForm.get('inventory')?.errors?.required">Estoque é obrigatório</mat-error>
+  </mat-form-field>
+
+  <mat-form-field  appearance="fill" class="w-100 mt-4">
+    <mat-label>Quantidade Maxima de Encomenda <span class="red-material">*</span></mat-label>
+    <input type="number" matInput formControlName="maximumQuantity">
+    <mat-error *ngIf="valuesForm.get('maximumQuantity')?.errors?.required">Quantidade Maxima é obrigatório</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="w-100 mt-4">
+    <mat-label>Ativo <span class="red-material">*</span></mat-label>
+    <mat-select formControlName="active">
+      <ng-container *ngFor="let option of options">
+        <mat-option [value]="option">{{option? 'Sim': 'Não'}}</mat-option>
+      </ng-container>
+    </mat-select>
+  </mat-form-field>
+
+  <div class="form-group col-md-12 text-center mt-4">
+    <button mat-button matStepperPrevious class="w-50" color="warn">Anterior</button>
+    <button mat-button matStepperNext class="w-50" color="primary" [disabled]="disableBtn">{{txtBtn}}</button>
+  </div>
+</form>

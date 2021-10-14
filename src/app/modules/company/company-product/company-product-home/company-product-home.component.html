@@ -1,0 +1,23 @@
+<ng-container>
+  <app-btn-router-back url="/company"></app-btn-router-back>
+
+  <app-title-button-add
+  [title]="'Produtos'"
+  [route]="'/company/product/add'">
+  </app-title-button-add>
+
+  <div class="mt-9">
+    <ng-container *ngIf="categorys; else emptyCategorys">
+      <app-home-products
+        [categorys]="categorys"
+        [company]=true
+        [productTypes]="productTypes">
+      </app-home-products>
+    </ng-container>
+    <ng-template #emptyCategorys>
+      <h3 class="title text-center mt-4 mb-4">Não foram cadastradas <span class="green-material">Categorias</span> de produtos</h3>
+    </ng-template>
+
+  </div>
+
+</ng-container>

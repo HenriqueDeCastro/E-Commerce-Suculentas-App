@@ -1,0 +1,66 @@
+<ng-container *ngIf="user$ | async as user">
+  <h1 class="title">Bem vindo(a), <span class="green-material">{{user.fullName}}.</span></h1>
+  <h1 class="title">O que deseja fazer hoje?</h1>
+  <br>
+  <br>
+  <mat-list>
+
+    <!-- CATALOGO -->
+    <div mat-subheader>Catálogo</div>
+    <mat-list-item  class="cursor-pointer" [routerLink]="['/company/category']">
+      <mat-icon class="material-icons-outlined" mat-list-icon>category</mat-icon>
+      <div mat-line>Categorias</div>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item class="cursor-pointer" [routerLink]="['/company/product']">
+      <mat-icon class="material-icons-outlined" mat-list-icon>local_offer</mat-icon>
+      <div mat-line>Produtos</div>
+    </mat-list-item>
+
+    <!-- VENDAS -->
+    <mat-list>
+      <div mat-subheader>Compras</div>
+      <mat-list-item class="cursor-pointer">
+        <mat-icon matBadge="" class="material-icons-outlined" mat-list-icon>credit_card</mat-icon>
+        <div mat-line>Aguardando Pagamento</div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item class="cursor-pointer">
+        <mat-icon matBadge="" class="material-icons-outlined" mat-list-icon>departure_board</mat-icon>
+        <div mat-line>Aguardando Envio</div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item class="cursor-pointer">
+        <mat-icon matBadge="" class="material-icons-outlined" mat-list-icon>local_shipping</mat-icon>
+        <div mat-line>Enviadas</div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item class="cursor-pointer">
+        <mat-icon matBadge="" class="material-icons-outlined" mat-list-icon>check</mat-icon>
+        <div mat-line>Finalizadas</div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item class="cursor-pointer">
+        <mat-icon matBadge="" class="material-icons-outlined" mat-list-icon>cancel</mat-icon>
+        <div mat-line>Canceladas</div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item class="cursor-pointer">
+        <mat-icon matBadge="" class="material-icons-outlined" mat-list-icon>shield</mat-icon>
+        <div mat-line>Em Disputa</div>
+      </mat-list-item>
+    </mat-list>
+
+    <!-- OPERAÇÔES -->
+    <div mat-subheader>Operações</div>
+    <mat-list-item class="cursor-pointer" [routerLink]="['/company/manual-freight']">
+      <mat-icon class="material-icons-outlined" mat-list-icon>travel_explore</mat-icon>
+      <div mat-line>Frete Manual</div>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item class="cursor-pointer">
+      <mat-icon class="material-icons-outlined" mat-list-icon>savings</mat-icon>
+      <div mat-line>Finanças</div>
+    </mat-list-item>
+  </mat-list>
+</ng-container>

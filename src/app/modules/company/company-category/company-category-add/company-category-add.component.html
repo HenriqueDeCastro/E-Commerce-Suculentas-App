@@ -1,0 +1,21 @@
+<app-btn-router-back url="/company/category/home"></app-btn-router-back>
+
+<h1 class="title mt-5 mb-5">Adicionar Categoria</h1>
+
+<app-required-fields></app-required-fields>
+
+<form [formGroup]="categoryForm" (ngSubmit)="register()" autocomplete="off">
+  <mat-form-field appearance="fill" class="w-100 mt-4">
+    <mat-label>Nome <span class="red-material">*</span></mat-label>
+    <input matInput formControlName="name">
+    <mat-error *ngIf="categoryForm.get('name')?.errors?.required">Nome é obrigatório</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="w-100 mt-4">
+    <mat-label>Descrição <span class="red-material">*</span></mat-label>
+    <textarea matInput formControlName="description"></textarea>
+    <mat-error *ngIf="categoryForm.get('description')?.errors?.required">Descrição é obrigatória</mat-error>
+  </mat-form-field>
+
+  <app-btn-responsive [disable]="disableBtn" [txt]="txtBtn"></app-btn-responsive>
+</form>

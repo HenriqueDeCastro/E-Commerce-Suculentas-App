@@ -1,0 +1,44 @@
+<app-btn-router-back url="/company"></app-btn-router-back>
+
+<h1 class="title mt-5">Frete Manual</h1>
+
+<ng-container *ngIf="!shippingValues">
+  <form [formGroup]="shippingForm" (ngSubmit)="calculateShipping()" autocomplete="off">
+    <mat-form-field  appearance="fill" class="w-100">
+      <mat-label>CEP</mat-label>
+      <input matInput formControlName="cep" mask="00000-000">
+      <mat-error *ngIf="shippingForm.get('cep')?.errors?.required">CEP é obrigatório</mat-error>
+      <mat-error *ngIf="shippingForm.get('cep')?.errors?.minlength">Insira um CEP valido</mat-error>
+    </mat-form-field>
+  </form>
+  <br>
+  <button mat-flat-button color=primary class="w-100" (click)="calculateShipping()" [disabled]=calculating>{{textBtn}}</button>
+</ng-container>
+
+<ng-container *ngIf="shippingValues">
+  <mat-list>
+    <ng-container *ngFor="let value of shippingValues;let i = index">
+      <app-list-dinamic [total]="shippingValues.length" [index]="i">
+        <mat-list-item>
+          <mat-icon
+            class="material-icons-outlined"
+            [ngClass]="
+              {
+                'yellow-material': value.company.name == 'Correios',
+                'red-material': value.company.name == 'Jadlog'
+              }"
+            mat-list-icon>
+            local_shipping
+          </mat-icon>
+          <div mat-line class="negrito">{{value.company.name}} - {{value.name}}</div>
+          <div mat-line *ngIf="value.price" class="font-bold">Valor do frete é de: {{value.price | currency}}</div>
+          <div mat-line *ngIf="!value.price" class="font-bold">{{value.error}}</div>
+        </mat-list-item>
+      </app-list-dinamic>
+    </ng-container>
+  </mat-list>
+
+  <div class="w-100 text-center">
+    <button mat-button color=primary type="button" class="w-50 text-center mt-5" (click)="clearShipping()">Consultar outro CEP ?</button>
+  </div>
+</ng-container>

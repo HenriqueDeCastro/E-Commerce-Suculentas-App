@@ -1,0 +1,27 @@
+<mat-card class="mat-elevation-z0 w-100 mt-4" >
+  <img mat-card-image src="{{urlImage}}{{product.image}}" alt="{{product.name}}" (click)="navigation()">
+    <mat-card-header (click)="navigation()">
+      <mat-card-title class="break-line title font-bold">{{product.name}}</mat-card-title>
+      <mat-card-title
+        *ngIf="type && type.name == types.inventory && company"
+        [ngClass]="{'green-material': product.inventory! > 5,
+                    'yellow-material': product.inventory! > 2 && product.inventory! < 5,
+                    'red-material': product.inventory! < 2}"
+        class="font-bold">
+        Estoque: {{product.inventory}}
+      </mat-card-title>
+      <mat-card-title
+        *ngIf="type && type.name == types.order && company" class="blue-material font-bold">
+        Encomenda: {{product.maximumQuantity}}
+      </mat-card-title>
+      <mat-card-subtitle>{{product.price | currency}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <app-btn-cart
+        typeBtn="transparent"
+        [quantity]="1"
+        [product]="product"
+        [productTypes]="productTypes"
+        [back]="false">
+    </app-btn-cart>  </mat-card-content>
+</mat-card>

@@ -1,0 +1,46 @@
+<app-btn-back></app-btn-back>
+
+<ng-container *ngIf="!product || !product.active; else active">
+  <app-not-found></app-not-found>
+</ng-container>
+
+<ng-template #active>
+  <ng-container *ngIf="mobile">
+    <h1 class="title text-center mt-4 mb-4">{{product.name}}</h1>
+  </ng-container>
+
+  <div class="row mt-5">
+
+    <div class="col-sm-5">
+      <div class="col-img">
+        <img src="{{urlImage}}{{product.image}}" alt="{{product.name}}" class="img">
+      </div>
+      <div class="mt-4">
+        <app-alert-warning text="
+          Os produtos do site são reais e tentamos sempre enviar o mais idêntico possível da foto disposta,
+          mas cada ítem é único, sendo assim natural a variabilidade de tamanho ou coloração.">
+        </app-alert-warning>
+      </div>
+
+      <ng-container *ngIf="productCart">
+        <app-alert-info text="
+          Você já adicionou '{{productCart.quantityOrder}} {{productCart.name}}' ao carrinho!">
+        </app-alert-info>
+      </ng-container>
+    </div>
+
+    <div class="col-sm-7">
+      <app-list-product
+        [product]="product"
+        [productTypes]="productTypes"
+        [mobile]="mobile"
+        [quantity]="quantity"
+        [maximumQuantity]="maximumQuantity"
+        [type]="type">
+      </app-list-product>
+    </div>
+  </div>
+
+</ng-template>
+
+

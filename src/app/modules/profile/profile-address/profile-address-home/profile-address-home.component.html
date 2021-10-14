@@ -1,0 +1,51 @@
+<app-btn-router-back url="/profile"></app-btn-router-back>
+
+<ng-container *ngIf="addresses?.length! > 0; else emptyAddress">
+  <app-title-button-add
+    title="Seus Endereços"
+    route="/profile/address/add">
+  </app-title-button-add>
+
+  <mat-list class="mt-9">
+    <ng-container *ngFor="let address of addresses;let i = index">
+      <app-list-dinamic [total]="addresses.length" [index]="i">
+        <mat-list-item>
+
+          <mat-icon [matMenuTriggerFor]="menu" class="cursor-pointer">more_vert</mat-icon>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="navigateEdit(address.id!)">
+              <mat-icon color=accent>edit</mat-icon>
+              <span>Editar</span>
+            </button>
+            <button mat-menu-item (click)="defineDevice(address.id!)">
+              <mat-icon color=warn>delete_outline</mat-icon>
+              <span>Apagar</span>
+            </button>
+          </mat-menu>
+
+          <div mat-line class="font-bold">{{address.description?? address.road}}</div>
+          <div mat-line class="font-bold">{{address.road}}, {{address.number}} - {{address.district}}</div>
+          <div mat-line>{{address.city}} - {{address.state}}</div>
+        </mat-list-item>
+      </app-list-dinamic>
+    </ng-container>
+  </mat-list>
+
+</ng-container>
+
+<ng-template #emptyAddress>
+  <h1 class="title mt-5">Meus Endereços</h1>
+
+  <div class="mt-5">
+    <h2 class="title text-center">Você ainda não tem nenhum endereço cadastrado!</h2>
+
+    <div class="mt-5">
+      <app-btn-responsive
+        txt="Adicionar"
+        color="primary"
+        (click)="navigateAdd()">
+      </app-btn-responsive>
+    </div>
+  </div>
+</ng-template>
+

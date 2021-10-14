@@ -1,0 +1,27 @@
+<ng-container *ngIf="roles">
+  <app-btn-router-back url="/admin"></app-btn-router-back>
+    <app-title-button-add
+      [title]="'Roles'"
+      [route]="'/admin/roles/add'">
+    </app-title-button-add>
+
+    <ng-container *ngIf="roles.length == 0; else existsRoles">
+      <app-initialize-roles></app-initialize-roles>
+    </ng-container>
+
+    <ng-template #existsRoles>
+      <mat-list class="mt-9 mb-5">
+        <ng-container *ngFor="let role of roles; let i = index">
+          <app-list-dinamic [total]="roles.length" [index]="i">
+            <mat-list-item>
+              <mat-icon class="material-icons-outlined" mat-list-icon>group</mat-icon>
+              <div mat-line class="font-bold">{{role.name}}</div>
+              <div mat-line>ID: {{role.id}}</div>
+            </mat-list-item>
+          </app-list-dinamic>
+        </ng-container>
+      </mat-list>
+    </ng-template>
+
+</ng-container>
+

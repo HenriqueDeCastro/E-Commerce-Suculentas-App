@@ -1,0 +1,16 @@
+<form [formGroup]="roleForm" (ngSubmit)="return()" autocomplete="off">
+  <mat-form-field appearance="fill" class="w-100">
+    <mat-label>Funções <span class="red-material">*</span></mat-label>
+    <mat-select formControlName="roles">
+      <mat-option *ngFor="let role of roles" [value]="role.name">
+        {{role.name}}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="roleForm.get('roles')?.errors?.required">Função é obrigatória</mat-error>
+  </mat-form-field>
+  <br>
+  <div class="form-group col-md-12 text-center mt-4">
+    <button mat-button matStepperPrevious class="w-50" color="warn">Anterior</button>
+    <button mat-button matStepperNext class="w-50" color="primary" [disabled]="disableBtn">{{txtBtn}}</button>
+  </div>
+</form>

@@ -1,0 +1,59 @@
+<ng-container *ngIf="roles">
+
+  <app-btn-router-back url="/admin/home"></app-btn-router-back>
+
+  <app-title-button-add
+    [title]="'Promover'"
+    [route]="'/admin/promotion/add'">
+  </app-title-button-add>
+
+  <ng-container *ngIf="roles.length > 0; else emptyRoles">
+    <mat-list class="mt-9">
+      <ng-container *ngFor="let role of roles; let i = index">
+        <div mat-subheader color=primary>{{role.roleName}}</div>
+
+        <ng-container *ngIf="role.users.length > 0; else emptyUsers">
+          <ng-container *ngFor="let user of role.users; let i = index">
+            <app-list-dinamic [total]="role.users.length" [index]="i">
+            <mat-list-item>
+              <div mat-line class="font-bold">{{user.fullName}}</div>
+              <div mat-line>{{user.cpf}}</div>
+              <div mat-line>{{user.email}}</div>
+              <button mat-icon-button (click)="openDialog(role.roleName, user.email)">
+                <mat-icon class="material-icons-outlined red-material">
+                  delete
+                </mat-icon>
+              </button>
+            </mat-list-item>
+          </app-list-dinamic>
+          </ng-container>
+        </ng-container>
+
+        <ng-template #emptyUsers>
+          <mat-list-item>
+            <div mat-line class="font-bold text-center">Não há usuários com esse perfil de acesso</div>
+          </mat-list-item>
+        </ng-template>
+
+      </ng-container>
+    </mat-list>
+  </ng-container>
+
+  <ng-template #emptyRoles>
+    <div class="mt-12 text center">
+      <app-alert-warning
+       text="Não há roles cadastradas ">
+      </app-alert-warning>
+      <button
+        mat-button
+        type="button"
+        class="w-100 mt-3 text-center"
+        color="primary"
+        [routerLink]="(['/admin/roles/add'])">
+        Cadastre aqui
+      </button>
+    </div>
+  </ng-template>
+
+</ng-container>
+

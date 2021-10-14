@@ -1,0 +1,27 @@
+.container-title {
+  position: relative;
+  width: 100%;
+}
+
+.h1-btn {
+  position: absolute;
+  left: 0;
+  top: 0;
+  max-width: 55%;
+  overflow: hidden
+}
+
+.btn-title {
+  position: absolute;
+  right: 0;
+  top: 0;
+  text-align: right;
+  max-width: 50%;
+  overflow: hidden;
+  display: inline-flex;
+}
+
+.mat-icon {
+  padding-top: 0.2rem;
+  margin-left: 1rem;
+}

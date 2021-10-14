@@ -1,0 +1,24 @@
+<app-btn-router-back url="/admin/roles"></app-btn-router-back>
+
+<h1 class="title mt-5">Adicionar Roles</h1>
+
+<div class="mt-4">
+  <app-required-fields></app-required-fields>
+</div>
+
+<form class="mt-5" [formGroup]="roleForm" (ngSubmit)="registrar()" autocomplete="off">
+  <mat-form-field appearance="fill" class="w-100">
+    <mat-label>Nome <span class="red-material">*</span></mat-label>
+    <input matInput formControlName="name">
+    <mat-icon class="material-icons-outlined" matSuffix >article</mat-icon>
+    <mat-error *ngIf="roleForm.get('name')?.errors?.required">Nome é obrigatório</mat-error>
+  </mat-form-field>
+
+  <app-btn-responsive
+    [txt]="txtBtn"
+    [disable]="disableBtn"
+    color="primary"
+    (click)="registrar()">
+  </app-btn-responsive>
+
+</form>

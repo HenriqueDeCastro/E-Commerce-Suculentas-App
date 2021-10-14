@@ -1,48 +1,15 @@
 @import '~@angular/material/theming';
 @include mat-core();
 
-@font-face {
-  font-family: "Bakerie";
-  display: block;
-  src: local("Bakerie"), url(./assets/fonts/bakerie-woff/BakerieRoughWide-Medium.woff) format("woff");
-}
-
-.wf-bakerie-n4-loading .titulo-site {
-  display: none;
-}
-
-@import '~./app/shared/SCSS/botoes';
-@import '~./app/shared/SCSS/custom-theme';
-@import '~./app/shared/SCSS/icons';
-@import '~./app/shared/SCSS/list';
-@import '~./app/shared/SCSS/mat-accordion';
-@import '~./app/shared/SCSS/mat-card';
-@import '~./app/shared/SCSS/pagination';
-@import '~./app/shared/SCSS/snackbar';
-@import '~./app/shared/SCSS/titulos';
-@import '~./app/shared/SCSS/utils';
-
 html, body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif !important;
 }
 
-:root {
-  --verde: #77bfa3;
-  --verde-claro: #80ed99;
-  --vermelho: #ff686b;
-  --azul: #80a1d4;
-  --azul-escuro: #338896;
-  --amarelo: #fcbf49;
-  --amarelo-queimado: #eead2d;
-  --laranja: #ffa62b;
-  --cinza-fundo: #f8f9fa;
-  --cinza-linha-toolbar: #dee2e6;
-  --cinza-hover: #e9ecef;
-  --roxo: #9d4edd;
-  --rosa: #ffcbf2;
-  --marrom: #cb997e;
-}
-
+@import '~./assets/scss/colors.scss';
+@import '~./assets/scss/custom-elements-material.scss';
+@import '~./assets/scss/theme.scss';
+@import '~./assets/scss/titles.scss';
+@import '~./assets/scss/utils.scss';
 
 

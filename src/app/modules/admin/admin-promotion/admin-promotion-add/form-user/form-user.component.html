@@ -1,0 +1,40 @@
+<form [formGroup]="userForm" (ngSubmit)="searchUser()" autocomplete="off">
+
+  <mat-form-field appearance="fill" class="w-100">
+    <mat-label>E-mail <span class="red-material">*</span></mat-label>
+    <input matInput formControlName="email">
+    <mat-icon class="material-icons-outlined" matSuffix>alternate_email</mat-icon>
+    <mat-error *ngIf="userForm.get('email')?.errors?.email">Insira apenas e-mails validos</mat-error>
+    <mat-error *ngIf="userForm.get('email')?.errors?.required">E-mail é obrigatório</mat-error>
+  </mat-form-field>
+
+  <ng-container *ngIf="!user; else foundUser">
+    <button mat-flat-button class="w-100 mt-3" color="primary" [disabled]=disable>Pesquisar</button>
+  </ng-container>
+
+  <ng-template #foundUser>
+    <mat-form-field appearance="fill" class="w-100 mt-4">
+      <mat-label> Nome </mat-label>
+      <input matInput [value]=user?.fullName [disabled]=true>
+      <mat-icon class="material-icons-outlined" matSuffix>person</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-100 mt-4">
+      <mat-label> CPF </mat-label>
+      <input matInput [value]=user?.cpf [disabled]=true>
+      <mat-icon class="material-icons-outlined" matSuffix>article</mat-icon>
+    </mat-form-field>
+
+    <button mat-flat-button class="w-100 mt-4" color="accent" (click)="alterUser()">Alterar</button>
+  </ng-template>
+
+  <div class="form-group col-md-12 text-center mt-5">
+    <button mat-button matStepperNext
+      class="w-100"
+      color="primary"
+      (click)="return()"
+      [disabled]="!user">
+      Próximo
+    </button>
+  </div>
+</form>

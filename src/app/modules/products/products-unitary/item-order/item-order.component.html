@@ -1,0 +1,15 @@
+<mat-list-item class="height-matline">
+  <mat-icon class="material-icons-outlined burnt-yellow-material" mat-list-icon>timer</mat-icon>
+  <div mat-line class="line-break-matline font-bold burnt-yellow-material mt-2">Esse produto tem um prazo de entrega estimado em 30 dias</div>
+  <div mat-line class="line-break-matline mb-2">Compre com antecedência ;)</div>
+</mat-list-item>
+
+<!-- ENCOMENDAR -->
+<div mat-subheader class="black-material font-bold mt-3">Encomendar</div>
+<mat-list-item class="height-matline">
+  <mat-icon class="material-icons-outlined dark-blue-material" mat-list-icon>local_mall</mat-icon>
+  <div mat-line class="line-break-matline font-bold dark-blue-material mt-2">Vendemos {{product.name}} apenas por encomendas</div>
+  <div mat-line *ngIf="product.maximumQuantity == 1" class="line-break-matline dark-blue-material">Limite maximo de compras: {{product.maximumQuantity}} unidade</div>
+  <div mat-line *ngIf="product.maximumQuantity! > 1" class="line-break-matline dark-blue-material">Limite maximo de compras: {{product.maximumQuantity}} unidades</div>
+  <div mat-line class="line-break-matline mb-2">Selecione abaixo a quantidade que deseja reservar</div>
+</mat-list-item>

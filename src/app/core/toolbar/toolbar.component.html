@@ -1,0 +1,64 @@
+<div class="docs-app">
+
+  <!-- toolbar -->
+  <mat-toolbar class="toolbar-line docs-navbar-header">
+    <mat-toolbar-row>
+      <div class="mr-3">
+        <a [routerLink]="['']" class="title-webpage black-material">
+          Suculentas da Rô
+        </a>
+      </div>
+      <span class="space-icons"></span>
+
+      <ng-container *ngIf="quantity$ | async as quantity; else emptyQuantity">
+        <a [routerLink]="['cart']">
+          <button mat-icon-button>
+            <mat-icon [matBadge]="quantity" matTooltip="Carrinho" class="material-icons-outlined black-material">shopping_cart</mat-icon>
+          </button>
+        </a>
+      </ng-container>
+      <ng-template #emptyQuantity>
+        <a [routerLink]="['cart']">
+          <button mat-icon-button>
+            <mat-icon [matBadge]="" matTooltip="Carrinho" class="material-icons-outlined black-material">shopping_cart</mat-icon>
+          </button>
+        </a>
+      </ng-template>
+
+      <ng-container *ngIf="mobile; else pc">
+        <button mat-icon-button matTooltip="Menu" (click)="openBottomSheet()">
+          <mat-icon class="material-icons-outlined">menu</mat-icon>
+        </button>
+      </ng-container>
+      <ng-template #pc>
+        <button mat-icon-button (click)="sidenav.toggle()" class="btn-pc">
+          <ng-container *ngIf="!sidenav.opened; else sidenavFechado">
+            <mat-icon matTooltip="Menu">menu</mat-icon>
+          </ng-container>
+          <ng-template #sidenavFechado>
+            <mat-icon class="icon-fechar">clear</mat-icon>
+          </ng-template>
+        </button>
+      </ng-template>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <ng-content select="[progress-bar]"></ng-content>
+
+  <!-- sidenav -->
+  <mat-sidenav-container class="mat-drawer-container mat-sidenav-container docs-component-viewer-sidenav-container" hasBackdrop="true">
+    <mat-sidenav  #sidenav [autoFocus]="false" position="end" mode="side">
+      <ng-container *ngIf="sidenav.opened">
+        <app-routers-menu [inputSideNav]="sidenav"></app-routers-menu>
+      </ng-container>
+    </mat-sidenav>
+    <mat-sidenav-content class="mat-drawer-content mat-sidenav-content">
+      <div class="background-sidenav height-sidenav">
+        <div class="container">
+          <ng-content select="[body]"></ng-content>
+        </div>
+      </div>
+      <ng-content select="[footer]"></ng-content>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

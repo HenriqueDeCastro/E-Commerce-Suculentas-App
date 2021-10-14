@@ -1,0 +1,35 @@
+<ng-container *ngFor="let category of categorys">
+  <app-divide-dotted [categoryName]="category.name"></app-divide-dotted>
+
+  <ng-container *ngIf="category.products?.length === 0; else products">
+    <h3 class="title text-center mt-4 mb-4">
+      <span *ngIf="company">
+        Não foram cadastrados(as) <span class="green-material">{{category.name}}.</span>
+      </span>
+      <span *ngIf="!company">
+        Aguarde por novidades!
+      </span>
+    </h3>
+  </ng-container>
+  <ng-template #products>
+    <app-card-list-products
+      [products]="category.products"
+      [company]="company"
+      [productTypes]="productTypes">
+    </app-card-list-products>
+  </ng-template>
+
+  <ng-container *ngIf="category.products?.length! > 0">
+    <div class="text-center">
+      <button
+        mat-button
+        class="w-100 mb-4 mt-4"
+        color="accent"
+        [routerLink]="company? ['/company/product/', category.name, category.id] : ['/products/category', category.name, category.id]">
+        Ver Mais
+      </button>
+    </div>
+  </ng-container>
+
+</ng-container>
+

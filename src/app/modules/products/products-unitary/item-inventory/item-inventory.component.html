@@ -1,0 +1,5 @@
+<mat-list-item class="height-matline">
+  <mat-icon class="material-icons-outlined dark-blue-material" mat-list-icon>local_mall</mat-icon>
+  <div mat-line class="line-break-matline font-bold  dark-blue-material mt-2">Temos {{maximumQuantity == null || product?.inventory! <= 0? product?.inventory! : maximumQuantity}} {{product?.name}} em estoque</div>
+  <div mat-line class="line-break-matline mb-2">Selecione abaixo a quantidade que deseja levar</div>
+</mat-list-item>

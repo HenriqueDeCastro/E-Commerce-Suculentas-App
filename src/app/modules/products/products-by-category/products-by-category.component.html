@@ -1,0 +1,8 @@
+<app-btn-router-back url="/products"></app-btn-router-back>
+<ng-container *ngIf="category">
+  <app-products-category
+    [category]="category"
+    [productTypes]="productTypes">
+  </app-products-category>
+</ng-container>
+

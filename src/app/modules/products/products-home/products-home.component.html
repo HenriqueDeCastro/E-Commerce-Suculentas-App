@@ -1,0 +1,14 @@
+<h1 class="title">Produtos</h1>
+
+<div class="mt-5">
+  <ng-container *ngIf="categorys; else emptyCategorys">
+    <app-home-products
+      [categorys]="categorys"
+      [productTypes]="productTypes">
+    </app-home-products>
+  </ng-container>
+  <ng-template #emptyCategorys>
+    <h3 class="title text-center mt-4 mb-4">Aguarde por novidades!!!</h3>
+  </ng-template>
+
+</div>

@@ -1,0 +1,16 @@
+<ng-container *ngIf="typeBtn == 'solid'">
+  <div class="text-center">
+    <button mat-flat-button color="primary" class="w-100" [disabled]="disableBtn" (click)="placeCart()">
+      <mat-icon class="material-icons-outlined">add_shopping_cart</mat-icon>
+      Carrinho
+    </button>
+  </div>
+</ng-container>
+<ng-container *ngIf="typeBtn == 'transparent'">
+  <div class="text-center">
+    <button mat-button color="primary" class="w-100" [disabled]="disableBtn" (click)="placeCart()">
+      <mat-icon class="material-icons-outlined">add_shopping_cart</mat-icon>
+      Carrinho
+    </button>
+  </div>
+</ng-container>

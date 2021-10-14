@@ -1,0 +1,27 @@
+<form [formGroup]="contactsForm" (ngSubmit)="return()" autocomplete="off">
+
+  <app-alert-warning text="O e-mail não pode ser alterado por sua segurança"></app-alert-warning>
+
+  <mat-form-field appearance="fill" class="w-100">
+    <mat-label> Celular + DDD <span class="red-material">*</span></mat-label>
+    <input matInput formControlName="phoneNumber" mask="(00)00000-0000">
+    <mat-icon class="material-icons-outlined" matSuffix>phone_iphone</mat-icon>
+    <mat-error *ngIf="contactsForm.get('phoneNumber')?.errors?.required">Número é obrigatório</mat-error>
+    <mat-error *ngIf="contactsForm.get('phoneNumber')?.errors?.minlength">Número deve ter 11 numeros</mat-error>
+    <mat-error *ngIf="contactsForm.get('phoneNumber')?.errors?.maxlength">Número deve ter 11 numeros</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="w-100 mt-4">
+    <mat-label> E-mail <span class="red-material">*</span></mat-label>
+    <input matInput formControlName="email">
+    <mat-icon class="material-icons-outlined" matSuffix>alternate_email</mat-icon>
+    <mat-error *ngIf="contactsForm.get('email')?.errors?.email">Insira apenas e-mails validos</mat-error>
+    <mat-error *ngIf="contactsForm.get('email')?.errors?.required">E-mail é obrigatório</mat-error>
+  </mat-form-field>
+
+  <div class="form-group col-md-12 text-center mt-4">
+    <button mat-button matStepperPrevious class="w-50" color="warn">{{txtPrevious}}</button>
+    <button mat-button class="w-50" color="primary" [disabled]="disableBtn">{{textBtn}}</button>
+  </div>
+
+</form>

@@ -1,0 +1,27 @@
+<app-btn-router-back url="/profile/user"></app-btn-router-back>
+
+<h1 class="titulo mt-5">Editar Dados</h1>
+
+<div class="mt-3">
+  <mat-vertical-stepper [linear]="false" #stepper>
+
+  <mat-step [stepControl]="identificationForm" errorMessage="Sua identidicação é obrigatória">
+    <ng-template matStepLabel>Identificação</ng-template>
+    <div class="mt-3">
+      <app-form-identification (returnForm)="identificationFormValue($event)"></app-form-identification>
+    </div>
+  </mat-step>
+
+  <mat-step [stepControl]="contactsForm" errorMessage="Seus contatos são obrigatórios">
+    <ng-template matStepLabel>Contatos</ng-template>
+    <div class="mt-3">
+      <app-form-contact
+      (returnForm)="contactsFormValue($event)"
+      [textBtn]="txtBtn"
+      [disableBtn]="disableBtn">
+    </app-form-contact>
+    </div>
+  </mat-step>
+
+  </mat-vertical-stepper>
+</div>

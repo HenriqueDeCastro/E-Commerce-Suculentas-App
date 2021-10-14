@@ -1,0 +1,20 @@
+<ng-template matStepLabel>Informações</ng-template>
+<form [formGroup]="informationForm" (ngSubmit)="return()" autocomplete="off">
+  <mat-form-field  appearance="fill" class="w-100 mt-4">
+    <mat-label>Nome <span class="red-material">*</span></mat-label>
+    <input matInput formControlName="name">
+    <mat-error *ngIf="informationForm.get('name')?.errors?.required">Nome é obrigatório</mat-error>
+  </mat-form-field>
+
+  <mat-form-field  appearance="fill" class="w-100 mt-4">
+    <mat-label>Descrição <span class="red-material">*</span></mat-label>
+    <textarea matInput formControlName="description"></textarea>
+    <mat-error *ngIf="informationForm.get('description')?.errors?.required">Descrição é obrigatória</mat-error>
+  </mat-form-field>
+
+  <div class="form-group col-md-12 text-center mt-4">
+    <button mat-button matStepperPrevious class="w-50" color="warn">Anterior</button>
+    <button mat-button matStepperNext class="w-50" color="primary">Próximo</button>
+  </div>
+</form>
+

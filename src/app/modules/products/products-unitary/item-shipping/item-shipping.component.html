@@ -1,0 +1,31 @@
+<ng-container *ngIf="!valueShipping">
+  <mat-list-item class="height-matline mt-1">
+    <mat-icon class="material-icons-outlined blue-material" mat-list-icon>local_shipping</mat-icon>
+    <div mat-line class="line-break-matline font-bold blue-material mt-2">Informe o seu CEP:</div>
+    <div mat-line class="line-break-matline">
+      <br>
+      <form [formGroup]="shippingForm" (ngSubmit)="calculateShipping()" autocomplete="off">
+        <mat-form-field  appearance="fill" class="w-100" color="accent">
+          <mat-label>CEP</mat-label>
+          <input matInput formControlName="cep" mask="00000-000">
+          <mat-error *ngIf="shippingForm.get('cep')?.errors?.required">CEP é obrigatório</mat-error>
+          <mat-error *ngIf="shippingForm.get('cep')?.errors?.minlength">Insira um CEP valido</mat-error>
+        </mat-form-field>
+      </form>
+      <br>
+    </div>
+    <div mat-line class="line-break-matline">
+      <button mat-flat-button color="accent" class="w-100 mb-2 btn-calculate" (click)="calculateShipping()" [disabled]=disableBTn>{{txtBtn}}</button>
+    </div>
+  </mat-list-item>
+</ng-container>
+<ng-container *ngIf="valueShipping">
+  <mat-list-item class="height-matline mt-1">
+    <mat-icon class="material-icons-outlined blue-material" mat-list-icon>local_shipping</mat-icon>
+    <div mat-line class="line-break-matline font-bold blue-material mt-2">O frete é de {{valueShipping.price | currency}} para {{cepCookie | mask:'00000-000'}}</div>
+    <div mat-line class="line-break-matline">Entregue por {{valueShipping.company.name}}©</div>
+    <div mat-line class="line-break-matline font-bold blue-material cursor-pointer mb-2"><br>
+      <span (click)="cleanCEP()">Calcular para outro endereço ?</span>
+    </div>
+  </mat-list-item>
+</ng-container>

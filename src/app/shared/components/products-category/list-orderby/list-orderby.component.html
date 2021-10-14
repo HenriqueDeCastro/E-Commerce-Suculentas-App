@@ -1,0 +1,29 @@
+<br>
+<h1 class="title text-center">Ordenar por:</h1>
+<mat-nav-list>
+  <mat-list-item (click)="close(types.priceLower)">
+    <mat-icon class="material-icons-outlined blue-material" mat-list-icon>arrow_circle_up</mat-icon>
+    <div mat-line class="font-bold">Preço</div>
+    <div mat-line>Menor para maior</div>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+    <mat-list-item (click)="close(types.priceHigher)">
+      <mat-icon class="material-icons-outlined blue-material" mat-list-icon>arrow_circle_down</mat-icon>
+      <div mat-line class="font-bold">Preço</div>
+      <div mat-line>Maior para menor</div>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item (click)="close(types.alphabetical)">
+      <mat-icon class="material-icons-outlined blue-material" mat-list-icon>sort_by_alpha</mat-icon>
+      <div mat-line class="font-bold">Ordem alfabética</div>
+      <div mat-line>Da letra A a Z</div>
+    </mat-list-item>
+    <ng-container *ngIf="company">
+      <mat-divider></mat-divider>
+      <mat-list-item (click)="close(types.inventory)">
+        <mat-icon class="material-icons-outlined red-material" mat-list-icon>warning</mat-icon>
+        <div mat-line class="font-bold">Estoque</div>
+        <div mat-line>Do zerado para a maior quantidade</div>
+      </mat-list-item>
+    </ng-container>
+</mat-nav-list>

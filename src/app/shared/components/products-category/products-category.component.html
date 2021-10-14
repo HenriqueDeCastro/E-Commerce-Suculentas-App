@@ -1,0 +1,51 @@
+<ng-container *ngIf="category; else notFound">
+    <div class="container-title mt-5">
+      <h1 class="h1-btn title">{{category.category.name}}</h1>
+      <div class="btn-title">
+        <mat-icon class="material-icons cursor-pointer" matTooltip="Pesquisar" color=primary (click)="open = !open">
+          {{!open? 'search' : 'clear'}}
+        </mat-icon>
+
+        <mat-icon class="material-icons cursor-pointer" matTooltip="Ordenar" color=accent (click)="defineDevice()">swap_vert</mat-icon>
+        </div>
+      </div>
+      <br>
+      <br>
+      <br>
+      <br>
+      <div>
+        <mat-accordion>
+          <mat-expansion-panel [expanded]="open == true" class="mat-elevation-z0" hideToggle>
+            <br>
+            <app-search (OnTyping)="receiveSearch($event)" [value]="search"></app-search>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+
+      <ng-container *ngIf="category.products?.length === 0; else products">
+        <h3 class="title text-center mt-5">Não encontramos nenhum(a) {{this.category.category.name}} que tenha em seu nome "{{search}}".🤔 </h3>
+      </ng-container>
+
+      <ng-template #products>
+        <app-card-list-products
+          [products]="category.products"
+          [company]="company"
+          [productTypes]="productTypes">
+        </app-card-list-products>
+      </ng-template>
+
+      <ng-container *ngIf="!lastPage">
+        <div class="text-center">
+          <button mat-button
+            class="w-100 mt-4"
+            color="accent"
+            (click)="viewMore()">
+            Ver Mais
+          </button>
+        </div>
+      </ng-container>
+    </ng-container>
+
+<ng-template #notFound>
+    <app-not-found></app-not-found>
+</ng-template>

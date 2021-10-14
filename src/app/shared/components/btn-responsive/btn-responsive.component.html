@@ -1,0 +1,10 @@
+
+<div class="form-group col-md-12 text-center mt-4">
+  <button
+    mat-flat-button
+    [ngClass]="{'w-100': mobile, 'w-50': !mobile}"
+    [disabled]="disable"
+    [color]="color">
+    {{txt}}
+  </button>
+</div>

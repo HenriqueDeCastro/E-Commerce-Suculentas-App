@@ -1,0 +1,66 @@
+// mat-toolbar
+.mat-toolbar {
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: white;
+}
+
+.toolbar-line {
+  border-bottom:solid 1.5px var(--gray-line-toolbar-material);
+}
+
+.docs-navbar-header[_ngcontent-iie-c50] {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 8px 16px;
+}
+
+.space-icons {
+  flex: 1 1 auto;
+}
+
+.title-webpage {
+  font-family: Bakerie !important;
+  font-size: 25px !important;
+  margin: 0;
+  position: absolute;
+  top: 25%;
+}
+
+.title-webpage:hover {
+  color: var(--green-material);
+}
+
+::ng-deep .mat-drawer-backdrop.mat-drawer-shown {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+//body
+.docs-app {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 1px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.img-logo {
+  height: 22px;
+  width: 22px;
+  position: absolute;
+  transform: translate(-50%, -60%);
+  margin-right: 1rem;
+}
+
+.background-sidenav {
+  background-color: var(--gray-background-material);
+}
+
+.height-sidenav {
+  min-height: calc(100vh - 65px);
+}

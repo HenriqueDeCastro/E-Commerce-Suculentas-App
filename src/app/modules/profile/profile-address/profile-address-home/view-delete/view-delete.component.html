@@ -1,0 +1,13 @@
+<br>
+<h1 class="title text-center">Você deseja apagar ?</h1>
+<br>
+<mat-divider></mat-divider>
+<br>
+<div class="row text-center">
+  <div class="col-sm">
+    <button mat-flat-button class="w-100 margin mb-2" color="primary" [disabled]="deleting" (click)="Cancelar()">Cancelar</button>
+  </div>
+  <div class="col-sm">
+    <button mat-flat-button class="w-100 margin" color="warn" [disabled]="deleting" (click)="delete()">{{txt}}</button>
+  </div>
+</div>

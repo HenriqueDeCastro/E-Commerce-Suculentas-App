@@ -1,0 +1,38 @@
+img    {
+  border-radius: 50%;
+  height: 100%;
+  width: 100%;
+}
+
+.text-about  {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+@media (max-width: 767px)
+{
+  .text-about {
+    text-align: center;
+    margin: 0;
+    position: relative;
+    top: 0%;
+    left: 0%;
+    transform: translate(0%, 0%);
+    width: 100%;
+  }
+
+  .img-center {
+    display: flex;
+    justify-content: center;
+  }
+
+  img    {
+    border-radius: 50%;
+    height: 50%;
+    width: 50%;
+    margin-bottom: 3rem;
+  }
+}

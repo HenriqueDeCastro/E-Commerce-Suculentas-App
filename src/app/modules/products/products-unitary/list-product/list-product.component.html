@@ -1,0 +1,57 @@
+<ng-container *ngIf="!mobile">
+  <h1 class="title text-center">{{product.name}}</h1>
+</ng-container>
+
+<mat-list>
+  <!-- DESCRIÇÂO -->
+  <div mat-subheader class="black-material font-bold">Descrição</div>
+  <mat-list-item class="height-matline">
+    <div mat-line class="line-break-matline mt-2 mb-2">{{product.description}}</div>
+  </mat-list-item>
+
+  <!-- VALOR -->
+  <div mat-subheader class="black-material font-bold mt-3">Valor</div>
+  <mat-list-item class="height-matline">
+    <mat-icon class="material-icons-outlined green-material" mat-list-icon>payments</mat-icon>
+    <div mat-line class="line-break-matline font-bold green-material mt-2">{{product.price | currency}}</div>
+    <div mat-line class="line-break-matline mb-2">Pagamentos são feitos pela ferramenta do PagSeguro©</div>
+  </mat-list-item>
+
+  <!-- FRETE -->
+  <div mat-subheader class="black-material font-bold mt-3">Frete</div>
+  <ng-container *ngIf="type && type.name == types.order">
+    <app-alert-city-order></app-alert-city-order>
+  </ng-container>
+  <app-item-shipping></app-item-shipping>
+
+  <!-- PRAZO ENCOMENDA -->
+  <ng-container *ngIf="type && type.name == types.order">
+    <div mat-subheader class="black-material font-bold mt-3">Prazo de Entrega</div>
+    <app-item-order [product]="product"></app-item-order>
+  </ng-container>
+
+  <!-- ESTOQUE -->
+  <ng-container *ngIf="type && type.name == types.inventory">
+    <div mat-subheader class="black-material font-bold mt-3">Estoque</div>
+    <app-item-inventory [product]="product" [maximumQuantity]="maximumQuantity"></app-item-inventory>
+  </ng-container>
+
+</mat-list>
+
+<div class="text-center mt-4">
+  <app-btn-quantity
+    [quantity]="quantity"
+    [maximumQuantity]="maximumQuantity"
+    (quantityChosen)="receiveQuantitySelect($event)">
+  </app-btn-quantity>
+
+  <div class="mt-5">
+    <app-btn-cart
+      typeBtn="solid"
+      [quantity]="quantity"
+      [product]="product"
+      [productTypes]="productTypes"
+      [back]="true">
+    </app-btn-cart>
+  </div>
+</div>

@@ -1,0 +1,57 @@
+<h1 class="title">Login</h1>
+
+<div class="mt-5">
+  <form
+    [formGroup]="loginForm" (ngSubmit)="login()"
+    autocomplete="off">
+
+    <div class="mt-4">
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label> E-mail </mat-label>
+        <input matInput formControlName="email">
+        <mat-icon class="material-icons-outlined" matSuffix >mail_outline</mat-icon>
+        <mat-error *ngIf="loginForm.get('email')?.errors?.required">E-mail é obrigatório</mat-error>
+        <mat-error *ngIf="loginForm.get('email')?.errors?.email">Insira apenas e-mails validos</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="mt-4">
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label> Senha </mat-label>
+        <input type="password" matInput formControlName="password">
+        <mat-icon class="material-icons-outlined" matSuffix>https</mat-icon>
+        <mat-error *ngIf="loginForm.get('password')?.errors?.required">Senha é obrigatória</mat-error>
+        <mat-error *ngIf="loginForm.get('password')?.errors?.minlength">Senha deve ter no minimo 8 caracteres</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="mt-2">
+      <a
+        [routerLink]="(['/user/forgot-password'])"
+        class="w-40 forgot cursor-pointer font-bold">
+        Esqueceu a senha?
+      </a>
+    </div>
+
+    <div class="form-row mt-5">
+      <div class="form-group col-md-12 text-center">
+        <p class="mt-2 mb-1 text-muted text-center green-material">Não tem login? Cadastre-se abaixo</p>
+        <button
+          mat-button type="button"
+          class="w-100"
+          color="primary"
+          [routerLink]="(['/user/register'])">
+          Quero me cadastrar
+        </button>
+      </div>
+    </div>
+
+    <app-btn-responsive
+      [txt]="txtBtnAccess"
+      [disable]="disable"
+      color="primary"
+      (click)="login()">
+    </app-btn-responsive>
+
+  </form>
+</div>

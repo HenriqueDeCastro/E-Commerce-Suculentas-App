@@ -1,0 +1,30 @@
+<ng-container *ngIf="categorys">
+  <app-btn-router-back url="/company"></app-btn-router-back>
+  <app-title-button-add
+    [title]="'Categorias'"
+    [route]="'/company/category/add'">
+  </app-title-button-add>
+
+  <ng-container *ngIf="categorys.length > 0; else emptyCategorys">
+    <mat-list class="mt-9">
+      <ng-container *ngFor="let category of categorys;let i = index">
+        <app-list-dinamic [total]="categorys.length" [index]="i">
+          <mat-list-item [routerLink]="['/company/category/edit/', category.id]">
+            <mat-icon class="material-icons-outlined" mat-list-icon>category</mat-icon>
+            <div mat-line class="font-bold">{{category.name}}</div>
+            <div mat-line
+              [ngClass]="{'green-material': category.active, 'red-material': !category.active}">
+              {{category.active? 'Ativa' : 'Inativa'}}
+            </div>
+          </mat-list-item>
+        </app-list-dinamic>
+      </ng-container>
+    </mat-list>
+  </ng-container>
+
+  <ng-template #emptyCategorys>
+    <mat-list-item>
+      <div mat-line class="font-bold text-center">Não há categorias cadastradas</div>
+    </mat-list-item>
+  </ng-template>
+</ng-container>

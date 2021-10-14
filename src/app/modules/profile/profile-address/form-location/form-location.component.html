@@ -1,0 +1,75 @@
+<form [formGroup]="localizationForm" autocomplete="off"  (ngSubmit)="return()">
+  <mat-form-field  appearance="fill" class="w-100 mt-4">
+    <mat-label>Apelido</mat-label>
+    <input matInput formControlName="description">
+    <mat-hint>Ex: Casa, Trabalho, Vizinho...</mat-hint>
+  </mat-form-field>
+
+  <ng-container *ngIf="states$ | async as states">
+    <mat-form-field appearance="fill" class="w-100 mt-4">
+      <mat-label>Estado <span class="red-material">*</span></mat-label>
+      <mat-select formControlName="state">
+
+        <mat-select-filter
+          [array]="states"
+          [displayMember]="'name'"
+          (filteredReturn)="$event? statesFilter = $event: statesFilter = states"
+          placeholder="Procure o Estado...">
+        </mat-select-filter>
+
+        <ng-container *ngIf="statesFilter && statesFilter.length > 0; else emptyFilter">
+          <mat-option *ngFor="let state of statesFilter" [value]="state.uf" (click)="selectState(state.id!)">
+            {{state.name}}
+          </mat-option>
+        </ng-container>
+
+        <ng-template #emptyFilter>
+          <mat-option *ngFor="let state of states" [value]="state.uf" (click)="selectState(state.id!)">
+            {{state.name}}
+          </mat-option>
+        </ng-template>
+
+      </mat-select>
+      <mat-error *ngIf="localizationForm.get('state')?.errors?.required">Estado é obrigatório</mat-error>
+    </mat-form-field>
+  </ng-container>
+
+  <ng-container *ngIf="citys$ | async as citys">
+    <mat-form-field appearance="fill" class="w-100 mt-4">
+      <mat-label>Cidade <span class="red-material">*</span></mat-label>
+        <mat-select formControlName="city">
+
+          <mat-select-filter
+            [array]="citys"
+            [displayMember]="'name'"
+            (filteredReturn)="$event? citysFilter = $event: citysFilter = citys"
+            placeholder="Procure a Cidade...">
+          </mat-select-filter>
+
+          <ng-container *ngIf="citysFilter && citysFilter.length > 0; else emptyCitys">
+            <mat-option *ngFor="let city of citysFilter" [value]="city.name">
+              {{city.name}}
+            </mat-option>
+          </ng-container>
+
+          <ng-template #emptyCitys>
+            <mat-option *ngFor="let city of citys" [value]="city.name">
+              {{city.name}}
+            </mat-option>
+          </ng-template>
+
+      </mat-select>
+      <mat-error *ngIf="localizationForm.get('city')?.errors?.required">Cidade é obrigatório</mat-error>
+    </mat-form-field>
+
+    <mat-form-field  appearance="fill" class="w-100 mt-4">
+      <mat-label>Bairro <span class="red-material">*</span></mat-label>
+      <input matInput formControlName="district">
+      <mat-error *ngIf="localizationForm.get('district')?.errors?.required">Bairro é obrigatório</mat-error>
+    </mat-form-field>
+  </ng-container>
+
+  <div class="form-group col-md-12 mt-4">
+    <button mat-button matStepperNext class="w-100" color="primary">{{txtNext}}</button>
+  </div>
+</form>

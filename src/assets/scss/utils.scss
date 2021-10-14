@@ -1,0 +1,53 @@
+.cursor-pointer {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+.font-bold {
+  font-weight: 500 !important;
+}
+
+.text-justify {
+  text-align: justify;
+}
+
+// li
+ol>li {
+  padding:0 0 0 2em;
+  text-indent:-1.5em;
+  list-style-type:none;
+  counter-increment:item;
+  margin-bottom: 0.5em;
+}
+
+ol>li:before {
+  color: var(--green-material);
+  text-align:right;
+  content:counter(item) ".";
+}
+
+.mat-list-item :hover {
+  background-color: var(--gray-hover-material);
+}
+
+// margin
+$spacer4: 4rem !default;
+$spacer3: 3rem !default;
+
+.mt-9 {
+  margin-top: ($spacer3 * 3) !important;
+}
+
+.mt-12 {
+  margin-top: ($spacer4 * 3) !important;
+}
+
+
+// mat-accordion
+.mat-expansion-panel {
+  background-color: var(--cinza-fundo);
+  display: block !important;
+}

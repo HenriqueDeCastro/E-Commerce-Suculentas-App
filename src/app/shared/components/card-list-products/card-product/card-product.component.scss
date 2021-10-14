@@ -1,0 +1,38 @@
+.mat-card {
+  border-radius: 20px;
+  border: 1px solid rgb(240, 240, 240);
+}
+
+.mat-card :hover {
+  cursor: pointer;
+}
+
+.break-line {
+  white-space: pre-wrap !important;
+}
+
+.mat-card-header{
+  margin-left: -0.90rem !important;
+}
+
+.mat-card-title {
+  font-size: 18px !important;
+}
+
+@media (max-width: 800px)
+{
+  .mat-card-title {
+    font-size: 14px !important;
+  }
+}
+
+@media (max-width: 300px)
+{
+  .mat-card-title {
+    font-size: 12px !important;
+  }
+
+  .mat-card-subtitle {
+    font-size: 12px !important;
+  }
+}

@@ -1,0 +1,34 @@
+<form [formGroup]="dataForm" autocomplete="off" (ngSubmit)="return()">
+
+  <mat-form-field appearance="fill" class="w-100">
+    <mat-label> Nome completo <span class="red-material">*</span></mat-label>
+    <input matInput formControlName="fullname">
+    <mat-icon class="material-icons-outlined" matSuffix>person</mat-icon>
+    <mat-error *ngIf="dataForm.get('fullname')?.errors?.required">Nome é obrigatório</mat-error>
+    <mat-error *ngIf="dataForm.get('fullname')?.errors?.minlength">Nome deve ter no minimo 4 caracteres</mat-error>
+    <mat-error *ngIf="dataForm.get('fullname')?.errors?.maxlength">Nome deve ter no maximo 70 caracteres</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="w-100 mt-4">
+    <mat-label> CPF <span class="red-material">*</span></mat-label>
+    <input matInput formControlName="cpf" mask="000.000.000/00">
+    <mat-icon class="material-icons-outlined" matSuffix>article</mat-icon>
+    <mat-error *ngIf="dataForm.get('cpf')?.errors?.required">CPF é obrigatório</mat-error>
+    <mat-error *ngIf="dataForm.get('cpf')?.errors?.minlength">CPF deve ter 11 numeros</mat-error>
+    <mat-error *ngIf="dataForm.get('cpf')?.errors?.maxlength">CPF deve ter 11 numeros</mat-error>
+  </mat-form-field>
+
+  <!-- <mat-form-field appearance="fill" class="w-100">
+    <mat-label> Data de nascimento <span class="asteristico-obrigatorio">*</span></mat-label>
+    <input matInput formControlName="dataNascimento" [dropSpecialCharacters]="false" mask="00/00/0000">
+    <mat-icon class="material-icons-outlined" matSuffix>cake</mat-icon>
+    <mat-error *ngIf="dataForm.get('dataNascimento').hasError('required')">Data de Nascimento é obrigatória</mat-error>
+    <mat-error *ngIf="dataForm.get('dataNascimento').hasError('minlength')">Valor inserido não confere como data valida</mat-error>
+    <mat-error *ngIf="dataForm.get('dataNascimento').hasError('maxlength')">Valor inserido não confere como data valida</mat-error>
+  </mat-form-field> -->
+
+  <div class="form-group col-md-12 text-center mt-4">
+    <button mat-button class="w-100" color="primary" >{{txtNext}}</button>
+  </div>
+
+</form>
