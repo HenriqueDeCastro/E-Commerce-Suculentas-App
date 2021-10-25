@@ -1,4 +1,4 @@
-import { IRole } from './../../../../shared/models/irole';
+import { IRole } from '../../../../shared/models/irole';
 import { MessagesSnackbar } from 'src/app/shared/enums/messages-snackbar';
 import { RoleService } from './../../../../core/services/role/role.service';
 import { SnackbarService } from 'src/app/core/services/snackbar/snackbar.service';
