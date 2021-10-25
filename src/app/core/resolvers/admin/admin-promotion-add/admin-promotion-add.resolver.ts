@@ -1,6 +1,6 @@
-import { IRole } from 'src/app/shared/models/irole';
 import { RoleService } from '../../../services/role/role.service';
 import { Injectable } from '@angular/core';
+import { IRole } from 'src/app/shared/models/irole';
 import {
   Router, Resolve,
   RouterStateSnapshot,
