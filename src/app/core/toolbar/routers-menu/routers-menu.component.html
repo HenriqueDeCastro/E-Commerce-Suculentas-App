@@ -8,26 +8,27 @@
     <mat-icon class="material-icons-outlined dark-blue-material" mat-list-icon>local_offer</mat-icon>
     <div mat-line>Produtos</div>
     <div mat-line>Produtos feitos com carinho para você</div>
-  </mat-list-item>
-  <mat-divider></mat-divider>
-
-  <ng-container>
-    <mat-list-item (click)="nav($event, '/company')">
-      <mat-icon class="material-icons-outlined red-material" mat-list-icon>store_mall_directory</mat-icon>
-      <div mat-line>Empresa</div>
-      <div mat-line>Gerenciar informações do site</div>
-    </mat-list-item>
     <mat-divider></mat-divider>
-  </ng-container>
+  </mat-list-item>
 
-  <ng-container>
-    <mat-list-item (click)="nav($event, '/admin')">
-      <mat-icon class="material-icons-outlined yellow-material" mat-list-icon>vpn_key</mat-icon>
-      <div mat-line>Admin</div>
-      <div mat-line>Gerenciar informações sensiveis</div>
-    </mat-list-item>
-  <mat-divider></mat-divider>
-  </ng-container>
+  <mat-list-item
+    (click)="nav($event, '/company')"
+    accessControl
+    [rolesPermission]="[roles.manager, roles.admin]">
+    <mat-icon class="material-icons-outlined red-material" mat-list-icon>store_mall_directory</mat-icon>
+    <div mat-line>Empresa</div>
+    <div mat-line>Gerenciar informações do site</div>
+    <mat-divider></mat-divider>
+  </mat-list-item>
+
+  <mat-list-item (click)="nav($event, '/admin')"
+    accessControl
+    [rolesPermission]="[roles.admin]">
+    <mat-icon class="material-icons-outlined yellow-material" mat-list-icon>vpn_key</mat-icon>
+    <div mat-line>Admin</div>
+    <div mat-line>Gerenciar informações sensiveis</div>
+    <mat-divider></mat-divider>
+  </mat-list-item>
 
   <ng-container *ngIf="loggedIn; else login">
     <mat-list-item (click)="nav($event, '/profile')">

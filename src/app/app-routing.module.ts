@@ -16,6 +16,10 @@ const routes: Routes = [
     data: { role:[Roles.admin]  }
   },
   {
+    path: 'cart',
+    loadChildren:() => import('./modules/cart/cart.module').then((m) => m.CartModule),
+  },
+  {
     path: 'company',
     loadChildren:() => import('./modules/company/company.module').then((m) => m.CompanyModule),
     canLoad: [AuthGuard],

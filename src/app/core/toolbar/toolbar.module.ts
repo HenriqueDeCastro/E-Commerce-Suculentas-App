@@ -17,6 +17,7 @@ import { SharedModule } from './../../shared/shared.module';
 import { ToolbarComponent } from './toolbar.component';
 import { RoutersMenuComponent } from './routers-menu/routers-menu.component';
 import { BottomSheetToolbarComponent } from './bottom-sheet-toolbar/bottom-sheet-toolbar.component';
+import { AccessControlModule } from 'src/app/shared/directives/access-control/access-control.module';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { BottomSheetToolbarComponent } from './bottom-sheet-toolbar/bottom-sheet
     MatSidenavModule,
     MatListModule,
     MatBottomSheetModule,
-    SharedModule
+    SharedModule,
+    AccessControlModule
   ],
   exports: [
     ToolbarComponent

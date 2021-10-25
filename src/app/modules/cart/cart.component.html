@@ -1,0 +1,45 @@
+<app-btn-back></app-btn-back>
+<div class="mt-5">
+  <h1 class="title">Carrinho</h1>
+</div>
+
+<ng-container *ngIf="unavailable">
+  <app-alert-danger
+    text="Um ou mais produtos se esgotaram enquanto você navegava na página :("
+    text2="Recomendamos removê-los para poder efetuar a compra dos demais!">
+    </app-alert-danger>
+</ng-container>
+
+<ng-container *ngIf="productsInventory.length > 0 && productsOrder.length > 0">
+  <app-alert-warning
+    text="Produtos por encomenda são vendidos separadamentes">
+  </app-alert-warning>
+</ng-container>
+
+<ng-container *ngIf="productsInventory.length > 0">
+  <h2 class="title mt-4">Produtos por Encomenda</h2>
+  <app-products-cart [products]=productsInventory ></app-products-cart>
+  <br>
+  <app-subtotal [products]="productsInventory"></app-subtotal>
+
+  <!-- <app-carrinho-botoes [Tipo]=TipoEncomenda (esvaziado)="ReceberAtt($event)"></app-carrinho-botoes> -->
+</ng-container>
+
+<ng-container *ngIf="productsInventory.length > 0 && productsOrder.length > 0">
+  <div class="mt-5"></div>
+</ng-container>
+
+<ng-container *ngIf="productsOrder.length > 0">
+  <h2 class="title mt-4">Produtos à Pronta Entrega</h2>
+  <app-products-cart [products]=productsOrder ></app-products-cart>
+  <br>
+  <app-subtotal [products]="productsOrder"></app-subtotal>
+
+  <!-- <app-carrinho-botoes [Tipo]=TipoEncomenda (esvaziado)="ReceberAtt($event)"></app-carrinho-botoes> -->
+</ng-container>
+
+<ng-container *ngIf="productsInventory.length == 0 && productsOrder.length == 0">
+  <h1 class="title text-center mt-9"> Não há produtos no carrinho ainda 😞</h1>
+</ng-container>
+
+

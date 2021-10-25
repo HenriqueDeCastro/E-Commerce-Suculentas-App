@@ -1,7 +1,7 @@
 import { IUserToken } from './../../../../shared/models/iuser-token';
 import { first, switchMap, take } from 'rxjs/operators';
 import { UserService } from './../../../../core/services/user/user.service';
-import { IUser } from './../../../../shared/models/iuser';
+import { IUser } from '../../../../shared/models/iuser';
 import { MessagesSnackbar } from 'src/app/shared/enums/messages-snackbar';
 import { TextButton } from 'src/app/shared/enums/text-button';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';

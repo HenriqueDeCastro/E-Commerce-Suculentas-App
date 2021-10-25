@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MatSidenav } from '@angular/material/sidenav';
 import { UserService } from '../../services/user/user.service';
+import { Roles } from 'src/app/shared/enums/roles';
 
 @Component({
   selector: 'app-routers-menu',
@@ -13,7 +14,8 @@ import { UserService } from '../../services/user/user.service';
 export class RoutersMenuComponent implements OnInit {
 
   public mobile!: boolean;
-  public loggedIn = this.userService.loggedIn()
+  public loggedIn = this.userService.loggedIn();
+  public roles = Roles;
   @Input() inputSideNav: MatSidenav | undefined;
 
   constructor(

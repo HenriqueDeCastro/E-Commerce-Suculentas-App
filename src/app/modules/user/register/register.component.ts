@@ -1,5 +1,5 @@
 import { IUserToken } from './../../../shared/models/iuser-token';
-import { IUser } from './../../../shared/models/iuser';
+import { IUser } from '../../../shared/models/iuser';
 import { AuthService } from './../../../core/services/auth/auth.service';
 import { SnackbarService } from './../../../core/services/snackbar/snackbar.service';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';

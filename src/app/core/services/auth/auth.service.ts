@@ -1,7 +1,7 @@
 import { IUserReset } from './../../../shared/models/iuser-reset';
 import { IUserForgotPassword } from './../../../shared/models/iuser-forgot-password';
 import { IUserToken } from '../../../shared/models/iuser-token';
-import { IUser } from './../../../shared/models/iuser';
+import { IUser } from '../../../shared/models/iuser';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, take } from 'rxjs/operators';

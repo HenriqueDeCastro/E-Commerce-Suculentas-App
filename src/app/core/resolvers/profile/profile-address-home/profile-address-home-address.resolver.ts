@@ -1,4 +1,4 @@
-import { IUser } from './../../../../shared/models/iuser';
+import { IUser } from '../../../../shared/models/iuser';
 import { switchMap, take } from 'rxjs/operators';
 import { UserService } from './../../../services/user/user.service';
 import { IAddress } from './../../../../shared/models/iaddress';

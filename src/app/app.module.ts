@@ -9,7 +9,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 // modules
 import { ToolbarModule } from './core/toolbar/toolbar.module';
 import { FooterModule } from './core/footer/footer.module';
-import { ProgressBarModule } from './core/progress-bar/progress-bar.module';
+import { ProgressBarModule } from './shared/components/progress-bar/progress-bar.module';
 import { AuthInterceptor } from './core/interceptors/auth/auth.interceptor';
 import { NgxImageCompressService } from 'ngx-image-compress';
 import { registerLocaleData } from '@angular/common';

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/internal/Observable';
 import { delay } from 'rxjs/internal/operators/delay';
-import { LoadingService } from '../services/loading/loading.service';
+import { LoadingService } from '../../../core/services/loading/loading.service';
 
 @Component({
   selector: 'app-progress-bar',

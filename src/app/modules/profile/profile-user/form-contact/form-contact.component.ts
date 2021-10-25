@@ -1,5 +1,5 @@
 import { UserService } from './../../../../core/services/user/user.service';
-import { IUser } from './../../../../shared/models/iuser';
+import { IUser } from '../../../../shared/models/iuser';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TextButton } from 'src/app/shared/enums/text-button';

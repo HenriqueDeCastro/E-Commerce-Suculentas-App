@@ -1,7 +1,7 @@
+import { IUser } from 'src/app/shared/models/iuser';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { IUser } from 'src/app/shared/models/iuser';
 import { TokenService } from '../token/token.service';
 
 @Injectable({
@@ -52,18 +52,23 @@ export class UserService {
   }
 
   verifyAcessRole(roleUser: string[]): boolean {
-    const user = this.decodesJWT();
+    if(this.loggedIn()) {
+      const user = this.decodesJWT();
 
-    if(user.role) {
-      return roleUser.some((role: string): boolean => {
-        if(user.role?.indexOf(role) != -1) {
-          return true;
-        }
-        return false;
-      });
+      if(user.role) {
+        return roleUser.some((role: string): boolean => {
+          if(user.role?.indexOf(role) != -1) {
+            return true;
+          }
+          return false;
+        });
+      }
+      else {
+        return false
+      }
     }
     else {
-      return false
+      return false;;
     }
   }
 }
