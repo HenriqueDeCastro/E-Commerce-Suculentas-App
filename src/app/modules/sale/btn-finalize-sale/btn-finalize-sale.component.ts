@@ -73,7 +73,7 @@ export class BtnFinalizeSaleComponent implements OnInit {
           this.quantityCartService.deleteQuantityByProducts(this.cartService.returnCart());
 
         this.txtBtn = TextButton.redirecting;
-        window.location.href = URL_PAGSEGURO + sale.trackingCode;
+        window.location.href = URL_PAGSEGURO + sale.transactionCode;
         this.router.navigate(['/sale/completed/' + sale.id]);
         this.snackbar.openSuccess(MessagesSnackbar.sale_successfully);
       }

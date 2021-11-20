@@ -1,0 +1,39 @@
+<h2 class="title mt-4">Editar</h2>
+<form [formGroup]="saleForm" (ngSubmit)="editSale()" autocomplete="off">
+  <div class="row">
+    <div class="col-sm-6 mt-3">
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Status</mat-label>
+        <mat-select [(value)]="selectedStatus" formControlName="status">
+          <mat-option *ngFor="let stt of status" [value]="stt.id" [disabled]="stt.id < 4 && stt.id < statusSale">
+            {{stt.desc}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="saleForm.get('status')?.hasError('required')">Status é obrigatório</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-sm-6 mt-3">
+      <mat-form-field  appearance="fill" class="w-100">
+        <mat-label>Endereço</mat-label>
+        <input matInput formControlName="address">
+        <mat-error *ngIf="saleForm.get('address')?.hasError('required')">Endereço é obrigatório</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <br>
+  <ng-container *ngIf="selectedStatus == statusSalesEnum.sent">
+    <div class="row">
+      <div class="col-sm-6 mt-3">
+        <mat-form-field  appearance="fill" class="w-100">
+          <mat-label>Código de Rastreio</mat-label>
+          <input matInput formControlName="trackingCode">
+          <mat-error *ngIf="saleForm.get('trackingCode')?.hasError('required')">Código de Rastreio é obrigatório</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+  </ng-container>
+  <br>
+  <div class="form-group col-md-12 text-center">
+    <button mat-button class="w-100" color="primary" [disabled]="disableBtn">{{txtBtn}}</button>
+  </div>
+</form>

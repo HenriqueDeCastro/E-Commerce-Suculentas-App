@@ -33,6 +33,6 @@ export class SaleDetailsComponent implements OnInit {
   }
 
   checkoutPagSeguro(): void {
-    window.location.href = URL_PAGSEGURO + this.sale.trackingCode;
+    window.location.href = URL_PAGSEGURO + this.sale.transactionCode;
   }
 }

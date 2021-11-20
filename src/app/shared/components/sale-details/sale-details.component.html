@@ -18,6 +18,8 @@
 
 <ng-container *ngIf="company; else client">
   <app-list-sale-detail-client [sale]="sale"></app-list-sale-detail-client>
+  <mat-divider class="mt-3 mb-4"></mat-divider>
+  <app-form-sale-edit [sale]="sale"></app-form-sale-edit>
 </ng-container>
 
 <ng-template #client>
