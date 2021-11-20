@@ -18,11 +18,14 @@
 
 <ng-container *ngIf="productsInventory.length > 0">
   <h2 class="title mt-4">Produtos por Encomenda</h2>
-  <app-products-cart [products]=productsInventory ></app-products-cart>
+  <app-products-cart
+    [editBtn]=true
+    [products]=productsInventory
+    (resultValue)="receiveActionCart($event)">
+  </app-products-cart>
   <br>
   <app-subtotal [products]="productsInventory"></app-subtotal>
-
-  <!-- <app-carrinho-botoes [Tipo]=TipoEncomenda (esvaziado)="ReceberAtt($event)"></app-carrinho-botoes> -->
+  <app-btn-empty-cart [type]="productsTypes.order" (emptied)="receiveActionCart($event)"></app-btn-empty-cart>
 </ng-container>
 
 <ng-container *ngIf="productsInventory.length > 0 && productsOrder.length > 0">
@@ -31,11 +34,14 @@
 
 <ng-container *ngIf="productsOrder.length > 0">
   <h2 class="title mt-4">Produtos à Pronta Entrega</h2>
-  <app-products-cart [products]=productsOrder ></app-products-cart>
+  <app-products-cart
+    [editBtn]=true
+    [products]=productsOrder
+    (resultValue)="receiveActionCart($event)">
+  </app-products-cart>
   <br>
   <app-subtotal [products]="productsOrder"></app-subtotal>
-
-  <!-- <app-carrinho-botoes [Tipo]=TipoEncomenda (esvaziado)="ReceberAtt($event)"></app-carrinho-botoes> -->
+  <app-btn-empty-cart [type]="productsTypes.inventory" (emptied)="receiveActionCart($event)"></app-btn-empty-cart>
 </ng-container>
 
 <ng-container *ngIf="productsInventory.length == 0 && productsOrder.length == 0">

@@ -8,6 +8,7 @@ export interface IProductCart {
   maximumQuantity?: number;
   active: boolean;
   productTypeId: number;
+  productTypeName: string;
   categoryId: number;
   quantityOrder: number;
   unavailable?: boolean;

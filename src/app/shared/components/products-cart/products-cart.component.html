@@ -11,7 +11,7 @@
           <mat-list>
             <mat-list-item class="height-matline padding-list">
               <div mat-line class="line-break-matline font-bold cursor-pointer mt-1"><span (click)="navigate(product)">{{product.name}}</span>
-                <!-- <mat-icon matTooltip="Editar" class="material-icons-outlined btn-edit btn-pc" (click)="OpenDialog(product)">edit</mat-icon> -->
+                <mat-icon *ngIf="editBtn" matTooltip="Editar" class="material-icons-outlined btn-edit btn-pc" (click)="openEdit(product)">edit</mat-icon>
               </div>
               <div mat-line class="line-break-matline">Quantidade: {{product.quantityOrder}}</div>
               <div mat-line *ngIf="product.unavailable" class="line-break-matline font-bold red-material">INDISPONÍVEL</div>

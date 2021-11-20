@@ -9,6 +9,7 @@ export enum TextButton {
   registering = 'Registrando...',
   sending = 'Enviando...',
   deleting = 'Deletando...',
+  redirecting = "Redirecionando...",
 
   // step
   previous = 'Anterior',

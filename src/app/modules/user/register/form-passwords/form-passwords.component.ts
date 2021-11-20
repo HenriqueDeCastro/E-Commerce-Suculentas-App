@@ -11,9 +11,9 @@ import { TextButton } from 'src/app/shared/enums/text-button';
 export class FormPasswordsComponent implements OnInit {
 
   @Output() returnForm = new EventEmitter<FormGroup>();
-  @Output() passwordsForm!: FormGroup;
   @Input() textBtn!: string;
   @Input() disableBtn!: boolean;
+  public passwordsForm!: FormGroup;
   public txtPrevious: string = TextButton.previous;
 
   constructor(

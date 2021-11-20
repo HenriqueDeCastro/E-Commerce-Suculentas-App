@@ -1,4 +1,3 @@
-import { MatIconModule } from '@angular/material/icon';
 import { RequiredFieldsModule } from 'src/app/shared/components/required-fields/required-fields.module';
 import { ListDinamicModule } from './../../../shared/components/list-dinamic/list-dinamic.module';
 import { MatListModule } from '@angular/material/list';

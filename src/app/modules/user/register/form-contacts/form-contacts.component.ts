@@ -10,7 +10,7 @@ import { TextButton } from 'src/app/shared/enums/text-button';
 export class FormContactsComponent implements OnInit {
 
   @Output() returnForm = new EventEmitter<FormGroup>();
-  @Output() contactsForm!: FormGroup;
+  public contactsForm!: FormGroup;
   public txtPrevious: string = TextButton.previous;
   public txtNext: string = TextButton.next;
 

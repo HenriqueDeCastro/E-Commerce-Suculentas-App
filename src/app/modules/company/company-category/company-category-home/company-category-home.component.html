@@ -9,7 +9,7 @@
     <mat-list class="mt-9">
       <ng-container *ngFor="let category of categorys;let i = index">
         <app-list-dinamic [total]="categorys.length" [index]="i">
-          <mat-list-item [routerLink]="['/company/category/edit/', category.id]">
+          <mat-list-item [routerLink]="['/company/category/edit/', category.id]" class="list-hover cursor-pointer">
             <mat-icon class="material-icons-outlined" mat-list-icon>category</mat-icon>
             <div mat-line class="font-bold">{{category.name}}</div>
             <div mat-line

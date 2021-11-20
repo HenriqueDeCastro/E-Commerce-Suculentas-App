@@ -7,7 +7,9 @@ export enum MessagesSnackbar   {
   unauthorized_login_error = "E-mail ou senha incorretos!",
   email_not_found = "Não foi encontrado nenhum usuário com o e-mail informado!",
   error_server_melhor_envio = 'Erro inesperado no servidor do "Melhor Envio", tente novamente!!!',
-  maximum_stock_error = 'Você já adicionou o máximo que temos em estoque',
+  maximum_stock_error = "Você já adicionou o máximo que temos em estoque",
+  error_pagSeguro = "OPS! Infelizmente o PagSeguro está fora do ar atualmente, tente finalizar a compra mais tarde",
+  unavailable_product_on_server = "OPS! Infelizmente o PagSeguro está fora do ar atualmente, tente finalizar a compra mais tarde",
 
   // Success
   successful_registration = "Cadastro realizado com sucesso",
@@ -15,5 +17,6 @@ export enum MessagesSnackbar   {
   delete_completed = "Deletado com sucesso",
   verify_email = "Não foi encontrado nenhum usuário com o e-mail informado",
   reset_password_successful = "Senha redefinida com sucesso",
-  product_added_cart = 'Produto adicionado ao carrinho!',
+  product_added_cart = "Produto adicionado ao carrinho!",
+  sale_successfully = "Venda Realizada com sucesso!"
 }

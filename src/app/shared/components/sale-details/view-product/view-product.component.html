@@ -1,0 +1,29 @@
+<div class="row mt-4">
+
+  <ng-container *ngFor="let order of orders">
+
+    <div class="col-sm-6 mb-3">
+      <div class="row">
+
+        <div class="col-4">
+          <img class="cursor-pointer" src="{{urlImage}}{{order.product?.image}}" alt="{{order.product?.name}}" (click)="navigate(order.product!)">
+        </div>
+
+        <div class="col-8">
+          <mat-list>
+            <mat-list-item class="height-matline padding-list">
+              <div mat-line class="line-break-matline font-bold cursor-pointer mt-1">
+                <span (click)="navigate(order.product!)">{{order.product?.name}}</span>
+              </div>
+              <div mat-line class="line-break-matline">Quantidade: {{order.amount}}</div>
+              <div mat-line class="line-break-matline mb-1">{{order.price | currency}}</div>
+            </mat-list-item>
+          </mat-list>
+        </div>
+
+      </div>
+    </div>
+
+  </ng-container>
+
+</div>

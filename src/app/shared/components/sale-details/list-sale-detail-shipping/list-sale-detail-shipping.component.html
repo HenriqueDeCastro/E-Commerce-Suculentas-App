@@ -1,0 +1,35 @@
+<ng-container *ngIf="sale.shipping; else notShipping">
+  <div class="row">
+    <div class="col-sm-6 mt-3 mb-3">
+      <mat-list>
+        <mat-list-item class="height-matline">
+          <mat-icon class="material-icons-outlined yellow-material" mat-list-icon>home</mat-icon>
+          <div mat-line class="line-break-matline font-bold">Endereço de Entrega</div>
+          <div mat-line class="line-break-matline">{{sale.address}}.</div>
+        </mat-list-item>
+      </mat-list>
+    </div>
+  </div>
+</ng-container>
+<ng-template #notShipping>
+  <div class="row">
+    <div class="col-sm-6 mt-3 mb-3">
+      <mat-list>
+        <mat-list-item class="height-matline">
+          <mat-icon class="material-icons-outlined yellow-material" mat-list-icon>home</mat-icon>
+          <div mat-line class="line-break-matline font-bold">Endereço residêncial</div>
+          <div mat-line class="line-break-matline">{{sale.address}}.</div>
+        </mat-list-item>
+      </mat-list>
+    </div>
+    <div class="col-sm-6 mt-3 mb-3">
+      <mat-list>
+        <mat-list-item class="height-matline">
+          <mat-icon class="material-icons-outlined red-material" mat-list-icon>pin_drop</mat-icon>
+          <div mat-line class="line-break-matline font-bold">Endereço de retirada</div>
+          <div mat-line class="line-break-matline">{{addressSuculentas.complete}}.</div>
+        </mat-list-item>
+      </mat-list>
+    </div>
+  </div>
+</ng-template>

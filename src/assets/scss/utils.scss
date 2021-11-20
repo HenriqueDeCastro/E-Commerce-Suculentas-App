@@ -29,7 +29,7 @@ ol>li:before {
   content:counter(item) ".";
 }
 
-.mat-list-item :hover {
+.list-hover :hover {
   background-color: var(--gray-hover-material);
 }
 

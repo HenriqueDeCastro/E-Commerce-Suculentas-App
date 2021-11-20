@@ -1,6 +1,7 @@
 import { IProductCart } from 'src/app/shared/models/iproduct-cart';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ProductTypes } from 'src/app/shared/enums/product-types';
 
 @Component({
   selector: 'app-cart',
@@ -12,18 +13,23 @@ export class CartComponent implements OnInit {
   public unavailable!: boolean;
   public productsOrder!: IProductCart[];
   public productsInventory! : IProductCart[];
+  public productsTypes = ProductTypes;
 
   constructor(
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
+    this.receiveProducts();
+    this.checkUnavailableProducts();
+  }
+
+  receiveProducts(): void {
     this.activatedRoute.params.subscribe((params) => {
       this.productsOrder = this.activatedRoute.snapshot.data['productsOrder'];
       this.productsInventory = this.activatedRoute.snapshot.data['productsInventory'];
     })
-
-    this.checkUnavailableProducts();
   }
 
   checkUnavailableProducts() {
@@ -34,6 +40,14 @@ export class CartComponent implements OnInit {
       this.unavailable = true;
     } else {
       this.unavailable = false;
+    }
+  }
+
+  receiveActionCart(action: boolean) {
+    if(action) {
+      this.router.navigate([]).finally(() => {
+        this.receiveProducts();
+      })
     }
   }
 }

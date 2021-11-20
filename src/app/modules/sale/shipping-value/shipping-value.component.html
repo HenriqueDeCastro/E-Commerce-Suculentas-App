@@ -1,0 +1,35 @@
+<ng-container *ngIf="type?.toLocaleUpperCase() == productTypes.inventory; else typeOrder">
+  <h2 class="title mt-4">Frete</h2>
+</ng-container>
+<ng-template #typeOrder>
+  <h2 class="title mt-4">Retirar</h2>
+</ng-template>
+
+<ng-container *ngIf="addressClient; else emptyAddress">
+  <ng-container *ngIf="shipping && type.toLocaleUpperCase() == productTypes.inventory">
+    <h3 class="title">O Frete fica no valor de <span class="font-bold">{{shipping.price | currency}}</span> para {{this.addressClient.cep| mask:'00000-000'}}.
+      <div class="title">Entregue por <span class="red-material">{{shipping.company.name}}©</span></div>
+    </h3>
+    <br>
+  </ng-container>
+
+  <ng-container *ngIf="!shipping && type.toLocaleUpperCase() == productTypes.inventory">
+    <h3 class="title text-center">Calculando...</h3>
+  </ng-container>
+
+  <ng-container *ngIf="!shipping && type.toLocaleUpperCase() == productTypes.order">
+    <app-alert-warning
+      text="Depois do pagamento aprovado o vendedor entrará em contato por Whatsapp para combinar prazos e tirar dúvidas">
+    </app-alert-warning>
+    <br>
+    <h3 class="title text-center">Esse produto deve ser retirado no endereço do vendedor:</h3>
+    <h4 class="title text-center">{{addressSuculentas.complete}}</h4>
+    <div class="form-group col-md-12 text-center">
+      <a [href]="addressSuculentas.url_google_maps" target="_blank" class="green-material">Veja aqui o endereço no Google Maps</a>
+    </div>
+    <br>
+  </ng-container>
+</ng-container>
+<ng-template #emptyAddress>
+  <h3 class="title mt-4 mb-4">Seleciona um endereço de entrega!!!</h3>
+</ng-template>

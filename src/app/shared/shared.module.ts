@@ -15,7 +15,6 @@ import { BtnRouterBackModule } from './components/btn-router-back/btn-router-bac
 import { BtnResponsiveModule } from './components/btn-responsive/btn-responsive.module';
 
 @NgModule({
-  declarations: [],
   imports: [
     CommonModule,
     MatIconModule,

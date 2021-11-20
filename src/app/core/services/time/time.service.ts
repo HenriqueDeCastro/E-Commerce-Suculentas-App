@@ -13,4 +13,11 @@ export class TimeService {
       'T_' + dNow.getHours() + '_' + dNow.getMinutes() + '_' + dNow.getSeconds();
     return localdate;
   }
+
+  returnCurrentDateTime(): string {
+    const dNow = new Date();
+    const localdate = dNow.getDate() + '/' + (dNow.getMonth() + 1) + '/' + dNow.getFullYear()
+                                  + ' ' + dNow.getHours() + ':' + dNow.getMinutes() + ':' + dNow.getSeconds();
+    return localdate;
+  }
 }

@@ -1,0 +1,36 @@
+<ng-container *ngIf="adresses?.length! > 0; else emptyAddress">
+  <ng-container *ngIf="type.toLocaleUpperCase() == productTypes.inventory; else typeOrder">
+    <h3 class="title mt-4">Selecione o endereço de entrega:</h3>
+  </ng-container>
+  <ng-template #typeOrder>
+    <h3 class="title mt-4">Selecione o seu endereço residêncial:</h3>
+    <app-alert-city-order></app-alert-city-order>
+  </ng-template>
+
+  <mat-radio-group class="radios-adresses-group" [(ngModel)]="addressSelection">
+    <mat-radio-button color=primary class="radios-adresses-group"
+      *ngFor="let address of adresses"
+      (click)="sendAddress(address)"
+      [disabled]="address.city != 'Santo André' && address.city != 'São Bernardo do Campo' && address.city != 'São Caetano do Sul' && address.city != 'Mauá'"
+      [value]="address">
+      <ng-container *ngIf="!address.description">
+        <span class="font-bold line-break-matline">{{address.road}}, {{address.number}} - {{address.district}}</span> ({{address.cep}})
+      </ng-container>
+      <ng-container *ngIf="address.description">
+        <span class="font-bold line-break-matline">{{address.description}}</span> ({{address.cep}})
+      </ng-container>
+    </mat-radio-button>
+  </mat-radio-group>
+</ng-container>
+
+<ng-template #emptyAddress>
+  <h3 class="title text-center mt-4">Clique no botão abaixo para adicionar um endereço</h3>
+</ng-template>
+
+<div class="form-group col-md-12 text-center">
+  <app-btn-responsive
+    txt="Gerenciar meus endereços"
+    color="primary"
+    (click)="navigate()">
+  </app-btn-responsive>
+</div>

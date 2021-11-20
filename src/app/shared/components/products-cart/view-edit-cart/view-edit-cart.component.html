@@ -1,0 +1,17 @@
+<br>
+<h2 class="title text-center">Editar</h2>
+  <app-btn-quantity [quantity]=quantity [maximumQuantity]=maximumQuantity (quantityChosen)="receiveQuantitySelect($event)"></app-btn-quantity>
+<br>
+<mat-divider></mat-divider>
+<br>
+<div class="row" align=center>
+  <div class="col-sm">
+    <button mat-flat-button class="w-100 mb-2" color="warn" (click)="removeItem()">
+      <mat-icon class="material-icons-outlined">remove_shopping_cart</mat-icon>
+      <span>Remover item</span>
+    </button>
+  </div>
+  <div class="col-sm">
+    <button mat-flat-button class="w-100" color="primary" (click)="editItem()">Salvar</button>
+  </div>
+</div>

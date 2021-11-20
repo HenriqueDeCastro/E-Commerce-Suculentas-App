@@ -11,7 +11,7 @@ import { TextButton } from 'src/app/shared/enums/text-button';
 export class FormPersonalDataComponent implements OnInit {
 
   @Output() returnForm = new EventEmitter<FormGroup>();
-  @Output() dataForm!: FormGroup;
+  public dataForm!: FormGroup;
   public txtNext: string = TextButton.next;
 
   constructor(private fb: FormBuilder) { }

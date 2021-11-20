@@ -1,3 +1,4 @@
+import { BtnBackModule } from './../../../shared/components/btn-back/btn-back.module';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MaskModule } from './../../../shared/components/mask/mask.module';
 import { MatOptionModule } from '@angular/material/core';
@@ -58,7 +59,8 @@ import { ViewDeleteComponent } from './profile-address-home/view-delete/view-del
     MatSelectModule,
     MatSelectFilterModule,
     MaskModule,
-    MatDialogModule
+    MatDialogModule,
+    BtnBackModule
   ]
 })
 export class ProfileAddressModule { }

@@ -19,7 +19,7 @@
               <div mat-line class="font-bold">{{user.fullName}}</div>
               <div mat-line>{{user.cpf}}</div>
               <div mat-line>{{user.email}}</div>
-              <button mat-icon-button (click)="openDialog(role.roleName, user.email)">
+              <button mat-icon-button (click)="openDialog(role.roleName, user.email)" matTooltip="Apagar">
                 <mat-icon class="material-icons-outlined red-material">
                   delete
                 </mat-icon>

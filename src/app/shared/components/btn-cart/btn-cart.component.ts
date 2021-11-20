@@ -133,17 +133,18 @@ export class BtnCartComponent implements OnInit {
     let productCart: IProductCart;
 
     return productCart = {
-    id: product.id,
-    name: product.name,
-    description: product.description,
-    price: product.price,
-    image: product.image,
-    inventory: product.inventory,
-    active: product.active,
-    productTypeId: product.productTypeId,
-    categoryId: product.categoryId,
-    maximumQuantity: product.maximumQuantity,
-    quantityOrder: this.quantity,
+      id: product.id,
+      name: product.name,
+      description: product.description,
+      price: product.price,
+      image: product.image,
+      inventory: product.inventory,
+      active: product.active,
+      productTypeId: product.productTypeId,
+      productTypeName: this.type.name,
+      categoryId: product.categoryId,
+      maximumQuantity: product.maximumQuantity,
+      quantityOrder: this.quantity,
     };
   }
 

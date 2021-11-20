@@ -1,0 +1,42 @@
+
+<app-btn-router-back url="/profile/home"></app-btn-router-back>
+
+<h1 class="mt-4 title text-center">{{title}}</h1>
+
+<ng-container *ngIf="sales.length > 0; else emptySale">
+
+  <mat-list>
+    <ng-container *ngFor="let sale of sales; let i = index">
+      <app-list-dinamic [total]="sales.length" [index]="i">
+        <mat-list-item (click)="saleNavigation(sale.id!)" class="list-hover cursor-pointer">
+          <div mat-line><span class="font-bold green-material">Pedido N.º {{sale.id}}</span> - {{sale.date | date}}</div>
+          <div mat-line class="font-bold subtitle">Produtos</div>
+          <div mat-line *ngFor="let order of sale.orders">{{order.amount}}x - {{order.product?.name}}</div>
+          <div mat-line class="font-bold subtitle">Valores</div>
+          <div mat-line *ngIf="sale.shipping">Frete: {{sale.shippingValue | currency}}</div>
+          <div mat-line>Produtos: {{sale.price | currency}}</div>
+        </mat-list-item>
+      </app-list-dinamic>
+    </ng-container>
+  </mat-list>
+
+  <ng-container *ngIf="!lastPage">
+    <div class="text-center">
+      <button mat-button
+        class="w-100 mt-4"
+        color="accent"
+        (click)="viewMore()">
+        Ver Mais
+      </button>
+    </div>
+  </ng-container>
+
+</ng-container>
+
+<ng-template #emptySale>
+  <h3 class="title text-center mt-5">OPS! Você não tem nenhuma compra "{{title}}".</h3>
+  <mat-divider></mat-divider>
+  <h3 class="title text-center mt-4">Tente verificar se sua compra já passou para a próxima etapa ;)</h3>
+  <mat-divider></mat-divider>
+  <h3 class="title text-center mt-4">Caso tenha alguma dúvida, nos chame no <span style="color: var(--verde);">Whatsapp</span>, o link para nosso chat se encontra no final da página.</h3>
+</ng-template>

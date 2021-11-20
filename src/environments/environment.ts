@@ -8,5 +8,7 @@ export const environment = {
 
   // HOMOLOGAÇÂO
   // urlApi: 'https://www.xn--suculentasdar-1lb.com.br',
+
+  urlPagSeguro: 'https://pagseguro.uol.com.br/v2/checkout/payment.html?code='
 };
 

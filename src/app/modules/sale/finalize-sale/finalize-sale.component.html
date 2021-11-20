@@ -1,0 +1,46 @@
+<app-btn-router-back url="/cart"></app-btn-router-back>
+<h1 class="title mt-5">Finalizar Compra</h1>
+
+<h2 class="title mt-4" *ngIf="products.length > 1">Produtos</h2>
+<h2 class="title mt-4" *ngIf="products.length == 1">Produto</h2>
+<app-products-cart [products]=products></app-products-cart>
+
+<mat-divider class="mt-4 mb-4"></mat-divider>
+
+<h2 class="title">Endereços</h2>
+<app-select-address
+  [adresses]=adresses
+  [type]="type"
+  (addressSend)="receiveAddress($event)">
+</app-select-address>
+
+<mat-divider class="mt-4 mb-4"></mat-divider>
+
+<app-shipping-value
+  [type]="type"
+  [addressClient]="addressSelect"
+  [shipping]="shipping">
+</app-shipping-value>
+
+<mat-divider class="mt-4 mb-4"></mat-divider>
+
+<ng-container *ngIf="addressSelect && type.toLocaleUpperCase() == productsType.inventory && shipping">
+  <app-table-total [products]="products" [shipping]="shipping" (returnTotal)="receiveTotal($event)"></app-table-total>
+  <app-btn-finalize-sale
+    [products]="products"
+    [address]="addressSelect"
+    [total]="total"
+    [shipping]="shipping"
+    [type]="type">
+  </app-btn-finalize-sale>
+</ng-container>
+
+<ng-container *ngIf="addressSelect && type.toLocaleUpperCase() == productsType.order">
+  <app-table-total [products]="products" (returnTotal)="receiveTotal($event)"></app-table-total>
+  <app-btn-finalize-sale
+  [products]="products"
+  [address]="addressSelect"
+  [total]="total"
+  [type]="type">
+</app-btn-finalize-sale>
+</ng-container>

@@ -11,7 +11,8 @@ const routes: Routes = [
     resolve: {
       productsOrder: CartSeparateProductsInventoryResolver,
       productsInventory: CartSeparateProductsOrderResolver
-    }
+    },
+    runGuardsAndResolvers: 'always'
   },
   {
     path: '**',

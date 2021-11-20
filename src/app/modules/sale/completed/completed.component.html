@@ -1,0 +1,14 @@
+<app-btn-router-back url="/products/home"></app-btn-router-back>
+
+<h1 class="title text-center mt-4">Compra realizada com sucesso!</h1>
+<div class="img-center">
+  <img src="assets/images/check_success.png" alt="sucesso" class="">
+</div>
+
+<ng-container *ngIf="user$ | async as user">
+  <h2 class="title text-center mt-3">Agradecemos a preferência <span class="green-material">{{user.fullName}}!</span></h2>
+</ng-container>
+
+<div class="alert alert-secondary mt-3" role="alert">
+  <h3 class="title text-center">Estamos aguardando a confirmação do pagamento, assim que validado pelo PagSeguro, começaremos a separar os seus pedidos :)</h3>
+</div>

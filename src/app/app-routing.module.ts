@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Router, RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './core/guard/auth/auth.guard';
 import { LoginGuard } from './core/guard/login/login.guard';
 import { Roles } from './shared/enums/roles';
@@ -41,6 +41,11 @@ const routes: Routes = [
   {
     path: 'profile',
     loadChildren:() => import('./modules/profile/profile.module').then((m) => m.ProfileModule),
+    canLoad: [AuthGuard]
+  },
+  {
+    path: 'sale',
+    loadChildren:() => import('./modules/sale/sale.module').then((m) => m.SaleModule),
     canLoad: [AuthGuard]
   },
   {

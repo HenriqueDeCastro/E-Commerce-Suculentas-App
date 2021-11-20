@@ -2,8 +2,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
-type NewType = Subject<string>;
-
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -14,7 +12,7 @@ export class SearchComponent implements OnInit {
   @Output() OnTyping = new EventEmitter<string>();
   @Output() page = new EventEmitter<number>();
   @Input() value!: string;
-  public debounce: NewType = new Subject<string>();
+  public debounce: Subject<string> = new Subject<string>();
 
   ngOnInit(): void {
     this.debounce.pipe(debounceTime(500))

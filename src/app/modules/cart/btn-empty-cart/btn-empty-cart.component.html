@@ -1,0 +1,26 @@
+<ng-container *ngIf="type == productsTypes.order">
+  <div class="row" align=center>
+    <div class="col-sm">
+      <button mat-stroked-button class="w-100 margin btn-stroked mb-3" color="warn" (click)="cleanCart()">
+        <mat-icon class="material-icons-outlined">clear_all</mat-icon>
+        <span>Esvaziar</span>
+      </button>
+    </div>
+    <div class="col-sm">
+      <button mat-flat-button class="w-100 margin" color="accent" (click)="finish()">Finalizar</button>
+    </div>
+  </div>
+</ng-container>
+<ng-container *ngIf="type == productsTypes.inventory">
+  <div class="row" align=center>
+    <div class="col-sm">
+      <button mat-stroked-button class="w-100 margin btn-stroked mb-3" color="warn" (click)="cleanCart()">
+        <mat-icon class="material-icons-outlined">clear_all</mat-icon>
+        <span>Esvaziar</span>
+      </button>
+    </div>
+    <div class="col-sm">
+      <button mat-flat-button class="w-100 margin" color="primary" (click)="finish()">Finalizar</button>
+    </div>
+  </div>
+</ng-container>

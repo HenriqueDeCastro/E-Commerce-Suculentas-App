@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col-sm-4 mt-3 mb-3">
+    <mat-list>
+      <mat-list-item class="height-matline">
+        <mat-icon class="material-icons-outlined blue-material" mat-list-icon>local_mall</mat-icon>
+        <div mat-line *ngIf="sale.orders?.length == 1" class="line-break-matline font-bold">Valor do Produto</div>
+        <div mat-line *ngIf="sale.orders?.length! > 1" class="line-break-matline font-bold ">Valores dos Produtos</div>
+        <div mat-line class="line-break-matline">{{sale.price - sale.shippingValue! | currency}}</div>
+      </mat-list-item>
+    </mat-list>
+  </div>
+  <div class="col-sm-4 mt-3 mb-3">
+    <mat-list>
+      <mat-list-item class="height-matline">
+        <mat-icon class="material-icons-outlined dark-blue-material" mat-list-icon>local_shipping</mat-icon>
+        <div mat-line class="line-break-matline font-bold">Valor do Frete</div>
+        <div mat-line *ngIf="sale.shipping" class="line-break-matline">{{ sale.shippingValue | currency}}</div>
+        <div mat-line *ngIf="!sale.shipping" class="line-break-matline">{{ 0 | currency}}</div>
+      </mat-list-item>
+    </mat-list>
+  </div>
+  <div class="col-sm-4 mt-3 mb-3">
+    <mat-list>
+      <mat-list-item class="height-matline">
+        <div mat-line class="line-break-matline font-bold">Total</div>
+        <mat-icon class="material-icons-outlined green-material" mat-list-icon>payments</mat-icon>
+        <div mat-line class="line-break-matline font-bold font-size-23">{{sale.price | currency}}</div>
+      </mat-list-item>
+    </mat-list>
+  </div>
+</div>

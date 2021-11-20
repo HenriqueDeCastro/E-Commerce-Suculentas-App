@@ -112,7 +112,7 @@ export class ProductsCategoryComponent implements OnInit {
     if(this.company) {
       products$ = this.categoryService.getByCompany(this.category.category.id ?? 0, this.currentPage, this.orderBy, this.search)
     } else {
-      products$ = this.categoryService.getByCompany(this.category.category.id ?? 0, this.currentPage, this.orderBy, this.search)
+      products$ = this.categoryService.getByClient(this.category.category.id ?? 0, this.currentPage, this.orderBy, this.search)
     }
 
     products$.subscribe((categoriaPagination: ICategoryPagination) => {

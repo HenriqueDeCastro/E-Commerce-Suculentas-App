@@ -1,3 +1,4 @@
+import { IProductCart } from 'src/app/shared/models/iproduct-cart';
 import { Observable } from 'rxjs/internal/Observable';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
@@ -42,12 +43,21 @@ export class QuantityCartService {
     this.coockieService.set(KEY, quantityCrypt, { expires: 7, path: PATH});
   }
 
+  hasQuantity(): boolean {
+    return !!this.returnQuantity();
+  }
+
   deleteQuantity(): void {
     this.quantitySubject.next(null!);
     this.coockieService.delete(KEY, PATH);
   }
 
-  hasQuantity(): boolean {
-    return !!this.returnQuantity();
+  deleteQuantityByProducts(products: IProductCart[]): void {
+    let quantityContinue: number = 0;
+    products.forEach((product: IProductCart) => {
+      quantityContinue += product.quantityOrder;
+    });
+
+    this.saveQuantity(quantityContinue);
   }
 }
