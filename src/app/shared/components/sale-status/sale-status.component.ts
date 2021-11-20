@@ -81,7 +81,7 @@ export class SaleStatusComponent implements OnInit {
 
   saleNavigation(saleId: number): void {
     if(this.company) {
-
+      this.router.navigate(['company/sale/details', saleId])
     } else {
       this.router.navigate(['profile/sale/details', saleId])
     }
@@ -117,5 +117,12 @@ export class SaleStatusComponent implements OnInit {
   }
 
   getByCompany(): void {
+    this.saleService.getByStatus(this.activatedRoute.snapshot.params.statusId, this.currentPage).subscribe((salePag: ISalePagination) => {
+      this.sales = this.sales.concat(salePag.sales);
+      this.lastPage = salePag.lastPage;
+    },
+    error => {
+      this.snackbar.openError(MessagesSnackbar.server_error);
+    });
   }
 }

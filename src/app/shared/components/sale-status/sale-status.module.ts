@@ -1,3 +1,4 @@
+import { BtnBackModule } from './../btn-back/btn-back.module';
 import { ListDinamicModule } from './../list-dinamic/list-dinamic.module';
 import { MatListModule } from '@angular/material/list';
 import { SharedModule } from './../../shared.module';
@@ -13,7 +14,8 @@ import { SaleStatusComponent } from './sale-status.component';
     CommonModule,
     SharedModule,
     MatListModule,
-    ListDinamicModule
+    ListDinamicModule,
+    BtnBackModule
   ],
   exports: [
     SaleStatusComponent

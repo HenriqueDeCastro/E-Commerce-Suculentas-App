@@ -5,11 +5,12 @@
   --dark-blue-material: #338896;
   --yellow-material: #fcbf49;
   --burnt-yellow-material: #eead2d;
-  --orange-material-material: #ffa62b;
+  --orange-material: #ffa62b;
   --gray-background-material: #f8f9fa;
   --gray-line-toolbar-material: #dee2e6;
   --gray-hover-material: #e9ecef;
   --black-material: #161616;
+  --brown-material: #cb997e;
 }
 
 .green-material {
@@ -54,4 +55,8 @@
 
 .black-material {
   color: var(--black-material);
+}
+
+.brown-material {
+  color: var(--brown-material);
 }

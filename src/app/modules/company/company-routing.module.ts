@@ -1,3 +1,4 @@
+import { CompanyHomeCountSaleResolver } from './../../core/resolvers/company/company-home/company-home-count-sale.resolver';
 import { CompanyHomeComponent } from './company-home/company-home.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -5,7 +6,10 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path:'home',
-    component: CompanyHomeComponent
+    component: CompanyHomeComponent,
+    resolve: {
+      saleCount: CompanyHomeCountSaleResolver
+    }
   },
   {
     path: 'category',
@@ -18,6 +22,10 @@ const routes: Routes = [
   {
     path: 'manual-freight',
     loadChildren:() => import('./company-manual-freight/company-manual-freight.module').then((m) => m.CompanyManualFreightModule)
+  },
+  {
+    path: 'sale',
+    loadChildren:() => import('./company-sale/company-sale.module').then((m) => m.CompanySaleModule)
   },
   {
     path: '',

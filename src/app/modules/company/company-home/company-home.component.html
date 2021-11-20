@@ -20,35 +20,42 @@
     <!-- VENDAS -->
     <mat-list>
       <div mat-subheader>Compras</div>
-      <mat-list-item class="cursor-pointer list-hover">
-        <mat-icon matBadge="" class="material-icons-outlined" mat-list-icon>credit_card</mat-icon>
-        <div mat-line>Aguardando Pagamento</div>
-      </mat-list-item>
-      <mat-divider></mat-divider>
-      <mat-list-item class="cursor-pointer list-hover">
-        <mat-icon matBadge="" class="material-icons-outlined" mat-list-icon>departure_board</mat-icon>
-        <div mat-line>Aguardando Envio</div>
-      </mat-list-item>
-      <mat-divider></mat-divider>
-      <mat-list-item class="cursor-pointer list-hover">
-        <mat-icon matBadge="" class="material-icons-outlined" mat-list-icon>local_shipping</mat-icon>
-        <div mat-line>Enviadas</div>
-      </mat-list-item>
-      <mat-divider></mat-divider>
-      <mat-list-item class="cursor-pointer list-hover">
-        <mat-icon matBadge="" class="material-icons-outlined" mat-list-icon>check</mat-icon>
-        <div mat-line>Finalizadas</div>
-      </mat-list-item>
-      <mat-divider></mat-divider>
-      <mat-list-item class="cursor-pointer list-hover">
-        <mat-icon matBadge="" class="material-icons-outlined" mat-list-icon>cancel</mat-icon>
-        <div mat-line>Canceladas</div>
-      </mat-list-item>
-      <mat-divider></mat-divider>
-      <mat-list-item class="cursor-pointer list-hover">
-        <mat-icon matBadge="" class="material-icons-outlined" mat-list-icon>shield</mat-icon>
-        <div mat-line>Em Disputa</div>
-      </mat-list-item>
+      <ng-container *ngFor="let sale of saleCount">
+        <mat-list-item class="cursor-pointer list-hover" [routerLink]="['/company/sale', statusSale.awaiting_payment]">
+          <mat-icon [matBadge]="sale.statusId == statusSale.awaiting_payment? sale.countSale : null" class="material-icons-outlined" mat-list-icon>credit_card</mat-icon>
+          <div mat-line>Aguardando Pagamento</div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+
+        <mat-list-item class="cursor-pointer list-hover" [routerLink]="['/company/sale', statusSale.waiting_to_sent]">
+          <mat-icon [matBadge]="sale.statusId == statusSale.waiting_to_sent? sale.countSale : null" class="material-icons-outlined" mat-list-icon>departure_board</mat-icon>
+          <div mat-line>Aguardando Envio</div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+
+        <mat-list-item class="cursor-pointer list-hover" [routerLink]="['/company/sale', statusSale.sent]">
+          <mat-icon [matBadge]="sale.statusId == statusSale.sent? sale.countSale : null" class="material-icons-outlined" mat-list-icon>local_shipping</mat-icon>
+          <div mat-line>Enviadas</div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+
+        <mat-list-item class="cursor-pointer list-hover" [routerLink]="['/company/sale', statusSale.finished]">
+          <mat-icon [matBadge]="sale.statusId == statusSale.finished? sale.countSale : null" class="material-icons-outlined" mat-list-icon>check</mat-icon>
+          <div mat-line>Finalizadas</div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+
+        <mat-list-item class="cursor-pointer list-hover" [routerLink]="['/company/sale', statusSale.canceled]">
+          <mat-icon [matBadge]="sale.statusId == statusSale.canceled? sale.countSale : null" class="material-icons-outlined" mat-list-icon>cancel</mat-icon>
+          <div mat-line>Canceladas</div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+
+        <mat-list-item class="cursor-pointer list-hover" [routerLink]="['/company/sale', statusSale.in_dispute]">
+          <mat-icon [matBadge]="sale.statusId == statusSale.in_dispute? sale.countSale : null" class="material-icons-outlined" mat-list-icon>shield</mat-icon>
+          <div mat-line>Em Disputa</div>
+        </mat-list-item>
+      </ng-container>
     </mat-list>
 
     <!-- OPERAÇÔES -->
