@@ -1,6 +1,6 @@
 # Succulents App
 
-### Description
+### Description:
 <div>
   <p>
     E-commerce project  succulent plants, the application has authentication, route control through user permission and responsiveness for mobile devices.
